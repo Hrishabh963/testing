@@ -1,0 +1,33 @@
+<div class="dialog-container">
+  <div mat-dialog-title class="header-container" *ngIf="headerText">
+    <h5>{{headerText}}</h5>
+    <button class="close-button" (click)="proceed()"> <mat-icon>close</mat-icon> </button>
+  </div>
+  <div mat-dialog-content *ngIf="isSuccessConfirmation;else customMessageTemp">
+    <div class="success-container">
+      <img src="assets/images/common/upload-success.svg" alt="success">
+      <span>{{successText}}</span>
+    </div>
+  </div>
+  <div mat-dialog-actions>
+    <div class="action-buttons">
+      <button mat-button class="button4 cancel btn btn-primary" (click)="proceed()">
+        {{ buttonText }}
+      </button>
+      <button *ngIf="additionalButton" mat-button class="button4 cancel btn btn-primary" (click)="proceed()">
+        {{ additionalButton?.text }}
+      </button>
+    </div>
+  </div>
+</div>
+
+<ng-template #customMessageTemp>
+  <mat-dialog-content class="dialog-content-text">
+    <mat-icon class="closeicon" (click)="proceed()" (keypress)="proceed()" tabindex="0">close</mat-icon>
+    <img *ngIf="!data.isErrorDisplay" src="assets/images/common/upload-success.svg" alt="Success" />
+    <img *ngIf="data.isErrorDisplay" src="assets/images/common/warning.svg" alt="Error" />
+    <p>
+      {{ data.description }}
+    </p>
+  </mat-dialog-content>
+</ng-template>

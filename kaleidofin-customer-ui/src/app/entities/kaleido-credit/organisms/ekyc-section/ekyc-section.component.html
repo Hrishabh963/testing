@@ -1,0 +1,49 @@
+<mat-accordion *ngIf="applicantKycData?.fields && (applicantKycData?.fields | keyvalue).length > 0">
+    <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+            <div>
+                <h1 class="section-title">
+                    Applicant KYC Documents
+                </h1>
+            </div>
+        </mat-expansion-panel-header>
+        <div>
+            <app-ekyc-details-section *ngIf="applicantKycData.fields" (getKycData)="getKycData()" [loanId]="loanId"
+                [entityType]="'APPLICANT'" [kycData]="applicantKycData.fields">
+            </app-ekyc-details-section>
+        </div>
+    </mat-expansion-panel>
+</mat-accordion>
+
+<div *ngIf="!applicantKycData?.fields">
+    <h2 class="section-title">Applicant KYC Documents </h2>
+    <h6><b> No Documents Available </b></h6>
+</div>
+
+<div class="co-applicant-ekyc">
+    <mat-accordion *ngIf="coApplicantKycData.length > 0">
+        <mat-expansion-panel [expanded]="true">
+            <mat-expansion-panel-header>
+                <h1 class="section-title">
+                    Co-Applicant KYC Documents
+                </h1>
+            </mat-expansion-panel-header>
+            <div *ngFor="let kycData of coApplicantKycData; let index = index">
+                <mat-accordion>
+                    <mat-expansion-panel>
+                        <mat-expansion-panel-header>
+                            <h3 class="section-sub-heading"> {{'Co-Applicant ' + (index + 1)}} </h3>
+                        </mat-expansion-panel-header>
+                        <app-ekyc-details-section *ngIf="kycData?.fields" (getKycData)="getKycData()" [loanId]="loanId"
+                            [entityType]="'CO_APPLICANT'" [kycData]="kycData?.fields">
+                        </app-ekyc-details-section>
+                    </mat-expansion-panel>
+                </mat-accordion>
+            </div>
+        </mat-expansion-panel>
+    </mat-accordion>
+    <div *ngIf="coApplicantKycData.length === 0">
+        <h2 class="section-title">Co-Applicant KYC Documents </h2>
+        <h6><b> No Documents Available </b></h6>
+    </div>
+</div>

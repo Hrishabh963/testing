@@ -1,0 +1,19 @@
+@import url(../reports-styles.scss);
+
+.customer-data-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 15px;
+  margin-left: 15px;
+}
+.image {
+  width: 150px;
+  height: 150px;
+  object-fit: fill;
+}
+
+h4 > span {
+  text-transform: capitalize;
+  font-weight: 500;
+}

@@ -1,0 +1,14 @@
+.toast-container {
+  display: flex;
+  align-items: center;
+}
+::ng-deep .my-custom-dialog-class {
+  mat-dialog-container {
+    padding: 15px 10px 35px 15px;
+    //add your css
+  }
+}
+
+.success-icon{
+    color: var(--kcredit-success-green);
+}

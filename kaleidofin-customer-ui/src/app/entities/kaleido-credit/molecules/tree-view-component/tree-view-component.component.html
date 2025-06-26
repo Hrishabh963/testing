@@ -1,0 +1,19 @@
+<div class="tree-container">
+    <div class="tree-title-container">
+        <span class="tree-title">{{ title || 'N/A' }}</span>
+        <img class="infoIcon" *ngIf="title && !showErrorTooltip" src="assets/images/common/info-tooltip.svg" [alt]="title"
+            [matTooltip]="optionalToolTip || ''" matTooltipPosition="below"
+            [matTooltipClass]="{'custom-tool-tip': true}" />
+        <img class="infoIcon" *ngIf="isEmpty(title) && showErrorTooltip" src="assets/images/common/error-info-tooltip.svg"
+            [alt]="'error'" [matTooltip]="optionalToolTip || ''" matTooltipPosition="below"
+            [matTooltipClass]="{'custom-tool-tip': true, 'custom-error-tool-tip': showErrorTooltip}" />
+    </div>
+    <ul>
+        <li *ngFor="let item of list">
+            <span class="item">{{ item || 'N/A'}} <img class="infoIcon" *ngIf="isEmpty(item) && showErrorTooltip"
+                    src="assets/images/common/error-info-tooltip.svg" [alt]="title" [matTooltip]="optionalToolTip || ''"
+                    matTooltipPosition="below"
+                    [matTooltipClass]="{'custom-tool-tip': true, 'custom-error-tool-tip': showErrorTooltip}" /></span>
+        </li>
+    </ul>
+</div>

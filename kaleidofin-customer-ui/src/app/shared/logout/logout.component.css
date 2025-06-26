@@ -1,0 +1,73 @@
+
+.username {
+  padding: 10px;
+  margin-left: 1rem;
+}
+
+.flex-container {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  background: var(--kcredit-secondary-background);
+  border-radius: 5rem;
+  height: 3.5rem;
+}
+
+.username-container {
+  width: 13rem;
+  min-width: fit-content;
+  justify-content: flex-end;
+}
+
+
+::ng-deep .user-profile-menu {
+   .mat-menu-item:hover {
+    background: var(--kcredit-menu-secondary-hover) !important;
+  }
+  width: 17rem !important;
+  left: -1rem !important;
+}
+
+.custom-menu {
+  width: 20rem;
+}
+
+.logout-container {
+  display: flex;
+}
+
+.recent-login-container {
+  display: flex;
+  gap: 2rem;
+  padding-right: 2rem;
+}
+
+.login-time-info {
+  display: flex;
+  align-items: flex-start;
+  
+  img {
+    width: 1.5rem;
+  }
+  
+  div {
+    display: flex;
+    flex-flow: column nowrap;
+    padding: 0.1rem 0 0 0.5rem;
+    gap: 0.6rem;
+
+    span {
+      font-size: 13px;
+    }
+
+  }
+
+}
+
+.login-time {
+  color: #496684;
+}
+
+.login-status {
+  color: #96AABD;
+}

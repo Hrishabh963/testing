@@ -1,0 +1,31 @@
+<app-form
+  [header]="'Login dashboard'"
+  [subheader]="'Enter your credentials'"
+  [myForm]="myForm"
+  (handleKeyDownEvent)="handleKeyDown($event)"
+  [formFields]="[
+    { inputType: 'text', label: 'Email / Username*', formControlName: 'email', disablePaste:true },
+    {
+      inputType: 'password',
+      label: 'Password*',
+      formControlName: 'password',
+      placeholder: '*******',
+      showGuidelines: false,
+      error: errorMessage,
+      isCurrentPassword: true
+    }
+  ]"
+  [showPasswordError]="invalidCredentials"
+></app-form>
+<div class="login-forgetPassword-container" *ngIf="!disableForgotPassword">
+  <span (click)="directToForgetPassword()">Forget Password?</span>
+</div>
+<div class="login-container">
+  <app-login-page-button
+    (onButtonClick)="login()"
+    [title]="'Login'"
+    [disabled]="myForm.invalid"
+  ></app-login-page-button>
+  <app-need-help></app-need-help>
+  <app-powered-by-kaleidofin></app-powered-by-kaleidofin>
+</div>

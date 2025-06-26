@@ -1,0 +1,141 @@
+.mandate-container {
+  background: #fafbff;
+  width: 100%;
+  height: 100%;
+  margin: 0px 5px 10px 80px;
+  padding-top: 15px;
+}
+.mandate-title-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+.action-buttons {
+  display: flex;
+  align-items: center;
+  width: 50%;
+  justify-content: end;
+  padding-right: 20px px;
+  text-align: right;
+}
+.mandate-table-container {
+  padding: 15px 25px;
+  box-shadow: 0px 1px 0px #edebeb;
+}
+
+.view-button {
+  background-color: var(--kcredit-primary-background);
+  color: var(--kcredit-primary-orange);
+}
+.row-even {
+  background-color: #3a1111; /* Light gray background for even rows */
+}
+
+.row-odd {
+  background-color: #ffffff; /* White background for odd rows */
+}
+
+th {
+  font-weight: 700;
+  background-color: #fff !important;
+}
+
+th:first-child {
+  /* Styles for the first child of the <thead> */
+  border-top-left-radius: 16px;
+}
+
+th:last-child {
+  /* Styles for the last child of the <thead> */
+  border-top-right-radius: 16px;
+}
+
+.mat-row {
+  height: 60px;
+}
+
+.opened {
+  background-color: #fff;
+}
+.closed {
+  background-color: #e6ebf5;
+}
+.date-range-container {
+  padding: 15px 25px;
+}
+.search-textfield {
+  background-color: #e6ebf5;
+  width: 400px;
+  border-radius: 8px;
+  height: 48px;
+  padding-right: 10px;
+}
+
+.mat-form-field input {
+  padding: 0 10px 6px 10px;
+}
+
+.button-group {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.button-group button {
+  margin-left: 10px;
+}
+
+.col-md-5 {
+  width: 50%;
+}
+
+.mat-icon {
+  cursor: pointer;
+}
+
+.sub-text {
+  font-family: HK Grotesk, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0.17307710647583008px;
+  text-align: left;
+  color: #777777;
+}
+.name-column {
+  width: 25vw;
+}
+td {
+  font-weight: 600;
+}
+
+.status-error {
+  color: red;
+}
+.status-success {
+  color: green;
+}
+.alternate-row {
+  background-color: #e9e9e9;
+}
+.search-icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.mat-form-field {
+  background-color: #e6ebf5;
+  border-radius: 8px;
+  height: 50px;
+  width: 10vw;
+  margin-left: 10px;
+}
+
+.mat-form-field-wrapper {
+  border: none;
+}
+
+.select-boxes {
+  padding: 0 10px;
+}

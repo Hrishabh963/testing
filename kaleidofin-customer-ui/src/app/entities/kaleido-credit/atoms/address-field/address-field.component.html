@@ -1,0 +1,7 @@
+<mat-form-field appearance="outline" [matTooltip]="toolTipLabel"
+    [matTooltipDisabled]="!showToolTip"
+    matTooltipPosition="above">
+    <mat-label>{{ label }}</mat-label>
+    <input matInput [(ngModel)]="dataObj.value[key]" [disabled]="!editable" />
+</mat-form-field>
+  

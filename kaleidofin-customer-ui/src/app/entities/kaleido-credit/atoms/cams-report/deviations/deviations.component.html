@@ -1,0 +1,58 @@
+<div>
+  <div class="section-title subtitle">{{ index + 1 }}. &nbsp;Deviations</div>
+  <table>
+    <caption></caption>
+    <thead>
+      <tr>
+        <th>
+          <div>Sr No.</div>
+        </th>
+        <th>
+          <div>Parameter</div>
+        </th>
+        <th>
+          <div>Norm</div>
+        </th>
+        <th>
+          <div>Actual</div>
+        </th>
+        <th>
+          <div>Approving Authority</div>
+        </th>
+        <th>
+          <div>Approving Remarks</div>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let item of reportData; let rowIndex = index">
+        <ng-container
+          *ngFor="let parameter of item?.parameter; let parameterIndex = index"
+        >
+          <tr>
+            <td
+              *ngIf="parameterIndex === 0"
+              [attr.rowspan]="item?.parameter?.length"
+            >
+              {{ rowIndex + 1 }}
+            </td>
+            <td>{{ parameter }}</td>
+            <td
+              *ngIf="parameterIndex === 0"
+              [attr.rowspan]="item?.parameter?.length"
+            >
+              {{ item.norm }}
+            </td>
+            <td >{{ item?.actual[parameterIndex] }}</td>
+            <td *ngIf="parameterIndex === 0" [attr.rowspan]="item?.parameter?.length">
+              {{ item.approvingAuthority }}
+            </td>
+            <td *ngIf="parameterIndex === 0" [attr.rowspan]="item?.parameter?.length">
+              {{ item.remarks }}
+            </td>
+          </tr>
+        </ng-container>
+      </ng-container>
+    </tbody>
+  </table>
+</div>

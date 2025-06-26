@@ -1,0 +1,38 @@
+<div class="container">
+  <span class="form-header">{{ header }}</span>
+  <span class="form-subheader">{{ subheader }}</span>
+  <form
+    [formGroup]="myForm"
+    class="form-container"
+    (keydown)="handleKeyDown($event)"
+  >
+    <ng-container *ngFor="let formField of formFields">
+      <div *ngIf="formField?.inputType == 'text'">
+        <app-text-input
+          [title]="formField?.label"
+          [myForm]="myForm"
+          [id]="formField?.formControlName"
+          [disablePaste]="formField?.disablePaste"
+        >
+        </app-text-input>
+      </div>
+      <div *ngIf="formField?.inputType == 'password'">
+        <app-password-input
+          [title]="formField?.label"
+          [myForm]="myForm"
+          [placeHolder]="formField?.placeholder"
+          [id]="formField?.formControlName"
+          [toolTipValid]="formField?.toolTipValid"
+          [errorMessage]="formField?.error"
+          [showError]="formField?.showError && myForm?.errors?.['passwordMismatch']"
+          [showGuidelines]="formField?.showGuidelines"
+          [showPasswordError]="showPasswordError"
+          [remainingRequirements]="remainingRequirements"
+          [isCurrentPassword]="formField?.isCurrentPassword"
+          [showRequirements]="formField?.showRequirements"
+        >
+        </app-password-input>
+      </div>
+    </ng-container>
+  </form>
+</div>

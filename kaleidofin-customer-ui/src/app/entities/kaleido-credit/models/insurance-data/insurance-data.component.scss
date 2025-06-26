@@ -1,0 +1,53 @@
+.container {
+    margin: 10px 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-bottom: 10px;
+  }
+  
+  .row > div {
+    flex: 1 0 calc(25% - 10px);
+    /* 25% for each div with some spacing between them */
+    margin-right: 10px;
+    /* Adjust for some spacing between divs */
+    margin-bottom: 10px;
+    /* Adjust for some spacing between rows */
+  }
+  .title-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-left:0;
+    gap: 0;
+  }
+  .space-between {
+    justify-content: space-between;
+  }
+  .button-container {
+    gap: 2rem;
+    display: flex;
+  }
+  .section-sub-heading {
+    color: #212529;
+    display: flex;
+    justify-content: space-between;
+    font-family: Arial, Verdana, Tahoma, sans-serif;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 0.173px;
+  }
+  
+  .delete-button {
+    background-color: var(--kcredit-failure-red) !important;
+    color: var(--kcredit-primary-white) !important;
+  }
+  

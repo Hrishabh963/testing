@@ -1,0 +1,16 @@
+<div>
+    <mat-form-field class="custom-form-field"
+         appearance="standard">
+        <input [formControl]="inputFormControl" matInput type="text"
+         [value]="valueObj?.[key]" (input)="checkInput($event)" />
+    </mat-form-field>
+    <mat-error class="error-text" *ngIf="inputFormControl?.hasError('emiGreaterThanBalance')"> 
+        Emi amount can not be greater than current opening balance or Last outstanding Balance.
+    </mat-error>
+    <mat-error class="error-text" *ngIf="inputFormControl?.hasError('emiLessThanOrEqualToInterest')"> 
+        Emi amount cannot be less than or equal to interest amount.
+    </mat-error>
+    <mat-error class="error-text" *ngIf="inputFormControl?.hasError('emiGreaterThanLoanAmount')"> 
+        EMI amount cannot be greater than loan amount.
+    </mat-error>
+</div>

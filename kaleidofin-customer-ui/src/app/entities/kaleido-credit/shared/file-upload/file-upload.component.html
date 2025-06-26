@@ -1,0 +1,66 @@
+<div class="container" appDnd (fileDropped)="fileBrowseHandler($event)"
+  *ngIf="files?.length === 0 && selectedDocuments?.length === 0 && uploadedDocuments?.length === 0">
+  <input type="file" #fileDropRef id="fileDropRef" multiple [accept]="getAcceptedFileTypes()"
+    (change)="fileBrowseHandler($event)" />
+  <br />
+  <h3>{{ fileUploadTitle }}</h3>
+  <h6>
+    {{ uploadInfoText }}
+  </h6>
+  <label for="fileDropRef">Browse File</label>
+  <br />
+  <div *ngIf="isKiscoreUpload">
+    <div class="upload-tips">
+      <div class="first-icon">
+        <img src="assets/images/kiscore/image1.svg" alt="" />
+        <p>Make sure your file has all columns filled</p>
+      </div>
+      <div>
+        <img src="assets/images/kiscore/image2.svg" alt="" />
+        <p>Upload only zip files having customer data & CB data</p>
+      </div>
+      <div>
+        <img src="assets/images/kiscore/image3.svg" alt="" />
+        <p>Make sure customer data file has extensions like XLS or XLSX</p>
+      </div>
+      <div>
+        <img src="assets/images/kiscore/image4.svg" alt="" />
+        <p>Make sure CB data file has extensions XML or JSON</p>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="files-list" *ngIf="files.length > 0 || uploadedDocuments?.length > 0">
+  <app-uploaded-documents
+    *ngIf="uploadedDocuments?.length > 0"
+    [uploadedDocuments]="uploadedDocuments"
+    (removeSelectedDocuments)="removeSelectedDocument.emit($event)"
+  >
+  </app-uploaded-documents>
+  <div class="single-file" *ngFor="let file of files; let i = index">
+    <div class="common-flex-container">
+      <div class="file-icon">
+        <img [src]="file?.fileUrl" alt="Doc" class="image-default-style" />
+      </div>
+      <p class="name">
+        {{ file?.name }}
+      </p>
+    </div>
+    <div class="common-flex-container">
+      <p class="size">
+        {{ formatBytes(file?.size) }}
+      </p>
+      <div class="delete" (click)="deleteFile(i)" (keypress)="deleteFile(i)">
+        <button mat-button class="btn btn-primary">Remove</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div *ngIf="files.length > 0 || selectedDocuments?.length > 0 || uploadedDocuments?.length > 0">
+  <input type="file" #fileDropRef id="fileDropRef" [multiple]="canAllowMultiple" class="relative-input"
+    [accept]="getAcceptedFileTypes()" (change)="fileBrowseHandler($event)" />
+  <label class="add-file" for="fileDropRef">
+    <mat-icon color="primary">+</mat-icon>
+    <p>Add another file</p>
+  </label>
+</div>

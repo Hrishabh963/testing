@@ -1,0 +1,128 @@
+<form name="reviewForm">
+  <div class="modal-header">
+    <div class="modal-title">Confirmation</div>
+    <button
+      class="close-icon"
+      (click)="cancel()"
+      tabindex="0"
+      aria-label="Close"
+      (keydown)="handleKeydown($event)"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <jhi-alert-error></jhi-alert-error>
+    <div class="col-md-12">
+      <span *ngIf="jlgMinimumSizeBreachedList > 0">
+        <div>
+          {{ metaData?.titleText || "Rejecting the Customer will breach the JLG
+          group minimum member criteria."}}
+        </div>
+        <div>{{ metaData?.subTitle || "Do you still want to proceed?"}}</div>
+      </span>
+      <div *ngIf="jlgMinimumSizeBreachedList == 0">
+        Are you sure want to evaluate
+        <span><b>{{noOfEntries}}</b></span> applications?
+      </div>
+    </div>
+    <div class="col-md-12">&nbsp;</div>
+    <div class="col-md-12" *ngIf="metaData.rejectionType?.length">
+      <label class="form-control-label choice-text asterix" htmlFor="label-1"
+        >Choose Evaluation type</label
+      >&nbsp;
+    </div>
+    <div class="form-group col-md-9">
+      <mat-radio-group
+        class="resubmit-container"
+        aria-label="Select an option"
+        [(ngModel)]="rejectionType"
+        name="rejectionTypeSelect"
+        (change)="hideRejectReasonDropDown($event)"
+      >
+        <span *ngFor="let rejectType of metaData.rejectionType">
+          <mat-radio-button [value]="rejectType"
+            >{{rejectType.label}}</mat-radio-button
+          >
+        </span>
+      </mat-radio-group>
+    </div>
+    <mat-dialog-content *ngIf="rejectReasons.length > 0 && !hideRejectReason">
+      <app-select-with-search
+        [rejectReasons]="rejectReasons"
+        (selectedReasonChange)="selectedRejectReasonChange($event)"
+      >
+      </app-select-with-search>
+    </mat-dialog-content>
+    <div class="form-group col-md-12" *ngIf="!checkAndHideRejectReason()">
+      <mat-form-field
+        class="textarea-full-width"
+        appearance="fill"
+        class="custom-textarea"
+      >
+        <mat-label class="asterix"
+          >{{metaData.remarksPlaceholder || 'Type a Reason'}}</mat-label
+        >
+        <textarea
+          matInput
+          cdkAutosizeMinRows="3"
+          cdkAutosizeMaxRows="5"
+          style="resize: none"
+          rows="3"
+          name="rejectionReason"
+          [(ngModel)]="rejectionReason"
+        ></textarea>
+      </mat-form-field>
+    </div>
+    <div
+      *ngIf="rejectionType && checkActionRequired() && metaData.displayActionRequired"
+    >
+      <div class="col-md-12">
+        <label class="form-control-label asterix" htmlFor="label-2"
+          >Required Action</label
+        >&nbsp;
+      </div>
+      <div class="col-md-8">
+        <div class="resubmit-container">
+          <span *ngFor="let action of metaData.actionRequired">
+            <mat-checkbox
+              class="custom-checkbox"
+              *ngIf="action"
+              (change)="onCheckboxChange($event,action.value)"
+              ><span class="action-text">{{action.label}}</span></mat-checkbox
+            >
+          </span>
+        </div>
+      </div>
+      <div *ngIf="showOptionalDocuments()">
+        <rework-documents-form
+          (documentsSelected)="onDocumentsUpdate($event)"
+          type="rework"
+        >
+        </rework-documents-form>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      mat-raised-button
+      class="btn-secondary"
+      (click)="cancel()"
+      data-dismiss="modal"
+    >
+      <span>Cancel</span>
+    </button>
+
+    <button
+      type="button"
+      mat-raised-button
+      class="btn-error"
+      (click)="reject()"
+      [disabled]="isDisabled()"
+    >
+      <span>{{getRejectButtons()}}</span>
+    </button>
+  </div>
+</form>

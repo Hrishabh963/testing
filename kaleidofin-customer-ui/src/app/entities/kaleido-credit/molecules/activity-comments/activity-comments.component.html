@@ -1,0 +1,12 @@
+<div class="activity-container">
+  <div class="activity" *ngFor="let activity of activityData">
+    <app-comment
+      [loanId]="loanId"
+      (reloadComments)="refreshComments($event)"
+      [showLabel]="false"      
+      [data]="activity?.comment || {}"
+      [userName]="userName"
+      [updateComment]="updateComment"
+    ></app-comment>
+  </div>
+</div>

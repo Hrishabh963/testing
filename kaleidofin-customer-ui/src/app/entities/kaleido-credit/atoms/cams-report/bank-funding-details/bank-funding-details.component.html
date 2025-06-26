@@ -1,0 +1,17 @@
+<table>
+  <caption></caption>
+  <thead>
+    <tr>
+      <th *ngFor="let key of getKeys()">
+        <div>{{ key }}</div>
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of reportData; let rowIndex = index">
+      <td *ngFor="let key of getKeys()">
+        <div [class]="'row-' + (rowIndex % 2)">{{ item[tableMap[key]] }}</div>
+      </td>
+    </tr>
+  </tbody>
+</table>

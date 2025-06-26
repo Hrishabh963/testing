@@ -1,0 +1,35 @@
+<div class="modal-header">
+  <h4 class="modal-title">Reject</h4>
+  <button
+    class="close-icon"
+    (click)="cancel()"
+    tabindex="0"
+    aria-label="Close"
+    (keydown)="handleKeydown($event)"
+  >
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+<br />
+<mat-dialog-content>
+  <div class="modal-body">
+    <p>Are you sure you want to reject {{documentCategory}} documents?</p>
+
+    <app-select-with-search
+      [rejectReasons]="rejectReasons"
+      (selectedReasonChange)="selectedRejectReasonChange($event)"
+      *ngIf="!hideReasonRejection"
+    >
+    </app-select-with-search>
+    <mat-form-field *ngIf="checkForReasonOthers() || hideReasonRejection" class="textarea-full-width" appearance="fill" class="custom-textarea">
+      <mat-label class="asterix">Remarks</mat-label>
+      <textarea matInput cdkAutosizeMinRows="3" cdkAutosizeMaxRows="5" style="resize: none" rows="3"
+        name="remarks" [(ngModel)]="remarks"></textarea>
+    </mat-form-field>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button (click)="cancel()" class="btn btn-secondary"> Cancel</button>
+  <button mat-button [disabled]="disableReject()" (click)="onReject()" class="btn btn-primary">Yes, Reject</button>
+</mat-dialog-actions>

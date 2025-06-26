@@ -1,0 +1,171 @@
+span {
+  font-size: 14px;
+}
+
+span.active {
+  background: none;
+  color: var(--kcredit-primary);
+  font-weight: bold;
+}
+
+.mat-list-item-link.active {
+  user-select: black;
+  font-weight: bold;
+  color: var(--kcredit-primary);
+}
+
+mat-nav-list.list-horizontal {
+  padding: 0;
+  content: " > ";
+  background-color: none;
+}
+
+mat-nav-list.list-horizontal .mat-list-item {
+  display: inline-block;
+  height: auto;
+  width: auto;
+  content: " > ";
+}
+
+a.active {
+  color: rgb(240, 173, 149);
+}
+
+::ng-deep .mat-select-value-text {
+  color: gray;
+  font-size: 1.5ex;
+}
+
+/* Task - #13734: Adding a Warning Icon */
+.top-left-warning-icon {
+  top: -0.5vw;
+  position: relative;
+  left: 0.5vw;
+  z-index: 9;
+  border-radius: 50%;
+}
+
+.mat-btn-success {
+  background: #0bc07f;
+  border-radius: 4px;
+  color: #fff;
+}
+
+.mat-btn-danger {
+  color: #fff;
+  background: #e42323;
+  border-radius: 4px;
+}
+
+.mat-list-item-link {
+  padding: 10px !important;
+  border-radius: 8px;
+}
+
+.action-buttons {
+  align-items: center;
+}
+
+.flex-center-align {
+  display: flex;
+  align-items: center;
+}
+
+.mat-form-field {
+  height: 50px;
+  width: 12vw;
+}
+
+.mat-form-field-appearance-fill .mat-form-field-infix {
+  padding: 0.25em 0 6px 0;
+}
+
+.filter-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.action-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 3vw;
+}
+
+.loan-sub-stage-container {
+  align-items: flex-start;
+}
+
+td,
+th {
+  padding: 8px 16px !important;
+  color: var(--Text-medium, #496684) !important;
+  font-family: "Lexend Deca", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.173px;
+  border-bottom: 1px solid #eaf2ff;
+}
+
+.loan-stage-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 20px 0px
+}
+
+.pagination-container {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column-reverse;
+  margin: 20px;
+}
+
+.tableFixHead {
+  overflow: auto;
+  max-height: 60vh;
+}
+
+.tableFixHead thead th {
+  position: sticky;
+  top: 0;
+  z-index: 0;
+}
+
+/* Just common table stuff. Really. */
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+th {
+  background: #eee;
+}
+
+
+::ng-deep .mat-drawer-container {
+  position: static !important;
+  background: white;
+}
+
+::ng-deep .mat-drawer {
+  position: fixed !important;
+}
+
+::ng-deep .mat-drawer-backdrop {
+  position: fixed !important;
+}
+
+.authorize-button-container {
+  display: flex;
+  align-items: center;
+  gap: 2em;
+  padding-left: 2em;
+}
+
+::ng-deep .custom-panel-class .mat-dialog-container {
+  padding: 0 !important;
+}

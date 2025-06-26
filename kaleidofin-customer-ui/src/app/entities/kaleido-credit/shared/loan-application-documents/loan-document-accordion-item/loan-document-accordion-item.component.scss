@@ -1,0 +1,32 @@
+.document-subtype-container {
+  margin: 10px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 98%;
+}
+.fill-image {
+  height: 100%;
+  width: 100%;
+}
+.document-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+.item {
+  flex-basis: calc(35% - 15px);
+  margin: 10px;
+  height: auto;
+}
+.image-container {
+  height: 50vh;
+}
+.document-action-container {
+  margin: 10px 0px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  gap: 10px;
+}
+

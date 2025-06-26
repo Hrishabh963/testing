@@ -1,0 +1,316 @@
+<mat-accordion>
+  <mat-expansion-panel
+    [expanded]="panelOpenState"
+    (opened)="panelOpenState = true"
+    (closed)="panelOpenState = false"
+  >
+    <mat-expansion-panel-header>
+      <div class="expansion-panel-title-container">
+        <div class="section-title">Family Information</div>
+      </div>
+    </mat-expansion-panel-header>
+    <div class="card-title">
+      <form
+        *ngIf="primaryRelationship"
+        name="familyInfoForm"
+        novalidate
+        #familyInfoForm="ngForm"
+      >
+        <div style="margin-top: 5ex">
+          <div class="expansion-panel-title-container">
+            <div class="section-sub-heading">
+              Information About {{ primaryRelationship.relationship }}
+            </div>
+            <app-section-edit-action
+              (onCancelHandler)="cancel($event)"
+              (onSaveHandler)="save($event)"
+              [panelOpenState]="true"
+              [isEditing]="isEditing"
+              (onEditHandler)="toggleEditDetails($event)"
+            ></app-section-edit-action>
+          </div>
+          <div class="row">
+            <div class="form-group col-md-3">
+              <div [hidden]="!isEditing">
+                <mat-form-field appearance="outline">
+                  <mat-label>Name</mat-label>
+                  <input
+                    matInput
+                    type="text"
+                    name="relationName"
+                    id="field_primaryRelationship"
+                    [(ngModel)]="primaryRelationship.relationName"
+                  />
+                </mat-form-field>
+              </div>
+              <div [hidden]="isEditing">
+                <label
+                  class="form-control-label"
+                  jhiTranslate="kCredit.loan.loanAmount"
+                  for="field_loanAmount"
+                  >Name</label
+                >
+                <jhi-null-replace
+                  [value]="primaryRelationship.relationName"
+                ></jhi-null-replace>
+              </div>
+            </div>
+            <div class="col-3">
+              <div [hidden]="!isEditing">
+                <mat-form-field appearance="outline">
+                  <mat-label>Relationship</mat-label>
+                  <input
+                    matInput
+                    type="text"
+                    name="fatherSpouseRelationship"
+                    id="field_primaryRelationship"
+                    [(ngModel)]="primaryRelationship.relationship"
+                  />
+                </mat-form-field>
+              </div>
+              <div [hidden]="isEditing">
+                <label
+                  class="form-control-label"
+                  jhiTranslate="kCredit.loan.loanAmount"
+                  for="field_loanAmount"
+                  >Relationship</label
+                >
+                <jhi-null-replace
+                  [value]="primaryRelationship.relationship"
+                ></jhi-null-replace>
+              </div>
+            </div>
+
+            <div class="col-3">
+              <div [hidden]="!isEditing">
+                <mat-form-field appearance="outline">
+                  <mat-label>Sex</mat-label>
+                  <input
+                    matInput
+                    type="text"
+                    name="gender"
+                    id="gender"
+                    [(ngModel)]="primaryRelationship.gender"
+                  />
+                </mat-form-field>
+              </div>
+              <div [hidden]="isEditing">
+                <label
+                  class="form-control-label"
+                  jhiTranslate="kCredit.loan.loanAmount"
+                  for="field_loanAmount"
+                  >Sex</label
+                >
+                <jhi-null-replace
+                  [value]="primaryRelationship.gender"
+                ></jhi-null-replace>
+              </div>
+            </div>
+
+            <div class="form-group col-md-3">
+              <div [hidden]="!isEditing">
+                <mat-form-field style="width: 80%" appearance="outline">
+                  <mat-label>Date of Birth</mat-label>
+                  <input
+                    matInput
+                    [matDatepicker]="dateOfBirth"
+                    placeholder="Date of Birth"
+                    [max]="maxDate"
+                    [min]="minDate"
+                    (dateChange)="
+                      updateDate($event, primaryRelationship, 'dob')
+                    "
+                    [value]="primaryRelationship?.dateDisplay"
+                  />
+                  <mat-datepicker-toggle
+                    matSuffix
+                    [for]="dateOfBirth"
+                  ></mat-datepicker-toggle>
+                  <mat-datepicker #dateOfBirth></mat-datepicker>
+                </mat-form-field>
+              </div>
+              <div [hidden]="isEditing">
+                <label
+                  class="form-control-label"
+                  jhiTranslate="kCredit.loan.emiStartDate"
+                  for="field_emi_start_date"
+                  >Date of birth</label
+                >
+                <jhi-null-replace
+                  [value]="primaryRelationship.dob"
+                  inputType="date"
+                ></jhi-null-replace>
+              </div>
+            </div>
+          </div>
+          <div class="row row-spacing">
+            <div class="col-3">
+              <div [hidden]="!isEditing">
+                <mat-form-field appearance="outline">
+                  <mat-label>Occupation</mat-label>
+                  <input
+                    matInput
+                    type="text"
+                    id="fatherSpouseOccupation"
+                    name="fatherSpouseOccupation"
+                    [(ngModel)]="primaryRelationship.occupation"
+                  />
+                </mat-form-field>
+              </div>
+              <div [hidden]="isEditing">
+                <label
+                  class="form-control-label"
+                  jhiTranslate="kCredit.loan.loanAmount"
+                  for="field_loanAmount"
+                  >Occupation</label
+                >
+                <jhi-null-replace
+                  [value]="primaryRelationship.occupation"
+                ></jhi-null-replace>
+              </div>
+            </div>
+
+            <div class="col-3">
+              <div [hidden]="!isEditing">
+                <mat-form-field appearance="outline">
+                  <mat-label>Educational Status</mat-label>
+                  <input
+                    matInput
+                    type="text"
+                    id="fatherSpouseEducationalStatus"
+                    name="fatherSpouseEducationalStatus"
+                    [(ngModel)]="primaryRelationship.educationalStatus"
+                  />
+                </mat-form-field>
+              </div>
+              <div [hidden]="isEditing">
+                <label
+                  class="form-control-label"
+                  jhiTranslate="kCredit.loan.loanAmount"
+                  for="field_loanAmount"
+                  >Educational Status</label
+                >
+                <jhi-null-replace
+                  [value]="primaryRelationship.educationalStatus"
+                ></jhi-null-replace>
+              </div>
+            </div>
+
+            <div class="col-3">
+              <div [hidden]="!isEditing">
+                <mat-form-field appearance="outline">
+                  <mat-label>Aadhaar No.</mat-label>
+                  <input
+                    matInput
+                    type="text"
+                    [disabled]="!isEditing"
+                    id="customer.fatherAadhaarNo"
+                    name="customer.fatherAadhaarNo"
+                    [(ngModel)]="primaryRelationship.aadhaarNumber"
+                  />
+                </mat-form-field>
+              </div>
+              <div [hidden]="isEditing">
+                <label
+                  class="form-control-label"
+                  jhiTranslate="kCredit.loan.loanAmount"
+                  for="field_loanAmount"
+                  >Aadhaar No.</label
+                >
+                <jhi-null-replace
+                  [value]="primaryRelationship?.aadhaarNumber"
+                ></jhi-null-replace>
+              </div>
+            </div>
+
+            <div class="col-3">
+              <div [hidden]="!isEditing">
+                <mat-form-field appearance="outline">
+                  <mat-label>Voter ID</mat-label>
+                  <input
+                    matInput
+                    type="text"
+                    [disabled]="!isEditing"
+                    name="fatherSpouseAadharNo"
+                    [(ngModel)]="primaryRelationship.voterId"
+                  />
+                </mat-form-field>
+              </div>
+              <div [hidden]="isEditing">
+                <label
+                  class="form-control-label"
+                  jhiTranslate="kCredit.loan.loanAmount"
+                  for="field_loanAmount"
+                  >Voter ID</label
+                >
+                <jhi-null-replace
+                  [value]="primaryRelationship.voterId"
+                ></jhi-null-replace>
+              </div>
+            </div>
+          </div>
+          <div class="row row-spacing">
+            <div class="col-3">
+              <div [hidden]="!isEditing">
+                <mat-form-field appearance="outline">
+                  <mat-label>Ration Card No.</mat-label>
+                  <input
+                    matInput
+                    type="text"
+                    [disabled]="!isEditing"
+                    name="fatherSpouseRationNo"
+                    [(ngModel)]="primaryRelationship.rationNumber"
+                  />
+                </mat-form-field>
+              </div>
+              <div [hidden]="isEditing">
+                <label
+                  class="form-control-label"
+                  jhiTranslate="kCredit.loan.loanAmount"
+                  for="field_loanAmount"
+                  >Ration Card No.</label
+                >
+                <jhi-null-replace
+                  [value]="primaryRelationship.rationNumber"
+                ></jhi-null-replace>
+              </div>
+            </div>
+            <div class="col-3">
+              <div [hidden]="!isEditing">
+                <mat-form-field appearance="outline">
+                  <mat-label>Mobile Number</mat-label>
+                  <input
+                    matInput
+                    type="text"
+                    [disabled]="!isEditing"
+                    name="fatherSpouseMobileNo"
+                    [(ngModel)]="primaryRelationship.mobileNumber"
+                  />
+                </mat-form-field>
+              </div>
+              <div [hidden]="isEditing">
+                <label
+                  class="form-control-label"
+                  jhiTranslate="kCredit.loan.loanAmount"
+                  for="field_loanAmount"
+                  >Mobile Number</label
+                >
+                <jhi-null-replace
+                  [value]="primaryRelationship.mobileNumber"
+                ></jhi-null-replace>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+      <div *ngFor="let familyMember of otherFamilyMembers; index as i">
+        <jhi-family-member
+          [disableEdit]="disableEdit"
+          [familyMember]="familyMember"
+          [index]="i"
+          (reloadAfterSave)="onSuccess($event)"
+        ></jhi-family-member>
+      </div>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>

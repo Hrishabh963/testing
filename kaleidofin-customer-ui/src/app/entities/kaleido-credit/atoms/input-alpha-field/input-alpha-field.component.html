@@ -1,0 +1,13 @@
+<mat-form-field appearance="outline" [matTooltip]="toolTipLabel"
+	[matTooltipDisabled]="!showToolTip"
+	matTooltipPosition="above">
+	<mat-label>{{ label }}</mat-label>
+	<input 
+	matInput 
+	[(ngModel)]="dataObj.value" 
+	[disabled]="!editable" 
+	[maxlength]="inputLength" 
+	[required]="isRequired"
+	(input)="onInput($event)" 
+	/>
+</mat-form-field>

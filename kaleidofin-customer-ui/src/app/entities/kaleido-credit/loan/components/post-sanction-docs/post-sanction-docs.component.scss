@@ -1,0 +1,17 @@
+
+  
+  /* Angular Material - Expansion panel Overrides */
+  
+  .mat-expansion-panel {
+    box-shadow: none; /* remove the default box-shadow from all sides */
+  }
+  
+  .mat-expansion-panel-header {
+    padding: 0px 10px 0px 0px;
+  }
+  
+  .mat-expansion-panel:not(.mat-expanded)
+    .mat-expansion-panel-header:hover:not([aria-disabled="true"]) {
+    background: none;
+  }
+  

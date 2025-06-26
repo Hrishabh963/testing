@@ -1,0 +1,40 @@
+<mat-accordion>
+  <mat-expansion-panel [expanded]="true">
+    <mat-expansion-panel-header>
+      <div class="section-title">Borrower Details</div>
+    </mat-expansion-panel-header>
+    <app-applicant-details
+      *ngIf="applicantDetails?.length"
+      [data]="applicantDetails"
+      [loanDetails]="loanDetails"
+      [editSections]="editSections"
+      [showEditButton]="showEditButton"
+    ></app-applicant-details>
+    <div *ngIf="coApplicantDetails?.length">
+      <app-co-applicant
+        [data]="coApplicant"
+        title="Co-applicant"
+        [loanDetails]="loanDetails"
+        *ngFor="let coApplicant of coApplicantDetails; let index = index"
+        [index]="index"
+        [editSections]="editSections"
+        [payloadTypeKey]="'coApplicants'"
+        [uiConfigKey]="'CO_APPLICANT_DETAILS'"
+        [showEditButton]="showEditButton"
+      ></app-co-applicant>
+    </div>
+    <div *ngIf="guarantorDetails?.length">
+      <app-co-applicant
+        [data]="guarantor"
+        title="Guarantor"
+        [loanDetails]="loanDetails"
+        *ngFor="let guarantor of guarantorDetails; let index = index"
+        [index]="index"
+        [editSections]="editSections"
+        [payloadTypeKey]="'guarantors'"
+        [uiConfigKey]="'GAURANTOR_DETAILS'"
+        [showEditButton]="showEditButton"
+      ></app-co-applicant>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>

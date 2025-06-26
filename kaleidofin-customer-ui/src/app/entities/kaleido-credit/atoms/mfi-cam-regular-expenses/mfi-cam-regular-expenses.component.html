@@ -1,0 +1,27 @@
+<div class="table-container">
+    <table>
+        <caption></caption>
+        <thead>
+            <tr>
+                <th scope="col" [colSpan]="reportData?.otherYearlyIncome?.length + 1" class="table-heading"> Yearly Household
+                    Expense Assessment - Amount in Rs. </th>
+            </tr>
+            <tr>
+                <th scope="col" [colSpan]="reportData?.otherYearlyIncome?.length + 1" class="table-heading"> Regular Expenses </th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let row of tableRow; let index = index">
+                <tr>
+                    <td [class]="'row-' + (1 - index % 2)" class="table-span table-span-header">
+                        {{ row?.title }}
+                    </td>
+                    <td [colSpan]="reportData?.otherYearlyIncome?.length" [class]="'row-' + (1 - index % 2)"
+                        class="table-span table-span-overall">
+                        <jhi-null-replace [value]="regularExpenses[row?.propertyKey] | dynamicDataTransform : row?.pipe"></jhi-null-replace>
+                    </td>
+                </tr>
+            </ng-container>
+        </tbody>
+    </table>
+</div>

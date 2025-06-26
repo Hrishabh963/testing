@@ -1,0 +1,40 @@
+.error {
+  color: #E42323;
+}
+.success {
+  color: #39b690;
+}
+.dialog-content-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.bulk-reject {
+
+  display: flex;
+  align-items: left;
+  justify-content: left;
+  flex-direction: column;
+}
+
+.bulk-action-buttons {
+
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: flex-end !important;
+  margin-left: 220px;
+}
+
+.footer {
+  width: 100%;
+}
+
+.actions-buttons{
+  width: 50%;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.dialog-title{
+  border-bottom: 1px solid #EAF2FF;
+}

@@ -1,0 +1,35 @@
+<div>
+  <div class="section-title subtitle">
+    {{ 4 }}. &nbsp;Customer Requirement (Asset Details)
+  </div>
+
+  <div *ngFor="let section of sections">
+    <div *ngIf="reportData[section?.apiDataKey]">
+      <div class="section-title subtitle caption">
+        {{ section?.subHeading }}
+      </div>
+      <table style="table-layout: fixed;">
+        <caption></caption>
+        <thead>
+          <tr>
+            <th *ngFor="let header of section.fields" style="width: 15em;">
+              <div>{{ header?.label }}</div>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="
+              let data of reportData[section?.apiDataKey];
+              let rowIndex = index
+            ">
+            <td *ngFor="let field of section.fields" [class]="'row-' + (rowIndex % 2)">
+                <span style="display: block; word-wrap: break-word;">
+                  {{ data[field?.propertyKey] }}
+                </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

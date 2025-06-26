@@ -1,0 +1,60 @@
+@import url(../reports-styles.scss);
+
+.image-container {
+    display: flex;
+}
+
+.applicant-image {
+    max-height: 10rem;
+    border-radius: 0.5rem;
+}
+
+.applicant-info-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: space-between;
+    max-height: 10rem;
+    padding-left: 2rem;
+}
+
+.applicant-name {
+    font-family: Lexend Deca, sans-serif;
+    font-size: 32px;
+    font-weight: 600;
+}
+
+.applicant-info {
+    font-family: Lexend Deca, sans-serif;
+    font-size: 22px;
+    font-weight: 400;
+    color: #212529;
+    opacity: 80%;
+    padding-top: 2rem;
+}
+
+.aadhaar-details {
+    display: flex;
+    justify-content: space-between;
+}
+
+.aadhaar-details > div:first-child {
+    flex-basis: 40%;
+}
+
+.aadhaar-details > div:nth-child(2) {
+    flex-basis: 50%;
+}
+
+.address-details {
+    width: 40%;
+}
+
+th {
+    font-size: 16px !important;
+    font-weight: 700;
+}
+
+button {
+    width: 7rem !important;
+}

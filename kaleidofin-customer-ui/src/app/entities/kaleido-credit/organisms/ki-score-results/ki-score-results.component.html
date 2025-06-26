@@ -1,0 +1,259 @@
+<div style="margin: auto 1rem auto 8rem">
+  <div class="header">
+    <div class="title-container">
+      <div class="title-back-container">
+        <h3 class="screen-title">
+          <mat-icon *ngIf="taskId" onKeyPress="" (click)="goBack()"
+            >arrow_back</mat-icon
+          >
+        </h3>
+        <h3 class="screen-title">ki score results</h3>
+      </div>
+      <div style="width: fit-content">
+        <jhi-search
+          (searchEvent)="onSearch($event)"
+          placeholder="Search by Customer ID/Loan ID"
+        ></jhi-search>
+      </div>
+    </div>
+    <div class="stage-buttons">
+      <button
+        *ngFor="let stage of stages"
+        mat-button
+        [ngClass]="[
+          'stage-btn',
+          stage?.value === selectedStage ? 'selected-stage-button' : ''
+        ]"
+        (click)="selectStage(stage?.value)"
+      >
+        {{ stageViewMapper[stage?.value] }} &middot;
+        {{ countMapper[stage?.value] | async }}
+      </button>
+    </div>
+
+    <table
+      mat-table
+      [dataSource]="kiscoreResults"
+      multiTemplateDataRows
+      class="mat-elevation-z8"
+    >
+      <ng-container matColumnDef="timeAndDate">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          class="report-type-col date-field"
+        >
+          Date & Time
+        </th>
+        <td mat-cell *matCellDef="let element" class="report-type-col">
+          {{ element.createdDate | date : "dd MMM YYYY, hh:mm" }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="customerId">
+        <th mat-header-cell *matHeaderCellDef class="report-type-col">
+          Customer ID
+        </th>
+        <td mat-cell *matCellDef="let element" class="report-type-col">
+          {{ element.partnerCustomerId }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="loanId">
+        <th mat-header-cell *matHeaderCellDef class="report-type-col">
+          Loan ID
+        </th>
+        <td mat-cell *matCellDef="let element" class="report-type-col">
+          {{ element.partnerLoanId }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="loanType">
+        <th mat-header-cell *matHeaderCellDef class="report-type-col">
+          Loan category
+        </th>
+        <td mat-cell *matCellDef="let element" class="report-type-col">
+          {{ element.loanType }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="branch">
+        <th mat-header-cell *matHeaderCellDef class="report-type-col">
+          Branch
+        </th>
+        <td mat-cell *matCellDef="let element" class="report-type-col">
+          {{ element.branchName }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="kiscore">
+        <th mat-header-cell *matHeaderCellDef class="report-type-col">
+          ki score
+        </th>
+        <td mat-cell *matCellDef="let element" class="report-type-col">
+          {{ element.kiscore }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="cbScore">
+        <th mat-header-cell *matHeaderCellDef class="report-type-col">
+          CB score
+        </th>
+        <td mat-cell *matCellDef="let element" class="report-type-col">
+          {{ element.cbScore }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="productType">
+        <th mat-header-cell *matHeaderCellDef class="report-type-col">
+          Product Type
+        </th>
+        <td mat-cell *matCellDef="let element" class="report-type-col">
+          {{ element.productCode }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="status">
+        <th
+          mat-header-cell
+          *matHeaderCellDef
+          class="actions-col"
+          aria-label="row actions"
+        >
+          Status
+        </th>
+        <td mat-cell *matCellDef="let element">
+          <div class="status-container">
+            <div
+              [ngClass]="[
+                'status-btn',
+                classViewMapper[element?.applicationStatus]?.class
+              ]"
+            >
+              {{ stageViewMapper[element.applicationStatus] }}
+              <mat-icon
+                [ngClass]="[
+                  'status-icon',
+                  classViewMapper[element?.applicationStatus]?.class
+                ]"
+                >{{
+                  classViewMapper[element.applicationStatus]?.icon
+                }}</mat-icon
+              >
+            </div>
+            <button
+              mat-icon-button
+              aria-label="expand row"
+              (click)="
+                expandedElement = expandedElement === element ? null : element;
+                $event.stopPropagation()
+              "
+            >
+              <mat-icon *ngIf="expandedElement === element"
+                >keyboard_arrow_up</mat-icon
+              >
+              <mat-icon *ngIf="expandedElement !== element"
+                >keyboard_arrow_down</mat-icon
+              >
+            </button>
+          </div>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="expandedDetail">
+        <td
+          mat-cell
+          *matCellDef="let element"
+          [attr.colspan]="columnsToDisplayWithExpand.length"
+          style="padding: 0"
+        >
+          <div
+            class="example-element-detail"
+            [@detailExpand]="
+              element === expandedElement ? 'expanded' : 'collapsed'
+            "
+          >
+            <div class="kiscore-details">
+              <div class="kiscore-item">
+                <div class="kiscore-item-label">Applied Loan Amount</div>
+                <div>
+                  {{
+                    element?.loanAmount
+                      ? (element?.loanAmount | currency : "INR")
+                      : "---"
+                  }}
+                </div>
+              </div>
+              <div class="kiscore-item">
+                <div class="kiscore-item-label">Interest rate</div>
+                <div>{{ element?.normalInterestRate || "---" }}&nbsp;&#37;</div>
+              </div>
+              <div class="kiscore-item">
+                <div class="kiscore-item-label">Loan tenure</div>
+                <div>
+                  {{
+                    getLoanTenure(
+                      element?.loanTenure,
+                      element?.repaymentFrequency
+                    )
+                  }}
+                </div>
+              </div>
+              <div class="kiscore-item">
+                <div class="kiscore-item-label">Instalment amount</div>
+                <div>
+                  {{
+                    element?.emiAmount
+                      ? (element?.emiAmount | currency : "INR")
+                      : "---"
+                  }}
+                </div>
+              </div>
+              <div class="kiscore-item">
+                <div class="kiscore-item-label">Repayment frequency</div>
+                <div class="repayment-frequency">
+                  {{ element?.repaymentFrequency || "--" }}
+                </div>
+              </div>
+            </div>
+          </div>
+        </td>
+      </ng-container>
+
+      <!-- Header Row -->
+      <tr mat-header-row *matHeaderRowDef="columnsToDisplayWithExpand"></tr>
+      <!-- Data Rows -->
+      <tr
+        mat-row
+        *matRowDef="let element; columns: columnsToDisplayWithExpand"
+        class="example-element-row"
+        [class.example-expanded-row]="expandedElement === element"
+        (click)="expandedElement = expandedElement === element ? null : element"
+        onKeyPress=""
+      ></tr>
+      <!-- Expanded Detail Row -->
+      <tr
+        mat-row
+        *matRowDef="let row; columns: ['expandedDetail']"
+        class="example-detail-row"
+      ></tr>
+    </table>
+    <mat-paginator
+      *ngIf="kiscoreResults?.length !== 0"
+      [pageSize]="itemsPerPage"
+      [length]="totalItems"
+      [showFirstLastButtons]="true"
+      [pageIndex]="page"
+      (page)="onLoadPage($event)"
+      [showPageSizeOptions]="false"
+      [hidePageSize]="true"
+    ></mat-paginator>
+
+    <div *ngIf="kiscoreResults?.length === 0">
+      <hr />
+      <h3 class="text-center kcredit-failure-color">
+        No ki score reports found
+      </h3>
+    </div>
+  </div>
+</div>

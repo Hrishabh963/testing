@@ -1,0 +1,36 @@
+{
+    "login": {
+        "title": "Sign in",
+        "otpSentTitle": "OTP Sent!",
+        "subTitle": "Hey, Welcome to kaleidofin financial program",
+        "otpSentSubTitle": "We've sent an OTP (One Time Password) to this number: +919043212324",
+        "otpSignIn": "Sign in with OTP",
+        "pwdSignIn": "Sign in with Password",
+        "home": {
+            "subTitle": "An account has already been created with this link. Want to login now?",
+            "button": "LOGIN",
+            "contact": "CONTACT SUPPORT TEAM"
+        },
+        "form": {
+            "username": "User name",
+            "username.placeholder": "Phone number",
+            "username.placeholder.forOtp": "OTP",
+            "password": "Password",
+            "password.placeholder": "Password",
+            "rememberme": "Remember me",
+            "button": "SIGN IN",
+            "getOtp": "GET OTP",
+            "message": "It might take a couple of minutes for the OTP to reach you",
+            "notGetIt": "Didn't get it?",
+            "resendOtp": "Resend OTP"
+        },
+        "messages": {
+            "error": {
+                "authentication": "<strong>Failed to sign in!</strong> Please check your credentials and try again."
+            }
+        },
+        "password" : {
+            "forgot": "Forgot password?"
+        }
+    }
+}

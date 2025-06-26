@@ -1,0 +1,17 @@
+<mat-accordion>
+  <mat-expansion-panel [expanded]="true">
+    <mat-expansion-panel-header>
+      <div class="section-title">Beneficiary check details</div>
+    </mat-expansion-panel-header>
+
+    <app-borrower-beneficiary-check
+      [beneficiaryData]="beneficiaryData"
+      [loanId]="loanDetails?.loanApplicationDTO?.id"
+      [customerId]="loanDetails?.loanApplicationDTO?.customerNumber"
+      [editSections]="editSections"
+      [applicationStatus]="applicationStatus"
+      (retryBeneficiaryCheck)="retryBeneficiaryCheck()"
+    >
+    </app-borrower-beneficiary-check>
+  </mat-expansion-panel>
+</mat-accordion>

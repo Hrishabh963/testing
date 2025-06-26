@@ -1,0 +1,46 @@
+<div class="comment-container" *ngIf="!enableEdit">
+  <div>
+    <mat-avatar class="mat-avatar">
+      {{ initials }}
+    </mat-avatar>
+  </div>
+  <div class="comment-with-edit-container">
+    <div class="comment-section">
+      <div class="comment-title-container">
+        <div class="comment-title">
+          <b>{{ data?.createdBy }}</b> {{ commentType }} a <b>Comment</b>
+        </div>
+        <div class="comment-date">
+          {{ (data?.deleted ? data?.lastModifiedDate : data?.createdDate) | date : "dd/MMM/YY, hh:mm aaa" }}
+        </div>      
+        <div *ngIf="showLabel">
+          <button mat-button class="activity-label">
+            <div class="activity-label-text">Comment</div>
+          </button>
+        </div>
+        <div class="comment-date" *ngIf="data?.version !== 1">
+          {{ data?.deleted ? 'Deleted' : 'Edited'}}
+        </div>
+      </div>
+      <div class="comment-data">
+        <div [ngClass]="['comment', deletedCommentClass]">{{ data?.comment }}</div>
+      </div>     
+    </div>
+  </div>
+</div>
+<div [ngClass]="updateComment ? 'edit-container' : 'disabled-edit'" *ngIf="!data?.deleted && data?.canEdit && !enableEdit">
+  <div color="primary" (click)="onEdit()"  (keypress)="onEdit()">Edit</div>
+  <div color="primary" (click)="deleteComment()"  (keypress)="deleteComment()">Delete</div>
+</div>
+<div *ngIf="enableEdit">
+  <app-add-comment
+    [loanId]="loanId"
+    [showCancel]="true"
+    (reloadComments)="reloadComments($event)"
+    (resetComment)="resetEdit()"
+    [comment]="data?.comment"
+    [userName]="userName"
+    [editComment]="true"
+    [commentId]="data?.id"
+  ></app-add-comment>
+</div>

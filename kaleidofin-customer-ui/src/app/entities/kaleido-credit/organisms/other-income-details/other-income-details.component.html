@@ -1,0 +1,122 @@
+<mat-accordion>
+  <mat-expansion-panel
+    [expanded]="panelOpenState"
+    (opened)="panelOpenState = true"
+    (closed)="panelOpenState = false"
+  >
+    <mat-expansion-panel-header>
+      <div class="expansion-panel-title-container">
+        <div class="section-title">Income Details</div>
+        <div>
+          <button
+            [hidden]="enableEdit"
+            mat-raised-button
+            *ngIf="panelOpenState"
+            type="button"
+            class="btn btn-primary"
+            data-dismiss="modal"
+            (click)="addOtherIncomeDetail($event)"
+            [disabled]="!editSections || !hasAuthority"
+          >
+            <span jhiTranslate="entity.action.edit"
+              >Add Income</span
+            ></button
+          >&nbsp;&nbsp;&nbsp;&nbsp;
+          <button
+            [hidden]="enableEdit"
+            mat-raised-button
+            *ngIf="panelOpenState"
+            type="button"
+            class="btn btn-primary"
+            data-dismiss="modal"
+            (click)="toggleEditDetails($event)"
+            [disabled]="!editSections || !hasAuthority"
+          >
+            <mat-icon>edit</mat-icon>&nbsp;<span
+              jhiTranslate="entity.action.edit"
+              >Edit</span
+            >
+          </button>
+        </div>
+        <div class="confirm-buttons" [hidden]="!enableEdit">
+          <button
+            mat-raised-button
+            type="button"
+            class="btn-secondary"
+            data-dismiss="modal"
+            (click)="cancel($event)"
+          >
+            <span jhiTranslate="entity.action.cancel">Cancel</span>
+          </button>
+          <button
+            mat-raised-button
+            type="button"
+            class="btn-primary"
+            data-dismiss="modal"
+            (click)="save($event)"
+          >
+            <span jhiTranslate="entity.action.save">Save</span>
+          </button>
+        </div>
+      </div>
+    </mat-expansion-panel-header>
+
+    <div class="top-label">
+      <div *ngIf="enableEdit && otherIncomeDetails[0]?.fields?.annualIncomeFromAgriLand?.editable">
+        <mat-form-field appearance="outline">
+          <mat-label>Annual income from Agri land</mat-label>
+          <input
+            matInput
+            type="text"
+            name="annualIncomeFromAgriland"
+            [(ngModel)]="
+              otherIncomeDetails[0]?.fields?.annualIncomeFromAgriLand.value
+            "
+          />
+        </mat-form-field>
+      </div>
+
+      <div [hidden]="enableEdit && otherIncomeDetails[0]?.fields?.annualIncomeFromAgriLand?.editable">
+        <label for="annualIncomeFromAgriland" class="form-control-label">
+          Annual income from Agri land
+        </label>
+        <jhi-null-replace
+          [value]="
+            otherIncomeDetails[0]?.fields?.annualIncomeFromAgriLand?.value
+              | dynamicDataTransform : 'currency'
+          "
+        ></jhi-null-replace>
+      </div>
+    </div>
+
+    <div *ngFor="let section of otherIncomeDetails; let index = index">
+      <app-other-income-data
+        *ngIf="index !== 0"
+        [loanId]="loanId"
+        [uiFields]="section?.fields"
+        [uiFieldsMap]="otherIncomeMap"
+        [title]="'Income ' + index"
+        [hideEditAction]="true"
+        [enableEdit]="enableEdit"
+        [editSections]="editSections"
+        [customButtons]="section?.customButtons"
+        [uiApiKey]="sectionKey"
+        [sectionTitle]="section?.title"
+      >
+      </app-other-income-data>
+      <hr />
+    </div>
+    <ng-container *ngIf="otherIncomeDetailsMap.length > 0 && otherIncomeDetails[0]?.fields">
+      <app-other-income-data
+        [loanId]="loanId"
+        [uiFields]="otherIncomeDetails[0]?.fields"
+        [uiFieldsMap]="otherIncomeDetailsMap"
+        [hideEditAction]="true"
+        [enableEdit]="enableEdit"
+        [editSections]="editSections"
+        [uiApiKey]="sectionKey"
+    >
+    </app-other-income-data>
+    </ng-container>
+  </mat-expansion-panel>
+</mat-accordion>

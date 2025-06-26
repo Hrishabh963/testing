@@ -1,0 +1,157 @@
+<div class="business-container">
+  <div class="business-title-text">Business Profile</div>
+  <div class="business-review-container">
+    <div class="business-review-avatar">
+      <img
+        src="assets/images/business-invoices/business-profile-icon.svg"
+        alt=""
+      />
+    </div>
+    <div class="business-review-details-container">
+      <div class="business-review-item">
+        <div class="business-review-label">Business name</div>
+        <div class="business-review-value">{{ getValue("businessName") }}</div>
+      </div>
+      <div class="business-review-item">
+        <div class="business-review-label">Business Category</div>
+        <div class="business-review-value">
+          {{ getValue("businessCategory") }}
+        </div>
+      </div>
+
+      <div class="business-review-item">
+        <div class="business-review-label">Business KRA</div>
+        <div class="business-review-value">**********</div>
+      </div>
+
+      <div class="business-review-item">
+        <div class="business-review-label">Business ID</div>
+        <div class="business-review-value">{{ getValue("businessId") }}</div>
+      </div>
+
+      <div class="business-review-item">
+        <div class="business-review-label">Mobile number</div>
+        <div class="business-review-value">{{ getValue("mobileNumber") }}</div>
+      </div>
+
+      <div class="business-review-item">
+        <div class="business-review-label">Location</div>
+        <div class="business-review-value">{{ getValue("location") }}</div>
+      </div>
+    </div>
+  </div>
+  <div (scroll)="onWindowScroll($event)">
+    <div id="business-review-sticky-header">
+      <nav
+        class="navbar navbar-expand-sm section-nav animated fadeInDown nav-padding"
+      >
+        <ul class="navbar-nav navbar-container">
+          <ng-container *ngFor="let key of objectKeys(navSectionList)">
+            <li class="nav-item">
+              <button class="nav-button" (click)="scrollTo(key)">
+                {{ navSectionList[key].title || navSectionList[key].navTitle }}
+                <ng-container *ngIf="currentSection === key">
+                  <span class="nav-section-title">{{
+                    navSectionList[key].title
+                  }}</span>
+                </ng-container>
+              </button>
+            </li>
+          </ng-container>
+          <li *ngIf="showMoreButton">
+            <button class="nav-button" [matMenuTriggerFor]="menu">
+              <div class="more-button">
+                More
+                <mat-icon>more_vert</mat-icon>
+              </div>
+            </button>
+          </li>
+          <mat-menu
+            class="more-menu"
+            #menu="matMenu"
+            xPosition="before"
+            yPosition="below"
+          >
+            <ng-container *ngFor="let key of objectKeys(navSectionMoreList)">
+              <button
+                class="nav-button menu-button"
+                mat-menu-item
+                (click)="scrollTo(key)"
+              >
+                {{
+                  navSectionMoreList[key].title ||
+                    navSectionMoreList[key].navTitle
+                }}
+                <span class="nav-section-title" *ngIf="currentSection === key">
+                  {{ navSectionMoreList[key].title }}</span
+                >
+              </button>
+            </ng-container>
+          </mat-menu>
+        </ul>
+      </nav>
+      <div class="nav-notification-border"></div>
+    </div>
+
+    <hr class="hr" />
+    <div
+      id="parentDiv"
+      scrollSpy
+      [spiedTags]="['DIV']"
+      (sectionChange)="onSectionChange($event)"
+      *ngFor="let key of objectKeys(sections)"
+      [ngSwitch]="key"
+    >
+      <app-business-profile-details
+        *ngSwitchCase="'businessProfileDetails'"
+      ></app-business-profile-details>
+      <app-audit-compliance-documents
+        *ngSwitchCase="'auditComplianceDocuments'"
+      ></app-audit-compliance-documents>
+      <app-business-registration-details
+        *ngSwitchCase="'businessRegistrationDetails'"
+      ></app-business-registration-details>
+      <app-business-registration-documents
+        *ngSwitchCase="'businessRegistrationDocuments'"
+      ></app-business-registration-documents>
+      <app-business-agreement *ngSwitchCase="'businessAgreementDocument'">
+      </app-business-agreement>
+      <app-factoring-limit
+        *ngSwitchCase="'factoringLimit'"
+      ></app-factoring-limit>
+      <app-business-kyc-details
+        *ngSwitchCase="'businessKycDetails'"
+      ></app-business-kyc-details>
+      <app-business-kyc-documents
+        *ngSwitchCase="'businessKycDocuments'"
+      ></app-business-kyc-documents>
+      <app-supplier-reference
+        *ngSwitchCase="'supplierReference'"
+      ></app-supplier-reference>
+      <app-other-business-documents
+        *ngSwitchCase="'otherBusinessDocuments'"
+      ></app-other-business-documents>
+    </div>
+  </div>
+  <div class="review-action-container">
+    <button
+      mat-raised-button
+      class="mat-btn-danger"
+      id="business-review-reject"
+      [disabled]="disableEvaluation"
+      (click)="handleEvaluateBusiness()"
+    >
+      Evaluate Business</button
+    >&nbsp;
+    <button
+      mat-raised-button
+      class="mat-btn-success approve-btn"
+      type="submit"
+      id="business-review-approve"
+      [disabled]="disableApprove"
+      (click)="handleApproveBusiness()"
+    >
+      Approve Business</button
+    >&nbsp;
+  </div>
+</div>

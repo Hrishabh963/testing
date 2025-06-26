@@ -1,0 +1,36 @@
+<div class="section-title subtitle">
+  {{ index + 1 }}. &nbsp;Approval Authority &amp; Designation
+</div>
+<table>
+  <caption></caption>
+  <tr>
+    <th class="no-display-header"></th>
+    <th><div>Proposed By</div></th>
+    <th><div>Recommended By</div></th>
+    <th><div>Approved By</div></th>
+  </tr>
+  <tr>
+    <td class="row-header"><div>Name</div></td>
+    <td class="row-0">
+      <div>{{ reportData?.proposedBy?.name }}</div>
+    </td>
+    <td class="row-0">
+      <div>{{ reportData?.recommendedBy?.name }}</div>
+    </td>
+    <td class="row-0">
+      <div>{{ reportData?.approvedBy?.name }}</div>
+    </td>
+  </tr>
+  <tr>
+    <td class="row-header"><div>Designation</div></td>
+    <td class="row-1">
+      <div>{{ reportData?.proposedBy?.designation }}</div>
+    </td>
+    <td class="row-1">
+      <div>{{ reportData?.recommendedBy?.designation }}</div>
+    </td>
+    <td class="row-1">
+      <div>{{ reportData?.approvedBy?.designation }}</div>
+    </td>
+  </tr>
+</table>

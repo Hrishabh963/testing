@@ -1,0 +1,48 @@
+.close-button,
+.close-button:focus,
+.close-button:active {
+    background: none;
+    border: none;
+}
+
+h5 {
+    color: #38526C;
+    font-size: 1em;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.button-container {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 0 !important;
+}
+
+span {
+    margin: 1em 0;
+}
+
+.dialog-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+
+.cancel-button {
+    background: #E7E8F0;
+    color: #96AABD;
+}
+
+h4, span {
+    color: var(--kcredit-text-dark);
+}
+
+.accept-subtext {
+    margin: 0 0 0.5em 0;
+}

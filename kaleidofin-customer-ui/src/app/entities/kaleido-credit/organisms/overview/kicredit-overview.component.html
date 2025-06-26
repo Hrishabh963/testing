@@ -1,0 +1,14 @@
+<div class="business-container">
+  <div class="business-title-text">Overview</div>
+  <div class="overview-item-container">
+    <div class="overview-item" *ngFor="let item of overviewItems">
+      <div class="icon-avatar">
+        <img [src]="item?.icon" alt="" />
+      </div>
+      <div class="overview-item-text">
+        <div>{{ item?.label }}</div>
+        <div class="count">{{ businessMetricsCount?.[item?.propertyKey] || "0"}}</div>
+      </div>
+    </div>
+  </div>
+</div>

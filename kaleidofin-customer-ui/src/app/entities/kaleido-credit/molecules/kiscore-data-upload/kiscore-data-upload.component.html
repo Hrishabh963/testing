@@ -1,0 +1,43 @@
+<div class="dialog-container">
+  <div mat-dialog-title class="dialog-title">
+    {{ dialogTitle }}
+    <mat-icon
+      class="closeicon"
+      (click)="cancel()"
+      tabindex="0"
+      (keypress)="cancel()"
+      >close</mat-icon
+    >
+  </div>
+  <div mat-dialog-content class="row">
+    <div class="col upload-container">
+      <app-file-upload
+        (passFileSelected)="receiveFileSelected($event)"
+        [uploadInfoText]="uploadInfoText"
+        [acceptedFileTypes]="acceptedFileTypes"
+        [canAllowMultiple]="canAllowMultiple"
+        [openByDefault]="openByDefault"
+        [selectedDocuments]="selectedDocuments"
+        [fileUploadTitle]="fileUploadTitle"
+        [isKiscoreUpload]="true"
+        [fileUploadLimit]="0"
+      ></app-file-upload>
+    </div>   
+  </div>
+  <div mat-dialog-actions>
+    <div class="action-buttons">
+      <button mat-raised-button class="btn-secondary" (click)="cancel()">
+        Cancel
+      </button>
+      <button
+        mat-raised-button
+        class="btn-primary"
+        cdkFocusInitial
+        (click)="proceed()"
+        [disabled]="!isFilesSelected"
+      >
+        Proceed
+      </button>
+    </div>
+  </div>
+</div>

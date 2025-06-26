@@ -1,0 +1,155 @@
+<div class="card-title">
+  <form name="projectFundingDetails" novalidate #editForm="ngForm">
+    <div class="card-body">
+      <div class="card-title">
+        <div class="expansion-panel-title-container">
+          <h5 class="section-sub-heading">Trade reference {{ index + 1 }}</h5>
+          <app-section-edit-action
+            (onCancelHandler)="cancel()"
+            (onSaveHandler)="save()"
+            [panelOpenState]="true"
+            [isEditing]="isEditing"
+            (onEditHandler)="edit()"
+          ></app-section-edit-action>
+        </div>
+        <div class="row">
+          <div class="form-group col-md-3">
+            <mat-form-field appearance="outline" [hidden]="!isEditing">
+              <mat-label>Name Of Entity</mat-label>
+              <input
+                matInput
+                [disabled]="!isEditing"
+                name="name_of_entity"
+                id="field_name_of_entity"
+                [(ngModel)]="profile.nameOfEntity"
+              />
+            </mat-form-field>
+
+            <div [hidden]="isEditing">
+              <label
+                class="form-control-label"
+                jhiTranslate="kCredit.tradeReference.nameOfEntity"
+                for="field_name_of_entity"
+                >Name Of Entity</label
+              >
+              <jhi-null-replace
+                [value]="profile.nameOfEntity"
+              ></jhi-null-replace>
+            </div>
+          </div>
+          <div class="form-group col-md-3">
+            <mat-form-field appearance="outline" [hidden]="!isEditing">
+              <mat-label>Contact Person Details</mat-label>
+              <input
+                matInput
+                [disabled]="!isEditing"
+                name="contact_person_details"
+                id="field_contact_person_details"
+                [(ngModel)]="profile.contactPersonDetails"
+              />
+            </mat-form-field>
+            <div [hidden]="isEditing">
+              <label
+                class="form-control-label"
+                jhiTranslate="kCredit.tradeReference.contactPersonDetails"
+                for="field_contact_person_details"
+                >Contact Person Details</label
+              >
+              <jhi-null-replace
+                [value]="profile.contactPersonDetails"
+              ></jhi-null-replace>
+            </div>
+          </div>
+          <div class="form-group col-md-3">
+            <mat-form-field appearance="outline" [hidden]="!isEditing">
+              <mat-label>Relationship With</mat-label>
+              <input
+                matInput
+                [disabled]="!isEditing"
+                name="relationship_with"
+                id="field_relationship_with"
+                [(ngModel)]="profile.relationshipWith"
+              />
+            </mat-form-field>
+            <div [hidden]="isEditing">
+              <label
+                class="form-control-label"
+                jhiTranslate="kCredit.tradeReference.relationshipWith"
+                for="field_relationship_with"
+                >Relationship With</label
+              >
+              <jhi-null-replace
+                [value]="profile.relationshipWith"
+              ></jhi-null-replace>
+            </div>
+          </div>
+          <div class="form-group col-md-3">
+            <mat-form-field appearance="outline" [hidden]="!isEditing">
+              <mat-label>Address</mat-label>
+              <input
+                matInput
+                [disabled]="!isEditing"
+                name="address"
+                id="field_address"
+                [(ngModel)]="profile.address"
+              />
+            </mat-form-field>
+            <div [hidden]="isEditing">
+              <label
+                class="form-control-label"
+                jhiTranslate="kCredit.tradeReference.address"
+                for="field_address"
+                >Address</label
+              >
+              <jhi-null-replace [value]="profile.address"></jhi-null-replace>
+            </div>
+          </div>
+        </div>
+        <div class="row row-spacing">
+          <div class="form-group col-md-3">
+            <mat-form-field appearance="outline" [hidden]="!isEditing">
+              <mat-label>Contact No</mat-label>
+              <input
+                matInput
+                [disabled]="!isEditing"
+                name="contact_no"
+                id="field_contact_no"
+                [(ngModel)]="profile.contactNo"
+              />
+            </mat-form-field>
+            <div [hidden]="isEditing">
+              <label
+                class="form-control-label"
+                jhiTranslate="kCredit.tradeReference.contactNo"
+                for="field_contact_no"
+                >Contact No</label
+              >
+              <jhi-null-replace [value]="profile.contactNo"></jhi-null-replace>
+            </div>
+          </div>
+          <div class="form-group col-md-3">
+            <mat-form-field appearance="outline" [hidden]="!isEditing">
+              <mat-label>Direct Agri, Jhadi & Village industries etc</mat-label>
+              <input
+                matInput
+                [disabled]="!isEditing"
+                name="direct"
+                id="field_direct"
+                [(ngModel)]="profile.direct"
+              />
+            </mat-form-field>
+            <div [hidden]="isEditing">
+              <label
+                class="form-control-label"
+                jhiTranslate="kCredit.tradeReference.direct"
+                for="field_direct"
+                >Direct Agri, Jhadi & Village industries etc</label
+              >
+              <jhi-null-replace [value]="profile.direct"></jhi-null-replace>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

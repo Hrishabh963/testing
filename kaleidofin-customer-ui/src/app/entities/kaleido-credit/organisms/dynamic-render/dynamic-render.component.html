@@ -1,0 +1,149 @@
+<div>
+  <div class="title-container space-between">
+    <div [ngClass]="[isSubHeading ? 'section-sub-heading' : 'section-title']">
+      {{ title }}
+    </div>
+    <div class="button-container">
+      <button *ngFor="let customButton of customButtons" [disabled]="customButton?.disabled"
+        (click)="onCustomButtonClickHandler($event, customButton)"
+        [ngClass]="['btn', 'btn-primary', customButton?.class]">
+        {{ customButton?.label }}
+      </button>
+      <button *ngIf="canViewReport" mat-raised-button type="button" class="btn btn-primary" data-dismiss="modal"
+        [hidden]="enableEdit" [disabled]="!uiFields?.fileId?.value" (click)="viewReport()">
+        <mat-icon class="svg-icon" svgIcon="pdf-icon"></mat-icon>
+        <span style="margin-left: 5px">View report</span>
+      </button>
+      <button mat-raised-button type="button" class="btn btn-primary" data-dismiss="modal" (click)="toggleEditDetails()"
+        [hidden]="enableEdit || hideEditAction" [disabled]="!editSections">
+        <mat-icon>edit</mat-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+
+      <button mat-raised-button type="button" class="btn-secondary" data-dismiss="modal"
+        [hidden]="!enableEdit || hideEditAction" (click)="cancelEditDetails()">
+        <span jhiTranslate="entity.action.cancel">Cancel</span>
+      </button>
+      <button mat-raised-button type="button" class="btn-primary" data-dismiss="modal"
+        [hidden]="!enableEdit || hideEditAction" (click)="saveDetails()">
+        <span jhiTranslate="entity.action.save">Save</span>
+      </button>
+    </div>
+  </div>
+</div>
+<div class="container">
+  <ng-container *ngFor="let field of uiFieldsMap; let i = index">
+    <ng-container *ngIf="uiFields && uiFields[field?.propertyKey]?.editable" [ngSwitch]="field?.inputType">
+      <ng-container *ngIf="enableEdit">
+        <div *ngIf="field?.inputType !== 'address'" class="col-lg-3 field">
+          <app-input-field *ngSwitchCase="'text'" [label]="field?.label" [dataObj]="uiFields[field?.propertyKey]"
+            [editable]="enableEdit" [inputLength]="field?.metadata?.inputLength"
+            [errors]="validationErrors?.field?.propertyKey" [isRequired]="field?.required"
+            [showToolTip]="field?.enableToolTip" [toolTipLabel]="field?.toolTipLabel" [roles]="field?.roles"
+            [key]="field?.propertyKey"
+            >
+          </app-input-field>
+
+          <app-input-alpha-field *ngSwitchCase="'alpha'" [label]="field?.label" [dataObj]="uiFields[field?.propertyKey]"
+            [editable]="enableEdit" [inputLength]="field?.metadata?.inputLength"
+            [errors]="validationErrors?.field?.propertyKey" [isRequired]="field?.required"
+            [showToolTip]="field?.enableToolTip" [toolTipLabel]="field?.toolTipLabel">
+          </app-input-alpha-field>
+
+          <app-date-field *ngSwitchCase="'date'" [label]="field?.label" [dataObj]="uiFields[field?.propertyKey]"
+            [editable]="enableEdit" [isRequired]="field?.required" [showToolTip]="field?.enableToolTip"
+            [toolTipLabel]="field?.toolTipLabel" [metadata]="field?.metadata" [fields]="uiFields"
+            (triggerUpdate)="initiateUiFieldsUpdate($event)" [roles]="field?.roles" [key]="field?.propertyKey">
+          </app-date-field>
+          <app-radio-button-field *ngSwitchCase="'radio'" [label]="field?.label"
+            [dataObj]="uiFields[field?.propertyKey]" [showToolTip]="field?.enableToolTip">
+          </app-radio-button-field>
+          <app-number-field *ngSwitchCase="'number'" [label]="field?.label" [dataObj]="uiFields[field?.propertyKey]"
+            [editable]="enableEdit" [inputLength]="field?.metadata?.inputLength" [isRequired]="field?.required"
+            [showToolTip]="field?.enableToolTip" [toolTipLabel]="field?.toolTipLabel" [roles]="field?.roles" [key]="field?.propertyKey">
+          </app-number-field>
+          <app-select-field *ngSwitchCase="'select'" [label]="field?.label" [dataObj]="uiFields[field?.propertyKey]"
+            [dropDownValues]="field?.dropDownValues" [isRequired]="field?.required"
+            [showSearchBox]="field?.showSearchBox" [showToolTip]="field?.enableToolTip"
+            [toolTipLabel]="field?.toolTipLabel" [disableDefault]="field?.disableDefault" [roles]="field?.roles" [key]="field?.propertyKey">
+          </app-select-field>
+          <app-select-with-input *ngSwitchCase="'selectWithInput'" [label]="field?.label"
+            [dataObj]="uiFields[field?.propertyKey]" [dropDownValues]="field?.dropDownValues"
+            [isRequired]="field?.required" [showToolTip]="field?.enableToolTip"
+            [toolTipLabel]="field?.toolTipLabel" [disableDefault]="field?.disableDefault"
+            [roles]="field?.roles" [key]="field?.propertyKey"
+            >
+          </app-select-with-input>
+        </div>
+        <ng-container *ngSwitchCase="'address'">
+          <div class="col-lg-3 field">
+            <app-address-field [label]="field?.label" [dataObj]="uiFields[field?.propertyKey]" [editable]="enableEdit"
+              [key]="'address1'" [showToolTip]="field?.enableToolTip" [toolTipLabel]="field?.toolTipLabel">
+            </app-address-field>
+          </div>
+          <div class="col-lg-3 field">
+            <app-address-field [label]="field?.label + ' 2'" [dataObj]="uiFields[field?.propertyKey]"
+              [editable]="enableEdit" [key]="'address2'" [showToolTip]="field?.enableToolTip"
+              [toolTipLabel]="field?.toolTipLabel">
+            </app-address-field>
+          </div>
+          <div class="col-lg-3 field">
+            <app-address-field [label]="field?.label + ' City'" [dataObj]="uiFields[field?.propertyKey]"
+              [editable]="enableEdit" [key]="'city'" [showToolTip]="field?.enableToolTip"
+              [toolTipLabel]="field?.toolTipLabel">
+            </app-address-field>
+          </div>
+          <div class="col-lg-3 field">
+            <app-address-field [label]="field?.label + ' District'" [dataObj]="uiFields[field?.propertyKey]"
+              [editable]="enableEdit" [key]="'district'" [showToolTip]="field?.enableToolTip"
+              [toolTipLabel]="field?.toolTipLabel">
+            </app-address-field>
+          </div>
+          <div class="col-lg-3 field">
+            <app-address-field [label]="field?.label + ' State'" [dataObj]="uiFields[field?.propertyKey]"
+              [editable]="enableEdit" [key]="'state'" [showToolTip]="field?.enableToolTip"
+              [toolTipLabel]="field?.toolTipLabel">
+            </app-address-field>
+          </div>
+          <div class="col-lg-3 field">
+            <app-address-field [label]="field?.label + ' Pincode'" [dataObj]="uiFields[field?.propertyKey]"
+              [editable]="enableEdit" [key]="'pincode'" [showToolTip]="field?.enableToolTip"
+              [toolTipLabel]="field?.toolTipLabel">
+            </app-address-field>
+          </div>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+    <div [hidden]="
+        enableEdit && uiFields && uiFields[field?.propertyKey]?.editable
+      " class="col-lg-3 field">
+      <ng-container *ngIf="uiFields" [ngSwitch]="field?.type">
+        <label class="form-control-label" [for]="field?.propertyKey">{{
+          field?.label
+          }}
+          <img class="infoIcon" *ngIf="field?.toolTipText?.length" src="assets/images/common/info-tooltip.svg" [alt]="title"
+          [matTooltip]="field?.toolTipText || ''" matTooltipPosition="below"
+          [matTooltipClass]="{'custom-tool-tip': true}" />
+        </label>
+
+        <jhi-null-replace *ngSwitchCase="'nestedDataRendering'" [isMandatory]="field?.isMandatory"
+          [value]="getNestedValue(field?.propertyKey)"></jhi-null-replace>
+
+        <jhi-null-replace *ngSwitchDefault [class]="field?.class" [isMandatory]="field?.isMandatory" [value]="
+            uiFields[field?.propertyKey]?.value
+              | dynamicDataTransform
+                : field?.metadata?.displayFormat
+                : field?.metadata?.format
+          " [errors]="validationErrors.selfErrors[field?.propertyKey] ? uiFields[field?.propertyKey]?.errors : null">
+        </jhi-null-replace>
+
+        <jhi-null-replace *ngSwitchCase="'customClass'" [isMandatory]="field?.isMandatory" [class]="uiFields[field?.propertyKey]?.value" [value]="
+          uiFields[field?.propertyKey]?.value
+            | dynamicDataTransform
+              : field?.metadata?.displayFormat
+              : field?.metadata?.format
+        "
+          [errors]="validationErrors.selfErrors[field?.propertyKey] ? uiFields[field?.propertyKey]?.errors : null"></jhi-null-replace>
+      </ng-container>
+    </div>
+  </ng-container>
+</div>

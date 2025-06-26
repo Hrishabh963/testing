@@ -1,0 +1,39 @@
+.user-profile-info-container {
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0px 6px 12px 0px #0000000d;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.headers-container {
+  display: flex;
+  flex-direction: column;
+  padding: 3rem 3rem 1rem 3rem;
+}
+
+.profile-header {
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.profile-sub-header {
+  color: var(--kcredit-profile-secondary-text);
+  font-size: 12px;
+  padding-top: 1rem;
+}
+
+.info {
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  padding: 0 3rem;
+  row-gap: 2rem;
+  column-gap: 3rem;
+}
+
+.info-card {
+  flex-basis: 40%;
+}

@@ -1,0 +1,15 @@
+.activity {
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    justify-content: flex-start;
+    gap: 15px;
+  }
+  .activity-label {
+    background-color: #acbccb;
+    height: 6vh;
+  }
+  .activity-label-text {
+    color: #212529;
+  }
+  

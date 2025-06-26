@@ -1,0 +1,11 @@
+<div class="subtitle">
+  Current Residence Address as per KYC  
+</div>
+
+<div class="container" fxLayout="row" fxLayoutGap="10px">
+  <div class="group-field {{field?.label}}" *ngFor="let field of uiFieldsMap">
+    <label class="form-control-label" htmlFor="label-1">{{ field?.label }}</label>
+    <jhi-null-replace [value]="uiFields[field?.propertyKey]?.value"></jhi-null-replace>
+  </div>
+  <group-info-table [tableData]="tableData"></group-info-table>
+</div>

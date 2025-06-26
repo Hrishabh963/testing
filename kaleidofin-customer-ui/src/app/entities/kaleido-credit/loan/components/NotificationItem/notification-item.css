@@ -1,0 +1,131 @@
+.notification-container {
+  display: flex;
+  flex-direction: row;
+  align-items: top;
+}
+
+.mat-expansion-panel-body {
+  width: 100%;
+
+  .ng-tns-c251-1 {
+    border: none;
+  }
+}
+
+.notification-image {
+  margin-left: -3px;
+}
+
+.notification-body {
+  flex-direction: column;
+  margin-left: 15px;
+  align-items: flex-start;
+}
+
+.header {
+  font-family: Lexend Deca, sans-serif;
+  font-size: 20px;
+  font-weight: 550;
+  line-height: 25px;
+  letter-spacing: 0.17307710647583008px;
+  text-align: left;
+  color: #000000;
+}
+
+.date-and-time {
+  color: var(--kcredit-notification-details-text);
+  margin-top: 5px;
+}
+
+.comment-header {
+  height: 15px;
+  top: 360px;
+  left: 132px;
+  color: var(--kcredit-notification-details-text);
+  margin-top: 25px;
+  width: 500px;
+}
+
+.comment {
+  color: var(--kcredit-notification-details-text);
+  font-family: Lexend Deca, sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 25px;
+  letter-spacing: 0.17307710647583008px;
+  text-align: left;
+  margin-top: 5px;
+  width: 90%;
+  height: 50px;
+  overflow: auto;
+}
+
+.reasons-body {
+  margin-left: 65px;
+}
+
+.notification-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 97%;
+}
+
+.copy-button {
+  align-items: center;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-right: 8px;
+  background-color: var(--kcredit-primary);
+  color: var(--kcredit-primary-white);
+}
+
+.copy-button:hover {
+  background-color: var(--kcredit-primary);
+  color: var(--kcredit-primary-white);
+}
+
+.notification-accordion {
+  width: 150%;
+  align-items: flex-start !important;
+  margin-left: 8px;
+
+  .mat-expansion-panel-header {
+    padding: 8px !important;
+  }
+}
+
+.review-notification {
+  width: 96.5%;
+  display: flex;
+  margin-left: 18px;
+  flex-direction: row;
+  align-items: center;
+  margin-top:15px;
+}
+
+.review-notification-body {
+  max-width: 96.3%;
+  margin-left: 15px;
+  display: flex;
+  flex-grow: 1;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.notification {
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 18px;
+  letter-spacing: 0.17307710647583008px;
+  text-align: left;
+  align-items: center;
+}
+
+.notification-header-button {
+  margin-right: 4px;
+}

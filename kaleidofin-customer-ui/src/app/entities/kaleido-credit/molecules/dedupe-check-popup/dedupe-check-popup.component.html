@@ -1,0 +1,26 @@
+<div class="header-container" mat-dialog-title>
+    <h5>{{title}}</h5>
+    <button class="close-button" (click)="close()"> <mat-icon>close</mat-icon> </button>
+</div>
+<mat-dialog-content class="dialog-content" *ngIf="type === 'REJECT';else acceptDedupe">
+    <span>Are you sure you want to reject this application?</span>
+    <mat-form-field appearance="fill" style="width: 90%;">
+        <textarea matInput placeholder="Type a reason" [(ngModel)]="rejectReason" style="resize: none;">
+        </textarea>
+    </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <div class="button-container">
+        <button mat-flat-button class="cancel-button" (click)="close()"> Cancel </button>
+        <button *ngIf="type === 'REJECT'" [disabled]="!rejectReason?.length" mat-flat-button class="mat-btn-danger"
+            (click)="reject()">Yes, reject</button>
+        <button mat-flat-button (click)="approve()" class="mat-btn-success" *ngIf="type !== 'REJECT'">ACCEPT</button>
+    </div>
+</mat-dialog-actions>
+
+<ng-template #acceptDedupe>
+    <mat-dialog-content class="dialog-content" style="gap: 0 !important;">
+        <h4 class="accept-subtext">Are you sure you want to approve? </h4>
+        <span>Once approved customers record will be merged/updated.</span>
+    </mat-dialog-content>
+</ng-template>

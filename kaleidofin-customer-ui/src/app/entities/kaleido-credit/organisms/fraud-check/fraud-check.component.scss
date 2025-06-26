@@ -1,0 +1,62 @@
+.decision-icon{
+    height: 15px;
+}
+.section-title-container{
+    display: flex;
+    justify-content: space-between;
+}
+
+.report-button {
+    border-radius: 2px;
+    background: #FF7B52;
+}
+
+.report-button-container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-basis: 15%;
+}
+
+.verify-icon{
+    margin-right: 0.3em;
+}
+
+.verify-button-container{
+    display: flex;
+}
+
+.verify {
+    color: #FF7B52;
+    font-family: Arial, Verdana, Tahoma, sans-serif;
+    font-size: 12px;
+    font-style: normal;
+    margin-left: 2em;
+    font-weight: 700;
+    line-height: 16px;
+    letter-spacing: 0.173px;
+    text-decoration-line: underline;
+    cursor: pointer;
+    padding-right: 2.5rem;
+}
+
+.verified {
+    color: #0BC07F;
+    font-family: Arial, Verdana, Tahoma, sans-serif;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 16px;
+    letter-spacing: 0.173px;
+    text-decoration-line: underline;
+    cursor: pointer;
+    padding-right: 2.5rem;
+}
+
+.approved {
+    color: #0BC07F;
+}
+
+.reject {
+    color: #E42323;
+}

@@ -1,0 +1,29 @@
+<div *ngIf="documentTypes?.length || (panDocuments | keyvalue)?.length">
+  <mat-accordion>
+    <mat-expansion-panel
+      [expanded]="panelOpenState"
+      (opened)="panelOpenState = true"
+      (closed)="panelOpenState = false"
+    >
+      <mat-expansion-panel-header>
+        <mat-panel-title class="document-type-title">
+          <h2 class="section-title">Post Sanction Documents</h2>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <app-common-document-accordion
+        [documentTypes]="documentTypes"
+        [panDocuments]="panDocuments"
+        [loanDetailDocuments]="loanDetailDocuments"
+        [authority]="authority"
+        [partnerId]="partnerId"
+        [customerId]="customerId"
+        [loanId]="loanId"
+      >
+      </app-common-document-accordion>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
+<div *ngIf="documentTypes && !documentTypes.length && !(panDocuments | keyvalue)?.length">
+  <h2 class="section-title">Post Sanction Documents</h2>
+  <h6><b> No Documents Available </b></h6>
+</div>

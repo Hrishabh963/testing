@@ -1,0 +1,66 @@
+<!-- Activation Error -->
+<div class="container-fluid" *ngIf="errorType === 'activation'">
+    <div class="row justify-content-center align-items-center">
+        <div class="col-md-12 text-center error-container">
+            <label class="k-font-1 k-denger-status" for="activationError">Activation error</label>
+            <p class="k-font-6 k-third-color-3">Oops, we’re sorry but it seems like your account could not be activated.</p>
+            <label class="k-font-6 k-third-color-3" for="kaleidofinHelp">Please contact <a href="javascript:void(0)" rel="noopener" >help@kaleidofin.com</a> {{supportNumber}} for any assistance.</label>
+        </div>
+    </div>
+</div>
+
+<!-- Customer Error -->
+<div class="container-fluid" *ngIf="errorType === 'customer'">
+    <div class="row justify-content-center align-items-center">
+        <div class="col-md-12 text-center error-container">
+            <label class="k-font-1 k-denger-status" for="customerError">Server error</label>
+            <p class="k-font-6 k-third-color-3">Sorry, it looks like there was an error in the server configuration.</p>
+            <label class="k-font-6 k-third-color-3" for="kaleidofinHelp">Please contact <a href="javascript:void(0)" rel="noopener" >help@kaleidofin.com</a> {{supportNumber}} for any assistance.</label>
+        </div>
+    </div>
+</div>
+
+<!-- Partner Error -->
+<div class="container-fluid" *ngIf="errorType === 'partner'">
+    <div class="row justify-content-center align-items-center">
+        <div class="col-md-12 text-center error-container">
+            <label class="k-font-1 k-denger-status" for="partnerError">Partner configuration error</label>
+            <p class="k-font-6 k-third-color-3">Sorry, it looks like there was an error in the partner configuration.</p>
+            <label class="k-font-6 k-third-color-3" for="kaleidofinHelp">Please contact <a href="javascript:void(0)" rel="noopener" >help@kaleidofin.com</a> {{supportNumber}} for any assistance.</label>
+        </div>
+    </div>
+</div>
+
+<!-- Template Error -->
+<div class="container-fluid" *ngIf="errorType === 'template'">
+    <div class="row justify-content-center align-items-center">
+        <div class="col-md-12 text-center error-container">
+            <label class="k-font-1 k-denger-status" for="templateError">Template error</label>
+            <p class="k-font-6 k-third-color-3">Sorry, it looks like there was an error in the template configuration.</p>
+            <label class="k-font-6 k-third-color-3" for="kaleidofinHelp">Please contact <a href="javascript:void(0)" rel="noopener" >help@kaleidofin.com</a> {{supportNumber}} for any assistance.</label>
+        </div>
+    </div>
+</div>
+
+<!-- Payments Error -->
+<div class="container-fluid" *ngIf="errorType === 'payment'">
+    <div class="row justify-content-center align-items-center">
+        <div class="col-md-12 text-center error-container">
+            <label class="k-font-1 k-denger-status" for="paymentsError">Payments error</label>
+            <p class="k-font-6 k-third-color-3">Sorry, it looks like there was an error in the payments configuration.</p>
+            <label class="k-font-6 k-third-color-3" for="kaleidofinHelp">Please contact <a href="javascript:void(0)" rel="noopener" >help@kaleidofin.com</a> {{supportNumber}} for any assistance.</label>
+        </div>
+    </div>
+</div>
+
+<!-- Page Not Found Error -->
+<div class="container-fluid" *ngIf="errorType === 'pagenotfound'">
+    <div class="row justify-content-center align-items-center">
+        <div class="col-md-12 text-center error-container">
+            <h1 class="k-third-color-2 error-404">404</h1>
+            <button disabled mat-button class="col-md-2 custom-button">Page not found</button>
+            <p class="noMargin">Oops, we’re sorry but it looks like we couldn’t find the page you are looking for.</p>
+            <p>Please visit <a href="https://kaleidofin.com/" class="noTextDecoration" target="_blank" rel="noopener">our homepage</a> to start over.</p>
+        </div>
+    </div>
+</div>

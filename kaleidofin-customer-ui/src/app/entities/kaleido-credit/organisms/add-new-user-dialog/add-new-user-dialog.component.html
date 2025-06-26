@@ -1,0 +1,64 @@
+<main *ngIf="createNewUser; else editUser">
+    <header class="dialog-header">
+        <h1>Add a user</h1>
+        <button mat-icon-button class="close-button" (click)="closeDialog()"> <mat-icon>close</mat-icon> </button>
+    </header>
+    <section class="hrms-search-field">
+        <mat-form-field class="search-field">
+            <mat-label for="hrms"> HRMS ID </mat-label>
+            <input matInput name="hrms" [formControl]="hrmsInput" (keydown.enter)="fetchUser()" />
+            <mat-error class="error-text" *ngIf="hrmsInput?.hasError('invalidId')">{{errorMessage}}</mat-error>
+        </mat-form-field>
+        <button class="btn-primary fetch-button" (click)="fetchUser()" [disabled]="userFetchSuccess || hrmsInput.invalid">
+            Fetch details
+        </button>
+    </section>
+    <ng-container *ngIf="userFetchSuccess">
+        <section class="user-details">
+            <app-user-details-container [userDetails]="currentUser" [detailsMap]="userDetailsMap">
+            </app-user-details-container>
+        </section>
+
+        <section>
+            <app-uam-roles-checkbox-group [roleTypeOptions]="roleTypeOptions" (emitSelectionChange)="updateSelectedRoles($event)">
+            </app-uam-roles-checkbox-group>
+        </section>
+
+        <section>
+            <app-user-change-password [passwordFormGroup]="passwordForm">
+            </app-user-change-password>
+        </section>
+        <footer class="submit-container">
+            <button mat-flat-button class="btn-primary" (click)="submit()" [disabled]="passwordForm?.invalid || !selectedRoles?.length"> Submit </button>
+            <button class="cancel-button" (click)="closeDialog()"> Cancel </button>
+        </footer>
+    </ng-container>
+</main>
+
+<ng-template #editUser>
+    <main>
+        <header class="dialog-header">
+            <div class="header-container">
+                <h1>Edit User</h1>
+                <button mat-button (click)="syncWithHrms()" tabindex="-1" [disabled]="isSyncSuccess || isSyncing">
+                    <mat-icon [ngClass]="{'spin': isSyncing}">sync</mat-icon>
+                    Sync with HRMS
+                </button>
+            </div>
+            <button mat-icon-button class="close-button" (click)="closeDialog()"> <mat-icon>close</mat-icon> </button>
+        </header>
+        <section>
+            <app-user-details-container [userDetails]="currentUser" [detailsMap]="userDetailsMap">
+            </app-user-details-container>
+        </section>
+        <section>
+            <app-uam-roles-checkbox-group [roleTypeOptions]="roleTypeOptions"  (emitSelectionChange)="updateSelectedRoles($event)" [selectedRoles]="selectedRoles">
+            </app-uam-roles-checkbox-group>
+        </section>
+        <footer class="submit-container change-password-container">
+            <div><button mat-flat-button class="btn-primary" [disabled]="!selectedRoles?.length" (click)="update()"> Update </button>
+                <button class="cancel-button" (click)="closeDialog()"> Cancel </button>
+            </div>
+        </footer>
+    </main>
+</ng-template>

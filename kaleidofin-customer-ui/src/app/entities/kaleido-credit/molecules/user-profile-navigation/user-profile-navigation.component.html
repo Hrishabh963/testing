@@ -1,0 +1,18 @@
+<div class="user-profile-navigation">
+    <div class="avatar-container">
+        <app-avatar-badge [username]="userInfo.fullName" [avatarRadius]="'100px'" [fontSize]="'30px'">
+        </app-avatar-badge>
+    </div>
+    <div class="name-container">
+        <span> {{userInfo.fullName}} </span>
+    </div>
+    <div class="navigation-container">
+        <ng-container *ngFor="let nav of navigationArray; let i = index">
+            <span *ngIf="!appMenuConfig[nav?.isDisabled]" (keydown.enter)="changeNavigation(i,
+                nav?.contentType)" (click)="changeNavigation(i, nav?.contentType)"
+                [ngClass]="{'active-class' : activeIndex === i}">
+                {{ nav?.label }}
+            </span>
+        </ng-container>
+    </div>
+</div>

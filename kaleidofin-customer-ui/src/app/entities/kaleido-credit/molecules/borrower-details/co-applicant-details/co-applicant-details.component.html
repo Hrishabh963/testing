@@ -1,0 +1,14 @@
+
+<app-dynamic-render-component
+  [title]="title + ' ' + (index + 1)"
+  [isSubHeading]="true"
+  [uiFields]="uiFields"
+  [uiFieldsMap]="uiFieldsMap"
+  [loanId]="loanDetails.loanApplicationDTO.id"
+  [uiApiKey]="uiApikey"
+  [editSections]="editSections"
+  [payloadTypeKey]="payloadTypeKey"
+  [payloadType]="'array'"
+  [hideEditAction]="!showEditButton"
+>
+</app-dynamic-render-component>  

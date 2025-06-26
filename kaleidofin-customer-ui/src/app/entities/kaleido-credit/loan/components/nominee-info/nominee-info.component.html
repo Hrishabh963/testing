@@ -1,0 +1,251 @@
+<div class="card-title">
+  <form name="nomineeDetailsForm" novalidate #nomineeDetailsForm="ngForm">
+    <div style="margin-top: 5ex">
+      <div class="expansion-panel-title-container">
+        <h5 class="section-sub-heading">Nominee Details</h5>
+        <app-section-edit-action (onCancelHandler)="cancelNomineeEdit()"
+          (onSaveHandler)="saveNomineeDetails(nomineeDetails)" [panelOpenState]="true" [isEditing]="editNomineeDetails"
+          (onEditHandler)="enableNomineeEdit()"></app-section-edit-action>
+      </div>
+      <div class="row row-spacing" *ngIf="nomineeDetails">
+        <div class="col-3">
+          <div [hidden]="!editNomineeDetails">
+            <mat-form-field appearance="outline">
+              <mat-label>Name</mat-label>
+              <input matInput [disabled]="!editNomineeDetails" name="nomineeName" [(ngModel)]="nomineeDetails.name"
+                required="required" />
+            </mat-form-field>
+          </div>
+          <div [hidden]="editNomineeDetails">
+            <label class="form-control-label" for="name">Name</label>
+            <jhi-null-replace [value]="nomineeDetails.name"></jhi-null-replace>
+          </div>
+        </div>
+        <div class="col-3">
+          <div [hidden]="!editNomineeDetails">
+            <mat-form-field appearance="outline">
+              <mat-label>Relationship with Nominee</mat-label>
+              <input matInput [disabled]="!editNomineeDetails" name="nomineeRelationship"
+                [(ngModel)]="nomineeDetails.nomineeRelationship" />
+            </mat-form-field>
+          </div>
+
+          <div [hidden]="editNomineeDetails">
+            <label class="form-control-label" for="nomineeRelationship">Relationship with Nominee</label>
+            <jhi-null-replace [value]="nomineeDetails.nomineeRelationship"></jhi-null-replace>
+          </div>
+        </div>
+        <div class="col-3">
+          <ig-input [inputField]="nomineeDetailsForm.controls.nomineeAge"
+            [inputErrors]="nomineeDetailsForm.controls.nomineeAge?.errors">
+            <label class="form-control-label" for="age">Age of Nominee(years)</label>
+            <jhi-null-replace [value]="getNomineeAge()"></jhi-null-replace>
+          </ig-input>
+        </div>
+        <div class="col-3">
+          <div [hidden]="!editNomineeDetails">
+            <mat-form-field style="width: 80%" appearance="outline">
+              <mat-label>Date of Birth</mat-label>
+              <input matInput [disabled]="!editNomineeDetails" [matDatepicker]="dateOfBirth" placeholder="Date of Birth"
+                [max]="maxDate" [min]="minDate" (dateChange)="updateDate($event, 'dateOfBirth')"
+                [value]="dateDisplay" />
+              <mat-datepicker-toggle matSuffix [for]="dateOfBirth"></mat-datepicker-toggle>
+              <mat-datepicker #dateOfBirth></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div [hidden]="editNomineeDetails">
+            <label class="form-control-label" for="dob">Date Of Birth</label>
+            <jhi-null-replace [value]="nomineeDetails.dateOfBirth" inputType="date"></jhi-null-replace>
+          </div>
+        </div>
+      </div>
+      <h4 style="font-weight: bold; margin-top: 3ex" class="section-sub-heading">
+        Address of the Nominee
+      </h4>
+      <div class="row row-spacing" *ngIf="nomineeAddress">
+        <div class="col-3">
+          <div [hidden]="!editNomineeDetails">
+            <mat-form-field appearance="outline">
+              <mat-label>Address</mat-label>
+              <input matInput [disabled]="!editNomineeDetails" name="nomineeAddress"
+                [(ngModel)]="nomineeAddress.address1" />
+            </mat-form-field>
+          </div>
+          <div [hidden]="editNomineeDetails">
+            <label class="form-control-label" for="address">Address</label>
+            <jhi-null-replace [value]="nomineeAddress.address1"></jhi-null-replace>
+          </div>
+        </div>
+        <div class="col-3">
+          <div [hidden]="!editNomineeDetails">
+            <mat-form-field appearance="outline">
+              <mat-label>City</mat-label>
+              <input matInput [disabled]="!editNomineeDetails" name="nomineeCity" [(ngModel)]="nomineeAddress.city" />
+            </mat-form-field>
+          </div>
+          <div [hidden]="editNomineeDetails">
+            <label class="form-control-label" for="city">City</label>
+            <jhi-null-replace [value]="nomineeAddress.city"></jhi-null-replace>
+          </div>
+        </div>
+        <div class="col-3">
+          <div [hidden]="!editNomineeDetails">
+            <mat-form-field appearance="outline">
+              <mat-label>Pin Code</mat-label>
+              <input matInput [disabled]="!editNomineeDetails" name="nomineePincode"
+                [(ngModel)]="nomineeAddress.pincode" />
+            </mat-form-field>
+          </div>
+          <div [hidden]="editNomineeDetails">
+            <label class="form-control-label" for="pinCode">Pin Code</label>
+            <jhi-null-replace [value]="nomineeAddress.pincode"></jhi-null-replace>
+          </div>
+        </div>
+        <div class="col-3">
+          <div [hidden]="!editNomineeDetails">
+            <mat-form-field appearance="outline">
+              <mat-label>State</mat-label>
+              <input matInput [disabled]="!editNomineeDetails" name="nomineeState" [(ngModel)]="nomineeAddress.state" />
+            </mat-form-field>
+          </div>
+          <div [hidden]="editNomineeDetails">
+            <label class="form-control-label" for="state">State</label>
+            <jhi-null-replace [value]="nomineeAddress.state"></jhi-null-replace>
+          </div>
+        </div>
+      </div>
+      <div class="row row-spacing" *ngIf="nomineeAddress">
+        <div class="col-3">
+          <div [hidden]="!editNomineeDetails">
+            <mat-form-field appearance="outline">
+              <mat-label>Landmark</mat-label>
+              <input matInput [disabled]="!editNomineeDetails" name="nomineeLandmark"
+                [(ngModel)]="nomineeAddress.address2" />
+            </mat-form-field>
+          </div>
+          <div [hidden]="editNomineeDetails">
+            <label class="form-control-label" for="landmark">Landmark</label>
+            <jhi-null-replace [value]="nomineeAddress.address2"></jhi-null-replace>
+          </div>
+        </div>
+        <div class="col-3">
+          <label class="form-control-label" for="nomineeIsMinor">Is Minor?</label>
+          <div [hidden]="!editNomineeDetails">
+            <mat-checkbox [disabled]="!editNomineeDetails" name="nomineeIsMinor" [(ngModel)]="nomineeDetails.isMinor">
+            </mat-checkbox>
+          </div>
+          <div [hidden]="editNomineeDetails">
+            <jhi-null-replace [value]="nomineeDetails.isMinor" inputType="checkbox"></jhi-null-replace>
+          </div>
+        </div>
+      </div>
+      <hr class="section-hr" />
+      <h5 style="font-weight: bold" class="section-sub-heading">Guardian</h5>
+      <div class="row row-spacing" *ngIf="nomineeDetails">
+        <div class="col-3">
+          <div [hidden]="!editNomineeDetails">
+            <mat-form-field appearance="outline">
+              <mat-label>Guardian Name</mat-label>
+              <input matInput [disabled]="!editNomineeDetails" type="text" name="guardianName"
+                [(ngModel)]="nomineeDetails.guardianName" />
+            </mat-form-field>
+          </div>
+          <div [hidden]="editNomineeDetails">
+            <label class="form-control-label" for="pinCode">Guardian Name</label>
+            <jhi-null-replace [value]="nomineeDetails.guardianName"></jhi-null-replace>
+          </div>
+        </div>
+        <div class="col-3">
+          <div [hidden]="!editNomineeDetails">
+            <mat-form-field style="width: 80%" appearance="outline">
+              <mat-label>Guardian Date of Birth</mat-label>
+              <input matInput [disabled]="!editNomineeDetails" [matDatepicker]="guardianDOB" [max]="maxDate"
+                [min]="minDate" (dateChange)="updateDate($event, 'guardianDOB')" [value]="guardianDOBDateDisplay" />
+              <mat-datepicker-toggle matSuffix [for]="guardianDOB"></mat-datepicker-toggle>
+              <mat-datepicker #guardianDOB></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div [hidden]="editNomineeDetails">
+            <label class="form-control-label" for="guardianDob">Guardian Date of Birth</label>
+            <jhi-null-replace [value]="nomineeDetails.guardianDOB" inputType="date"></jhi-null-replace>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="guardianAddress">
+        <div class="col-12 row" style="margin-top: 3ex">
+          <div class="col-9">
+            <h4 class="section-sub-heading">Address of the Guardian</h4>
+          </div>
+          <div class="col-3">
+            <app-section-edit-action (onCancelHandler)="cancelGuardianEdit()"
+              (onSaveHandler)="saveGuardianAddress(guardianAddress)" [panelOpenState]="true"
+              [isEditing]="editGuardianAddress" (onEditHandler)="enableGuardianEdit()"></app-section-edit-action>
+          </div>
+        </div>
+        <div class="row row-spacing">
+          <div class="col-3">
+            <div [hidden]="!editGuardianAddress">
+              <mat-form-field appearance="outline">
+                <mat-label>Address</mat-label>
+                <input matInput [disabled]="!editGuardianAddress" type="text" name="guardianAddress"
+                  [(ngModel)]="guardianAddress.address1" />
+              </mat-form-field>
+            </div>
+
+            <div [hidden]="editGuardianAddress">
+              <label class="form-control-label" for="address">Address</label>
+              <jhi-null-replace [value]="guardianAddress.address1"></jhi-null-replace>
+            </div>
+          </div>
+          <div class="col-3">
+            <div [hidden]="!editGuardianAddress">
+              <mat-form-field appearance="outline">
+                <mat-label>District</mat-label>
+                <input matInput [disabled]="!editGuardianAddress" type="text" name="guardianDistrict"
+                  [(ngModel)]="guardianAddress.district" />
+              </mat-form-field>
+            </div>
+
+            <div [hidden]="editGuardianAddress">
+              <label class="form-control-label" for="district">District</label>
+              <jhi-null-replace [value]="guardianAddress.district"></jhi-null-replace>
+            </div>
+          </div>
+          <div class="col-3">
+            <div [hidden]="!editGuardianAddress">
+              <mat-form-field appearance="outline">
+                <mat-label>Pin Code</mat-label>
+                <input matInput [disabled]="!editGuardianAddress" type="text" name="guardianPinCode"
+                  [(ngModel)]="guardianAddress.pincode" />
+              </mat-form-field>
+            </div>
+            <div [hidden]="editGuardianAddress">
+              <label class="form-control-label" for="pinCode">Pin Code</label>
+              <jhi-null-replace [value]="guardianAddress.pincode"></jhi-null-replace>
+            </div>
+          </div>
+          <div class="col-3">
+            <div [hidden]="!editGuardianAddress">
+              <mat-form-field appearance="outline">
+                <mat-label>State</mat-label>
+                <input matInput [disabled]="!editGuardianAddress" type="text" name="guardianState"
+                  [(ngModel)]="guardianAddress.state" />
+              </mat-form-field>
+            </div>
+            <div [hidden]="editGuardianAddress">
+              <label class="form-control-label" for="state">State</label>
+              <jhi-null-replace [value]="guardianAddress.state"></jhi-null-replace>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div class="row row-spacing">
+  <app-kyc-details-accordion [title]="'Nominee'" [partnerId]="loanDetails?.customerDTO?.partnerId"
+    [kycDocumentList]="coApplicantKYCDetailsList" [entityType]="'NOMINEE'"
+    [loanId]="loanDetails?.loanApplicationDTO?.id">
+  </app-kyc-details-accordion>
+</div>

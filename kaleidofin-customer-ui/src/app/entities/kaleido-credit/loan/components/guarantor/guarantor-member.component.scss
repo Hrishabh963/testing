@@ -1,0 +1,39 @@
+.Yes,
+.YES,
+.yes,
+.High,
+.high,
+.HIGH,
+.Rejected,
+.rejected,
+.REJECTED {
+    color: #E42323;
+}
+
+
+.no,
+.No,
+.NO,
+.approved,
+.Approved,
+.APPROVED,
+.ACCEPTED,
+.Accepted,
+.accepted,
+.LOW,
+.low,
+.Low
+{
+  color: #0BC07F;
+}
+.medium,
+.Medium,
+.MEDIUM {
+    color: #FFAC30;
+}
+
+.verification-container {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}

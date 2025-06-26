@@ -1,0 +1,53 @@
+<div class="dialog-container">
+  <div mat-dialog-title class="dialog-title">
+    <mat-icon class="closeicon" (click)="cancel()" (keypress)="cancel()" tabindex="0">close</mat-icon>
+  </div>
+  <div mat-dialog-content class="dialog-content-text">
+    <img
+      *ngIf="enableReports"
+      src="../../../../../assets/images/common/progress.svg"
+      alt="In Progress"
+    />
+    <img
+      *ngIf="errors"
+      src="../../../../../assets/images/common/info-tooltip.svg"
+      alt="In Progress"
+    />
+    <p *ngIf="!enableReports && !errors">
+      {{ data.confirmationText }}
+    </p>
+    <p *ngIf="enableReports">
+      File download has started. Check status in the reports section
+    </p>
+    <p *ngIf="errors">Error downloading file.</p>
+  </div>
+  <div mat-dialog-actions>
+    <div class="action-buttons">
+      <button
+        *ngIf="!enableReports && !errors"
+        mat-button
+        class="button4 cancel"
+        (click)="cancel()"
+      >
+        Cancel
+      </button>
+      <button
+        *ngIf="!enableReports && !errors"
+        mat-button
+        class="button4 proceed"
+        cdkFocusInitial
+        (click)="proceed()"
+      >
+        Proceed
+      </button>
+      <button
+        *ngIf="enableReports"
+        mat-button
+        class="button4 cancel"
+        (click)="goToReports()"
+      >
+        Go To Reports
+      </button>
+    </div>
+  </div>
+</div>

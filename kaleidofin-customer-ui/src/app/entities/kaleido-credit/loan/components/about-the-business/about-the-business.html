@@ -1,0 +1,233 @@
+<mat-accordion>
+  <mat-expansion-panel
+    [expanded]="panelOpenState"
+    (opened)="panelOpenState = true"
+    (closed)="panelOpenState = false"
+  >
+    <mat-expansion-panel-header>
+      <div class="expansion-panel-title-container">
+        <div class="section-title">About the Business</div>
+        <app-section-edit-action
+          (onCancelHandler)="cancel($event)"
+          (onSaveHandler)="save($event)"
+          [panelOpenState]="panelOpenState"
+          [isEditing]="isEditing"
+          (onEditHandler)="toggleEditDetails($event)"
+        ></app-section-edit-action>
+      </div>
+    </mat-expansion-panel-header>
+
+    <div class="card-title">
+      <form name="aboutTheBusiness" novalidate #editForm="ngForm">
+        <div class="card-body">
+          <div class="card-title">
+            <div class="row row-spacing">
+              <div class="form-group col-md-3">
+                <mat-form-field appearance="outline" [hidden]="!isEditing">
+                  <mat-label>Name of the enterprise</mat-label>
+                  <input
+                    matInput
+                    [disabled]="!isEditing"
+                    name="name"
+                    id="field_enterprise_name"
+                    [(ngModel)]="businessDetails.nameOfEnterprise"
+                  />
+                </mat-form-field>
+                <div [hidden]="isEditing">
+                  <label class="form-control-label" for="field_enterprise_name"
+                    >Name of the enterprise</label
+                  >
+                  <jhi-null-replace
+                    [value]="businessDetails?.nameOfEnterprise"
+                  ></jhi-null-replace>
+                </div>
+              </div>
+              <div class="form-group col-md-3">
+                <mat-form-field appearance="outline" [hidden]="!isEditing">
+                  <mat-label>Income sources</mat-label>
+                  <input
+                    matInput
+                    [disabled]="!isEditing"
+                    name="income_source"
+                    id="field_income_source"
+                    [(ngModel)]="businessDetails.sourceOfIncome"
+                  />
+                </mat-form-field>
+                <div [hidden]="isEditing">
+                  <label class="form-control-label" for="field_income_source"
+                    >Income sources</label
+                  >
+                  <jhi-null-replace
+                    [value]="businessDetails?.sourceOfIncome"
+                  ></jhi-null-replace>
+                </div>
+              </div>
+              <div class="form-group col-md-3">
+                <mat-form-field appearance="outline" [hidden]="!isEditing">
+                  <mat-label>Description of business</mat-label>
+                  <input
+                    matInput
+                    [disabled]="!isEditing"
+                    name="descriptionOfBusiness"
+                    id="field_description"
+                    [(ngModel)]="businessDetails.descriptionOfBusiness"
+                  />
+                </mat-form-field>
+                <div [hidden]="isEditing">
+                  <label class="form-control-label" for="field_description"
+                    >Description of business</label
+                  >
+                  <jhi-null-replace
+                    [value]="businessDetails?.descriptionOfBusiness"
+                  ></jhi-null-replace>
+                </div>
+              </div>
+              <div class="form-group col-md-3">
+                <mat-form-field appearance="outline" [hidden]="!isEditing">
+                  <mat-label>Running since how many years?</mat-label>
+                  <input
+                    matInput
+                    [disabled]="!isEditing"
+                    name="runningSince"
+                    id="field_runningSince"
+                    [(ngModel)]="businessDetails.runningSince"
+                  />
+                </mat-form-field>
+
+                <div [hidden]="isEditing">
+                  <label class="form-control-label" for="field_running_since"
+                    >Running since how many years?</label
+                  >
+                  <jhi-null-replace
+                    [value]="businessDetails?.runningSince"
+                  ></jhi-null-replace>
+                </div>
+              </div>
+            </div>
+            <div class="row row-spacing">
+              <div class="form-group col-md-3">
+                <mat-form-field appearance="outline" [hidden]="!isEditing">
+                  <mat-label>Experience</mat-label>
+                  <input
+                    matInput
+                    [disabled]="!isEditing"
+                    name="experience"
+                    id="field_experience"
+                    [(ngModel)]="businessDetails.businessExperience"
+                  />
+                </mat-form-field>
+                <div [hidden]="isEditing">
+                  <label
+                    class="form-control-label"
+                    jhiTranslate="kCredit.aboutTheBusiness.experience"
+                    for="field_experience"
+                    >Experience</label
+                  >
+                  <jhi-null-replace
+                    [value]="businessDetails?.businessExperience"
+                  ></jhi-null-replace>
+                </div>
+              </div>
+              <div class="form-group col-md-3">
+                <mat-form-field appearance="outline" [hidden]="!isEditing">
+                  <mat-label>Industry Type</mat-label>
+                  <input
+                    matInput
+                    [disabled]="!isEditing"
+                    name="industryType"
+                    id="field_industrytype"
+                    [(ngModel)]="businessDetails.industryType"
+                  />
+                </mat-form-field>
+                <div [hidden]="isEditing">
+                  <label
+                    class="form-control-label"
+                    jhiTranslate="kCredit.aboutTheBusiness.industryType"
+                    for="field_industrytype"
+                    >Industry Type</label
+                  >
+                  <jhi-null-replace
+                    [value]="businessDetails?.industryType"
+                  ></jhi-null-replace>
+                </div>
+              </div>
+              <div class="form-group col-md-3">
+                <mat-form-field appearance="outline" [hidden]="!isEditing">
+                  <mat-label>PAN No</mat-label>
+                  <input
+                    matInput
+                    [disabled]="!isEditing"
+                    name="pan"
+                    id="field_pan"
+                    [(ngModel)]="businessDetails.businessPanNo"
+                  />
+                </mat-form-field>
+
+                <div [hidden]="isEditing">
+                  <label
+                    class="form-control-label"
+                    jhiTranslate="kCredit.aboutTheBusiness.pan"
+                    for="field_pan"
+                    >PAN No</label
+                  >
+                  <jhi-null-replace
+                    [value]="businessDetails?.businessPanNo"
+                  ></jhi-null-replace>
+                </div>
+              </div>
+              <div class="form-group col-md-3">
+                <mat-form-field appearance="outline" [hidden]="!isEditing">
+                  <mat-label>GST No</mat-label>
+                  <input
+                    matInput
+                    [disabled]="!isEditing"
+                    name="gst"
+                    id="field_gst"
+                    [(ngModel)]="businessDetails.businessGstNo"
+                  />
+                </mat-form-field>
+
+                <div [hidden]="isEditing">
+                  <label
+                    class="form-control-label"
+                    jhiTranslate="kCredit.aboutTheBusiness.gst"
+                    for="field_gst"
+                    >GST No</label
+                  >
+                  <jhi-null-replace
+                    [value]="businessDetails?.businessGstNo"
+                  ></jhi-null-replace>
+                </div>
+            </div>
+            <div class="row row-spacing">
+              </div>
+              <div class="form-group col-md-3">
+                <mat-form-field appearance="outline" [hidden]="!isEditing">
+                  <mat-label>Business Vintage</mat-label>
+                  <input
+                    matInput
+                    [disabled]="!isEditing"
+                    name="business_vintage"
+                    id="field_business_vintage"
+                    [(ngModel)]="businessDetails.businessVintage"
+                  />
+                </mat-form-field>
+                <div [hidden]="isEditing">
+                  <label
+                    class="form-control-label"
+                    jhiTranslate="kCredit.aboutTheBusiness.businessVintage"
+                    for="field_business_vintage"
+                    >Business Vintage</label
+                  >
+                  <jhi-null-replace
+                    [value]="businessDetails.businessVintage"
+                  ></jhi-null-replace>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>

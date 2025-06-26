@@ -1,0 +1,127 @@
+.title {
+    font-family: Lexend Deca, sans-serif;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 16px;
+    color: #38526C;
+    margin-right: 5rem;
+}
+
+.filters-title-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25vw;
+    margin-left: 1.5vw;
+    padding: 2rem 4rem 2rem 2rem;
+}
+
+.close-icon {
+    cursor: pointer;
+    height: 4vh;
+}
+
+.filters-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem 1rem 0 1rem;
+    height: 76vh;
+
+    .filter-list {
+        flex-basis: 29%;
+        overflow: scroll;
+        max-height: 70vh;
+    }
+
+    .filter-value {
+        flex-basis: 70%;
+        overflow: scroll;
+        max-height: 79vh;
+
+        .options {
+            padding-left: 1.5rem;
+
+            ::ng-deep span {
+                font-family: Lexend Deca, sans-serif;
+                font-size: 14px;
+                font-weight: 400;
+                color: #496684;
+            }
+            .option-label {
+                padding-left: 0.8rem;
+            }
+        }
+    }
+
+    .horizontal-divider {
+        height: 100%;
+        border: 1px solid #96AABD;
+        margin-right: 0.25rem;
+        opacity: 30%;
+        margin-left: 1rem;
+    }
+}
+
+.filter-name-container {
+    padding: 1.5rem 1rem 1rem 1rem;
+    cursor: pointer;
+    margin-right: 0.8rem;
+    height: 4rem;
+}
+
+.filter-name-container:hover {
+    background-color: #f0f0f0;
+    transition: background-color 0.3s ease;
+}
+
+.filter-name {
+    font-family: Lexend Deca, sans-serif;
+    font-size: 15px;
+    font-weight: 400;
+    text-align: left;
+    color: #38526C;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+.clicked {
+    background-color: var(--kcredit-primary-background);
+    border-radius: 5px;
+
+    .filter-name {
+        color: var(--kcredit-primary);
+    }
+}
+
+.button-container {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 3rem;
+
+    .clear-button {
+        color: var(--kcredit-primary);
+    }
+}
+
+.search-box {
+    width: 28vw;
+    padding-left: 1.5rem;
+}
+
+.vertical-divider {
+    width: 100%;
+    border: 1px solid #96AABD;
+    opacity: 30%;
+    margin-bottom: 1rem;
+}
+
+.filter-selected-count {
+    padding: 0.25em 0.5em;
+    font-family: Lexend Deca, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    background-color: #FFE4DC;
+    border-radius: 5px;
+    color: #FF7B52;
+}

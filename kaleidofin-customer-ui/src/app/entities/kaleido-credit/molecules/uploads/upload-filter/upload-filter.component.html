@@ -1,0 +1,23 @@
+<div class="col-md-12 filter-container">
+  <mat-form-field appearance="fill" class="custom-mat-form-field" *ngIf="!hasDefaultReport">
+    <mat-label>Report Type</mat-label>
+    <mat-select
+      placeholder="Report Type"
+      (selectionChange)="updateReportType()"
+      [(ngModel)]="selectedReportType"
+    >
+      <mat-option *ngFor="let report of reportTypes" [value]="report">{{
+        report.viewValue
+      }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button
+    mat-raised-button
+    class="btn-primary upload-button"
+    [disabled]="!selectedReportType"
+    (click)="openUploadDialog()"
+  >
+    Upload
+  </button>
+</div>

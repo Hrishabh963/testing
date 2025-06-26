@@ -1,0 +1,38 @@
+<div class="table-container">
+    <table>
+        <caption></caption>
+        <thead>
+            <tr>
+                <th class="table-heading"> Household Income Assessment </th>
+                <ng-container *ngFor="let income of houseHoldIncome; let index = index">
+                    <th class="table-heading" *ngIf="index === 0"> Applicant </th>
+                    <th class="table-heading" *ngIf="index !== 0"> HH Member {{ index }} </th>
+                </ng-container>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let row of tableRow; let index = index" [ngSwitch]="row?.type">
+                <tr *ngSwitchDefault>
+                    <td [class]="'row-' + (1 - index % 2)" class="table-span"> {{ row?.title }} </td>
+                    <td [class]="'row-' + (1 - index % 2)" class="table-span" *ngFor="let income of houseHoldIncome">
+                        <jhi-null-replace [value]="income[row?.propertyKey] | dynamicDataTransform : row?.pipe"></jhi-null-replace>
+                    </td>
+                </tr>
+                <tr *ngSwitchCase="'overall'">
+                    <td [class]="'row-' + (1 - index % 2)" class="table-span"> {{ row?.title }} </td>
+                    <td [class]="'row-' + (1 - index % 2)" class="table-span table-span-overall"
+                        [colSpan]="houseHoldIncome?.length"> <jhi-null-replace
+                            [value]="reportData[row?.propertyKey] | dynamicDataTransform : row?.pipe"></jhi-null-replace> </td>
+                </tr>
+            </ng-container>
+            <ng-container *ngFor="let row of otherIncomeTable; let index = index">
+                <tr>
+                    <td [class]="'row-' + (1 - index % 2)" class="table-span"> {{ row?.title }} </td>
+                    <td [class]="'row-' + (1 - index % 2)" class="table-span" *ngFor="let income of otherIncome">
+                        <jhi-null-replace [value]="income[row?.propertyKey] | dynamicDataTransform : row?.pipe"></jhi-null-replace>
+                    </td>
+                </tr>
+            </ng-container>
+        </tbody>
+    </table>
+</div>

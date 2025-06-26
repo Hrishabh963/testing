@@ -1,0 +1,17 @@
+<div>
+  <button
+    [disabled]="fromEntry"
+    mat-stroked-button
+    class="lender-sheet-buttons"
+    [matMenuTriggerFor]="menu"
+  >
+    Download
+  </button>
+  <mat-menu class="custom-style" #menu="matMenu">
+    <button mat-menu-item *ngFor="let report of reports; let i = index" (click)="openReport(report.value)">
+      <div>
+        <div>{{ report.viewValue }}</div>
+      </div>
+    </button>
+  </mat-menu>
+</div>

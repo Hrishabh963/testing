@@ -1,0 +1,148 @@
+<div style="margin: 5vh 0 3vh 0">
+  <div class="sub-heading-container">
+    <div class="document-type-title">Borrower’s beneficiary check</div>
+    <div class="button-container">
+      <button mat-raised-button type="button" class="btn btn-primary" data-dismiss="modal" (click)="retryCheck()"
+        [disabled]="beneficiaryData?.status?.value === 'VERIFIED' || !isAgreementRecieved || !editSections"
+        [hidden]="enableEdit">
+        Retry Beneficiary Check
+      </button>
+      <button mat-raised-button type="button" class="btn btn-primary" data-dismiss="modal" [hidden]="enableEdit"
+        [disabled]="!canEdit || !editSections || !isAgreementRecieved" (click)="toggleEditDetails()">
+        <mat-icon>edit</mat-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+      </button>
+      <button mat-raised-button type="button" class="btn-secondary" data-dismiss="modal" [hidden]="!enableEdit"
+        (click)="cancelEditDetails()">
+        <span jhiTranslate="entity.action.cancel">Cancel</span>
+      </button>
+      <button mat-raised-button type="button" class="btn-primary" data-dismiss="modal" (click)="saveDetails()"
+        [hidden]="!enableEdit">
+        <span jhiTranslate="entity.action.save">Save</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="container">
+    <ng-container *ngFor="let field of beneficiaryFieldsMap" [ngSwitch]="field?.type">
+      <div *ngSwitchDefault class="col-lg-3 field">
+        <app-input-field *ngIf="enableEdit && beneficiaryData[field?.propertyKey]?.editable" [label]="field?.label"
+          [dataObj]="beneficiaryData[field?.propertyKey]" [editable]="enableEdit" [useRegex]="field?.useRegex"
+          [inputLength]="field?.metadata?.inputLength" [isRequired]="field?.required" [customRegex]="field?.customRegex"
+          [errorMessage]="field?.errorMessage">
+        </app-input-field>
+        <div [hidden]="enableEdit && beneficiaryData[field?.propertyKey]?.editable">
+          <label class="form-control-label" [for]="field?.propertyKey"> {{field?.label}} </label>
+          <jhi-null-replace [value]="beneficiaryData[field?.propertyKey]?.value
+          | dynamicDataTransform
+            : field?.metadata?.displayFormat
+            : field?.metadata?.format">
+          </jhi-null-replace>
+        </div>
+      </div>
+
+      <div *ngSwitchCase="'number'" class="col-lg-3 field">
+        <app-number-field *ngIf="enableEdit && beneficiaryData[field?.propertyKey]?.editable" [label]="field?.label"
+          [dataObj]="beneficiaryData[field?.propertyKey]" [editable]="enableEdit"
+          [inputLength]="field?.metadata?.inputLength" [isRequired]="field?.required">
+        </app-number-field>
+        <div [hidden]="enableEdit && beneficiaryData[field?.propertyKey]?.editable">
+          <label class="form-control-label" [for]="field?.propertyKey"> {{field?.label}} </label>
+          <jhi-null-replace [value]="beneficiaryData[field?.propertyKey]?.value
+          | dynamicDataTransform
+            : field?.metadata?.displayFormat
+            : field?.metadata?.format">
+          </jhi-null-replace>
+        </div>
+      </div>
+
+
+      <div *ngSwitchCase="'select'" class="col-lg-3 field">
+        <app-select-field *ngIf="enableEdit && beneficiaryData[field?.propertyKey]?.editable" [label]="field?.label"
+          [dataObj]="beneficiaryData[field?.propertyKey]" [dropDownValues]="field?.dropDownValues"
+          [isRequired]="field?.required" [showSearchBox]="field?.showSearchBox">
+        </app-select-field>
+        <div [hidden]="enableEdit && beneficiaryData[field?.propertyKey]?.editable">
+          <label class="form-control-label" [for]="field?.propertyKey"> {{field?.label}} </label>
+          <jhi-null-replace [value]="beneficiaryData[field?.propertyKey]?.value
+          | dynamicDataTransform
+            : field?.metadata?.displayFormat
+            : field?.metadata?.format">
+          </jhi-null-replace>
+        </div>
+      </div>
+      <div *ngSwitchCase="'searchIFSC'" [hidden]="!toggleSearchIFSC" class="col-lg-3 field">
+        <button mat-raised-button type="button" class="btn btn-primary" data-dismiss="modal" [disabled]="!enableEdit"
+          (click)="searchIfsc()">
+          Search IFSC
+        </button>
+      </div>
+      <div *ngSwitchCase="'statusMapper'" class="col-lg-3 field">
+        <label class="form-control-label" for="statusDisplay">Status</label>
+        <div id="statusDisplay" [ngClass]="statusMapper[beneficiaryData?.status?.value]?.class">
+          {{ statusMapper[beneficiaryData?.status?.value]?.message || "--" }}
+          <img class="status-icon" *ngIf="statusMapper[beneficiaryData?.status?.value]?.message"
+            [src]="statusMapper[beneficiaryData?.status?.value]?.icon"
+            [alt]="statusMapper[beneficiaryData?.status?.value]?.message" />
+        </div>
+      </div>
+    </ng-container>
+  </div>
+
+  <!-- Bank Branch Details  -->
+  <ng-container *ngIf="toggleBankDetails">
+    <div class="sub-heading-container">
+      <div class="document-type-title">Bank Branch Details</div>
+    </div>
+
+    <div class="container">
+      <ng-container *ngFor="let field of bankFieldsMap" [ngSwitch]="field?.type">
+        <div *ngSwitchDefault class="col-lg-3 field">
+          <app-input-field *ngIf="enableEdit && beneficiaryData[field?.propertyKey]?.editable" [label]="field?.label"
+            [dataObj]="beneficiaryData[field?.propertyKey]" [editable]="enableEdit"
+            [inputLength]="field?.metadata?.inputLength" [isRequired]="field?.required">
+          </app-input-field>
+          <div [hidden]="enableEdit && beneficiaryData[field?.propertyKey]?.editable">
+            <label class="form-control-label" [for]="field?.propertyKey"> {{field?.label}} </label>
+            <jhi-null-replace [value]="
+              beneficiaryData[field?.propertyKey]?.value
+              | dynamicDataTransform
+              : field?.metadata?.displayFormat
+              : field?.metadata?.format">
+            </jhi-null-replace>
+          </div>
+        </div>
+
+        <div *ngSwitchCase="'number'" class="col-lg-3 field">
+          <app-number-field *ngIf="enableEdit && beneficiaryData[field?.propertyKey]?.editable" [label]="field?.label"
+            [dataObj]="beneficiaryData[field?.propertyKey]" [editable]="enableEdit"
+            [inputLength]="field?.metadata?.inputLength" [isRequired]="field?.required">
+          </app-number-field>
+          <div [hidden]="enableEdit && beneficiaryData[field?.propertyKey]?.editable">
+            <label class="form-control-label" [for]="field?.propertyKey"> {{field?.label}} </label>
+            <jhi-null-replace [value]="beneficiaryData[field?.propertyKey]?.value
+        | dynamicDataTransform
+          : field?.metadata?.displayFormat
+          : field?.metadata?.format">
+            </jhi-null-replace>
+          </div>
+        </div>
+
+
+        <div *ngSwitchCase="'select'" class="col-lg-3 field">
+          <app-select-field *ngIf="enableEdit && beneficiaryData[field?.propertyKey]?.editable" [label]="field?.label"
+            [dataObj]="beneficiaryData[field?.propertyKey]" [dropDownValues]="field?.dropDownValues"
+            [isRequired]="field?.required" [showSearchBox]="field?.showSearchBox">
+          </app-select-field>
+          <div [hidden]="enableEdit && beneficiaryData[field?.propertyKey]?.editable">
+            <label class="form-control-label" [for]="field?.propertyKey"> {{field?.label}} </label>
+            <jhi-null-replace
+             [value]="
+             beneficiaryData[field?.propertyKey]?.value
+             | dynamicDataTransform : field?.metadata?.displayFormat : field?.metadata?.format">
+            </jhi-null-replace>
+          </div>
+        </div>
+      </ng-container>
+    </div>
+  </ng-container>
+</div>

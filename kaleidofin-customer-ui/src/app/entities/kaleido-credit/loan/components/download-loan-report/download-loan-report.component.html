@@ -1,0 +1,12 @@
+<button *ngIf="authority.view" class="btn-review review-button" mat-button [matMenuTriggerFor]="belowMenu">
+  Download
+  <span class="material-icons"> keyboard_arrow_down </span>
+</button>
+<mat-menu #belowMenu="matMenu" yPosition="below" xPosition="before">
+  <div *ngFor="let menu of downloadMenus">
+    <span mat-menu-item [value]="menu.value"
+    (click)="openDialog(menu)"
+    (keypress)="openDialog(menu)"
+    >{{menu.viewValue}}</span>
+  </div>
+</mat-menu>

@@ -1,0 +1,57 @@
+<mat-accordion>
+  <mat-expansion-panel [expanded]="panelOpenState" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+      <div class="expansion-panel-title-container">
+        <div class="section-title">Credit Bureau Data</div>
+        <div>
+          <button [hidden]="enableEdit" mat-raised-button *ngIf="panelOpenState" type="button" class="btn btn-primary"
+            data-dismiss="modal" (click)="toggleEditDetails($event)" [disabled]="!editSections || !canEdit">
+            <mat-icon>edit</mat-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+          </button>
+        </div>
+        <div class="confirm-buttons" [hidden]="!enableEdit">
+          <button mat-raised-button type="button" class="btn-secondary" data-dismiss="modal" (click)="cancel($event)">
+            <span jhiTranslate="entity.action.cancel">Cancel</span>
+          </button>
+          <button mat-raised-button type="button" class="btn-primary" data-dismiss="modal" (click)="save($event)">
+            <span jhiTranslate="entity.action.save">Save</span>
+          </button>
+        </div>
+      </div>
+    </mat-expansion-panel-header>
+    <ng-container *ngIf="preSanctionMap.length > 0">
+      <app-dynamic-render-component [title]="'Pre Sanction Credit Rule'" [isSubHeading]="true" [loanId]="loanId"
+        [editSections]="editSections" [uiFieldsMap]="preSanctionMap" [uiFields]="preSanctionData"
+        [hideEditAction]="true" [enableEdit]="enableEdit">
+      </app-dynamic-render-component>
+      <hr class="section-hr" />
+    </ng-container>
+    <div class="applicant-data" *ngIf="applicantCbReportData?.fields">
+      <app-dynamic-render-component [title]="'Applicant'" [isSubHeading]="true" [loanId]="loanId"
+        [editSections]="editSections" [uiFieldsMap]="uiFieldsMap" [uiFields]="applicantCbReportData?.fields"
+        [hideEditAction]="true" [enableEdit]="enableEdit" [canViewReport]="true" [uiApiKey]="'CREDIT_BUREAU_DATA'"
+        [sectionTitle]="applicantCbReportData?.title">
+      </app-dynamic-render-component>
+      <hr class="section-hr" />
+    </div>
+    <div *ngIf="coApplicantCbReportData.length > 0">
+      <div *ngFor="let cbReport of coApplicantCbReportData; let index = index">
+        <app-dynamic-render-component [title]="'Co-Applicant '+ (index+1)" [isSubHeading]="true" [loanId]="loanId"
+          [editSections]="editSections" [uiFieldsMap]="uiFieldsMap" [uiFields]="cbReport?.fields"
+          [hideEditAction]="true" [enableEdit]="enableEdit" [canViewReport]="true" [sectionTitle]="cbReport?.title"
+          [uiApiKey]="'CREDIT_BUREAU_DATA'">
+        </app-dynamic-render-component>
+      </div>
+    </div>
+    <div *ngIf="guarantorCbReportData.length > 0">
+      <div *ngFor="let cbReport of guarantorCbReportData; let index = index">
+        <app-dynamic-render-component [title]="'Guarantor '+ (index+1)" [isSubHeading]="true" [loanId]="loanId"
+          [editSections]="editSections" [uiFieldsMap]="uiFieldsMap" [uiFields]="cbReport?.fields"
+          [hideEditAction]="true" [enableEdit]="enableEdit" [canViewReport]="true" [sectionTitle]="cbReport?.title"
+          [uiApiKey]="'CREDIT_BUREAU_DATA'">
+        </app-dynamic-render-component>
+      </div>
+    </div>
+
+  </mat-expansion-panel>
+</mat-accordion>

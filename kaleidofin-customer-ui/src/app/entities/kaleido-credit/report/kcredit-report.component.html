@@ -1,0 +1,115 @@
+<mat-drawer-container>
+  <mat-drawer [disableClose]="true" mode="over" position="end" #moreFilters>
+    <app-multi-filter *ngIf="(requiredFilters | async).length > 0"
+      (toggleDrawer)="moreFilters.toggle()"
+      [requiredFilters]="requiredFilters | async"
+      (updateFilter)="onFilterChange($event)"
+    >
+    </app-multi-filter>
+  </mat-drawer>
+  <div style="margin-left: 80px">
+    <div class="title-container">
+      <div class="title">Loan Review</div>
+      <div *ngIf="authority.search">
+        <jhi-search
+          (searchEvent)="onSearch($event)"
+          [placeholder]="searchPlaceholder"
+        ></jhi-search>
+      </div>
+    </div>
+    <div class="loan-stage-container">
+      <app-loan-stage-breadcrumbs
+        [data]="loanStages"
+        [selectedIndex]="selectedFirstLevelIndex"
+        (clickHandler)="loanStageChangehandler($event)"
+      ></app-loan-stage-breadcrumbs>
+      <app-upload-reports
+        [uploadLoanStage]="selectedLoanStatus"
+      ></app-upload-reports>
+    </div>
+    <div class="loan-stage-container loan-sub-stage-container">
+      <div>
+        <app-loan-stage-display
+          [data]="selectedLoanStatusMap?.substages"
+          [selectedLoanSubStageIndex]="selectedSecondLevelIndex"
+          (clickHandler)="loanSubstageHandler($event)"
+        ></app-loan-stage-display>
+      </div>
+      <app-loan-application-search-filter
+        *ngIf="(requiredFilters | async)?.length"
+        (updateFilter)="onFilterChange($event)"
+        [requiredFilters]="requiredFilters | async"
+        (openMoreFilters)="moreFilters.toggle()"
+        [showMoreFilter]="showMoreFilter"
+      ></app-loan-application-search-filter>
+    </div>
+
+    <div class="action-container">
+        <form
+          *ngIf="enableUserActions()"
+          name="submitForm"
+          (ngSubmit)="openConfirmDialog($event.submitter.id)"
+        >
+          <div
+            class="btn-group float-left flex-btn-group-container action-buttons"
+            style="left: 5px"
+          >
+            <span style="font-weight: bold"
+              >&nbsp;&nbsp;{{ checkedList.length }}&nbsp;</span
+            >
+            <span> Item(s) selected&nbsp;&nbsp;&nbsp;&nbsp;</span>
+            <div *ngIf="checkedListWithEligibilityPassed?.length">
+              <button
+                mat-raised-button
+                class="mat-btn-success"
+                type="submit"
+                id="conditionalapprove"
+              >
+                <span class="fa fa-check-circle"></span>&nbsp;
+                <span>Approve</span>
+              </button>
+              &nbsp;
+              <button
+                mat-raised-button
+                class="mat-btn-danger"
+                type="submit"
+                id="reject"
+              >
+                <span class="fa fa-times-circle"></span>&nbsp;
+                <span> Evaluate </span>
+              </button>
+            </div>
+          </div>
+        </form>
+      <div class="authorize-button-container" 
+          *ngIf="checkedList?.length && selectedLoanStatus === 'LOANDISBURSAL'"
+      >
+        <div> {{ checkedList?.length }} {{ checkedList?.length > 1 ? 'Items' : 'Item' }} selected</div>
+        <div>
+          <button mat-flat-button class="btn btn-primary" (click)="openAuthorizePopup()">Authorize</button>
+        </div>
+      </div>
+      <div *ngIf="validateDownloadReports()">
+        <app-download-loan-report
+          [inputAuthority]="authority?.downloadReportView"
+          [loanIds]="selectedApplicationId"
+          [loanStage]="selectedLoanStatus"
+        ></app-download-loan-report>
+      </div>
+    </div>
+
+    <div class="row">
+      <app-loan-application-table
+        [loanDetails]="loanDetails"
+        [tableData]="tableData"
+        [queryCount]="queryCount"
+        [itemsPerPage]="itemsPerPage"
+        [totalItems]="totalItems"
+        (loadPage)="loadPage($event)"
+        [page]="page"
+        [checkAll]="checkAll"
+        (updateFilter)="onFilterChange($event)"
+      ></app-loan-application-table>
+    </div>
+  </div>
+</mat-drawer-container>

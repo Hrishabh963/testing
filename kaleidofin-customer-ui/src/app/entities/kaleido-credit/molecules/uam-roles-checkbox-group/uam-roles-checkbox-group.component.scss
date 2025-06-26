@@ -1,0 +1,22 @@
+.roles-list-container {
+    display: flex !important;
+    flex-flow: row wrap;
+}
+
+h5 {
+    margin: 0;
+    margin-top: 1em;
+    color: var(--kcredit-text-medium);
+}
+
+.roles-option {
+    flex-basis: 32%;
+    color: var(--kcredit-text-medium);
+    div {
+        padding-left: 0 !important;
+    }
+}
+
+::ng-deep .roles-option .mat-list-item-content {
+    padding-left: 0 !important;
+}

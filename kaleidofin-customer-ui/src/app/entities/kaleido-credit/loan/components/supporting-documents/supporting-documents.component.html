@@ -1,0 +1,26 @@
+<div *ngIf="documents && documents.length">
+  <mat-accordion>
+    <mat-expansion-panel
+      [expanded]="documents && documents.length"
+      (opened)="panelOpenState = true"
+      (closed)="panelOpenState = false"
+    >
+      <mat-expansion-panel-header>
+        <mat-panel-title class="document-type-title">
+          <h2 class="section-title">Supporting Documents</h2>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <app-loan-document-accordion-item
+        [loanId]="loanId"
+        [partnerId]="partnerId"
+        subtype=""
+        [fileData]="documents"
+      ></app-loan-document-accordion-item>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
+
+<div *ngIf="documents && !documents.length">
+  <h2 class="section-title">Supporting Documents</h2>
+  <h6><b> No Documents Available </b></h6>
+</div>

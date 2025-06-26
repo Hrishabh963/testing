@@ -1,0 +1,49 @@
+<div class="mandate-date-filter-container">
+  <div class="date-container">
+    <div>
+      <p>Mandate Start Date</p>
+      <mat-form-field appearance="none">
+        <input
+          matInput
+          [matDatepicker]="startDatePicker"
+          placeholder="Mandate Start Date"
+          (dateChange)="onSelectDate($event, 'start')"
+          [(ngModel)]="startDate"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="startDatePicker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #startDatePicker></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div>
+      <p>Mandate End Date</p>
+      <mat-form-field appearance="none">
+        <input
+          matInput
+          [matDatepicker]="endDatePicker"
+          placeholder="Mandate End Date"
+          (dateChange)="onSelectDate($event, 'end')"
+          [(ngModel)]="endDate"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="endDatePicker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #endDatePicker></mat-datepicker>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="action-buttons">
+    <div (click)="resetDate()" class="clear-all-btn" (keypress)="resetDate()">Clear All</div>
+    <button
+      (click)="searchByDate()"
+      [disabled]="startDate == null && endDate === null"
+      mat-button
+      class="button4 view-button"
+    >
+      Submit
+    </button>
+  </div>
+</div>

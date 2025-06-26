@@ -1,0 +1,56 @@
+.reject-reason-container {
+  background: var(--kcredit-background-light-red);
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  border-radius: 8px;
+  padding: 1.5em;
+  max-width: 25rem;
+  overflow: auto;
+  word-wrap: break-word;
+  text-wrap: auto;
+  max-height: 20rem;
+}
+.reject-status {
+  color: var(--kcredit-failure-red);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width: -webkit-fill-available;
+  font-size: large;
+  gap: 10px;
+  padding-bottom: 1rem;
+}
+
+.reject-reason-list {
+  width: 100%;
+}
+
+img {
+  width: 2em;
+}
+
+.reject-reason-list > li {
+  font-size: large;
+  font-weight: 700;
+}
+.reject-reason-list > div {
+  font-size: medium;
+  margin-bottom: 10px;
+}
+.accept-container {
+  background: var(--kcredit-success-green-light);
+  padding: 1rem;
+  color: var(--kcredit-success-green);
+  min-width: 12rem;
+  border-radius: 6px;
+}
+.accept-status {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+ol {
+  padding-left: 1.5em;
+}

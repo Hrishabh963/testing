@@ -1,0 +1,106 @@
+<div class="business-doc-title-container">
+  <div class="document-type-text">
+    Document Type &colon; {{ data?.typeLabel }}
+  </div>
+  <div class="document-action-button-container" *ngIf="documents?.length > 0">
+    <button
+      mat-raised-button
+      class="btn-secondary reject-button"
+      *ngIf="hideRejectAllSection()"
+      [disabled]="
+        !disableEditAccess || disableButtonsForTags || validateRejectAll()
+      "
+      (click)="acceptRejectAllDocuments('REJECT')"
+    >
+      Reject All
+    </button>
+    <button
+      mat-raised-button
+      class="btn-primary"
+      *ngIf="hideRejectAllSection()"
+      [disabled]="
+        !disableEditAccess || disableButtonsForTags || validateRejectAll()
+      "
+      (click)="acceptRejectAllDocuments('ACCEPT')"
+    >
+      Accept All
+    </button>
+  </div>
+</div>
+
+<div class="document-container" *ngIf="documents?.length > 0">
+  <div
+    [ngClass]="[doc.documentFileId ? 'item' : '']"
+    *ngFor="let doc of documents"
+  >
+    <div *ngIf="doc.documentFileId">
+      <app-doc-title-container
+        [doc]="doc"
+        [documentCategory]="category"
+        [id]="loanId"
+        [disableEditButtons]="checkForTags()"
+        (editImage)="editImage(doc, 'CROP')"
+        [hideEditButtons]="checkAndDisableActions(doc)"
+        [docType]="doc?.docType"
+        [enableAuthorityCheck]="false"
+        [hideTagging]="true"
+      ></app-doc-title-container>
+      <br />
+      <div class="image-container" *ngIf="doc.image">
+        <img
+          *ngIf="!isPdf(doc)"
+          class="d-inline-block nach-image fill-image"
+          [src]="doc.image"
+          alt="Doc"
+        />
+        <img
+          *ngIf="isPdf(doc)"
+          class="d-inline-block nach-image fill-image"
+          [src]="doc.fileIcon"
+          [alt]="doc.documentName"
+        />
+      </div>
+      <br />
+      <div class="document-name">
+        {{ doc?.documentName }} &nbsp; &#x2022; &nbsp;
+        <span [class]="doc?.docSizeClass">{{ doc?.size }}</span>
+      </div>
+      <div class="document-action-container">
+        <button
+          mat-raised-button
+          class="btn-secondary reject-button"
+          (click)="acceptRejectDocument(doc, 'REJECT')"
+          [hidden]="checkAndDisableActions(doc)"
+          [disabled]="
+            !disableEditAccess || disableButtonsForTags || checkForTags()
+          "
+        >
+          Reject
+        </button>
+        <button
+          mat-raised-button
+          class="btn-primary"
+          (click)="acceptRejectDocument(doc, 'ACCEPT')"
+          [hidden]="checkAndDisableActions(doc)"
+          [disabled]="
+            !disableEditAccess || disableButtonsForTags || checkForTags()
+          "
+        >
+          Accept
+        </button>
+      </div>
+      <div class="document-subtype-container">
+        <document-review-status-alert
+          [reviewStatus]="doc?.reviewStatus || doc?.verificationStatus"
+          [rejectReasons]="doc?.reviewRemarks || doc?.message"
+        ></document-review-status-alert>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="documents?.length === 0">
+  <div class="no-documents">
+    No documents uploaded for {{ data?.typeLabel }}
+  </div>
+</div>

@@ -1,0 +1,105 @@
+<div class="main-container">
+  <div class="section-title-container">
+    <div class="screen-title">Manage Users</div>
+    <div class="screen-subtitle">
+      Manage user and access from in your organisation
+    </div>
+  </div>
+  <div class="section-item-container">
+    <div class="section-item">
+      <div class="title">Total users</div>
+      <div class="subtitle">{{userCount?.totalUsers || 0}}</div>
+    </div>
+    <div class="section-item">
+      <div class="title">Active users</div>
+      <div class="subtitle">{{userCount?.activeUsers || 0}} &#124; {{userCount?.totalUsers || 0}}</div>
+    </div>
+    <div class="section-item" *ngFor="let role of userCount?.userRoleCountList">
+      <div class="title">{{rolesMap?.[role?.role]}}</div>
+      <div class="subtitle">{{role?.roleCount}}</div>
+    </div>
+    <div class="section-item">
+      <button mat-raised-button class="btn-primary" (click)="openAddUserDialog()">Add New User</button>
+    </div>
+  </div>
+  <hr class="hr" />
+  <div class="uam-list-container">
+    <div class="screen-title user-table-title">Manage Users</div>
+    <app-uam-search-filter (emitSearchValues)="fetchUserData($event)"
+      [roleTypeOptions]="roleTypeOptions"></app-uam-search-filter>
+  </div>
+  <hr class="hr" />
+
+  <!--  -->
+
+  <div class="user-table-container">
+    <div class="table-wrapper">
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8" matSort mat-table-sticky-headers>
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+          <td mat-cell *matCellDef="let user">
+            <div class="user-info">
+              <div class="avatar">{{ user?.firstName?.[0] }}</div>
+              <div>
+                <div class="user-name">{{ user?.firstName }}</div>
+                <div class="user-email">{{ user?.email }}</div>
+              </div>
+            </div>
+          </td>
+        </ng-container>
+
+        <!-- HRMS ID Column -->
+        <ng-container matColumnDef="hrmsId">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>HRMS ID</th>
+          <td mat-cell *matCellDef="let user">{{ user?.externalId || '--' }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="lastActivity">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header>
+            Last Activity
+          </th>
+          <td mat-cell *matCellDef="let user">{{ getRecentLogin(user?.recentLogin) }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="roleType">
+          <th mat-header-cell *matHeaderCellDef>Role Type</th>
+          <td mat-cell *matCellDef="let user" [matTooltip]="getUserRoles(user?.role)"
+            [matTooltipDisabled]="!user?.role?.length" [matTooltipClass]="{'custom-tool-tip': true}">
+            <span class="user-role">
+              {{ getUserRoles(user?.role) }}
+            </span>
+        </ng-container>
+
+        <ng-container matColumnDef="status">
+          <th mat-header-cell *matHeaderCellDef>Status</th>
+          <td mat-cell *matCellDef="let user">
+            <app-status-indicator [status]="user?.status"></app-status-indicator>
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="action">
+          <th mat-header-cell *matHeaderCellDef>Action</th>
+          <td mat-cell *matCellDef="let user">
+            <button mat-icon-button [matMenuTriggerFor]="menu" [disabled]="!getCurrentOptions(user?.status) || checkForDisabled(user)">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+              <button *ngFor="let options of getCurrentOptions(user?.status)" mat-menu-item
+                (click)="options.handler(user)">{{options?.label}}</button>
+            </mat-menu>
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+      </table>
+    </div>
+
+    <mat-paginator [length]="totalElements" [page] [pageSize]="10" [hidePageSize]="true" [pageSizeOptions]="[5, 10, 25, 50]"
+      aria-label="Select" (page)="changePage($event)">
+    </mat-paginator>
+  </div>
+
+  <!--  -->
+</div>

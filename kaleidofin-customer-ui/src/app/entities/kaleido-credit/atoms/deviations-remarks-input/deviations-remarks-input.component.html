@@ -1,0 +1,34 @@
+<div class="menu-container" *ngIf="approval?.approveDeviation === 'Pending'">
+    <mat-form-field>
+        <textarea [formControl]="textAreaFormControl" matInput placeholder="Write your remarks" cols="4" rows="4"
+            (click)="$event.stopPropagation()">
+</textarea>
+
+        <mat-hint align="end">
+            {{ textAreaFormControl.value?.length || 0 }}/250
+        </mat-hint>
+        <mat-error *ngIf="textAreaFormControl?.hasError('minLength')">
+            Please enter characters less than 250.
+        </mat-error>
+    </mat-form-field>
+    <div class="menu-button-container">
+        <button (click)="close()" class="menu-close">Cancel</button>
+        <button mat-flat-button class="btn btn-primary" [disabled]="textAreaFormControl?.hasError('minLength')"
+            (click)="save()">Save</button>
+    </div>
+</div>
+<div class="review-container" *ngIf="approval?.approveDeviation !== 'Pending'">
+    <div class="close-button-container">
+        <button class="close-button" (click)="close()"> <mat-icon>close</mat-icon> </button>
+    </div>
+    <div class="remarks-container">
+        <div class="remark">
+            <h2>Remarks:</h2>
+            <span>{{ approval?.remarks }}</span>
+        </div>
+        <div *ngIf="approval?.approverComment" class="approver-comment">
+            <h2>On behalf of Remarks:</h2>
+            <span> {{ approval?.approverComment }} </span>
+        </div>
+    </div>
+</div>

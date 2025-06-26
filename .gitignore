@@ -1,0 +1,15 @@
+kaleidofin-customer-ui/build/
+kaleidofin-customer-ui/node_modules/
+kaleidofin-customer-ui/.cache-loader/
+kaleidofin-customer-ui/.angular/
+kaleidofin-customer-ui/.project
+kaleidofin-customer-ui/.settings/
+.project
+/.settings/
+package-lock.json
+kaleidofin-customer-ui/node_modules/.bin
+kaleidofin-customer-ui/yarn-error.log
+node_modules
+kaleidofin-customer-ui/.idea/*
+
+.idea/workspace.xml

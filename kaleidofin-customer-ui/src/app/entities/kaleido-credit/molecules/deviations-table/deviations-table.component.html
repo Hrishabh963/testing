@@ -1,0 +1,151 @@
+<div *ngIf="deviations.length > 0">
+    <div class="section-sub-heading">Deviations</div>
+    <div *ngIf="checkedDeviations.length > 0"> <span>{{ checkedDeviations.length }} Deviations Selected</span> <button
+            mat-button [disabled]="!authority.approve" class="bulk-approve"
+            (click)="handleDeviationDecision(checkedDeviations,'Approved')"><img
+                src="assets/images/common/button-approve.svg" alt="Approve"><span>Approve</span></button><button
+            mat-button [disabled]="!authority.approve" class="bulk-reject"
+            (click)="handleDeviationDecision(checkedDeviations,'Declined')"><img
+                src="assets/images/common/button-decline.svg" alt="Decline"><span>Decline</span></button>
+    </div>
+    <table>
+        <caption></caption>
+        <thead class="header-container">
+            <tr>
+                <th class="table-header" *ngFor="let column of tableData" [ngSwitch]="column?.type">
+                    <ng-container *ngSwitchDefault>
+                        <div class="table-header-text" class="deviation-content">{{ column?.label }} </div>
+                    </ng-container>
+                    <ng-container *ngSwitchCase="'checkbox'">
+                        <div class="checkbox-container" class="deviation-content">
+                            <mat-checkbox class="checkbox" [disabled]="!authority.approve" [disableRipple]="true"
+                                (change)="checkAllDeviations()"></mat-checkbox>
+                        </div>
+                    </ng-container>
+                </th>
+            </tr>
+        </thead>
+        <tbody *ngIf="currentDeviations.length > 0">
+            <ng-container *ngFor="let deviation of currentDeviations; let deviationIndex = index">
+                <ng-container *ngFor="let nameAndValue of deviation['featureDescriptionList']; let i = index">
+                    <tr>
+                        <td *ngIf="i === 0" [attr.rowspan]="deviation['featureDescriptionList'].length"
+                            [ngClass]="deviation['ruleDescription'] ? '' : 'no-border'">
+                            <div class="checkbox-container" class="deviation-content"
+                                *ngIf="deviation['ruleDescription']">
+                                <mat-checkbox
+                                    [checked]="checkAll && deviation['approveDeviations']?.[i]?.approveDeviation === 'Pending' && deviation['approveDeviations']?.[i]?.enableDeviationApproval"
+                                    (change)="selectDeviation(deviation, $event)"
+                                    [disabled]="!authority.approve || deviation['approveDeviations']?.[i]?.approveDeviation !== 'Pending' || !deviation['approveDeviations']?.[i]?.enableDeviationApproval">
+                                </mat-checkbox>
+                            </div>
+                        </td>
+                        <td *ngIf="i === 0" [attr.rowspan]="deviation['featureDescriptionList']?.length"
+                            [ngClass]="deviation['ruleDescription'] ? '' : 'no-border'">
+                            <div class="table-column-text deviation-content">
+                                {{ deviation['ruleDescription'] }}
+                            </div>
+                        </td>
+                        <td [ngClass]="deviation['ruleDescription'] ? '' : 'no-border'">
+                            <div class="table-column-text deviation-content"
+                                *ngIf="deviation['ruleDescription'] && !nameAndValue?.calculatedVariablesList?.length">
+                                {{ nameAndValue?.name }}
+                                <img id="infoIcon" *ngIf="nameAndValue?.description"
+                                    src="assets/images/common/info-tooltip.svg" [alt]="nameAndValue?.name"
+                                    [matTooltip]="nameAndValue?.description || ''" matTooltipPosition="above"
+                                    [matTooltipClass]="{'custom-tool-tip': true}" />
+                            </div>
+                            <app-tree-view-component *ngIf="deviation['ruleDescription'] && nameAndValue?.calculatedVariablesList?.length"
+                                [title]="nameAndValue?.name" [list]="getCalculatedNameOrValues(nameAndValue)"
+                                [optionalToolTip]="nameAndValue?.description">
+                            </app-tree-view-component>
+                        </td>
+                        <td [ngClass]="deviation['ruleDescription'] ? '' : 'no-border'">
+                            <div class="table-column-text deviation-content"
+                                *ngIf="deviation['ruleDescription'] && !nameAndValue?.calculatedVariablesList?.length">
+                                {{ nameAndValue?.value }}
+                            </div>
+                            <app-tree-view-component *ngIf="deviation['ruleDescription'] && nameAndValue?.calculatedVariablesList?.length"
+                                [title]="nameAndValue?.value" [list]="getCalculatedNameOrValues(nameAndValue, true)" [showErrorTooltip]="true"
+                                [optionalToolTip]="nullValueError"
+                            >
+                            </app-tree-view-component>
+                        </td>
+                        <td *ngIf="i === 0" [attr.rowspan]="deviation['featureDescriptionList'].length">
+                            <ng-container *ngFor="let approval of deviation['approveDeviations']">
+                                <div class="approval">
+                                    {{ approval?.deviationApprover }}
+                                </div>
+                            </ng-container>
+                        </td>
+                        <td *ngIf="i === 0" [attr.rowspan]="deviation['featureDescriptionList'].length">
+                            <div class="approval-container">
+                                <div *ngFor="let approval of deviation['approveDeviations']" class="approval">
+
+                                    <ng-container *ngIf="approval?.approveDeviation === 'Pending'">
+                                        <button mat-flat-button
+                                            [disabled]="!authority.approve || !approval?.enableDeviationApproval"
+                                            class="approve-button"
+                                            (click)="handleDeviationDecision([deviation], 'Approved', approval?.higherAuthorityUser, approval?.deviationApprover)">
+                                            <span class="approve-text">
+                                                Yes
+                                            </span>
+                                        </button>
+                                        <button mat-flat-button
+                                            [disabled]="!authority.approve || !approval?.enableDeviationApproval"
+                                            class="reject-button"
+                                            (click)="handleDeviationDecision([deviation],'Declined', approval?.higherAuthorityUser, approval?.deviationApprover)">
+                                            <span class="reject-text">
+                                                No
+                                            </span>
+                                        </button>
+                                    </ng-container>
+                                    <div *ngIf="approval?.approveDeviation !== 'Pending'">
+                                        <span [ngClass]="approval?.approveDeviation"> {{
+                                            approval.approveDeviation }} </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                        <td *ngIf="i === 0" [attr.rowspan]="deviation['featureDescriptionList'].length">
+                            <div *ngFor="let approval of deviation['approveDeviations']" class="remarks">
+                                <button class="remarks-trigger" [matMenuTriggerFor]="inputRemarks"
+                                    #menuTrigger="matMenuTrigger" [disabled]="!checkCommentAuthority()">
+                                    <span [className]="approval?.remarks?.length ? '' :  'placeholder-text'">
+                                        {{ approval?.remarks?.length ? approval?.remarks : "Write Your Remarks" }}
+                                    </span>
+                                    <span class="approver-comment" *ngIf="approval?.approverComment">
+                                        {{ approval?.approverComment }}
+                                    </span>
+                                </button>
+                                <mat-menu #inputRemarks="matMenu" overlapTrigger>
+                                    <app-deviations-remarks-input (closeMenu)="closeMenu()" [approval]="approval"
+                                        (saveRemarks)="saveRemarks($event, approval)">
+                                    </app-deviations-remarks-input>
+                                </mat-menu>
+                            </div>
+                        </td>
+                        <td *ngIf="i === 0" [attr.rowspan]="deviation['featureDescriptionList']?.length">
+                            <div *ngFor="let approval of deviation['approveDeviations']" class="remarks">
+                                <button (click)="uploadDocument(approval, deviation)">
+                                    <img src="assets/images/common/document-attachment.svg" alt="upload">
+                                </button>
+                                <div class="document-count"
+                                    *ngIf="approval?.deviationFilesDto && approval?.deviationFilesDto?.length !== 0">
+                                    <span> {{
+                                        approval?.deviationFilesDto?.length }}</span>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </ng-container>
+            </ng-container>
+        </tbody>
+    </table>
+    <div class="button-container" *ngIf="deviations.length > 5 && currentDeviations.length <= 5">
+         <button
+            mat-raised-button class="btn-review review-button" (click)="showMoreDeviations()">
+            <span class="btn-review-text">View All</span>
+        </button>
+    </div>
+</div>

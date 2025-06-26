@@ -1,0 +1,22 @@
+.snack-container {
+    display: flex;
+    align-items: center;
+}
+
+
+.icon {
+    width: 1.4em;
+}
+
+.message {
+    color: #FFFFFF;
+    padding-left: 0.6em;
+}
+
+.success-snackbar {
+    color: var(--kcredit-success-green) !important;
+}
+
+.failure-snackbar {
+    color: var(--kcredit-failure-red) !important;
+}

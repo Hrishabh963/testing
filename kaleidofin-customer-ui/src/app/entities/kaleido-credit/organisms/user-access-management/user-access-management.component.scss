@@ -1,0 +1,125 @@
+.main-container {
+  margin-left: 110px;
+  margin-right: 30px;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+.screen-title {
+  font-family: Lexend Deca;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 30px;
+  letter-spacing: -0.011em;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  color: var(--kcredit-notification-details-text);
+}
+.user-table-title {
+  font-weight: 500;
+}
+.screen-subtitle {
+  font-family: Lexend Deca;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 20px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  color: var(--kcredit-notification-details-text);
+}
+
+.section-title-container {
+  display: flex;
+  gap: 0.5rem;
+  flex-direction: column;
+}
+
+.section-item-container {
+  margin: 1rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.section-item {
+  display: flex;
+  gap: 0.2rem;
+  flex-direction: column;
+  .title {
+    font-size: 12px;
+    color: var(--kcredit-profile-secondary-text);
+  }
+  .subtitle {
+    font-size: 16px;
+    color: var(--kcredit-notification-details-text);
+  }
+}
+
+.user-table-container {
+  .table-wrapper {
+    max-height: 400px;
+    overflow-y: auto;
+    position: relative;
+  }
+
+  table {
+    width: 100%;
+  }
+
+  .mat-header-row {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background: white;
+  }
+
+  .user-info {
+    display: flex;
+    align-items: center;
+
+    .avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: var(--kcredit-primary-blue-background);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 12px;
+      font-weight: bold;
+      color: var(--kcredit-primary);
+    }
+
+    .user-name {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--kcredit-notification-details-text);
+    }
+
+    .user-email {
+      font-size: 12px;
+      color: var(--kcredit-profile-secondary-text);
+    }
+  }
+
+  mat-paginator {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  th,
+  .mat-sort-header-content {
+    font-size: 15px;
+    color: var(--kcredit-profile-secondary-text) !important;
+  }
+  td {
+    font-size: 12px;
+  }
+}
+
+
+.uam-list-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

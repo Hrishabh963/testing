@@ -1,0 +1,29 @@
+:host{
+	width: 100%;
+}
+
+span{
+	margin-top: 3vh;
+	font-size: 1.1rem;
+	line-height: 1;
+	text-decoration: none;
+	padding-top: 1rem;
+}
+
+button {
+	border: none;
+	background: none;
+	color: var(--kcredit-primary);
+	font-size: 1.1em;
+}
+
+button:hover, button:focus {
+	text-decoration: underline;
+}
+
+.NeedHelp-container{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 1.5em 0;
+}

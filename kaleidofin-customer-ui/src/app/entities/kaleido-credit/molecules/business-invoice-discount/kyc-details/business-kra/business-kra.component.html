@@ -1,0 +1,41 @@
+<div class="sub-section-container">
+  <div class="title-with-btns">
+    <div class="business-review-subtitle-text">
+      Business KRA Certificate details
+    </div>
+    <app-business-section-action-buttons
+      [isEditing]="isEditing"
+      (onRejectHandler)="onReject()"
+      (onEditHandler)="onEdit()"
+      (onCancelHandler)="onCancel()"
+      (onSaveHandler)="onSave()"
+    ></app-business-section-action-buttons>
+  </div>
+  <div class="details-grid">
+    <div class="field-item" *ngFor="let field of fields">
+      <span class="business-review-label">{{ field.label }}</span>
+      
+      <ng-container *ngIf="isEditing">
+        <input
+          type="text"
+          [value]="
+            businessInvoiceService?.isFieldMasked(field.value)
+              ? businessInvoiceService?.maskField(data[field.value])
+              : data[field.value]
+          "
+          (input)="data[field.value] = $event.target.value"
+        />
+      </ng-container>
+
+      <ng-container *ngIf="!isEditing">
+        <strong class="business-review-value">
+          {{
+            businessInvoiceService?.isFieldMasked(field.value)
+              ? businessInvoiceService?.maskField(data[field.value])
+              : data[field.value] || "--"
+          }}
+        </strong>
+      </ng-container>
+    </div>
+  </div>
+</div>

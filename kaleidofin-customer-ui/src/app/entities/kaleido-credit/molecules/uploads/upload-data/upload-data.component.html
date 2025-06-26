@@ -1,0 +1,85 @@
+<div class="col-md-12">
+  <table class="table table-light col-md-12 table-bordered table-list-size">
+  <caption></caption>
+    <thead class="thead-inverse">
+      <tr>
+        <th><span>Date</span></th>
+        <th><span>File name</span></th>
+        <th><span>User name</span></th>
+        <th><span>Report type</span></th>
+        <th><span>Status</span></th>
+        <th><span>Action</span></th>
+      </tr>
+    </thead>
+    <tbody *ngIf="tableData.length > 0">
+      <tr *ngFor="let uploadReport of tableData">
+        <td>{{ dataUtils.getDate(uploadReport) | customDate }}</td>
+        <td
+          class="file-name tooltip-cell"
+          [title]="dataUtils.getFileName(uploadReport)"
+        >
+          {{ dataUtils.getFileName(uploadReport) }}
+        </td>
+        <td>{{ dataUtils.getUserName(uploadReport) }}</td>
+        <td>{{ getReportType(uploadReport) }}</td>
+        <td title="{{ dataUtils.getReportRemarks(uploadReport) }}">
+          {{ dataUtils.getReportStatus(uploadReport) }}
+        </td>
+        <td>
+          <div class="col-md-3 button-group">
+            <button
+              mat-icon-button
+              title="Download All Files"
+              class="kcredit-primary-color"
+              [disabled]="dataUtils.validateFileId(uploadReport)"
+              (click)="dataUtils.downLoadFile(uploadReport)"
+            >
+              <span class="material-icons">download_for_offline</span>
+            </button>
+            <button
+              mat-icon-button
+              title="Replay"
+              class="kcredit-primary-color"
+              [disabled]="dataUtils.validateFileId(uploadReport)"
+              (click)="dataUtils.replayReportProcessing(uploadReport)"
+            >
+              <span class="material-icons">refresh</span>
+            </button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+    <tfoot *ngIf="tableData.length > 0">
+      <tr class="bg-light">
+        <td colspan="12">
+          <div class="row pagination-align">
+            <jhi-item-count
+              [page]="page"
+              [itemsPerPage]="itemsPerPage"
+              [total]="totalItems"
+            >
+            </jhi-item-count>
+          </div>
+          <div class="row pagination-align">
+            <ngb-pagination
+              class="text-center-div"
+              [collectionSize]="totalItems"
+              [(page)]="page"
+              [pageSize]="itemsPerPage"
+              (pageChange)="loadDataByPage(page)"
+              [maxSize]="3"
+              [rotate]="true"
+              [boundaryLinks]="true"
+            >
+            </ngb-pagination>
+          </div>
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+  <div *ngIf="tableData.length === 0">
+    <hr />
+    <h3 class="text-center kcredit-failure-color">No Reports found</h3>
+    <hr />
+  </div>
+</div>

@@ -1,0 +1,14 @@
+<div class="redirect-popup row p-relative noMargin" >
+    <div class="d-flex col-md-9">
+        <br>
+        <img src="assets/images/url_mismatch.svg" alt="Mismatch">
+        <br>
+        <span *ngIf="!isMobile">&nbsp;</span>
+        <p [ngClass]=" isMobile ?'k-font-14':'k-font-4'">This account is already registered
+            with <strong>{{displayURL}}</strong></p>
+            <br>
+    </div>
+    <div class="col-md-3 noPadding " style="margin-top: 0px;">
+        <button mat-button class="w-100 h-100 k-font-5 k-background-color-10 k-third-color-1" style="padding :12px; white-space: normal;" (click) ="redirect($event)"><a>TAKE ME THERE</a></button>
+    </div>
+</div>

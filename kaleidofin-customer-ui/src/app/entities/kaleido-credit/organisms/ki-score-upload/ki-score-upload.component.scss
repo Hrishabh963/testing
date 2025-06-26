@@ -1,0 +1,124 @@
+.container {
+  margin: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.upload-btn {
+  color: var(--kcredit-app-secondary);
+  background-color: var(--kcredit-primary);
+}
+
+.custom-table {
+  width: 100%;
+  text-align: center;
+  tr {
+    border: 1px solid #eaf2ff;
+  }
+}
+
+.mat-header-cell {
+  font-size: 12px;
+  text-align: center;
+}
+
+.mat-cell {
+  font-size: 12px;
+  vertical-align: middle;
+}
+
+.info-text {
+  font-size: 12px;
+  color: grey;
+  max-height: 8vh;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  text-wrap: pretty;
+}
+
+.action-btn-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.kiscore-upload-status {
+  text-align: justify;
+  padding: 5px 25px;
+}
+/* Customize column widths */
+.uploaded-date-col {
+  width: 15%;
+}
+
+.file-name-col {
+  width: 10%;
+}
+
+.report-type-col {
+  width: 12%;
+}
+
+.ki-scored-col {
+  width: 35%;
+}
+
+.approved-col {
+  width: 10%;
+}
+
+.rejected-col {
+  width: 10%;
+}
+
+.actions-col {
+  width: 20%;
+}
+
+.screen-title {
+  font-weight: 500;
+  font-size: 18px;
+  color: #38526c;
+  margin-top: 1rem;
+}
+.pagination-container {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column-reverse;
+  margin: 20px;
+}
+
+.FAILED {
+  color: var(--kcredit-failure-red);
+}
+
+.download-link {
+  margin-right: 2rem;
+  color: var(--kcredit-primary);
+  cursor: pointer;
+}
+.mat-paginator-range-label {
+  font-size: 12px;
+}
+.download-container {
+  display: flex;
+  align-items: center;
+}
+mat-icon {
+  font-size: 1.5rem;
+}
+.mat-menu-item {
+  color: var(--kcredit-primary);
+}
+.IN_PROGRESS {
+  color: var(--kcredit-text-light);
+}
+.generate-button img {
+  font-size: 14px;
+}

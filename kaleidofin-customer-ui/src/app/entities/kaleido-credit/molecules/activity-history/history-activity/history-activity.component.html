@@ -1,0 +1,34 @@
+<div>
+  <div class="comment-container">
+    <div>
+      <mat-avatar class="mat-avatar">
+        {{ loanActivityService.getInitials(data?.performedBy) }}
+      </mat-avatar>
+    </div>
+
+    <div class="comment-section">
+      <div class="comment-title-container">
+        <div class="comment-title">
+          <b>{{ data?.performedBy }}</b> {{ data?.action }}
+          <b>{{ data?.entityValue }}</b>
+        </div>
+        <div class="comment-date">
+          {{ data?.updatedAt | date : "dd/MMM/YY, hh:mm aaa" }}
+        </div>
+        <div *ngIf="showLabel">
+          <button mat-button class="activity-label">
+            <div class="activity-label-text"> {{ data.activityType }} </div>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="comment-data">
+      <div *ngFor="let event of data.events">
+        <div class="comment">{{ event }}</div>
+        <br />
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,24 @@
+<mat-nav-list class="list-horizontal loan-stage-ruler">
+  <a
+    mat-list-item
+    routerLinkActive="active"
+    *ngFor="let item of data; let i = index"
+    (click)="onApplicationStateSelection(item, i)"
+    [class.active]="selectedIndex === i"
+    class="status-container"
+    [ngClass]="['status-container',selectedIndex === i ? 'loan-stage':'']"
+  >
+    <span
+      [ngClass]="[selectedIndex === i ? 'active' : '']"
+      class="status-container"
+    >
+      {{ item?.label }}
+      <span class="dot"> &middot;</span>
+      {{ item?.count | async }}
+    </span>
+    <div *ngIf="i < data?.length - 1">
+      &nbsp;
+      <mat-icon class="loan-states-forward">keyboard_arrow_right</mat-icon>
+    </div>
+  </a>
+</mat-nav-list>

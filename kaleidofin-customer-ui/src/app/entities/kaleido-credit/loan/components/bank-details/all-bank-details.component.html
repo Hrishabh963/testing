@@ -1,0 +1,4 @@
+<div class="card-title">
+        <jhi-bank-details [disableEdit]="disableEdit" [bankDetails]="BankDetails" [loanDetails]="loanDetails"  (reloadAfterSave)="onSuccess($event)"></jhi-bank-details>
+    <span  *ngIf="!BankDetails">--</span>
+</div>

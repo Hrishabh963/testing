@@ -1,0 +1,19 @@
+.filter-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+.kcredit-upload-container {
+  margin-left: 80px;
+  padding: 5px 15px;
+}
+.upload-button {
+  width: 125px;
+  border-radius: 4px;
+  height: 45px;
+}
+
+.filter-container:has(button:only-child) {
+  justify-content: flex-end;
+}

@@ -1,0 +1,127 @@
+<div class="mat-dialog-title">
+  <span>Generate new report</span>
+  <button mat-icon-button (click)="onCancel()">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+
+<div mat-dialog-content>
+  <form [formGroup]="reportForm">
+    <div class="form-row">
+      <mat-form-field appearance="fill">
+        <mat-label>Purpose</mat-label>
+        <mat-select
+          formControlName="purpose"
+          (selectionChange)="onPurposeChange($event)"
+        >
+          <mat-option
+            *ngFor="let purpose of generateReportsService.purposeList"
+            [value]="purpose"
+          >
+            {{ purpose.viewValue }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Report Type</mat-label>
+        <mat-select formControlName="reportType" multiple>
+          <app-select-all-combo-box
+            [model]="reportForm.get('reportType')"
+            [values]="reportTypeOptions"
+            text="All"
+          >
+          </app-select-all-combo-box>
+          <mat-option
+            *ngFor="let reportType of reportTypeOptions"
+            [value]="reportType"
+          >
+            {{ reportType.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>{{ isDCBMFI ? "BC Name" : "Partner" }}</mat-label>
+        <mat-select formControlName="partner" multiple>
+          <app-select-all-combo-box
+            [model]="reportForm.get('partner')"
+            [values]="partnerList"
+            text="All"
+          ></app-select-all-combo-box>
+          <mat-option *ngFor="let partner of partnerList" [value]="partner">
+            {{ partner.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="fill">
+        <mat-label>Loan Type</mat-label>
+        <mat-select formControlName="loanType" multiple>
+          <app-select-all-combo-box
+            [model]="reportForm.get('loanType')"
+            [values]="loanTypes"
+            text="All"
+          >
+          </app-select-all-combo-box>
+          <mat-option *ngFor="let loanType of loanTypes" [value]="loanType">
+            {{ loanType }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Start Date</mat-label>
+        <input
+          matInput
+          [matDatepicker]="startPicker"
+          formControlName="startDate"
+          [max]="maxDate"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="startPicker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #startPicker></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>End Date</mat-label>
+        <input
+          matInput
+          [matDatepicker]="endPicker"
+          formControlName="endDate"
+          [max]="maxDate"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="endPicker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #endPicker></mat-datepicker>
+      </mat-form-field>
+      <app-loan-status-menu
+        *ngIf="enableStatusMenu()"
+        (updateSelectedStatus)="updateSelectedStatus($event)"
+      ></app-loan-status-menu>
+    </div>
+  </form>
+  <div *ngIf="dateErrorMessage" class="date-error">
+    {{ dateErrorMessage }}
+  </div>
+</div>
+<div mat-dialog-actions class="dialog-actions">
+  <div class="spacer"></div>
+  <button mat-button class="btn btn-secondary" (click)="onCancel()">
+    Cancel
+  </button>
+  <button
+    mat-button
+    class="btn btn-primary"
+    (click)="onGenerateReport()"
+    [disabled]="
+      reportForm.invalid || (enableStatusMenu() && !this.selectedStatus?.length)
+    "
+  >
+    Generate Report
+  </button>
+</div>

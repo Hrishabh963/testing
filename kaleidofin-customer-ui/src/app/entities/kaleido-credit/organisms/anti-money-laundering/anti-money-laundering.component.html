@@ -1,0 +1,14 @@
+<mat-accordion>
+    <mat-expansion-panel [expanded]="displayDetails">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                <div class="section-title">AML</div>
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <ng-container *ngFor="let amlDetail of amlDetails">
+            <app-aml-details-accordion [AMLDetail]="amlDetail" [loanApplicationId]="loanApplicationId"
+                [branchCode]="branchCode" (refreshAmlData)="refreshAmlData()" (initiateAml)="initiateAml($event)">
+            </app-aml-details-accordion>
+        </ng-container>
+    </mat-expansion-panel>
+</mat-accordion>

@@ -1,0 +1,100 @@
+<table class="tid-table">
+  <caption></caption>
+  <thead>
+    <tr class="headers">
+      <th id="hitNo" rowspan="2">Hit No.</th>
+      <th id="searchName" rowspan="2">Search Name</th>
+      <th id="entityType" rowspan="2">Entity</th>
+      <th id="alias" rowspan="2">AKA</th>
+      <th id="country" rowspan="2">Country</th>
+      <th id="amlType" colspan="3">AML Type</th>
+      <th id="action" rowspan="2">
+        <div class="match-container">
+          <div class="action-container">
+            <div class="action">
+              <span>Action</span>
+              <mat-icon (keypress)="updateDisplay()" (click)="updateDisplay()"
+                *ngIf="!showDetail">keyboard_arrow_down</mat-icon>
+              <mat-icon (keypress)="updateDisplay()" (click)="updateDisplay()"
+                *ngIf="showDetail">keyboard_arrow_up</mat-icon>
+            </div>
+            <button mat-flat-button *ngIf="hits?.length" class="btn-review" [disabled]="!enableVerifyAll"
+              (click)="verifyAll($event)" (keypress)="verifyAll($event)">
+              <span class="btn-review-text" [ngClass]="{
+                'all-verified': !enableVerifyAll
+              }">{{ enableVerifyAll ? 'Verify All' : 'All Verified' }}</span>
+            </button>
+          </div>
+
+        </div>
+      </th>
+    </tr>
+    <tr class="aml-type-headers">
+      <th id="pep">PEP</th>
+      <th id="sanction">Sanction</th>
+      <th id="warning">Warning</th>
+    </tr>
+  </thead>
+  <tbody *ngIf="hits?.length; else emptyTable">
+    <ng-container *ngFor="let hit of hits; let index = index" [ngSwitch]="hit?.amlType">
+      <tr *ngSwitchDefault [ngClass]="['tid-detail-row', showDetail ? 'show' : 'hide-border']">
+        <td [hidden]="!showDetail">
+          <div>{{ index + 1 }}</div>
+        </td>
+        <ng-container *ngFor="let column of tableColumns">
+          <td [hidden]="!showDetail">
+            <div>{{hit?.[column.key]}}</div>
+          </td>
+        </ng-container>
+        <td [hidden]="!showDetail">
+          <div [ngClass]="{'is-match' : getText(hit?.amlType, 'pep')}">
+            {{ getText(hit?.amlType, 'pep') || "--" }}
+          </div>
+        </td>
+        <td [hidden]="!showDetail">
+          <div [ngClass]="{'is-match' : getText(hit?.amlType, 'sanction')}">
+            {{ getText(hit?.amlType, 'sanction') || "--" }}
+          </div>
+        </td>
+        <td [hidden]="!showDetail">
+          <div [ngClass]="{'is-match' : getText(hit?.amlType, 'warnings')}">
+            {{ getText(hit?.amlType, 'warnings') || "--" }}
+          </div>
+        </td>
+        <td [hidden]="!showDetail">
+          <div class="verify-container" *ngIf="getVerifyStatus(hit) === 'verify';else verified">
+            <button mat-flat-button class="btn-review" (click)="verifyAml($event,hit)"
+              (keypress)="verifyAml($event,hit)">
+              <span class="btn-review-text">Verify</span>
+            </button>
+          </div>
+          <ng-template #verified>
+            <div class="verified verify-container">
+              <img src="assets/images/common/upload-success.svg" alt="green-check">
+              <span>
+                Verified
+              </span>
+            </div>
+          </ng-template>
+        </td>
+      </tr>
+    </ng-container>
+  </tbody>
+
+  <ng-template #emptyTable>
+    <tbody>
+      <tr class="tid-detail-row">
+        <td [hidden]="!showDetail">--</td>
+        <td [hidden]="!showDetail">--</td>
+        <td [hidden]="!showDetail">--</td>
+        <td [hidden]="!showDetail">--</td>
+        <td [hidden]="!showDetail">--</td>
+        <td [hidden]="!showDetail">--</td>
+        <td [hidden]="!showDetail">--</td>
+        <td [hidden]="!showDetail">--</td>
+        <td [hidden]="!showDetail">--</td>
+      </tr>
+    </tbody>
+  </ng-template>
+
+</table>

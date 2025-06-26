@@ -1,0 +1,49 @@
+.popup-container {
+    width: 30vw;
+    max-height: 50vh;
+    position: relative;
+    z-index: auto;
+    overflow: auto;
+}
+
+.header-container {
+    padding: 1em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    background: #FFFFFF;
+}
+
+h1 {
+    font-size: 1.3em;
+    font-weight: 500;
+    color: var(--kcredit-primary-color1);
+}
+
+.close-button,
+.close-button:hover {
+    background: none;
+    border: none;
+    opacity: none;
+    span {
+        color: var(--kcredit-failure-red);
+        text-decoration: underline;
+    }
+}
+
+hr {
+    opacity: 1 !important;
+    color: #EBEBEB;
+}
+
+img {
+    width: 1em;
+}
+
+.link-container {
+    display: flex;
+    flex-flow: column nowrap;
+    padding: 0.5em 1em;
+}

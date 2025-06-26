@@ -1,0 +1,75 @@
+.container {
+  margin: 10px 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.row > div {
+  flex: 1 0 calc(25% - 10px);
+  /* 25% for each div with some spacing between them */
+  margin-right: 10px;
+  /* Adjust for some spacing between divs */
+  margin-bottom: 10px;
+  /* Adjust for some spacing between rows */
+}
+
+.kyc-details-container {
+  display: flex;
+  justify-content: space-between;
+  padding-right: 1.3rem;
+}
+
+.button-container {
+  align-self: flex-start;
+  display: flex;
+  flex-direction: column;
+}
+
+.review-status-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 11rem;
+}
+
+.table-container {
+  max-width: 55%;
+}
+
+.ekyc-title-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.status-container {
+  display: flex;
+  align-self: flex-start;
+  flex-direction: column;
+  gap: 0.4rem;
+  align-items: flex-end;
+}
+
+.error-field {
+  color: #e42323 !important;
+}
+
+.reject-button {
+  background-color: var(--kcredit-failure-red-background);
+  color: var(--kcredit-primary-orange);
+  margin-right: 10px;
+}

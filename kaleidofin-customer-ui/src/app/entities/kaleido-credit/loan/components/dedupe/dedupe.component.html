@@ -1,0 +1,6 @@
+<div class="card-title">
+        
+        <div *ngFor="let dedupe of dedupeData | keyvalue" >
+                <jhi-applicant [applicantType]="dedupe.key" [loanDetails]="loanDetails" [dedupeDataForComponent]="dedupe.value"></jhi-applicant>
+        </div>
+</div>

@@ -1,0 +1,32 @@
+.filter-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+.kcredit-upload-container {
+  margin-left: 80px;
+  padding: 5px 15px;
+}
+.upload-button {
+  width: 125px;
+  border-radius: 4px;
+  height: 45px;
+}
+td {
+  width: fit-content;
+  font-weight: 400;
+  font-size: 14px;
+  max-width: 15vw;
+  word-wrap: break-word;
+  word-break: break-word;
+}
+.error {
+  color: #e42323;
+}
+.success {
+  color: #39b690;
+}
+.warning {
+  color: var(--kcredit-primary-orange);
+}

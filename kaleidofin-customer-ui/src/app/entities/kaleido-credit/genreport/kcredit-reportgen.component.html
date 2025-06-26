@@ -1,0 +1,102 @@
+<div class="reports-container">
+  <div class="col-12 no-space">
+    <div class="flex-container title-container">
+      <div class="flex-container">
+        <h3 class="title-text">Reports</h3>
+        <div>
+          <app-search-filter
+            (loadKiCreditReport)="loadAll()"
+          ></app-search-filter>
+        </div>
+      </div>
+      <div>
+        <button
+          mat-button
+          class="btn btn-primary"
+          (click)="openGenerateReport()"
+        >
+          Generate new report
+        </button>
+      </div>
+    </div>
+      <div *ngIf="jobDetailsList?.length > 0; else noReports">
+        <table
+          class="table table-light col-md-12 table-bordered table-list-size"
+        >
+        <caption></caption>
+          <thead class="thead-inverse">
+            <tr>
+              <th><span>Date</span></th>
+              <th><span>File name</span></th>
+              <th><span>User name</span></th>
+              <th><span>Report type</span></th>
+              <th><span>Date range</span></th>
+              <th><span>{{ isDCBMFI ? 'BC Name' : 'Partner' }}</span></th>
+              <th><span>Loan type</span></th>
+              <th><span>Status</span></th>
+              <th><span>Action</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let jobDetails of jobDetailsList">
+              <td>{{ jobDetails?.uploadedDate }}</td>
+              <td>
+                {{
+                  getOutputFile(jobDetails?.outputFileId, jobDetails?.jobStatus)
+                }}
+              </td>
+              <td>{{ jobDetails?.createdBy }}</td>
+              <td>{{ getReportType(jobDetails?.jobName) }}</td>
+              <td>{{ getDateRange(jobDetails?.jobConfiguration) }}</td>
+              <td>{{ jobDetails?.partnerName }}</td>
+              <td>{{ getProductType(jobDetails?.jobConfiguration) }}</td>
+              <td>{{ getJobStatus(jobDetails?.jobStatus) }}</td>
+              <td>
+                <div class="col-md-3">
+                  <button
+                    mat-icon-button
+                    class="kcredit-primary-color"
+                    [disabled]="jobDetails?.outputFileId == null"
+                    (click)="downLoadFile(jobDetails?.outputFileId, jobDetails?.jobName)"
+                  >
+                    <span class="material-icons">download_for_offline</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr class="bg-light">
+              <td colspan="12">
+                <div class="row pagination-align">
+                  <jhi-item-count
+                    [page]="page"
+                    [total]="queryCount"
+                    [itemsPerPage]="itemsPerPage"
+                  >
+                  </jhi-item-count>
+                </div>
+                <div class="row pagination-align">
+                  <ngb-pagination
+                    class="text-center-div"
+                    [collectionSize]="totalItems"
+                    [(page)]="page"
+                    [pageSize]="itemsPerPage"
+                    (pageChange)="loadPage(page)"
+                    [maxSize]="3"
+                    [rotate]="true"
+                    [boundaryLinks]="true"
+                  >
+                  </ngb-pagination>
+                </div>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+      <ng-template #noReports>
+        <hr />
+        <h3 class="text-center kcredit-failure-color">No Reports found</h3>
+      </ng-template>
+  </div>
+</div>

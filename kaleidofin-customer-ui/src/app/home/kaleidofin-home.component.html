@@ -1,0 +1,20 @@
+<div class="login-page">    
+    <img [ngClass]="['header', metaData?.logoClass|| '' ]" [src]="metaData?.logo" alt="Admin Tool">
+    <mat-card class="login-card">
+        <mat-card-content>
+            <h3>Login to dashboard</h3>
+            <h5>Enter your credentials</h5>
+            <ig-login-modal></ig-login-modal>
+            <div class="link ">
+                Need help?
+                <a href="javascript:void(0)" (click)="contact()" style="text-decoration: none;"
+                    class="k-font-10">
+                    <span>Contact us</span>
+                </a>
+            </div>
+        </mat-card-content>
+    </mat-card>
+    <div *ngIf="metaData?.useFooter">
+        <ig-footer></ig-footer>
+    </div>
+</div>

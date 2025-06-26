@@ -1,0 +1,43 @@
+<div id="report">
+  <div class="report-logo">
+    <div class="report-title-container">
+      <div class="report-logo-container">
+        <img src="assets/images/lender/dcb-logo.svg" alt="Kaleidofin" />
+      </div>
+      <div class="section-title-container">
+        <div class="section-title">Fi Report</div>
+        <button mat-flat-button class="btn-primary download-button" id="pdf-download-button" (click)="downloadPdf()">
+          Download </button>
+      </div>
+    </div>
+
+    <img
+      class="report-static-logo fi-report-logo"
+      src="assets/images/common/report-heading-image.svg"
+      alt="Reports"
+    />
+  </div>
+  <table>
+    <caption></caption>
+    <thead>
+      <tr>
+        <th>Field Name</th>
+        <th>Values</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let fieldKey of getFieldKeys(); let index = index">
+        <tr>
+          <td class="row-{{ index % 2 }}">
+            {{ fieldDisplayNames[fieldKey].label }}
+          </td>
+          <td class="row-{{ index % 2 }}">
+            {{ reportData[fieldKey]?.value | dynamicDataTransform
+            : fieldDisplayNames[fieldKey]?.pipe
+            : fieldDisplayNames[fieldKey]?.format }}
+          </td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+</div>

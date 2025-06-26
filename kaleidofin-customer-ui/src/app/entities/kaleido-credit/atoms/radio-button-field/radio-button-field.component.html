@@ -1,0 +1,12 @@
+<div class="radio-button-container">
+    <mat-label>
+        {{ dataObj.value }}
+    </mat-label>
+    <mat-radio-group (change)="edit()" [(ngModel)]="dataObj.value">
+        <ng-container *ngFor="let option of dataObj?.options">
+            <mat-radio-button class="mat-radio-button" [value]="option.viewValue">
+                {{ option.viewValue }}
+            </mat-radio-button>
+        </ng-container>
+</mat-radio-group>
+</div>

@@ -1,0 +1,107 @@
+<div class="container download-search-container">
+  <div class="row">
+    <div class="col-lg-3">
+      <p>Report Type</p>
+      <mat-form-field appearance="none" class="select-boxes">
+        <mat-select
+          [(ngModel)]="selectedReportType"
+          placeholder="Select Report Type"
+          (selectionChange)="onReportTypeChange($event)"
+        >
+          <mat-option
+            *ngFor="let reportType of reportTypes"
+            [value]="reportType.value"
+          >
+            {{ reportType.viewValue }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="col-lg-3">
+      <p>Status</p>
+      <mat-form-field appearance="none" class="select-boxes">
+        <mat-select placeholder="Select Status" [(ngModel)]="selectedStatus">
+          <mat-option *ngFor="let status of statuses" [value]="status.value">
+            {{ status.viewValue }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="col-lg-3">
+      <p>Duration</p>
+      <mat-form-field appearance="none" class="select-boxes">
+        <mat-select
+          placeholder="Select Duration"
+          [(ngModel)]="selectedDuration"
+          (selectionChange)="onDurationChange()"
+        >
+          <mat-option
+            *ngFor="let duration of durationList"
+            [value]="duration.value"
+          >
+            <strong>{{ duration.viewValue }}</strong>
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="col-lg-1"></div>
+    <div class="col-lg-2 download-button">
+      <button
+        mat-raised-button
+        class="button1"
+        [disabled]="selectedReportType === null || (toDate && fromDate && toDate < fromDate)"
+        (click)="generateMandateReport()"
+      >
+        Download
+      </button>
+    </div>
+  </div>
+
+  <div class="row" *ngIf="enableDateRange">
+    <div class="col-lg-3">
+      <div>
+        <p>From Date</p>
+        <mat-form-field appearance="none">
+          <input
+            matInput
+            [matDatepicker]="fromDatePicker"
+            placeholder="From Date"
+            [(ngModel)]="fromDate"
+            name="fromDate"
+            [min]="minDate"
+            [max]="maxDate"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="fromDatePicker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #fromDatePicker></mat-datepicker>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="col-lg-3">
+      <div>
+        <p>To Date</p>
+        <mat-form-field appearance="none">
+          <input
+            matInput
+            [matDatepicker]="toDatePicker"
+            placeholder="To Date"
+            [(ngModel)]="toDate"
+            name="toDate"
+            [min]="minDate"
+            [max]="maxDate"
+          />
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="toDatePicker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #toDatePicker></mat-datepicker>
+        </mat-form-field>
+      </div>
+    </div>
+    <small class="error-text" *ngIf="toDate && fromDate && toDate < fromDate">
+      Invalid Date Range
+    </small>
+  </div>
+</div>

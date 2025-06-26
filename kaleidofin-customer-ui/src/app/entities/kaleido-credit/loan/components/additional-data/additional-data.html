@@ -1,0 +1,26 @@
+<div>
+  <form name="additionalData" novalidate #editForm="ngForm">
+    <div class="card-body">
+      <div class="card-title">
+        <div
+          class="row row-spacing"
+          *ngFor="let chunk of chunkedAdditionalData"
+        >
+          <div
+            class="form-group col-md-3"
+            *ngFor="let additionalProperty of chunk"
+          >
+            <div>
+              <label class="form-control-label" for="field_land_holding">
+                {{ additionalProperty.propertyName }}
+              </label>
+              <jhi-null-replace
+                [value]="additionalProperty.propertyValue"
+              ></jhi-null-replace>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

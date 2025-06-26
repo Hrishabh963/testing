@@ -1,0 +1,90 @@
+<div>
+  <mat-accordion>
+    <mat-expansion-panel
+      [expanded]="openBreSection"
+      (opened)="openBreSection = true"
+      (closed)="openBreSection = false"
+    >
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <div class="bre-title-container">
+            <div class="section-title">BRE</div>
+            <div class="bre-action-buttons" *ngIf="openBreSection">
+              <button
+                mat-raised-button
+                class="btn btn-primary"
+                (click)="recalculateBre($event)"
+                [disabled]="!enableRecalculateBre"
+              >
+                Recalculate BRE
+              </button>
+              <button
+                [hidden]="fromEntry"
+                mat-raised-button
+                class="btn btn-primary"
+                (click)="openBreReport($event)"
+              >
+                <mat-icon class="svg-icon" svgIcon="pdf-icon"></mat-icon>
+                View Report
+              </button>
+            </div>
+          </div>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="bre-data-container">
+        <app-bre-subsections
+          *ngIf="checkForFields(newTractor)"
+          [title]="'New Tractor'"
+          [uiFields]="newTractor"
+          [uiFieldsMap]="fieldMap?.newTractor"
+          [hideEditAction]="true"
+          [editSections]="editSections && hasAuthority"
+          (saveSubsection)="save()"
+        ></app-bre-subsections>
+        <app-bre-subsections
+          *ngIf="checkForFields(usedAndRefinanceTractor)"
+          [title]="'Used and Refinance Tractor'"
+          [uiFields]="usedAndRefinanceTractor"
+          [uiFieldsMap]="fieldMap?.usedAndRefinanceTractor"
+          [hideEditAction]="true"
+          [editSections]="editSections && hasAuthority"
+          (saveSubsection)="save()"
+        ></app-bre-subsections>
+        <app-bre-subsections
+          *ngIf="checkForFields(implement)"
+          [uiFields]="implement"
+          [uiFieldsMap]="fieldMap?.implement"
+          [hideEditAction]="true"
+          [title]="'Implement'"
+          [editSections]="editSections && hasAuthority"
+          (saveSubsection)="save()"
+        ></app-bre-subsections>
+        <app-bre-subsections
+          *ngIf="checkForFields(identifyCustomerDetails)"
+          [uiFields]="identifyCustomerDetails"
+          [uiFieldsMap]="fieldMap?.identifyCustomerDetails"
+          [title]="'Identify Customer Details for BRE'"
+          [editSections]="editSections && hasAuthority"
+          (saveSubsection)="save()"
+        ></app-bre-subsections>
+        <app-bre-subsections
+          *ngIf="checkForFields(approveFinalAmounts)"
+          [uiFields]="approveFinalAmounts"
+          uiFieldKey="approveFinalAmounts"
+          [uiFieldsMap]="fieldMap?.approvalFinalAmounts"
+          [title]="'Approved Final Amount(as per Credit)'"
+          [editSections]="editSections && hasAuthority"
+          (saveSubsection)="save()"
+        ></app-bre-subsections>
+        <app-bre-subsections
+          *ngIf="checkForFields(eligibilityCalculation)"
+          [uiFields]="eligibilityCalculation"
+          [uiFieldsMap]="fieldMap?.eligibilityCalculations"
+          [title]="'Eligibility Calculation'"
+          [editSections]="editSections && hasAuthority"
+          (saveSubsection)="save()"
+        ></app-bre-subsections>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

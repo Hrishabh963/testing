@@ -1,0 +1,25 @@
+.activity {
+    display: flex;
+    flex-direction: column;
+    align-items: baseline;
+    justify-content: flex-start;
+    gap: 15px;
+  }
+  .activity-label {
+    background-color: rgba(150, 170, 189, 0.2) ;
+    height: 6vh;
+  }
+  .activity-label-text {
+    color: #212529;
+  }
+
+  .no-activity {
+    font-family: Arial, Verdana, Tahoma, sans-serif;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 28px;
+    margin-top: 12%;
+    margin-left: 27%;
+    color: var(--kcredit-text-light);
+ } 

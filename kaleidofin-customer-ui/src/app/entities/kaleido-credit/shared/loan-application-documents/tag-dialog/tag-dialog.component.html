@@ -1,0 +1,113 @@
+<div>
+  <div mat-dialog-title class="dialog-title">
+    <div>Tag document</div>
+    <mat-icon (click)="cancel()" (keypress)="cancel()" tabindex="0"
+      >close</mat-icon
+    >
+  </div>
+  <div mat-dialog-content class="dialog-content-text">
+    <div>
+      <div>Select categories to tag the selected document</div>
+      <br />
+      <div class="row">
+        <div class="col-md-5">
+          <mat-form-field
+            id="userType"
+            appearance="fill"
+            class="custom-mat-form-field"
+          >
+            <mat-label>Document belongs to</mat-label>
+            <mat-select
+              [(value)]="selectedUserType"
+              (selectionChange)="updateUserTypeChange($event.value)"
+            >
+              <mat-option *ngFor="let user of userTypeList" [value]="user">{{
+                user.viewValue
+              }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-5">
+          <mat-form-field
+            id="docCategory"
+            appearance="fill"
+            class="custom-mat-form-field"
+          >
+            <mat-label>Document Category</mat-label>
+            <mat-select
+              [(value)]="selectedDocumentCategory"
+              (selectionChange)="updateSelection($event.value)"
+            >
+              <mat-option
+                *ngFor="let category of documentCategoryList"
+                [value]="category"
+                >{{ category.viewValue }}</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-5">
+          <mat-form-field
+            id="docType"
+            appearance="fill"
+            class="custom-mat-form-field"
+          >
+            <mat-label>Document type</mat-label>
+            <mat-select
+              [(value)]="selectedDocumentType"
+              (selectionChange)="loanDocIds()"
+            >
+              <mat-option
+                *ngFor="let type of documentTypeList"
+                [value]="type"
+                >{{ type.viewValue }}</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-5" *ngIf="selectIds">
+          <mat-form-field
+            id="docId"
+            appearance="fill"
+            class="custom-mat-form-field"
+          >
+            <mat-label>Select ID</mat-label>
+            <mat-select
+              [value]="kycId"
+              (selectionChange)="updateKycId($event.value)"
+            >
+              <mat-option
+                *ngFor="let category of availableIds"
+                [value]="category"
+                >{{ category }}</mat-option
+              >
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-md-5" *ngIf="selectIds">
+          <mat-form-field *ngIf="enableTextField" appearance="fill">
+            <input matInput placeholder="Enter ID" [(ngModel)]="manualKycId" />
+          </mat-form-field>
+          <div *ngIf="errors?.length" class="error">
+            {{ errors }}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div mat-dialog-actions class="action-buttons">
+    <button mat-button class="cancel btn-secondary" (click)="cancel()">Cancel</button>
+    <button
+      mat-button
+      class="btn-primary"
+      (click)="approve()"
+      [disabled]="checkDisability()"
+    >
+      Approve
+    </button>
+  </div>
+</div>

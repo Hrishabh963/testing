@@ -1,0 +1,54 @@
+<div *ngIf="documentTypes && documentTypes.length">
+  <mat-accordion>
+    <mat-expansion-panel
+      [expanded]="documentTypes && documentTypes.length"
+      (opened)="panelOpenState = true"
+      (closed)="panelOpenState = false"
+    >
+      <mat-expansion-panel-header>
+        <mat-panel-title class="document-type-title">
+          <div class="expansion-panel-title-container">
+            <h2 class="section-title">Additional Documents</h2>
+            <button
+              mat-raised-button
+              *ngIf="panelOpenState"
+              type="button"
+              class="btn btn-primary"
+              data-dismiss="modal"
+              [disabled]="!disableAddDocuments || !editSections"
+              (click)="addAdditionalDocuments($event)"
+            >
+              <span>Add more documents</span>
+            </button>
+          </div>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div *ngFor="let doc of documentTypes">
+        <app-loan-document-accordion
+        [loanId]="loanId"
+        [partnerId]="partnerId"
+        [documentData]="documentMap[doc]"
+        [title]="doc"
+        [rejectionReasons]="rejectionReasons"
+      >
+      </app-loan-document-accordion>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
+<div *ngIf="documentTypes && !documentTypes.length">
+  <div class="expansion-panel-title-container">
+    <h2 class="section-title">Additional Documents</h2>
+    <button
+      mat-raised-button
+      type="button"
+      class="btn btn-primary"
+      data-dismiss="modal"
+      (click)="addAdditionalDocuments($event)"
+      [disabled]="!disableAddDocuments || !editSections"
+    >
+      <span>Add more documents</span>
+    </button>
+  </div>
+  <h6><b> No Documents Available </b></h6>
+</div>

@@ -1,0 +1,12 @@
+.FAIL,
+.FAILED,
+.status-error {
+  color: var(--kcredit-failure-red);
+}
+.SUCCESS,
+.status-success {
+  color: var(--kcredit-success-green);
+}
+.mandate-table-container {
+  padding: 0;
+}

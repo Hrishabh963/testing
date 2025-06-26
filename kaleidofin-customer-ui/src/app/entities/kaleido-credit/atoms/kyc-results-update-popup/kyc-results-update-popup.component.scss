@@ -1,0 +1,97 @@
+.title-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #80808047;
+  margin: 0;
+}
+
+.title-text {
+  color: #0f547e;
+}
+
+.close-icon {
+  cursor: pointer;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  padding: 5vh 0 1vh 0.5vw;
+}
+
+.header-text {
+  font-size: 14px;
+  color: #96AABD;
+  width: 45%;
+  text-align: left;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+}
+
+.existing-value,
+.updated-value {
+  display: flex;
+  flex-direction: column;
+  width: 45%;
+}
+
+label {
+  font-size: 12px;
+  color: #808080;
+}
+
+.value-text {
+  font-size: 16px;
+  word-wrap: anywhere;
+  white-space: wrap;
+  line-break: auto;
+}
+
+.updated-text {
+  color: green;
+}
+
+.arrow-icon {
+  font-size: 24px;
+  color: #808080;
+}
+
+.success-message,
+.error-message {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.success-message {
+  color: green;
+}
+
+.error-message {
+  color: red;
+}
+
+.success-message mat-icon,
+.error-message mat-icon {
+  margin-top: 1vh;
+  margin-right: 0.5rem;
+}
+
+.mid-width-button,
+.btn-success,
+.btn-retry {
+  min-width: 13vw;
+  min-height: 3.5vw;
+}
+
+.btn-success {
+  color: var(--kcredit-success-green);
+  background-color: var(--kcredit-success-green-light);
+}

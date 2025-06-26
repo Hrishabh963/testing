@@ -1,0 +1,25 @@
+<div>
+  <div mat-dialog-title class="dialog-title">
+    <div>Select an Option</div>
+    <mat-icon (click)="cancel()" (keypress)="cancel()" tabindex="0">close</mat-icon>
+  </div>
+  <div mat-dialog-content class="dialog-content-text">
+    <mat-radio-group class="column-radio-group" [(ngModel)]="selectedOption">
+      <mat-radio-button *ngFor="let option of reportTypes" [value]="option.value">
+        <span>{{ option.viewValue }} </span>
+      </mat-radio-button>
+    </mat-radio-group>
+  </div>
+  <div mat-dialog-actions class="action-buttons">
+    <button mat-button class="button4 cancel" (click)="cancel()">Cancel</button>
+    <button
+      mat-button
+      class="btn btn-primary"
+      cdkFocusInitial
+      [disabled]="!selectedOption"
+      (click)="download()"
+    >
+      Download
+    </button>
+  </div>
+</div>

@@ -1,0 +1,26 @@
+<div *ngFor="let section of reportData; let i = index">
+  <div class="section-title subtitle">
+    {{ i + 1 }}. &nbsp; {{ section.title }}
+  </div>
+  <br />
+  <table>
+    <caption></caption>
+    <thead>
+      <tr>
+        <th *ngFor="let header of section.headers">
+          {{ header?.key }}
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let row of section.rows; let rowIndex = index">
+        <td
+          *ngFor="let header of section.headers; let headerIndex = index"
+          [class]="'row-' + (rowIndex % 2)"
+        >
+          <div>{{ row[header["value"]] }}</div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

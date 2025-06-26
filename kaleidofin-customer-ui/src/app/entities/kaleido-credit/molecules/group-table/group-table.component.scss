@@ -1,0 +1,169 @@
+.match-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+$cell-padding: 8px;
+
+p {
+  font-family: Lato, sans-serif;
+}
+
+table,
+th,
+td {
+  border: 1px solid #ebebeb;
+  border-collapse: collapse;
+  padding-top: 1vw;
+  color: var(--kcredit-primary-black) !important;
+}
+
+th,
+td {
+  padding: $cell-padding;
+  text-align: left;
+}
+
+table.tid-table {
+  border: 0;
+  box-shadow: none !important;
+
+  th {
+    background-color: #f9f9f9 !important;
+
+    > div {
+      font-size: small;
+    }
+  }
+
+  tr {
+    &.tid-detail-row {
+      > td {
+        padding: 10px;
+        border: 1px solid #ebebeb;
+        box-shadow: none;
+
+        > div {
+          width: 100%;
+          font-size: small;
+          box-sizing: border-box;
+          max-height: 0;
+          transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
+          overflow: hidden;
+
+          > div {
+            padding: $cell-padding;
+          }
+        }
+      }
+
+      &.show > td > div {
+        max-height: 1000px;
+        transition: max-height 1s ease-in-out;
+        font-size: small;
+      }
+    }
+
+    &.tid-even {
+      background-color: #dbdbdb;
+    }
+  }
+}
+
+.kyc-verification-container {
+  padding: 10px;
+  margin-left: -25px;
+}
+
+.accept {
+  color: #0bc07f;
+}
+
+.failed {
+  color: #e42323;
+}
+
+th {
+  font-weight: bold;
+}
+
+.hide-border {
+  td {
+    border: 0 !important;
+    box-shadow: none !important;
+  }
+}
+
+.verification-container {
+  display: flex;
+  flex-direction: row;
+  overflow: auto;
+  margin-left: 1rem;
+  max-height: 200px;
+}
+
+.verify-btn-container {
+  margin-left: 20px;
+}
+
+.row-container {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.row-container > div {
+  margin-right: 10px;
+  /* Adjust margin as needed */
+}
+
+.reject-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #e42323 !important;
+  height: 40px;
+  width: 100px;
+}
+
+.reject-button:hover {
+  background-color: darkred !important;
+}
+
+.cross-image {
+  width: 20px;
+  height: 20px;
+  padding-right: 5px;
+}
+
+.tbody-style {
+  width: 150px;
+}
+
+.view-row {
+  color: var(--kcredit-primary) !important;
+
+  div:hover {
+    cursor: pointer;
+  }
+}
+
+.table-header {
+  position: sticky !important;
+}
+
+.item-count {
+  color: #496684;
+  margin-left: 13px;
+}
+
+.table-header mat-checkbox {
+  margin-top: 11px;
+  margin-left: 2px;
+}
+
+.tbody-style mat-checkbox {
+  margin-top: 8px !important;
+}

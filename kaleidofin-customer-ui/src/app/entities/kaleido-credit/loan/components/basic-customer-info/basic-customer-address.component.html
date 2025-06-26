@@ -1,0 +1,132 @@
+<form
+  name="customerAddressInfoForm"
+  novalidate
+  #customerAddressInfoForm="ngForm"
+>
+  <div class="section-container">
+      <span class="section-sub-heading">
+        {{ getAddressHeading() }}
+      </span>
+       <app-section-edit-action
+          (onCancelHandler)="cancelEdit()"
+          (onSaveHandler)="saveCurrentAddress(address)"
+          [panelOpenState]="true"
+          [isEditing]="editCurrentAddress"
+          (onEditHandler)="enableEdit()"
+        ></app-section-edit-action>
+  </div>
+  <div class="row row-spacing">
+    <div class="col-3">
+      <div [hidden]="!editCurrentAddress">
+        <mat-form-field appearance="outline">
+          <mat-label for="currentAddress1">Address</mat-label>
+          <input
+            matInput
+            type="text"
+            name="currentAddress1"
+            id="currentAddress1"
+            [(ngModel)]="address.address1"
+            required
+          />
+        </mat-form-field>
+      </div>
+      <div [hidden]="editCurrentAddress">
+        <label class="form-control-label" for="currentAddress1">Address</label>
+        <jhi-null-replace [value]="address.address1"></jhi-null-replace>
+      </div>
+    </div>
+    <div class="col-3">
+      <div [hidden]="!editCurrentAddress">
+        <mat-form-field appearance="outline">
+          <mat-label for="city">City</mat-label>
+          <input
+            matInput
+            type="text"
+            name="city"
+            id="city"
+            [(ngModel)]="address.city"
+            required
+          />
+        </mat-form-field>
+      </div>
+      <div [hidden]="editCurrentAddress">
+        <label class="form-control-label" for="city">City</label>
+        <jhi-null-replace [value]="address.city"></jhi-null-replace>
+      </div>
+    </div>
+    <div class="col-3">
+      <div [hidden]="!editCurrentAddress">
+        <mat-form-field appearance="outline">
+          <mat-label for="currentDistrict">District</mat-label>
+          <input
+            matInput
+            type="text"
+            name="currentDistrict"
+            id="currentDistrict"
+            [(ngModel)]="address.district"
+          />
+        </mat-form-field>
+      </div>
+      <div [hidden]="editCurrentAddress">
+        <label class="form-control-label" for="currentDistrict">District</label>
+        <jhi-null-replace [value]="address.district"></jhi-null-replace>
+      </div>
+    </div>
+    <div class="col-3">
+      <div [hidden]="!editCurrentAddress">
+        <mat-form-field appearance="outline">
+          <mat-label for="currentPincode">Pin</mat-label>
+          <input
+            matInput
+            type="text"
+            name="currentPincode"
+            id="currentPincode"
+            [(ngModel)]="address.pincode"
+          />
+        </mat-form-field>
+      </div>
+      <div [hidden]="editCurrentAddress">
+        <label class="form-control-label" for="currentPincode">Pin</label>
+        <jhi-null-replace [value]="address.pincode"></jhi-null-replace>
+      </div>
+    </div>
+  </div>
+  <div class="row row-spacing">
+    <div class="col-3">
+      <div [hidden]="!editCurrentAddress">
+        <mat-form-field appearance="outline">
+          <mat-label for="currentState">State</mat-label>
+          <input
+            matInput
+            type="text"
+            name="currentState"
+            id="currentState"
+            [(ngModel)]="address.state"
+          />
+        </mat-form-field>
+      </div>
+      <div [hidden]="editCurrentAddress">
+        <label class="form-control-label" for="currentState">State</label>
+        <jhi-null-replace [value]="address.state"></jhi-null-replace>
+      </div>
+    </div>
+    <div class="col-3">
+      <div [hidden]="!editCurrentAddress">
+        <mat-form-field appearance="outline">
+          <mat-label for="currentLandmark">Landmark</mat-label>
+          <input
+            matInput
+            type="text"
+            name="currentLandmark"
+            id="currentLandmark"
+            [(ngModel)]="address.address2"
+          />
+        </mat-form-field>
+      </div>
+      <div [hidden]="editCurrentAddress">
+        <label class="form-control-label" for="currentLandmark">Landmark</label>
+        <jhi-null-replace [value]="address.address2"></jhi-null-replace>
+      </div>
+    </div>
+  </div>
+</form>

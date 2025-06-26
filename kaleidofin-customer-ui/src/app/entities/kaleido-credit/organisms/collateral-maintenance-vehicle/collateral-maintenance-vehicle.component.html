@@ -1,0 +1,24 @@
+<mat-accordion>
+	<mat-expansion-panel [expanded]="panelOpenState" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+		<mat-expansion-panel-header>
+			<div class="expansion-panel-title-container">
+				<div class="section-title">Collateral Maintenance - Vehicle</div>
+				<button [hidden]="editDetails" [disabled]="!editSections || !hasAuthority" mat-raised-button *ngIf="panelOpenState" type="button"
+					class="btn btn-primary" data-dismiss="modal" (click)="toggleEditDetails($event)">
+					<mat-icon>edit</mat-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+				</button>
+				<div class="confirm-buttons" [hidden]="!editDetails">
+					<button mat-raised-button type="button" class="btn-secondary" data-dismiss="modal" (click)="cancel($event)">
+						<span jhiTranslate="entity.action.cancel">Cancel</span>
+					</button>
+					<button mat-raised-button type="button" class="btn-primary" data-dismiss="modal" (click)="save($event)">
+						<span jhiTranslate="entity.action.save">Save</span>
+					</button>
+				</div>
+			</div>
+		</mat-expansion-panel-header>
+		<div *ngIf="uiFieldsMap.length > 0">
+			<app-dynamic-render-component [uiFields]="collateralMaintaince" [uiFieldsMap]="uiFieldsMap" [loanId]="loanId"
+				[editSections]="editSections" [enableEdit]="editDetails" [hideEditAction]="true" [uiApiKey]="'COLLATERAL_MAINTENANCE_VEHICLE'">
+			</app-dynamic-render-component>
+		</div>

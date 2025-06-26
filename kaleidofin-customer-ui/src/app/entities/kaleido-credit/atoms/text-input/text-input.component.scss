@@ -1,0 +1,36 @@
+.email-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding-top: 1vh;
+  padding-bottom: 1vh;
+}
+
+label {
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+input {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 0.1rem solid rgba(0, 0, 0, 0.2) !important;
+  outline: none !important;
+  font-size: 16px;
+  padding-bottom: 0.2rem;
+  font-weight: 600;
+}
+
+input:focus {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-bottom: 0.1rem solid rgba(0, 0, 0, 0.2) !important;
+  outline: none !important;
+}
+
+input::placeholder {
+  opacity: 20%;
+  font-weight: 100 !important;
+}

@@ -1,0 +1,6 @@
+<h5>Select Role</h5>
+<mat-selection-list [disableRipple]="true" class="roles-list-container" [(ngModel)]="selectionList" (selectionChange)="onSelectionChange()">
+    <mat-list-option class="roles-option" checkboxPosition="before"  *ngFor="let role of roleTypeOptions" [value]="role?.value">
+        {{ role?.label }}
+    </mat-list-option>
+</mat-selection-list>

@@ -1,0 +1,28 @@
+<mat-accordion>
+  <mat-expansion-panel (opened)="updateAccordionOpenState()" (closed)="updateAccordionCloseState()">
+    <mat-expansion-panel-header class="accordion-header">
+      <mat-panel-title class="section-title">
+        Dedupe - {{ data.title }}
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div *ngIf="panelOpenState">
+      <div *ngIf="showDedupeForm;else noDedupeFound">
+        <app-dedupe-form [data]="data.customerInformation" [paramsObject]="matchingParamsObject"></app-dedupe-form>
+        <app-dedupe-data [customerId]="customerId" [tableItems]="dedupeData"
+          [paramsObject]="matchingParamsObject" [dedupeType]="dedupeType"
+          [enableReject]="enableReject" [dedupeReferenceType]="dedupeReferenceType"
+          [dedupeReferenceId]="dedupeReferenceId"></app-dedupe-data>
+      </div>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>
+
+
+<ng-template #noDedupeFound>
+  <section class="no-dedupe">
+    <div>
+      <img src="assets\images\common\dedupe.svg" alt="dedupe">
+      <span>No Dedupe’s found</span>
+    </div>
+  </section>
+</ng-template>

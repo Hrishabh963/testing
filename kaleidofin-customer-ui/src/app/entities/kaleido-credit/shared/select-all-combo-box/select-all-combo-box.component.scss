@@ -1,0 +1,18 @@
+app-select-all-combo-box .mat-checkbox-layout,
+app-select-all-combo-box .mat-checkbox-label {
+  width: 100% !important;
+}
+
+app-select-all-combo-box .mat-checkbox-inner-container {
+  &::after {
+    display: none;
+  }
+}
+
+app-select-all-combo-box .mat-checkbox-mixedmark {
+  display: none;
+}
+
+app-select-all-combo-box .mat-checkbox-indeterminate.mat-accent .mat-checkbox-background{
+background-color: transparent;
+}

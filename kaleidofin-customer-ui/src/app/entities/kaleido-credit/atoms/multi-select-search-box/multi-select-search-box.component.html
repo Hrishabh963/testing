@@ -1,0 +1,22 @@
+<form [formGroup]="form">
+  <mat-form-field appearance="fill" class="custom-mat-form-field">
+    <mat-label>{{ data?.label }}</mat-label>
+    <mat-select (openedChange)="onSelectMenuOpen($event)" #matSelect [placeholder]="data?.label"
+      [formControlName]="data?.propertyKey" multiple [(ngModel)]="selectedItems">
+      <mat-form-field class="search-input" appearance="none">
+        <input matInput [placeholder]="data?.placeholder || 'Enter Search Value'" [formControl]="searchFieldFormControl" autocomplete="off" />
+      </mat-form-field>
+      <div class="rule-break"></div>
+      <app-select-all-combo-box [model]="form.get(data?.propertyKey)" [values]="sortedMenus" text="All">
+      </app-select-all-combo-box>
+      <div class="options-container">
+        <mat-option *ngIf="data?.enableDefaultValue"
+          [value]="data?.defaultValue"><i>{{data?.defaultValue?.label}}</i></mat-option>
+        <mat-option *ngFor="let item of sortedMenus" [value]="item"
+          [checked]="item?.checked">{{
+          item?.label
+          }}</mat-option>
+      </div>
+    </mat-select>
+  </mat-form-field>
+</form>

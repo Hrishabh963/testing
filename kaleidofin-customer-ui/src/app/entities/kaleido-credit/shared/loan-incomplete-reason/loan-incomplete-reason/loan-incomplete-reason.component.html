@@ -1,0 +1,25 @@
+<div>
+  <div class="title-container">
+    <div class="section-title">{{ title }}</div>
+    <button
+      mat-button
+      class="btn-primary"
+      [hidden]="reasons.length == 0"
+      (click)="copy()"
+    >
+      Copy
+    </button>
+  </div>
+  <div>
+    <div
+      class="reason"
+      *ngFor="let reason of reasons; let index = index"
+      [id]="index"
+      [ngClass]="{ 'reason-border': reasons.length > 1 && !last }"
+    >
+      <span class="material-icons close-icon"> highlight_off </span>
+      &nbsp; &nbsp;
+      <span>{{ reason }}</span>
+    </div>
+  </div>
+</div>

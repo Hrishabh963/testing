@@ -1,0 +1,26 @@
+<div class="main-container">
+    <div class="image-container">
+        <img class="image-logo" [src]="logo | async" alt="Logo" />
+    </div>
+    <div class="profile-section-container">
+        <div>
+            <app-user-profile-navigation [contentType]="contentType" [userInfo]="userInfo"
+                 (changeSection)="changeSection($event)"
+                 [appMenuConfig]="appMenuConfig"
+                 >
+            </app-user-profile-navigation>
+        </div>
+        <div class="profile-info">
+            <ng-container [ngSwitch]="contentType">
+                <ng-container *ngSwitchCase="'basicDetails'">
+                    <app-user-profile-info [userInfo]="userInfo">
+                    </app-user-profile-info>
+                </ng-container>
+                <ng-container *ngSwitchCase="'changePassword'">
+                    <app-change-password [userInfo]="userInfo">
+                    </app-change-password>
+                </ng-container>
+            </ng-container>
+        </div>
+    </div>
+</div>

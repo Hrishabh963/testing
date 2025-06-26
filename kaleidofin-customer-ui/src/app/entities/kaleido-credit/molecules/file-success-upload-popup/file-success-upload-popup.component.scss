@@ -1,0 +1,45 @@
+.success-container {
+    width: 35vw;
+}
+
+.close-button {
+    background: none;
+    border: none;
+    color: #496684;
+}
+
+span {
+    color: #38526C;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.25em 1em;
+    align-items: center;
+    border-bottom: 1px solid #EAF2FF;
+}
+
+.message {
+    display: flex;
+    gap: 1em;
+}
+
+.message-container {
+    display: flex;
+    flex-direction: column;
+    padding: 1em;
+    height: 18vh;
+    justify-content: space-between;
+}
+
+img {
+    width: 1.5em;
+}
+
+.confirm-button {
+    align-self: flex-end;
+    background: #FF7B52;
+    color: white;
+    width: 6em;
+}

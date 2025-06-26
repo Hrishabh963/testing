@@ -1,0 +1,31 @@
+.chip-content-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 20vw;
+    max-width: max-content;
+    background: #E6E8F1;
+    padding: 0.5rem 0.6rem;
+    border-radius: 8px;
+}
+
+.chip-content {
+    font-size: 0.96rem;
+    color: #496684;
+}
+
+.close-icon {
+    max-height: 1.5rem;
+    border: none;
+    background: none;
+}
+
+.close-icon:focus {
+    outline: none;
+    background: none;
+}
+
+.close-icon .mat-icon {
+    font-size: 1.5rem;
+    color: #496684;
+}

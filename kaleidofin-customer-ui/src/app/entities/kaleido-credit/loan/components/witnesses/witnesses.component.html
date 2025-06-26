@@ -1,0 +1,70 @@
+<div>
+    <div *ngFor="let witness of witnesses; let i = index" class="card-title">
+        <h5 jhiTranslate="kCredit.loanObligators.witness" class="section-sub-heading">Witness {{i+1}} </h5>
+        <div class="row row-spacing">
+            <div class="col-3">
+                <label class="form-control-label" jhiTranslate="kCredit.loanObligators.name">
+                    Name
+                    <label class="form-control-label" jhiTranslate="kCredit.loanObligators.name" htmlFor =";label-0">NameWitnessComponent</label>
+                </label>
+                
+            </div>
+            <div class="col-3">
+                <label class="form-control-label" jhiTranslate="kCredit.loanObligators.relationship" htmlFor="label-1">
+                    Relationship
+                </label>
+                <jhi-null-replace [value]="witness.relationship"></jhi-null-replace>
+                
+            </div>
+            <div class="col-3">
+                <label class="form-control-label" jhiTranslate="kCredit.loanObligators.mobileNo" htmlFor="label-2">
+                    Contact Number
+                </label>
+                <jhi-null-replace [value]="witness.mobileNo"></jhi-null-replace>
+            </div>
+            <div class="col-3">
+                <label class="form-control-label" jhiTranslate="kCredit.loanObligators.dateOfBirth" htmlFor="label-3">
+                    Date of birth (YYYY-MM-DD)
+                </label>
+                <jhi-null-replace [value]="witness.dateOfBirth"></jhi-null-replace>
+            </div>
+            <div class="col-3">
+                <label class="form-control-label" jhiTranslate="kCredit.loanObligators.remarks" htmlFor="label-4">
+                    Remarks
+                </label>
+                <jhi-null-replace [value]="witness.remarks"></jhi-null-replace>
+                
+            </div>
+        </div>
+        <div *ngIf="witness.addressDTO" class="row row-spacing">
+            <div class="col-3">
+                <label class="form-control-label" jhiTranslate="kCredit.loanObligators.address" htmlFor="label-5">
+                    Address
+                </label>
+                <jhi-null-replace [value]="witness.addressDTO.address1"></jhi-null-replace>
+                <jhi-null-replace [value]="witness.addressDTO.address2"></jhi-null-replace>
+                <jhi-null-replace [value]="witness.addressDTO.address3"></jhi-null-replace>
+                
+            </div>
+            <div class="col-3">
+                <label class="form-control-label" jhiTranslate="kCredit.loanObligators.district" htmlFor="label-6">
+                    District
+                </label>
+                <jhi-null-replace [value]="witness.addressDTO.district"></jhi-null-replace>
+            </div>
+            <div class="col-3">
+                <label class="form-control-label" jhiTranslate="kCredit.loanObligators.state" htmlFor="label-7">
+                    State
+                </label>
+                <jhi-null-replace [value]="witness.addressDTO.state"></jhi-null-replace>
+            </div>
+            <div class="col-3">
+                <label class="form-control-label" jhiTranslate="kCredit.loanObligators.pincode" htmlFor="label-8">
+                    Pincode
+                </label>
+                <jhi-null-replace [value]="witness.addressDTO.pincode"></jhi-null-replace>
+            </div>
+        </div>
+    </div>
+    <span  *ngIf="!witnesses.length">--</span>
+</div>

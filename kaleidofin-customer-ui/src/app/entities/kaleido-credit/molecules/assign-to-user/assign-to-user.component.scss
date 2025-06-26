@@ -1,0 +1,32 @@
+.selection-menu {
+  border: 1px solid #ebebeb;
+  box-shadow: 2px;
+}
+.mat-menu-panel.custom-style {
+  width: 16vw !important;
+  height: auto !important;
+  max-height: 30vh !important;
+  padding: 5px 10px 5px 15px !important;
+  background-color: white;
+}
+.assignment-label {
+  color: #777777;
+}
+
+.mat-form-field-appearance-legacy .mat-form-field-underline {
+  display: none;
+}
+
+.rule-break {
+  border-bottom: 1px solid #dddddd;
+}
+
+.mat-form-field-appearance-legacy .mat-form-field-wrapper {
+  padding-bottom: 0.25em;
+}
+
+
+.search-input {
+  outline: none !important;
+  border: none !important;
+}

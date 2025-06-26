@@ -1,0 +1,103 @@
+.title-search-container {
+  display: flex;
+  gap: calc(100% - 85%);
+}
+
+.tab-buttons {
+  display: flex;
+  gap: 5px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.tab-buttons button {
+  border: none;
+  background: none;
+  font-size: 1rem;
+  padding: 8px;
+  cursor: pointer;
+  border-bottom: 1px solid #e0e0e0;
+  color: #96aabd;
+}
+
+.tab-buttons button:hover {
+  color: #28b2b6;
+}
+
+.tab-buttons button.active-tab {
+  border-bottom: 1px solid #28b2b6;
+  color: #28b2b6;
+  border-radius: 0;
+}
+.tab-buttons button.active-tab:focus {
+  border-bottom: 1px solid #28b2b6 !important;
+  color: #28b2b6;
+  border-radius: 0;
+}
+
+.sub-stage-section {
+  display: flex;
+  gap: 16px;
+  margin: 16px 0;
+  button {
+    color: #96aabd;
+  }
+}
+
+.sub-stage-section button.active {
+  background-color: #d8eeef;
+  color: #28b2b6;
+}
+
+table {
+  width: 100%;
+}
+tr.mat-row {
+  border: 1px solid #eaf2ff;
+  height: 4.5rem;
+}
+
+th.mat-header-cell,
+td.mat-cell {
+  text-align: center;
+  color: #38526c !important;
+  font-size: 12px;
+}
+.stage-icon {
+  margin: auto 1px;
+  color: #96aabd;
+}
+.status-badge {
+  display: inline-block;
+  padding: 8px 16px;
+  border-radius: 20px;
+  width: 7rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-family: Lexend Deca, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 15px;
+  letter-spacing: 0.17307710647583008px;
+  text-align: center;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+}
+.AGREEMENT_PENDING,
+.REVIEW_PENDING {
+  color: #ffac30;
+  background-color: #fff7ea;
+}
+.AGREEMENT_RECEIVED,
+.APPROVED {
+  color: #39b690;
+  background-color: #fff7ea;
+}
+.AGREEMENT_REWORK,
+.REWORK {
+  color: #3586ff;
+  background-color: #e7f1ff;
+}
+.REJECTED {
+  color: #e42323;
+  background-color: #ffd7d7;
+}

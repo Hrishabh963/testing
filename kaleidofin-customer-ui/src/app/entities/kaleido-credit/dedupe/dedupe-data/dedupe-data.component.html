@@ -1,0 +1,70 @@
+<div>
+  <div class="result-display">
+    <h3>Result</h3>
+    <span class="result-text" *ngIf="dedupeType === 'FULL';else hardMatchResult">
+      This application is a 100% match with an existing customer.
+    </span>
+    <ng-template #hardMatchResult>
+      <span class="result-text">
+        This application matches with an existing customer on {{(paramsObject | keyvalue)?.length}} parameters :  {{matchingText}}
+      </span>
+    </ng-template>
+  </div>
+  <div class="button-container" *ngIf="dedupeType === 'FULL';else hardMatch">
+    <button mat-raised-button class="mat-btn-success" (click)="approveAll()">Approve</button>
+    <button class="mat-btn-danger" mat-raised-button (click)="rejectDedupe()" *ngIf="enableReject">
+      Reject
+    </button>
+  </div>
+
+</div>
+<div *ngIf="tableItems.length > 0">
+  <table>
+    <caption></caption>
+    <thead>
+      <tr>
+        <th class="small-width"></th>
+        <th>Applicant Name</th>
+        <th>Partner ID</th>
+        <th>Loan ID</th>
+        <th>Application Date</th>
+        <th>Duplicate Parameter type</th>
+        <th>Product Code</th>
+        <th>Link</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of tableItems">
+        <td class="small-width">
+          <mat-checkbox (change)="selectItem(item)"></mat-checkbox>
+        </td>
+        <td>{{ item.name }}</td>
+        <td>{{ item.partnerId }}</td>
+        <td>{{ item.loanNumber }}</td>
+        <td>{{ item.createdDate }}</td>
+        <td>{{ item.dedupeParameter }}</td>
+        <td>{{ item.productCode }}</td>
+        <td>
+          <button mat-button class="btn btn-primary" (click)="openLoan(item)">
+            Open Link
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<ng-template #hardMatch>
+  <div class="button-container">
+    <button *ngIf="tableItems.length" [disabled]="!selectedItems.length" class="btn btn-primary" mat-raised-button
+      (click)="markDedupe(true)">
+      Mark as existing Customer
+    </button>
+    <button class="btn btn-primary" mat-raised-button (click)="markDedupe()" [disabled]="disableMarkingNewCustomer">
+      Mark as new Customer
+    </button>
+    <button class="mat-btn-danger" mat-raised-button (click)="rejectDedupe()" *ngIf="enableReject">
+      Reject
+    </button>
+  </div>
+</ng-template>

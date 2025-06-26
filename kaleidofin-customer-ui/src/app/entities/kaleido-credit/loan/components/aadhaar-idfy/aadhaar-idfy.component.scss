@@ -1,0 +1,45 @@
+button {
+  height: 30px;
+  padding: 0px 5px 0px 2px !important;
+  font-size: 8px;
+  font-weight: 700;
+  width: auto;
+}
+.custom-icon {
+  font-size: 1.3em;
+  height: auto;
+}
+.aadhaarIdfyVerified {
+  color: #028003;
+  background-color: #e3ffe4;
+  font-family: Arial, Verdana, Tahoma, sans-serif;
+}
+
+.aadhaarIdfyUnverified {
+  color: #e42323;
+  background-color: #ffe5e5;
+  font-family: Arial, Verdana, Tahoma, sans-serif;
+}
+
+.aadhaarIdfyError {
+  color: #ff820f;
+  background-color: #ffe3c9;
+}
+
+.aadhaarIdfyToBeVerified {
+  color: white;
+  background-color: #037bfe;
+  padding: 0px 5px;
+}
+
+.aadhaarIdfyInProgress {
+  color: #ff820f;
+  background-color: #ffe3c9;
+}
+.error-icon{
+    background-color: #e42323;
+}
+.img-icon{
+    height: 16px;
+    width: 16px;
+}

@@ -1,0 +1,8 @@
+<span>{{ column?.label }}</span>
+<mat-select style="width: 1.3em;" [formControlName]="selectAllFormControl" value="All" multiple (selectionChange)="onChange()"
+    [(value)]="selectedValues">
+    <mat-checkbox class="mat-option" [checked]="allSelected" color="accent"
+        (change)="handleChange($event)">All</mat-checkbox>
+    <mat-option *ngFor="let option of column?.options" [value]="option" [checked]>{{ option?.viewValue
+        }}</mat-option>
+</mat-select>

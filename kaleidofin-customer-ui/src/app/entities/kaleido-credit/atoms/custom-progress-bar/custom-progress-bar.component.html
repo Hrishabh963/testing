@@ -1,0 +1,5 @@
+<div class="progress-bar-container" [ngStyle]="{'background' : containerBackground}">
+    <div class="progress-bar" [style.width.%]="progressValue"
+        [ngStyle]="{'background': accentHex}">
+        <span class="progress-text">{{ progressValue }}%</span>
+    </div>

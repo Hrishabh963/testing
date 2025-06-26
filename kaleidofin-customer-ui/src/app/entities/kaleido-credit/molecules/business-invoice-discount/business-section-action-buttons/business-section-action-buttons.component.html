@@ -1,0 +1,16 @@
+<div class="action-buttons">
+  <button
+    mat-button
+    *ngIf="!isEditing"
+    class="edit-btn btn btn-primary"
+    (click)="onEdit()"
+  >
+    Edit
+  </button>
+  <button mat-button *ngIf="isEditing" class="save-btn" (click)="onSave()">
+    Update
+  </button>
+  <button mat-button *ngIf="isEditing" class="cancel-btn" (click)="onCancel()">
+    Cancel
+  </button>
+</div>

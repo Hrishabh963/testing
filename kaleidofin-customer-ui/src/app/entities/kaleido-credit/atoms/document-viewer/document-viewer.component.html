@@ -1,0 +1,44 @@
+<div class="pdf-viewer-container">
+  <div class="pdf-viewer-header">
+    <div class="file-name">{{ fileName }}</div>
+    <div class="header-actions">
+      <button mat-flat-button class="btn-primary" (click)="onTagClick()">
+        Tag
+      </button>
+      <button mat-icon-button class="close-button" (click)="closeDialog()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+  </div>
+  <div class="pdf-view-area">
+    <div *ngIf="loading" class="loading-overlay">
+      <mat-spinner></mat-spinner>
+    </div>
+    <div class="header-actions">
+      <button mat-icon-button (click)="zoomOut()"><mat-icon>zoom_out</mat-icon></button>
+      <button mat-icon-button (click)="zoomIn()"><mat-icon>zoom_in</mat-icon></button>
+      <button mat-icon-button (click)="downloadPdf()">
+        <mat-icon>download</mat-icon>
+      </button>
+    </div>
+    <div #pdfContainer class="pdf-scroll-container"></div>
+
+    <div class="document-actions" *ngIf="!hideActions">
+      <button
+        mat-stroked-button
+        class="btn-secondary reject-button"
+        (click)="onRejectClick()"
+      >
+        <span>Reject</span>
+      </button>
+      <button
+        mat-flat-button
+        class="btn-primary"
+        color="accent"
+        (click)="onAcceptClick()"
+      >
+        Accept
+      </button>
+    </div>
+  </div>
+</div>

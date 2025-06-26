@@ -1,0 +1,33 @@
+<div class="filter-container">
+  <div class="filter-dropdown" *ngFor="let filter of requiredFilters">
+    <div *ngIf="filterData[filter?.value]?.length > 1">
+      <ng-container [ngSwitch]="filter?.type">
+        <app-multi-select-search-box
+          [menuKey]="filter?.value"
+          [data]="filter"
+          *ngSwitchCase="'multi-select-search'"
+          (submitHandler)="onFilterChange($event, filter)"
+        ></app-multi-select-search-box>
+
+        <mat-form-field *ngSwitchDefault appearance="fill">
+          <mat-label>{{ filter?.label }}</mat-label>
+          <mat-select (selectionChange)="onFilterChange($event, filter)">
+            <mat-option *ngIf="filter?.enableDefaultValue" [value]="filter?.defaultValue?.value"> {{filter?.defaultValue?.label}} </mat-option>
+            <mat-option
+              *ngFor="let data of filterData[filter?.value]"
+              [value]="data?.value"
+              >{{ data?.label }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+      </ng-container>
+    </div>
+  </div>
+  <div *ngIf="showMoreFilter" (click)="openMoreFilters.emit()" (keypress)="openMoreFilters.emit()" >
+    <mat-form-field appearance="fill">
+      <mat-label> More Filters </mat-label>
+      <mat-select>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</div>

@@ -1,0 +1,25 @@
+.pass {
+    color: var(--Green, #0BC07F);
+    font-family: 'Lexend Deca', Arial, Verdana, Tahoma, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.fail {
+    color: rgba(228, 35, 35, 1);
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.loan-status {
+    border-radius: 24px;
+    background: var(--Yellow-light, #FFF7EA);
+    color: var(--Yellow, #FFAC30);
+    font-family: 'Lexend Deca', Arial, Verdana, Tahoma, sans-serif;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}

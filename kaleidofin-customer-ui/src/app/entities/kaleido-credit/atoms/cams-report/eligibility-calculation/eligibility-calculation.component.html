@@ -1,0 +1,22 @@
+<div>
+  <div class="section-title subtitle">
+    {{ index + 1 }}. &nbsp;Eligibility Calculation
+  </div>
+  <div class="section-container">
+    <app-cams-section
+      [title]="agriculturalIncome?.title"
+      [tableMap]="agriculturalIncome?.tableMap"
+      [reportData]="reportData?.totalAgriCulturalIncomes"
+    ></app-cams-section>
+    <app-cams-section
+      [title]="otherIncomeSources?.title"
+      [tableMap]="otherIncomeSources?.tableMap"
+      [reportData]="reportData?.otherSourceOfIncomes"
+    ></app-cams-section>
+    <app-cams-section
+      [title]="finalIncomeMap?.title"
+      [tableMap]="finalIncomeMap?.tableMap"
+      [reportData]="reportData?.finalIncomeAndEmiObligations"
+    ></app-cams-section>
+  </div>
+</div>

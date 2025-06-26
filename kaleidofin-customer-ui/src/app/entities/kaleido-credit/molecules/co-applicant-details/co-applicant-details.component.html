@@ -1,0 +1,646 @@
+<mat-accordion>
+  <mat-expansion-panel
+    [expanded]="panelOpenState"
+    (opened)="panelOpenState = true"
+    (closed)="panelOpenState = false"
+  >
+    <mat-expansion-panel-header>
+      <div class="sub-heading-container">
+        <h1
+          class="section-sub-heading"
+          jhiTranslate="kCredit.loanObligators.coApplicant"
+          class="section-sub-heading"
+        >
+          {{ title }}
+        </h1>
+        <div>
+          <app-section-edit-action
+            *ngIf="panelOpenState"
+            (onCancelHandler)="cancelCoApplicantEdit($event)"
+            (onSaveHandler)="saveCoApplicant($event)"
+            [panelOpenState]="true"
+            [isEditing]="editCoApplicantDetails"
+            (onEditHandler)="enableCoApplicantEdit($event)"
+          ></app-section-edit-action>
+        </div>
+      </div>
+    </mat-expansion-panel-header>
+    <div class="row row-spacing">
+      <div class="col-3">
+        <div [hidden]="!editCoApplicantDetails">
+          <mat-form-field appearance="outline">
+            <mat-label>Name</mat-label>
+            <input
+              matInput
+              [disabled]="!editCoApplicantDetails"
+              name="coApplicantName"
+              [(ngModel)]="coApplicant.name"
+              required="required"
+            />
+          </mat-form-field>
+        </div>
+        <div [hidden]="editCoApplicantDetails">
+          <label
+            for=""
+            class="form-control-label"
+            jhiTranslate="kCredit.loanObligators.name"
+            >Name</label
+          >
+          <jhi-null-replace [value]="coApplicant.name"></jhi-null-replace>
+        </div>
+      </div>
+
+      <div class="col-3">
+        <div [hidden]="!editCoApplicantDetails">
+          <mat-form-field appearance="outline">
+            <mat-label>Relationship</mat-label>
+            <input
+              matInput
+              [disabled]="!editCoApplicantDetails"
+              name="coApplicantRelationship"
+              [(ngModel)]="coApplicant.relationship"
+            />
+          </mat-form-field>
+        </div>
+
+        <div [hidden]="editCoApplicantDetails">
+          <label
+            for=""
+            class="form-control-label"
+            jhiTranslate="kCredit.loanObligators.relationship"
+            >Relationship</label
+          >
+          <jhi-null-replace
+            [value]="coApplicant.relationship"
+          ></jhi-null-replace>
+        </div>
+      </div>
+      <div class="col-3">
+        <div [hidden]="!editCoApplicantDetails">
+          <mat-form-field appearance="outline">
+            <mat-label>Contact Number</mat-label>
+            <input
+              matInput
+              [disabled]="!editCoApplicantDetails"
+              name="coApplicantMobileNo"
+              [(ngModel)]="coApplicant.mobileNo"
+            />
+          </mat-form-field>
+        </div>
+        <div [hidden]="editCoApplicantDetails">
+          <label
+            for=""
+            class="form-control-label"
+            jhiTranslate="kCredit.loanObligators.mobileNo"
+            >Contact Number</label
+          >
+          <jhi-null-replace [value]="coApplicant.mobileNo"></jhi-null-replace>
+        </div>
+      </div>
+      <div class="col-3">
+        <div [hidden]="!editCoApplicantDetails">
+          <mat-form-field class="date-picker" appearance="outline">
+            <mat-label>Date of birth (YYYY-MM-DD)</mat-label>
+            <input
+              matInput
+              [disabled]="!editCoApplicantDetails"
+              format="yyyy-MM-dd"
+              [matDatepicker]="dateOfBirth"
+              placeholder="Date of Birth"
+              [max]="maxDate"
+              [min]="minDate"
+              (dateChange)="updateDate($event)"
+              [value]="coApplicant.dateOfBirth"
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="dateOfBirth"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #dateOfBirth></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div [hidden]="editCoApplicantDetails">
+          <label
+            for=""
+            class="form-control-label"
+            jhiTranslate="kCredit.loanObligators.dateOfBirth"
+            >Date of birth (YYYY-MM-DD)</label
+          >
+          <jhi-null-replace
+            [value]="coApplicant.dateOfBirth"
+          ></jhi-null-replace>
+        </div>
+      </div>
+    </div>
+    <div class="row row-spacing">
+      <div class="col-3">
+        <div [hidden]="!editCoApplicantDetails">
+          <mat-form-field appearance="outline">
+            <mat-label>Nationality</mat-label>
+            <input
+              matInput
+              [disabled]="!editCoApplicantDetails"
+              name="coApplicantNationality"
+              [(ngModel)]="coApplicant.nationality"
+            />
+          </mat-form-field>
+        </div>
+
+        <div [hidden]="editCoApplicantDetails">
+          <label
+            for=""
+            class="form-control-label"
+            jhiTranslate="kCredit.loanObligators.nationality"
+            >Nationality</label
+          >
+          <jhi-null-replace
+            [value]="coApplicant.nationality"
+          ></jhi-null-replace>
+        </div>
+      </div>
+      <div class="col-3">
+        <div [hidden]="!editCoApplicantDetails">
+          <mat-form-field appearance="outline">
+            <mat-label>CB Score</mat-label>
+            <input
+              matInput
+              [disabled]="!editCoApplicantDetails"
+              name="coApplicantCBScore"
+              [(ngModel)]="coApplicant.cbScore"
+            />
+          </mat-form-field>
+        </div>
+
+        <div [hidden]="editCoApplicantDetails">
+          <label
+            class="form-control-label"
+            for=""
+            jhiTranslate="kCredit.loanObligators.cbScore"
+            >CB Score</label
+          >
+          <jhi-null-replace [value]="coApplicant.cbScore"></jhi-null-replace>
+        </div>
+      </div>
+
+      <div class="col-3">
+        <div [hidden]="!editCoApplicantDetails">
+          <mat-form-field appearance="outline">
+            <mat-label>Aadhaar Number</mat-label>
+            <input
+              matInput
+              [disabled]="!editCoApplicantDetails"
+              name="coApplicantAadhaar Number"
+              [(ngModel)]="coApplicant.maskedAadhaar"
+              minlength="12"
+              maxlength="12"
+              type="number"
+              pattern="^[0-9]{12}$"
+              [errorStateMatcher]="errorMatcher"
+              required="required"
+            />
+            <mat-error>{{ errorConstants.aadhaarNumber }}</mat-error>
+          </mat-form-field>
+        </div>
+        <div [hidden]="editCoApplicantDetails">
+          <label class="form-control-label" for="">Aadhaar Number</label>
+          <jhi-null-replace
+            [value]="coApplicant.maskedAadhaar"
+          ></jhi-null-replace>
+        </div>
+      </div>
+      <div class="col-3">
+        <div>
+          <label class="form-control-label" for="">KYC POI Document Type</label>
+          <jhi-null-replace
+            [value]="coApplicantDocType?.poi"
+          ></jhi-null-replace>
+        </div>
+      </div>
+      <div class="row row-spacing">
+        <div class="col-3">
+          <div>
+            <label class="form-control-label" for=""
+              >KYC POI Proof Number</label
+            >
+            <div class="verification-container">
+              <jhi-null-replace
+                [value]="coApplicantDocId?.poi"
+              ></jhi-null-replace>
+              <jhi-aadhaar-idfy
+                *ngIf="riskCategoryEnabled"
+                [isPoaPoi]="true"
+                [customerType]="'CO_APPLICANT'"
+                [doc]="poiDoc"
+                [entityId]="coApplicant?.id"
+                [loanId]="loanId"
+              >
+              </jhi-aadhaar-idfy>
+            </div>
+          </div>
+        </div>
+        <div class="col-3">
+          <div>
+            <label class="form-control-label" for=""
+              >KYC POA Document Type</label
+            >
+            <jhi-null-replace
+              [value]="coApplicantDocType?.poa"
+            ></jhi-null-replace>
+          </div>
+        </div>
+        <div class="col-3">
+          <div>
+            <label class="form-control-label" for=""
+              >KYC POA Proof Number</label
+            >
+            <div class="verification-container">
+              <jhi-null-replace
+                [value]="coApplicantDocId?.poa"
+              ></jhi-null-replace>
+              <jhi-aadhaar-idfy
+                *ngIf="riskCategoryEnabled"
+                [isPoaPoi]="true"
+                [customerType]="'CO_APPLICANT'"
+                [doc]="poaDoc"
+                [entityId]="coApplicant?.id"
+                [loanId]="loanId"
+              >
+              </jhi-aadhaar-idfy>
+            </div>
+          </div>
+        </div>
+        <div class="col-3" *ngIf="riskCategoryEnabled">
+          <div>
+            <label class="form-control-label" for="">PEP Status</label>
+            <jhi-null-replace
+              [ngClass]="
+                coApplicantRiskProfile?.pepStatus
+                  ? coApplicantRiskProfile?.pepStatus
+                  : ''
+              "
+              [value]="coApplicantRiskProfile?.pepStatus | titlecase"
+            ></jhi-null-replace>
+          </div>
+        </div>
+      </div>
+
+      <div class="row row-spacing">
+        <div class="col-3" *ngIf="riskCategoryEnabled">
+          <div>
+            <label class="form-control-label" for="">KYC Risk Category</label>
+            <jhi-null-replace
+              [ngClass]="
+                coApplicantRiskProfile?.kycIdRiskCategory
+                  ? coApplicantRiskProfile?.kycIdRiskCategory
+                  : ''
+              "
+              [value]="coApplicantRiskProfile?.kycIdRiskCategory | titlecase"
+            ></jhi-null-replace>
+          </div>
+        </div>
+        <div class="col-3" *ngIf="riskCategoryEnabled">
+          <div>
+            <label class="form-control-label" for=""
+              >Overall Risk Category</label
+            >
+            <jhi-null-replace
+              [ngClass]="
+                coApplicantRiskProfile?.kycRiskCategory
+                  ? coApplicantRiskProfile?.kycRiskCategory
+                  : ''
+              "
+              [value]="coApplicantRiskProfile?.kycRiskCategory | titlecase"
+            ></jhi-null-replace>
+          </div>
+        </div>
+      </div>
+    </div>
+    <h5
+      jhiTranslate="kCredit.loanObligators.coApplicant"
+      class="section-sub-heading"
+    >
+      <h1 class="section-sub-heading bank-details-heading">Address Details</h1>
+    </h5>
+    <div *ngIf="coApplicant.addressDTO" class="row">
+      <div class="col-3" [hidden]="!editCoApplicantDetails">
+        <mat-form-field appearance="outline">
+          <mat-label>Address 1</mat-label>
+          <input
+            matInput
+            [disabled]="!editCoApplicantDetails"
+            name="coApplicantAddress1"
+            [(ngModel)]="coApplicant.addressDTO.address1"
+          />
+        </mat-form-field>
+      </div>
+      <div class="col-3" [hidden]="!editCoApplicantDetails">
+        <mat-form-field appearance="outline">
+          <mat-label>Address 2</mat-label>
+          <input
+            matInput
+            [disabled]="!editCoApplicantDetails"
+            name="coApplicantAddress2"
+            [(ngModel)]="coApplicant.addressDTO.address2"
+          />
+        </mat-form-field>
+      </div>
+      <div class="col-3" [hidden]="!editCoApplicantDetails">
+        <mat-form-field appearance="outline">
+          <mat-label>Address 3</mat-label>
+          <input
+            matInput
+            [disabled]="!editCoApplicantDetails"
+            name="coApplicantAddress3"
+            [(ngModel)]="coApplicant.addressDTO.address3"
+          />
+        </mat-form-field>
+      </div>
+      <div class="col-3" [hidden]="editCoApplicantDetails">
+        <label
+          class="form-control-label"
+          for=""
+          jhiTranslate="kCredit.loanObligators.address"
+          >Address</label
+        >
+        <jhi-null-replace
+          [value]="coApplicant.addressDTO.address1"
+        ></jhi-null-replace>
+        <jhi-null-replace
+          [value]="coApplicant.addressDTO.address2"
+        ></jhi-null-replace>
+        <jhi-null-replace
+          [value]="coApplicant.addressDTO.address3"
+        ></jhi-null-replace>
+      </div>
+      <div class="col-3">
+        <div [hidden]="!editCoApplicantDetails">
+          <mat-form-field appearance="outline">
+            <mat-label>District</mat-label>
+            <input
+              matInput
+              [disabled]="!editCoApplicantDetails"
+              name="coApplicantDistrict"
+              [(ngModel)]="coApplicant.addressDTO.district"
+            />
+          </mat-form-field>
+        </div>
+
+        <div [hidden]="editCoApplicantDetails">
+          <label
+            class="form-control-label"
+            for=""
+            jhiTranslate="kCredit.loanObligators.district"
+            >District</label
+          >
+          <jhi-null-replace
+            [value]="coApplicant.addressDTO.district"
+          ></jhi-null-replace>
+        </div>
+      </div>
+
+      <div class="col-3">
+        <div [hidden]="!editCoApplicantDetails">
+          <mat-form-field appearance="outline">
+            <mat-label>State</mat-label>
+            <input
+              matInput
+              [disabled]="!editCoApplicantDetails"
+              name="coApplicantState"
+              [(ngModel)]="coApplicant.addressDTO.state"
+            />
+          </mat-form-field>
+        </div>
+
+        <div [hidden]="editCoApplicantDetails">
+          <label
+            class="form-control-label"
+            for=""
+            jhiTranslate="kCredit.loanObligators.state"
+            >State</label
+          >
+          <jhi-null-replace
+            [value]="coApplicant.addressDTO.state"
+          ></jhi-null-replace>
+        </div>
+      </div>
+
+      <div class="col-3">
+        <div [hidden]="!editCoApplicantDetails">
+          <mat-form-field appearance="outline">
+            <mat-label>Pincode</mat-label>
+            <input
+              matInput
+              [disabled]="!editCoApplicantDetails"
+              name="coApplicantDistrict"
+              [(ngModel)]="coApplicant.addressDTO.pincode"
+            />
+          </mat-form-field>
+        </div>
+
+        <div [hidden]="editCoApplicantDetails">
+          <label
+            class="form-control-label"
+            for=""
+            jhiTranslate="kCredit.loanObligators.pincode"
+            >Pincode</label
+          >
+          <jhi-null-replace
+            [value]="coApplicant.addressDTO.pincode"
+          ></jhi-null-replace>
+        </div>
+      </div>
+    </div>
+    <h5
+      jhiTranslate="kCredit.loanObligators.coApplicant"
+      class="section-sub-heading"
+    >
+      <h1 class="section-sub-heading bank-details-heading">
+        Bank Details of Co-applicants
+      </h1>
+    </h5>
+    <div class="row row-spacing">
+      <div class="col-3">
+        <div [hidden]="!editCoApplicantDetails">
+          <mat-form-field appearance="outline">
+            <mat-label>Bank Name</mat-label>
+            <input
+              matInput
+              [disabled]="!editCoApplicantDetails"
+              name="coApplicantBankName"
+              [(ngModel)]="coApplicant.bankName"
+            />
+          </mat-form-field>
+        </div>
+
+        <div [hidden]="editCoApplicantDetails">
+          <label
+            class="form-control-label"
+            for=""
+            jhiTranslate="kCredit.loanObligators.bankName"
+            >Bank Name</label
+          >
+          <jhi-null-replace [value]="coApplicant.bankName"></jhi-null-replace>
+        </div>
+      </div>
+      <div class="col-3">
+        <div [hidden]="!editCoApplicantDetails">
+          <mat-form-field appearance="outline">
+            <mat-label>Branch</mat-label>
+            <input
+              matInput
+              [disabled]="!editCoApplicantDetails"
+              name="coApplicantBankBranch"
+              [(ngModel)]="coApplicant.bankBranch"
+            />
+          </mat-form-field>
+        </div>
+
+        <div [hidden]="editCoApplicantDetails">
+          <label
+            class="form-control-label"
+            for=""
+            jhiTranslate="kCredit.loanObligators.bankBranch"
+            >Branch</label
+          >
+          <jhi-null-replace [value]="coApplicant.bankBranch"></jhi-null-replace>
+        </div>
+      </div>
+
+      <div class="col-3">
+        <div [hidden]="!editCoApplicantDetails">
+          <mat-form-field appearance="outline">
+            <mat-label>Address</mat-label>
+            <input
+              matInput
+              [disabled]="!editCoApplicantDetails"
+              name="coApplicantBankAddress"
+              [(ngModel)]="coApplicant.bankAddress"
+            />
+          </mat-form-field>
+        </div>
+
+        <div [hidden]="editCoApplicantDetails">
+          <label
+            class="form-control-label"
+            for=""
+            jhiTranslate="kCredit.loanObligators.bankAddress"
+            >Address</label
+          >
+          <jhi-null-replace
+            [value]="coApplicant.bankAddress"
+          ></jhi-null-replace>
+        </div>
+      </div>
+      <div class="col-3">
+        <div [hidden]="!editCoApplicantDetails">
+          <mat-form-field appearance="outline">
+            <mat-label>IFSC</mat-label>
+            <input
+              matInput
+              [disabled]="!editCoApplicantDetails"
+              name="coApplicantIfscCode"
+              [(ngModel)]="coApplicant.ifscCode"
+            />
+          </mat-form-field>
+        </div>
+
+        <div [hidden]="editCoApplicantDetails">
+          <label
+            class="form-control-label"
+            for=""
+            jhiTranslate="kCredit.loanObligators.ifscCode"
+            >IFSC</label
+          >
+          <jhi-null-replace [value]="coApplicant.ifscCode"></jhi-null-replace>
+        </div>
+      </div>
+    </div>
+    <div class="row row-spacing">
+      <div class="col-3">
+        <div [hidden]="!editCoApplicantDetails">
+          <mat-form-field appearance="outline">
+            <mat-label>Account Holder Name</mat-label>
+            <input
+              matInput
+              [disabled]="!editCoApplicantDetails"
+              name="coApplicantAccountName"
+              [(ngModel)]="coApplicant.accountName"
+            />
+          </mat-form-field>
+        </div>
+        <div [hidden]="editCoApplicantDetails">
+          <label
+            class="form-control-label"
+            for=""
+            jhiTranslate="kCredit.loanObligators.accountName"
+            >Account Holder Name</label
+          >
+          <jhi-null-replace
+            [value]="coApplicant.accountName"
+          ></jhi-null-replace>
+        </div>
+      </div>
+
+      <div class="col-3">
+        <div [hidden]="!editCoApplicantDetails">
+          <mat-form-field appearance="outline">
+            <mat-label>Account No</mat-label>
+            <input
+              matInput
+              [disabled]="!editCoApplicantDetails"
+              name="coApplicantAccountNum"
+              [(ngModel)]="coApplicant.accountNum"
+            />
+          </mat-form-field>
+        </div>
+
+        <div [hidden]="editCoApplicantDetails">
+          <label
+            class="form-control-label"
+            for=""
+            jhiTranslate="kCredit.loanObligators.accountNum"
+            >Account No</label
+          >
+          <jhi-null-replace [value]="coApplicant.accountNum"></jhi-null-replace>
+        </div>
+      </div>
+      <div class="col-3">
+        <div [hidden]="!editCoApplicantDetails">
+          <mat-form-field appearance="outline">
+            <mat-label>Account Type</mat-label>
+            <input
+              matInput
+              [disabled]="!editCoApplicantDetails"
+              name="coApplicantAccountType"
+              [(ngModel)]="coApplicant.accountType"
+            />
+          </mat-form-field>
+        </div>
+
+        <div [hidden]="editCoApplicantDetails">
+          <label
+            class="form-control-label"
+            for=""
+            jhiTranslate="kCredit.loanObligators.accountType"
+            >Account Type</label
+          >
+          <jhi-null-replace
+            [value]="coApplicant.accountType"
+          ></jhi-null-replace>
+        </div>
+      </div>
+    </div>
+
+    <div class="kyc-container">
+      <app-kyc-details-accordion
+        [title]="'KYC Documents'"
+        [partnerId]="loanDetails?.customerDTO?.partnerId"
+        [kycDocumentList]="coApplicant?.kycDocuments"
+        [showSubHeading]="true"
+        [entityType]="'CO_APPLICANT'"
+        [loanId]="loanId"
+      >
+      </app-kyc-details-accordion>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>

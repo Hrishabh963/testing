@@ -1,0 +1,307 @@
+<div class="col-12 row" style="height: 5ex" xmlns="http://www.w3.org/1999/html"></div>
+
+<form name="applicantForm" novalidate #applicantForm="ngForm">
+  <div class="col-12 row">
+    <div class="col-md-2" *ngIf="dedupeDataForComponent?.dedupeEntityType === 'applicant'">
+      <h3 class="section-title">Applicant</h3>
+    </div>
+    <div class="col-md-2" *ngIf="dedupeDataForComponent?.dedupeEntityType === 'co_applicant'">
+      <h3 class="section-title">
+        Co-Applicant {{ dedupeDataForComponent.coApplicantNumber + 1 }}
+      </h3>
+    </div>
+    <div class="col-md-2">
+      <button
+        *ngIf="dedupeDataForComponent?.ucic"
+        type="button"
+        class="btn kcredit-primary-button-color"
+        data-dismiss="modal"
+        (click)="dedupeSearchCustomer(applicantType)"
+        [disabled]="disableInspect"
+        matBadge="default"
+        matBadgeIcon="check_circle"
+        matBadgeIconColor="green"
+        matBadgeIconBackgroundColor="white"
+        matBadgePosition="before"
+      >
+        <span>Inspect</span>
+      </button>
+      <button
+        *ngIf="!dedupeDataForComponent?.ucic"
+        type="button"
+        class="btn kcredit-primary-button-color"
+        data-dismiss="modal"
+        (click)="dedupeSearchCustomer(applicantType)"
+        [disabled]="disableInspect"
+      >
+        <span>Inspect</span>
+      </button>
+    </div>
+    <div class="col-md-8"></div>
+  </div>
+  <div class="col-12 row" style="height: 3ex"></div>
+
+  <div class="col-md-12" *ngIf="dedupeDataForComponent?.ucic">
+    <strong>UCIC Code : <span>{{ dedupeDataForComponent.ucic }}</span></strong>
+  </div>
+  <div class="col-md-12" *ngIf="!dedupeDataForComponent?.ucic">
+    <div class="col-md-12" *ngIf="!applicantTypeUcic && dedupeEnabled">
+      <div class="row row-spacing">
+        <div class="col-3">
+          <ig-input
+            [inputField]="applicantForm.controls.preprocessingCustomerId"
+            [inputErrors]="applicantForm.controls.preprocessingCustomerId?.errors"
+          >
+            <label for="preprocessingCustomerId" class="form-control-label">Pre processing customer ID</label>
+            <div *ngIf="dedupeDataForComponent">
+              <jhi-null-replace [value]="dedupeDataForComponent?.preprocessingCustomerId"></jhi-null-replace>
+            </div>
+          </ig-input>
+        </div>
+        <div class="col-3">
+          <ig-input
+            [inputField]="applicantForm.controls.applicantName"
+            [inputErrors]="applicantForm.controls.applicantName?.errors"
+          >
+            <label for="applicantName" class="form-control-label">Applicant Name</label>
+            <div *ngIf="dedupeDataForComponent">
+              <jhi-null-replace [value]="dedupeDataForComponent?.applicantName"></jhi-null-replace>
+            </div>
+          </ig-input>
+        </div>
+        <div class="col-3">
+          <ig-input
+            [inputField]="applicantForm.controls.kyc1"
+            [inputErrors]="applicantForm.controls.kyc1?.errors"
+          >
+            <label for="kyc1" class="form-control-label">KYC 1</label>
+            <div *ngIf="dedupeDataForComponent">
+              <jhi-null-replace [value]="dedupeDataForComponent.kyc1"></jhi-null-replace>
+            </div>
+          </ig-input>
+        </div>
+        <div class="col-3">
+          <ig-input
+            [inputField]="applicantForm.controls.kyc2"
+            [inputErrors]="applicantForm.controls.kyc2?.errors"
+          >
+            <label for="kyc2" class="form-control-label">KYC 2</label>
+            <div *ngIf="dedupeDataForComponent">
+              <jhi-null-replace [value]="dedupeDataForComponent.kyc2"></jhi-null-replace>
+            </div>
+          </ig-input>
+        </div>
+      </div>
+      <div class="row row-spacing">
+        <div class="col-3">
+          <ig-input
+            [inputField]="applicantForm.controls.loanAmount"
+            [inputErrors]="applicantForm.controls.loanAmount?.errors"
+          >
+            <label for="loanAmount" class="form-control-label">Loan Amount</label>
+            <div *ngIf="dedupeDataForComponent">
+              <jhi-null-replace [value]="dedupeDataForComponent.loanAmount"></jhi-null-replace>
+            </div>
+          </ig-input>
+        </div>
+        <div class="col-3">
+          <ig-input
+            [inputField]="applicantForm.controls.createdDateTime"
+            [inputErrors]="applicantForm.controls.createdDateTime?.errors"
+          >
+            <label for="createdDateTime" class="form-control-label">Created date & time</label>
+            <div *ngIf="dedupeDataForComponent">
+              <jhi-null-replace [value]="dedupeDataForComponent.createdDateTime"></jhi-null-replace>
+            </div>
+          </ig-input>
+        </div>
+        <div class="col-3">
+          <ig-input
+            [inputField]="applicantForm.controls.dateOfBirth"
+            [inputErrors]="applicantForm.controls.dateOfBirth?.errors"
+          >
+            <label for="dateOfBirth" class="form-control-label">Date of Birth</label>
+            <div *ngIf="dedupeDataForComponent">
+              <jhi-null-replace [value]="dedupeDataForComponent.dateOfBirth" inputType="date"></jhi-null-replace>
+            </div>
+          </ig-input>
+        </div>
+        <div class="col-3">
+          <ig-input
+            [inputField]="applicantForm.controls.status"
+            [inputErrors]="applicantForm.controls.status?.errors"
+          >
+            <label for="status" class="form-control-label">Status</label>
+            <div *ngIf="dedupeDataForComponent">
+              <jhi-null-replace [value]="dedupeDataForComponent.status"></jhi-null-replace>
+            </div>
+          </ig-input>
+        </div>
+      </div>
+      <div class="row row-spacing">
+        <div class="col-12">
+          <ig-input
+            [inputField]="applicantForm.controls.address"
+            [inputErrors]="applicantForm.controls.address?.errors"
+          >
+            <label for="address" class="form-control-label">Address</label>
+            <div *ngIf="dedupeDataForComponent">
+              <jhi-null-replace [value]="dedupeDataForComponent.address"></jhi-null-replace>
+            </div>
+          </ig-input>
+        </div>
+      </div>
+
+      <div class="col-md-12 row">
+        <div class="col-md-1"></div>
+        <div class="col-md-2">
+          <button
+            type="button"
+            [disabled]="updateUcic"
+            *ngIf="executedDedupeResultList && executedDedupeResultList.length > 0"
+            class="btn kcredit-primary-button-color"
+            style="margin-right: 1ex"
+            data-dismiss="modal"
+            (click)="callCreateUcic()"
+          >
+            <span>New UCIC</span>
+          </button>
+        </div>
+        <div class="col-md-2">
+          <button
+            type="button"
+            *ngIf="updateUcic"
+            class="btn kcredit-primary-button-color"
+            data-dismiss="modal"
+            (click)="callUpdateUcic()"
+          >
+            <span>Update UCIC</span>
+          </button>
+        </div>
+        <div class="col-md-7"></div>
+      </div>
+      <div class="col-md-12 row" *ngIf="noMatch">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+          <div style="text-align: center" class="col-md-12">
+            <strong>Duplicate Not Found</strong>
+          </div>
+          <div style="text-align: center" class="col-md-12">
+            <button
+              type="button"
+              class="btn kcredit-primary-button-color"
+              data-dismiss="modal"
+              (click)="callCreateUcic()"
+            >
+              <span>New UCIC</span>
+            </button>
+          </div>
+        </div>
+        <div class="col-md-4"></div>
+      </div>
+
+      <div class="col-12 row" style="height: 3ex"></div>
+      <div
+        class="table-responsive"
+        #dedupeResult
+        *ngIf="executedDedupeResultList && executedDedupeResultList.length > 0"
+      >
+        <table class="table table-light col-md-12">
+          <caption></caption>
+          <thead class="thead-inverse">
+            <tr>
+              <th></th>
+              <th><span>S.no</span></th>
+              <th><span>Applicant Name</span></th>
+              <th><span>Date Of Birth</span></th>
+              <th><span>Source</span></th>
+              <th><span>Target Type</span></th>
+              <th><span>Residential Address</span></th>
+              <th><span>Permanent Address</span></th>
+              <th><span>Office Address</span></th>
+              <th><span>Mobile Number</span></th>
+              <th><span>Residence Phone Number</span></th>
+              <th><span>Office Phone Number</span></th>
+              <th><span>POI</span></th>
+              <th><span>POA</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container
+              *ngFor="let executedDedupeResult of executedDedupeResultList; let i = index"
+              [attr.data-index]="i"
+            >
+              <tr
+                *ngIf="
+                  executedDedupeResult !== undefined &&
+                  executedDedupeResult !== null
+                "
+              >
+                <td>
+                  <input
+                    type="radio"
+                    name="selectedDedupe"
+                    onkeypress=""
+                    (click)="onCheckboxChange(executedDedupeResult, $event)"
+                  /><span></span>
+                </td>
+                <td>{{ i + 1 }}</td>
+                <td>{{ executedDedupeResult.firstName }}</td>
+                <td>{{ executedDedupeResult.dob }}</td>
+                <td>{{ executedDedupeResult.sourceSystem }}</td>
+                <td>{{ executedDedupeResult.targetType }}</td>
+                <td>{{ executedDedupeResult.address0 }}</td>
+                <td>{{ executedDedupeResult.address1 }}</td>
+                <td>{{ executedDedupeResult.address2 }}</td>
+                <td>{{ executedDedupeResult.phone0 }}</td>
+                <td>{{ executedDedupeResult.phone1 }}</td>
+                <td>{{ executedDedupeResult.phone2 }}</td>
+                <td></td>
+                <td></td>
+              </tr>
+            </ng-container>
+          </tbody>
+          <tfoot>
+            <tr class="bg-light"></tr>
+          </tfoot>
+        </table>
+      </div>
+      <div class="col-12 row" style="height: 5ex"></div>
+    </div>
+    <div class="col-md-12" *ngIf="applicantTypeUcic && dedupeEnabled">
+      <div class="col-md-12" *ngIf="!ucicCreatedOrUpdated">
+        <span>{{ applicantTypeUcic }}</span>
+      </div>
+      <div class="col-md-12 row" *ngIf="ucicCreatedOrUpdated">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+          <div class="col-md-12">
+            <span class="ucicSuccess success-color material-icons">check_circle</span>
+          </div>
+          <div *ngIf="!updateUcic" class="col-md-12" style="text-align: center">
+            <strong>UCIC Code : <span>{{ applicantTypeUcic }}</span> created successfully</strong>
+          </div>
+          <div *ngIf="updateUcic" class="col-md-12" style="text-align: center">
+            <strong>UCIC Code : <span>{{ applicantTypeUcic }}</span> updated successfully</strong>
+          </div>
+        </div>
+        <div class="col-md-3"></div>
+      </div>
+    </div>
+    <div class="col-md-12" *ngIf="!dedupeEnabled">
+      <div class="col-md-12 row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+          <div class="col-md-12">
+            <span class="kcredit-failure-color ucicSuccess material-icons">highlight_off</span>
+          </div>
+          <div class="col-md-12" class="dedupeDisabled">
+            <strong>Dedupe cannot be Done. This loan application is not linked any associate lender</strong>
+          </div>
+        </div>
+        <div class="col-md-3"></div>
+      </div>
+    </div>
+  </div>
+</form>
+<hr class="section-hr" />

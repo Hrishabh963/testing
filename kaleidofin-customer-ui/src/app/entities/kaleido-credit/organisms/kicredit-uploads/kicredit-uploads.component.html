@@ -1,0 +1,18 @@
+<div class="kcredit-upload-container">
+  <div class="col-md-12">
+    <jhi-alert></jhi-alert>
+    <h3>Upload Report</h3>
+  </div>
+  <br />
+  <app-upload-filter [config]="uiConfig" (fetchUploadedReports)="fetchUploadedReports($event)"></app-upload-filter>
+  <app-upload-data
+  [config]="uiConfig"
+  [tableData]="uploadReports"
+  [totalItems]="totalItems"
+  [page]="page"
+  [itemsPerPage]="itemsPerPage"
+  [links]="links"
+  (loadPage)="loadPage($event)"
+  
+  ></app-upload-data>
+</div>

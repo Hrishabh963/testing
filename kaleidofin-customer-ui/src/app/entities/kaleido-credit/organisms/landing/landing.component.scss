@@ -1,0 +1,44 @@
+
+.landing-container{
+	display: flex;
+	height: 100vh;
+}
+
+
+.sub-landing-container-1{
+	width: 65%;
+	display: flex;
+	flex-direction: column;
+	background-color: #F1F7F7;
+	padding-left: 4vw;
+	height: auto;
+	padding-top: 30vh;
+	justify-content: center;
+	padding-bottom: 30vh;
+	padding-right: 8vw;
+
+}
+
+.sub-landing-container-2{
+	width: 35%;
+	display: flex;
+	flex-direction: column;
+	background-color: #FFFFFF;
+	padding-top: 10vh;
+	height: auto;
+	align-items: center;
+	padding-left: 4vw;
+	padding-right: 4vw;
+}
+
+img{
+	max-width: 100%;
+	height: auto;
+}
+
+.sub-landing-container-1 span{
+	font-weight: 700;
+	font-size:2.7em;
+	line-height: 1;
+	margin-top:6vh;
+}

@@ -1,0 +1,79 @@
+<div>
+    <div class="title-container space-between">
+        <h1 class="section-sub-heading">
+            {{ title }}
+        </h1>
+    </div>
+</div>
+<div class="container">
+    <ng-container *ngFor="let field of uiFieldsMap" [ngSwitch]="field?.type">
+        <ng-container *ngSwitchDefault>
+            <div class="col-lg-3 field">
+                <app-number-field *ngIf="enableEdit" [label]="field?.label" [dataObj]="uiFields[field?.propertyKey]"
+                    [editable]="enableEdit" [inputLength]="field?.metadata?.inputLength" [isRequired]="field?.required">
+                </app-number-field>
+                <div *ngIf="!enableEdit">
+                    <label class="form-control-label" [for]="field?.propertyKey"> {{field?.label}} </label>
+                    <jhi-null-replace
+                        [value]="uiFields[field?.propertyKey]?.value | dynamicDataTransform : field?.metadata?.displayFormat">
+                    </jhi-null-replace>
+                </div>
+            </div>
+        </ng-container>
+        <ng-container *ngSwitchCase="'text'">
+            <div class="col-lg-3 field">
+                <app-input-field *ngIf="enableEdit" [label]="field?.label" [dataObj]="uiFields[field?.propertyKey]"
+                    [editable]="enableEdit" [inputLength]="field?.metadata?.inputLength" [isRequired]="field?.required">
+                </app-input-field>
+                <div *ngIf="!enableEdit">
+                    <label class="form-control-label" [for]="field?.propertyKey"> {{field?.label}} </label>
+                    <jhi-null-replace
+                        [value]="uiFields[field?.propertyKey]?.value | dynamicDataTransform : field?.metadata?.displayFormat">
+                    </jhi-null-replace>
+                </div>
+            </div>
+        </ng-container>
+        <ng-container *ngSwitchCase="'select'">
+            <div class="col-lg-3 field">
+                <app-select-field *ngIf="enableEdit" [label]="field?.label" [dataObj]="uiFields[field?.propertyKey]"
+                    [dropDownValues]="field?.dropDownValues || dropDownValues" [isRequired]="field?.required">
+                </app-select-field>
+                <div *ngIf="!enableEdit">
+                    <label class="form-control-label" [for]="field?.propertyKey"> {{field?.label}} </label>
+                    <jhi-null-replace
+                        [value]="uiFields[field?.propertyKey]?.value | dynamicDataTransform : field?.metadata?.displayFormat">
+                    </jhi-null-replace>
+                </div>
+            </div>
+        </ng-container>
+        <ng-container *ngSwitchCase="'dependent'">
+            <div class="col-lg-3 field">
+                <app-select-field *ngIf="enableEdit" [label]="field?.label" [dataObj]="uiFields[field?.propertyKey]"
+                    [dropDownValues]="field?.dropDownValues" [isRequired]="field?.required"
+                    (emitSelection)="checkCondition($event)">
+                </app-select-field>
+                <div *ngIf="!enableEdit">
+                    <label class="form-control-label" [for]="field?.propertyKey"> {{field?.label}} </label>
+                    <jhi-null-replace
+                        [value]="uiFields[field?.propertyKey]?.value | dynamicDataTransform : field?.metadata?.displayFormat">
+                    </jhi-null-replace>
+                </div>
+            </div>
+            <div class="col-lg-3 field">
+                <app-input-field *ngIf="enableEdit" [label]="field?.dependentField?.label"
+                    [dataObj]="uiFields[field?.dependentField?.propertyKey]" [editable]="enableEdit"
+                    [inputLength]="field?.dependentField?.metadata?.inputLength"
+                    [isRequired]="field?.dependentField?.required"
+                    [disabled]="disableInput"
+                    >
+                </app-input-field>
+                <div *ngIf="!enableEdit">
+                    <label class="form-control-label" [for]="field?.dependentField?.propertyKey"> {{field?.dependentField?.label}} </label>
+                    <jhi-null-replace
+                        [value]="uiFields[field?.dependentField?.propertyKey]?.value | dynamicDataTransform : field?.dependentField?.metadata?.displayFormat">
+                    </jhi-null-replace>
+                </div>
+            </div>
+        </ng-container>
+    </ng-container>
+</div>

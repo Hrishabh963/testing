@@ -1,0 +1,31 @@
+<div class="dialog-container">
+  <div mat-dialog-title class="dialog-title">
+    <mat-icon class="closeicon" (click)="cancel()" (keypress)="cancel()" tabindex="0">close</mat-icon>
+  </div>
+  <div mat-dialog-content class="dialog-content-text">
+    <img [src]="statusIcon" alt="In Progress" />
+    <p *ngIf="data?.success">
+      SBM SI mandate against loan ID: {{ data?.mandateId }} is closed successfully
+    </p>
+    <div *ngIf="!data?.success">
+      <p>
+        Unable to close SBM SI mandate against loan ID: {{ data?.mandateId }}
+        Unable to contact bank server retry
+      </p>
+      <p>Unable to contact bank server</p>
+    </div>
+  </div>
+  <div mat-dialog-actions>
+    <div class="action-buttons">
+      <button
+        *ngIf="!enableReports"
+        mat-button
+        class="button4 proceed"
+        cdkFocusInitial
+        (click)="proceed()"
+      >
+        {{ data?.success ? "Ok" : "Retry" }}
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,39 @@
+{
+		"referenceCode": {
+			"home": {
+				"title": "Reference Codes",
+				"createLabel": "Create a new Reference Code",
+				"createOrEditLabel": "Create or edit a Reference Code",
+				"search": "Search for Reference Code"
+			},
+			"created": "A new Reference Code is created with identifier {{ param }}",
+			"updated": "A Reference Code is updated with identifier {{ param }}",
+			"deleted": "A Reference Code is deleted with identifier {{ param }}",
+			"delete": {
+				"question": "Are you sure you want to delete Reference Code {{ id }}?"
+			},
+			"disabled": "A Reference Code is disabled with identifier {{ param }}",
+			"disable": {
+				"title": "Confirm disable operation",
+				"question": "Are you sure you want to disable/enable Reference Code {{ id }}?"
+			},
+			"detail": {
+				"title": "Reference Code"
+			},
+			"version": "Version",
+			"classifier": "Classifier",
+			"name": "Name",
+			"code": "Code",
+			"parentClassifier": "Parent Classifier",
+			"parentReferenceCode": "Parent Reference Code",
+			"status": "Status",
+			"field1": "Field 1",
+			"field2": "Field 2",
+			"field3": "Field 3",
+			"field4": "Field 4",
+			"field5": "Field 5",
+			"disable": "Disable",
+			"enable": "Enable"
+
+	}
+}

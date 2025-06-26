@@ -1,0 +1,115 @@
+.example-spacer {
+  flex: 0 1 calc(50%);
+}
+
+.image-logo {
+  height: 2rem !important;
+}
+
+.example-spacer-left {
+  flex: 0 1 calc(43%);
+  margin-left: 4px;
+  font-weight: 500;
+  font-size: 24px;
+  display: flex;
+  align-items: center;
+  height: 100%;
+}
+
+.noTopNav {
+  background: white;
+}
+
+.topNav {
+  background: #fdfdfd;
+  height: 64px;
+}
+
+.activeTab {
+  color: #ff7b52 !important;
+  border-bottom: 2px solid #ff7b52;
+}
+
+.tabsContainer {
+  height: 100%;
+  margin-left: 10%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: max-content;
+  color: #777777;
+  flex: 1 1 0%;
+  font-weight: bold;
+  font-size: 16px;
+  letter-spacing: 0.173077px;
+  line-height: 21px;
+}
+.tab {
+  padding-top: 12px;
+  height: 100%;
+  width: fit-content;
+  display: flex;
+  margin-right: 50px;
+  cursor: pointer;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  align-items: center;
+}
+
+.tab:hover {
+  color: #ff7b52;
+}
+
+.disabled {
+  pointer-events: none;
+  opacity: 0.4;
+}
+
+.tabsContainer-f {
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: max-content;
+  color: #777777;
+  flex: 1 1 0%;
+  font-weight: bold;
+  font-size: 16px;
+  letter-spacing: 0.173077px;
+  line-height: 21px;
+  margin-left: 0 !important;
+}
+.tab-f {
+  padding-top: 12px;
+  height: 100%;
+  width: fit-content;
+  display: flex;
+  cursor: pointer;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  align-items: center;
+  margin-left: 30px;
+}
+
+.tab-f:hover {
+  color: #ff7b52;
+}
+
+.topNav-f {
+  background: #fdfdfd;
+  height: 64px;
+  width: 100%;
+}
+
+.navbar-container {
+  .mat-drawer-container {
+    position: static !important;
+    background: white;
+    z-index: 9999 !important;
+  }
+}
+.tdb-logo{
+  height: 3.5rem !important;
+}

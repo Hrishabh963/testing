@@ -1,0 +1,112 @@
+<div class="container">
+    <ng-container *ngFor="let field of uiFieldsMap" [ngSwitch]="field?.inputType">
+        <div *ngSwitchDefault class="col-lg-3 field">
+            <app-input-field *ngIf="enableEdit && demandSchedule[field?.propertyKey]?.editable" [label]="field?.label" [dataObj]="demandSchedule[field?.propertyKey]"
+                [editable]="enableEdit" [inputLength]="field?.metadata?.inputLength" [isRequired]="field?.required">
+            </app-input-field>
+            <div [hidden]="enableEdit && demandSchedule[field?.propertyKey]?.editable" [label]="field?.label">
+                <label [for]="field?.propertyKey" class="form-control-label">{{ field?.label }}</label>
+                <jhi-null-replace [class]="field?.class" [value]="
+                    demandSchedule[field?.propertyKey]?.value
+                     | dynamicDataTransform
+                    : field?.metadata?.displayFormat
+                    : field?.metadata?.format">
+                </jhi-null-replace>
+            </div>
+            <mat-error> {{demandSchedule[field?.propertyKey]?.error}} </mat-error>
+        </div>
+        <div *ngSwitchCase="'date'" class="col-lg-3 field">
+            <app-date-field *ngIf="enableEdit && demandSchedule[field?.propertyKey]?.editable" [label]="field?.label" [dataObj]="demandSchedule[field?.propertyKey]"
+                [editable]="enableEdit" [isRequired]="field?.required">
+            </app-date-field>
+            <div [hidden]="enableEdit && demandSchedule[field?.propertyKey]?.editable" [label]="field?.label">
+                <label [for]="field?.propertyKey" class="form-control-label">{{ field?.label }}</label>
+                <jhi-null-replace [class]="field?.class" [value]="
+                    demandSchedule[field?.propertyKey]?.value
+                     | dynamicDataTransform
+                    : field?.metadata?.displayFormat
+                    : field?.metadata?.format">
+                </jhi-null-replace>
+            </div>
+            <mat-error> {{demandSchedule[field?.propertyKey]?.error}} </mat-error>
+        </div>
+        <div *ngSwitchCase="'number'" class="col-lg-3 field">
+            <app-number-field *ngIf="enableEdit && demandSchedule[field?.propertyKey]?.editable" [label]="field?.label" [dataObj]="demandSchedule[field?.propertyKey]"
+                [editable]="enableEdit" [inputLength]="field?.metadata?.inputLength" [isRequired]="field?.required">
+            </app-number-field>
+            <div [hidden]="enableEdit && demandSchedule[field?.propertyKey]?.editable" [label]="field?.label">
+                <label [for]="field?.propertyKey" class="form-control-label">{{ field?.label }}</label>
+                <jhi-null-replace [class]="field?.class" [value]="
+                    demandSchedule[field?.propertyKey]?.value
+                     | dynamicDataTransform
+                    : field?.metadata?.displayFormat
+                    : field?.metadata?.format">
+                </jhi-null-replace>
+            </div>
+            <mat-error> {{demandSchedule[field?.propertyKey]?.error}} </mat-error>
+        </div>
+        <div *ngSwitchCase="'select'" class="col-lg-3 field">
+            <app-select-field *ngIf="enableEdit && demandSchedule[field?.propertyKey]?.editable" [label]="field?.label" [dataObj]="demandSchedule[field?.propertyKey]"
+                [dropDownValues]="field?.dropDownValues" [isRequired]="field?.required"
+                [showSearchBox]="field?.showSearchBox">
+            </app-select-field>
+            <div [hidden]="enableEdit && demandSchedule[field?.propertyKey]?.editable" [label]="field?.label">
+                <label [for]="field?.propertyKey" class="form-control-label">{{ field?.label }}</label>
+                <jhi-null-replace [class]="field?.class" [value]="
+                    demandSchedule[field?.propertyKey]?.value
+                     | dynamicDataTransform
+                    : field?.metadata?.displayFormat
+                    : field?.metadata?.format">
+                </jhi-null-replace>
+            </div>
+            <mat-error> {{demandSchedule[field?.propertyKey]?.error}} </mat-error>
+        </div>
+        <div *ngSwitchCase="'tenure'" class="col-lg-3 field">
+            <app-select-field *ngIf="enableEdit && demandSchedule[field?.propertyKey]?.editable" [label]="field?.label" [dataObj]="demandSchedule[field?.propertyKey]"
+                [dropDownValues]="field?.dropDownValues" [isRequired]="field?.required"
+                [showSearchBox]="field?.showSearchBox" [selectFieldFormControl]="tenureFormControl">
+            </app-select-field>
+            <div [hidden]="enableEdit && demandSchedule[field?.propertyKey]?.editable" [label]="field?.label">
+                <label [for]="field?.propertyKey" class="form-control-label">{{ field?.label }}</label>
+                <jhi-null-replace [class]="field?.class" [value]="
+                    demandSchedule[field?.propertyKey]?.value
+                     | dynamicDataTransform
+                    : field?.metadata?.displayFormat
+                    : field?.metadata?.format">
+                </jhi-null-replace>
+            </div>
+            <mat-error> {{demandSchedule[field?.propertyKey]?.error}} </mat-error>
+        </div>
+        <div *ngSwitchCase="'emiFrequency'" class="col-lg-3 field">
+            <app-select-field *ngIf="enableEdit && demandSchedule[field?.propertyKey]?.editable" [label]="field?.label" [dataObj]="demandSchedule[field?.propertyKey]"
+                [dropDownValues]="field?.dropDownValues" [isRequired]="field?.required"
+                [showSearchBox]="field?.showSearchBox" [selectFieldFormControl]="emiFormControl">
+            </app-select-field>
+            <div [hidden]="enableEdit && demandSchedule[field?.propertyKey]?.editable" [label]="field?.label">
+                <label [for]="field?.propertyKey" class="form-control-label">{{ field?.label }}</label>
+                <jhi-null-replace [class]="field?.class" [value]="
+                    demandSchedule[field?.propertyKey]?.value
+                     | dynamicDataTransform
+                    : field?.metadata?.displayFormat
+                    : field?.metadata?.format">
+                </jhi-null-replace>
+            </div>
+            <mat-error> {{demandSchedule[field?.propertyKey]?.error}} </mat-error>
+        </div>
+        <div *ngSwitchCase="'irr'" class="col-lg-3 field">
+            <app-number-field *ngIf="enableEdit && demandSchedule[field?.propertyKey]?.editable" [label]="field?.label" [dataObj]="demandSchedule[field?.propertyKey]"
+                [editable]="enableEdit" [inputLength]="field?.metadata?.inputLength" [isRequired]="field?.required" [formControl]="irrFormControl">
+            </app-number-field>
+            <div [hidden]="enableEdit && demandSchedule[field?.propertyKey]?.editable" [label]="field?.label">
+                <label [for]="field?.propertyKey" class="form-control-label">{{ field?.label }}</label>
+                <jhi-null-replace [class]="field?.class" [value]="
+                    demandSchedule[field?.propertyKey]?.value
+                     | dynamicDataTransform
+                    : field?.metadata?.displayFormat
+                    : field?.metadata?.format">
+                </jhi-null-replace>
+            </div>
+            <mat-error> {{demandSchedule[field?.propertyKey]?.error}} </mat-error>
+        </div>
+    </ng-container>
+</div>

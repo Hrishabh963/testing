@@ -1,0 +1,42 @@
+<mat-accordion>
+    <mat-expansion-panel [expanded]="panelOpenState" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+        <mat-expansion-panel-header>
+            <div class="expansion-panel-title-container">
+                <div class="section-title">Customer Demand Schedule</div>
+                <div class="buttons-container">
+                    <button style="margin-right: 1em;" [disabled]="!editSections || !hasAuthority || !editDetails"
+                        mat-raised-button class="btn btn-primary"
+                        (click)="recalculateDemandSchedule($event)">Re-calculate Demand
+                        Schedule</button>
+                    <button [hidden]="editDetails" [disabled]="!editSections || !hasAuthority" mat-raised-button
+                        *ngIf="panelOpenState" type="button" class="btn btn-primary" data-dismiss="modal"
+                        (click)="toggleEditDetails($event)">
+                        <mat-icon>edit</mat-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+                    </button>
+                    <div class="confirm-buttons" [hidden]="!editDetails">
+                        <button mat-raised-button type="button" class="btn-secondary" data-dismiss="modal"
+                            (click)="cancel($event)">
+                            <span jhiTranslate="entity.action.cancel">Cancel</span>
+                        </button>
+                        <button mat-raised-button type="button" class="btn-primary" data-dismiss="modal"
+                            (click)="save($event, true)" [disabled]="hasError">
+                            <span jhiTranslate="entity.action.save">Save</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </mat-expansion-panel-header>
+        <div *ngIf="uiFieldsMap.length > 0">
+            <app-demand-schedule-detail [uiFieldsMap]="uiFieldsMap" (showTenureError)="showTenureError($event)"
+                [demandSchedule]="demandSchedule" [enableEdit]="editDetails">
+            </app-demand-schedule-detail>
+        </div>
+        <hr class="section-hr">
+        <app-repayment-schedule-table *ngIf="paymentSchedule.length > 0" [disableEdit]="disableEditOnCall"
+            [emiType]="emiType" [paymentSchedule]="paymentSchedule" (saveDetails)="recalculateDemandSchedule($event)"
+            [principalAmountException]="principalAmountException" [enableEdit]="editDetails" (checkForError)="checkError($event)"
+            [finalLoanAmount]="finalLoanAmount" [repaymentScheduleError]="repaymentScheduleError"
+            [showTenureError]="hasTenureError">
+        </app-repayment-schedule-table>
+    </mat-expansion-panel>
+</mat-accordion>

@@ -1,0 +1,112 @@
+<div class="modal-body">
+  <div display-flax justify-content-center align-items-center>
+    <div class="display-flax justify-content-center align-items-center">
+      <img
+        src="assets/images/kaleidofin-new-logo.svg"
+        alt="Logo of kaleidofin"
+        class="logo"
+      />
+    </div>
+    <div class="icon-container">
+      <div *ngIf="status == 'InProgress'" class="progress-container">
+        <div class="v1"></div>
+        <div class="animation"></div>
+      </div>
+      <div
+        *ngIf="status == 'Rejected' || status == 'Pending'"
+        class="pending-reject-container"
+      >
+        <img src="assets/images/bank-validation-2.png" alt="Bank validation" />
+        <div class="v1"></div>
+      </div>
+
+      <div
+        *ngIf="status == 'Success' || status == 'NameMismatch'"
+        class="success-conatiner"
+      >
+        <img
+          src="assets/images/bank-validation-3.jpg"
+          height="20px"
+          width="20px"
+          alt="Bank validation"
+        />
+        <div class="v1"></div>
+      </div>
+      <br />
+      <div class="bank-icon-conatiner">
+        <img
+          src="assets/images/bank-validaton-1.png"
+          height="31px"
+          width="31px"
+          alt="Bank validation"
+        />
+      </div>
+    </div>
+    <p>&nbsp;</p>
+
+    <div *ngIf="status == 'InProgress'">
+      <label
+        class="display-flax justify-content-center align-items-center k-font-4 k-primary-color-4"
+        htmlFor="label-1"
+        >Verifying your bank details...</label
+      >
+      <label
+        class="display-flax justify-content-center align-items-center k-font-11 k-primary-color-4"
+        htmlFor="label-2"
+        >We do this by transferring &#8377;1 into</label
+      >
+      <label
+        class="display-flax justify-content-center align-items-center k-font-11 k-primary-color-4"
+        htmlFor="label-3"
+      >
+        your account</label
+      >
+      <br />
+    </div>
+    <div *ngIf="status != 'InProgress'">
+      <p class="col-md-10 mx-auto text-center k-font-4 k-primary-color-4">
+        {{ messageTitle }}
+      </p>
+      <p class="col-md-10 mx-auto text-center k-font-11 k-primary-color-4">
+        {{ messageDescription1 }}
+      </p>
+      <div *ngIf="status == 'NameMismatch'">
+        <p class="col-md-10 mx-auto text-center k-font-3 k-primary-color-6">
+          {{ messageDescription2 }}
+        </p>
+        <div class="display-flax flex-row justify-content-center">
+          There is a name mismatch with the given account holder name
+          <b>{{ accountHolderNameList[0] }}</b> and the zipnach validated name
+          is <b>{{ accountHolderNameList[1] }}</b>
+        </div>
+      </div>
+      <div class="flex-container">
+        <button
+          *ngIf="status == 'Rejected' && resetCountbtn"
+          class="btn btn-success"
+          (click)="resetAndRetry()"
+        >
+          <span> RESET COUNT AND RETRY </span>
+        </button>
+        <button
+          *ngIf="status == 'Rejected' || status == 'NameMismatch'"
+          class="btn mat-btn-danger"
+          (click)="close()"
+        >
+          <span> CLOSE </span>
+        </button>
+        <button
+          *ngIf="
+            status == 'Success' ||
+            status == 'Pending' ||
+            status == 'NameMismatch'
+          "
+          class="btn btn-success"
+          (click)="finish()"
+        >
+          <span> OK PROCEED </span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

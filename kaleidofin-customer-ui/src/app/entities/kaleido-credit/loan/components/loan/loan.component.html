@@ -1,0 +1,75 @@
+<div class="card-title">
+    <div class="row row-spacing">
+        <div class="col-2">
+            <label class="form-control-label" for="applicationId" jhiTranslate="kCredit.applicationId">Application Id</label>
+            <jhi-null-replace id="applicationId" [value]="loanDetails.loanApplicationDTO.applicationNumber"></jhi-null-replace>
+        </div>
+        <div class="col-2">
+            <label class="form-control-label" for="name" jhiTranslate="kCredit.name">Name</label>
+            <jhi-null-replace [value]="loanDetails.customerDTO.name"></jhi-null-replace>
+        </div>
+        <div class="col-2">
+            <label class="form-control-label" for="mobileNumber" jhiTranslate="kCredit.mobileNumber">Mobile Number</label>
+            <jhi-null-replace id="mobileNumber" [value]="loanDetails.customerDTO.primaryMobileNumber"></jhi-null-replace>
+        </div>
+        <div class="col-2">
+            <label class="form-control-label" for="partner" jhiTranslate="kCredit.partner">Partner</label>
+            <jhi-null-replace *ngIf="loanDetails.partnerDTO" id="partner" [value]="loanDetails.partnerDTO.name"></jhi-null-replace>
+            <span></span>
+        </div>
+        <div class="col-2">
+            <label class="form-control-label" for="customerId" jhiTranslate="kCredit.customerId">Customer Id</label>
+            <jhi-null-replace id="customerId" [value]="loanDetails.customerDTO.id"></jhi-null-replace>
+        </div>
+        <div class="col-2">
+            <label class="form-control-label" for="kiScore" jhiTranslate="kCredit.kiScore">Ki-Score</label>
+            <jhi-null-replace id="ki-score" [value]="loanDetails.loanApplicationDTO.kiscore"></jhi-null-replace>
+        </div>
+    </div>
+    <div class="row row-spacing">
+        <div class="col-2">
+            <label class="form-control-label" for="eligibility" jhiTranslate="kCredit.eligibility">Eligibility</label>
+            <div *ngIf="loanDetails?.loanApplicationDTO?.eligibility" class="pass-color"><span>Pass</span></div>
+            <div *ngIf="!loanDetails?.loanApplicationDTO?.eligibility" class="fail-color"><span>Fail</span></div>
+        </div>
+        <div class="col-2">
+            <label class="form-control-label" for="loanStatus" jhiTranslate="kCredit.loanStatus">Loan Status</label>
+            <jhi-null-replace id="loanStatus" [value]="loanDetails.loanApplicationDTO.applicationStatus"></jhi-null-replace>
+        </div>
+        <div class="col-2">
+            <label class="form-control-label" for="partnerCustomerId" jhiTranslate="kCredit.partnerCustomerId">Partner Customer Id</label>
+            <jhi-null-replace id="partnerCustomerId" [value]="loanDetails.loanApplicationDTO.partnerCustomerId"></jhi-null-replace>
+        </div>
+        <div class="col-2">
+            <label class="form-control-label" for="partnerApplicationId">Partner Application Id</label>
+            <jhi-null-replace id="partnerApplicationId" [value]="loanDetails.loanApplicationDTO.partnerLoanId"></jhi-null-replace>
+        </div>
+        <div class="col-2">
+            <label class="form-control-label" for="appliedOn" jhiTranslate="kCredit.appliedOn">Applied On</label>
+            <jhi-null-replace id="appliedOn" [value]="loanDetails.loanApplicationDTO.applicationDate"></jhi-null-replace>
+        </div>
+        <div class="col-2">
+            <label class="form-control-label" for="cbScore" jhiTranslate="kCredit.cbScore">CB Score</label>
+            <jhi-null-replace id="cbScore" [value]="cbScore"></jhi-null-replace>
+        </div>
+    </div>
+    <div class="row row-spacing">
+        <div *ngIf="breNeeded" class="col-2">
+            <label class="form-control-label" for="breCheck">BRE Check</label>
+            <div *ngIf="breDecision !== null" [class]="fetchBreDecision()">
+                <span>{{ fetchBreDecision() }}</span>
+            </div>
+        </div>
+        <div class="col-2">
+            <label class="form-control-label" for="dedupeResponse">Dedupe response</label>
+            <div *ngIf="loanDetails?.loanApplicationDTO?.ucic" class="pass-color">
+                <span>Pass</span>
+            </div>
+            <jhi-null-replace *ngIf="!loanDetails?.loanApplicationDTO?.ucic" id="dedupeResponse"></jhi-null-replace>
+        </div>
+        <div class="col-2">
+            <label class="form-control-label" for="ucicCode">UCIC Code</label>
+            <jhi-null-replace id="ucicCode" [value]="loanDetails.loanApplicationDTO.ucic"></jhi-null-replace>
+        </div>
+    </div>
+</div>

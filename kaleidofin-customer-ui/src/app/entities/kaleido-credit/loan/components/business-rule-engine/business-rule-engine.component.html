@@ -1,0 +1,27 @@
+<div class="card-title">
+  <div class="col-12 row">
+    <div class="bre-container">
+      <div class="section-title">BRE</div>
+      <button
+        class="btn btn-primary"
+        mat-button
+        [hidden]="!authority?.viewReport"
+        (click)="openBreReport()"
+        *ngIf="enableViewReport"
+      >
+        View Report
+      </button>
+    </div>
+  </div>
+  <div class="col-12 row">&nbsp;</div>
+  <div class="col-12 row">
+    <div>Action</div>
+  </div>
+  <div class="col-12 row">&nbsp;</div>
+  <div class="col-12 row">
+  
+  <div [ngClass]="['bre-status', breAction]">
+      {{ breAction === 'PENDING' ? "Bre is getting calculated..." : breAction }}
+    </div>
+  </div>
+</div>

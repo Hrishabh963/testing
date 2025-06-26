@@ -1,0 +1,37 @@
+<div class="dialog-container">
+  <div mat-dialog-title class="dialog-title">
+    <div [ngClass]="['section-title', 'title', data?.titleClass]">
+      {{ title }}
+    </div>
+    <mat-icon class="closeicon" (click)="cancel()" onKeyPress=""
+      >close</mat-icon
+    >
+  </div>
+  <div mat-dialog-content class="dialog-content-text flex-center-align">
+    <img
+      *ngIf="!errors"
+      src="assets/images/common/upload-success.svg"
+      alt="Success"
+    />
+    <img
+      *ngIf="errors"
+      src="assets/images/common/warning.svg"
+      style="color: 'red'"
+      alt="Success"
+    />
+    &nbsp;
+    <div class="alert-text">{{ description }}</div>
+  </div>
+  <div mat-dialog-actions *ngIf="data?.enableButtons">
+    <div class="action-buttons">
+      <button
+        mat-button
+        class="button4 proceed"
+        cdkFocusInitial
+        (click)="proceed()"
+      >
+        {{ data?.btnText || "Ok" }}
+      </button>
+    </div>
+  </div>
+</div>

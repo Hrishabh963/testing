@@ -1,0 +1,116 @@
+<div class="card-title">
+  <form name="projectFundingDetails" novalidate #editForm="ngForm">
+    <div class="card-body">
+      <div class="card-title">
+        <div class="col-12 row">
+          <div style="display: flex; align-items: center; justify-content: space-between;width: 100%;">
+            <h5 class="section-sub-heading">
+              Financial Details of applicant for Year {{ index + 1 }}
+            </h5>
+            <app-section-edit-action
+              (onCancelHandler)="cancel()"
+              (onSaveHandler)="save()"
+              [panelOpenState]="true"
+              [isEditing]="isEditing"
+              (onEditHandler)="edit()"
+            ></app-section-edit-action>
+          </div>
+        </div>
+        <br />
+        <div class="row">
+          <div class="form-group col-md-3">
+            <mat-form-field appearance="outline" [hidden]="!isEditing">
+              <mat-label>Net Worth</mat-label>
+              <input
+                matInput
+                [disabled]="!isEditing"
+                name="net_worth"
+                id="field_net_worth"
+                [(ngModel)]="profile.netWorth"
+              />
+            </mat-form-field>
+            <div [hidden]="isEditing">
+              <label
+                class="form-control-label"
+                jhiTranslate="kCredit.financialDetail.netWorth"
+                for="field_net_worth"
+                >Net Worth</label
+              >
+              <jhi-null-replace [value]="profile.netWorth"></jhi-null-replace>
+            </div>
+          </div>
+
+          <div class="form-group col-md-3">
+            <mat-form-field appearance="outline" [hidden]="!isEditing">
+              <mat-label>Net profit after tax</mat-label>
+              <input
+                matInput
+                [disabled]="!isEditing"
+                name="net_profit_after_tax"
+                id="field_net_profit_after_tax"
+                [(ngModel)]="profile.netProfitAfterTax"
+              />
+            </mat-form-field>
+            <div [hidden]="isEditing">
+              <label
+                class="form-control-label"
+                jhiTranslate="kCredit.financialDetail.netProfitAfterTax"
+                for="field_net_profit_after_tax"
+                >Net profit after tax</label
+              >
+              <jhi-null-replace
+                [value]="profile.netProfitAfterTax"
+              ></jhi-null-replace>
+            </div>
+          </div>
+
+          <div class="form-group col-md-3">
+            <mat-form-field appearance="outline" [hidden]="!isEditing">
+              <mat-label>Net Sales</mat-label>
+              <input
+                matInput
+                [disabled]="!isEditing"
+                name="net_sales"
+                id="field_net_sales"
+                [(ngModel)]="profile.netSales"
+              />
+            </mat-form-field>
+            <div [hidden]="isEditing">
+              <label
+                class="form-control-label"
+                jhiTranslate="kCredit.financialDetail.netSales"
+                for="field_net_sales"
+                >Net Sales</label
+              >
+              <jhi-null-replace [value]="profile.netSales"></jhi-null-replace>
+            </div>
+          </div>
+
+          <div class="form-group col-md-3">
+            <mat-form-field appearance="outline" [hidden]="!isEditing">
+              <mat-label>Operating Profit</mat-label>
+              <input
+                matInput
+                [disabled]="!isEditing"
+                name="operating_profit"
+                id="field_operating_profit"
+                [(ngModel)]="profile.operatingProfit"
+              />
+            </mat-form-field>
+            <div [hidden]="isEditing">
+              <label
+                class="form-control-label"
+                jhiTranslate="kCredit.financialDetail.operatingProfit"
+                for="field_operating_profit"
+                >Operating Profit</label
+              >
+              <jhi-null-replace
+                [value]="profile.operatingProfit"
+              ></jhi-null-replace>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

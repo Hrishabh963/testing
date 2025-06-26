@@ -1,0 +1,78 @@
+* {
+  cursor: auto;
+}
+.icon {
+  margin-left: 10px;
+  width: 22px;
+  height: 22px;
+  object-fit: cover;
+}
+.sidenav_container {
+  min-width: 60px;
+  height: calc(100vh - 200px);
+  z-index: 9999;
+}
+
+.link {
+  margin-left: 2em;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+}
+.kicredit-logo {
+  padding: 5px 30px;
+}
+.image-logo {
+  height: 2.5rem;
+  margin-top: 10px;
+}
+
+.route-link {
+  margin-bottom: 10px;
+  color: var(--kcredit-icon-theme-color);
+}
+
+.route-link:focus {
+  border-right: 2px solid var(--kcredit-icon-theme-color-selected) !important;
+}
+
+.ki-pay-logo {
+  padding: 24px 0px 10px 24px;
+}
+.active {
+  color: var(--kcredit-primary);
+}
+
+.nav-selected {
+  color: var(--kcredit-icon-theme-color-selected);
+  border-right: 2px solid var(--kcredit-icon-theme-color-selected);
+}
+.tdb-logo {
+  height: 4rem;
+}
+
+.svg-icon {
+  vertical-align: baseline;
+}
+.active-svg-icon {
+  filter: invert(58%) sepia(75%) saturate(421%) hue-rotate(133deg)
+    brightness(89%) contrast(89%);
+}
+.icon-container {
+  position: relative;
+  width: 36px;
+  height: 36px;
+}
+
+.user-icon {
+  font-size: 36px; /* Adjust to your base size */
+  color: #00bcd4; /* Match your color */
+}
+
+.check-icon {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  font-size: 16px; /* Adjust smaller size for the checkmark */
+  color: #00bcd4; /* Match your color */
+}

@@ -1,0 +1,79 @@
+<div>
+  <table class="table1">
+    <caption></caption>
+    <thead class="thead-table">
+      <tr>
+        <th><div>Branch</div></th>
+        <th class="data-field"><div>{{reportData[0]?.branch}}</div></th>
+        <th><div>Date of CAM Preparation</div></th>
+        <th class="data-field"><div>{{reportData[0]?.dateOfCamPreparation | dynamicDataTransform: 'date': 'dd-MM-yyyy'}}</div></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td colspan="4" class="section-title subtitle">
+          {{ index + 1 }}. &nbsp; Customer Criteria &amp; KYC
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <table class="table1">
+    <caption></caption>
+    <thead class="thead-table">
+      <tr>
+        <th rowspan="2" scope="col"><div>Status</div></th>
+        <th rowspan="2" scope="col"><div>Name</div></th>
+        <th rowspan="2" scope="col"><div>Age</div></th>
+        <th rowspan="2" scope="col"><div>Contact No</div></th>
+        <th rowspan="2" scope="col"><div>Relation with applicant</div></th>
+        <th rowspan="2" scope="col"><div>Address</div></th>
+        <th rowspan="2" scope="col"><div>CIBIL Score</div></th>
+        <th colspan="4" scope="colgroup" class="land-holding"><div>Land Holding</div></th>
+      </tr>
+      <tr class="inner-table">
+        <th scope="col"><div>Own Land</div></th>
+        <th scope="col"><div>Lease Land</div></th>
+        <th scope="col"><div>Validate Through</div></th>
+        <th scope="col" class="total-land"><div>Total Land</div></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of reportData; let rowIndex = index">
+        <td [class]="'row-' + (rowIndex % 2)">
+          <div>{{ data?.status }}</div>
+        </td>
+        <td [class]="'row-' + (rowIndex % 2)">
+          <div>{{ data?.name }}</div>
+        </td>
+        <td [class]="'row-' + (rowIndex % 2)">
+          <div>{{ data?.age }}</div>
+        </td>
+        <td [class]="'row-' + (rowIndex % 2)">
+          <div>{{ data?.contactNo }}</div>
+        </td>
+        <td [class]="'row-' + (rowIndex % 2)">
+          <div>{{ data?.relationWithApplicant }}</div>
+        </td>
+        <td [class]="'row-' + (rowIndex % 2)">
+          <div>{{ data?.address | addressFormat }}</div>
+        </td>
+        <td [class]="'row-' + (rowIndex % 2)">
+          <div>{{ data?.cibilScore }}</div>
+        </td>
+        <td [class]="'row-' + (rowIndex % 2)">
+          <div>{{ data?.ownLand }}</div>
+        </td>
+        <td [class]="'row-' + (rowIndex % 2)">
+          <div>{{ data?.leaseLand }}</div>
+        </td>
+        <td [class]="'row-' + (rowIndex % 2)">
+          <div>{{ data?.validateThrough }}</div>
+        </td>
+        <td [class]="'row-' + (rowIndex % 2)">
+          <div>{{ data?.totalLand }}</div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

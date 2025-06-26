@@ -1,0 +1,53 @@
+::ng-deep .custom-panel .mat-dialog-container {
+    padding: 0 !important;
+}
+
+.deviation-header {
+    padding: 0.5em 1em;
+    border-bottom: 1px solid #EAF2FF;
+    margin-bottom: 0.7em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    h5 {
+        font-size: 15px;
+        margin: 0;
+        color: #38526C;
+    }
+}
+
+.deviation-header button {
+    background: none;
+    border: none;
+    color: #496684;
+}
+
+.document-container {
+    padding: 1em;
+}
+
+.document {
+    width: 100%;
+    padding: 1em 0.5em;
+    margin: 0.7em;
+    background: #F8F8F8;
+    border-radius: 8px;
+    display: flex;
+    gap: 1em;
+    align-items: center;
+    border: none;
+    color: #38526C;
+}
+
+.document :last-child {
+    margin-left: auto;
+}
+
+.deviation-document-container {
+    width: 65vw;
+}
+
+img {
+    max-width: 2.5em;
+}

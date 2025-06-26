@@ -1,0 +1,3 @@
+<button mat-flat-button type="submit" [ngStyle]="{'padding-top': padding, 'padding-bottom': padding}"
+    [disabled]="disabled" (keydown)="handleKeyEvent($event)" (click)="handleButtonClick()"
+    class="custom-button"><span>{{title}}</span></button>

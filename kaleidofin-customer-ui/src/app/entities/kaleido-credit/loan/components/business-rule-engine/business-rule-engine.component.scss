@@ -1,0 +1,34 @@
+.bre-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.bre-status {
+  font-weight: 500;
+  font-size: initial;
+}
+
+.accept,
+.pass,
+.PASS,
+.Pass {
+  color: #0BC07F;
+}
+
+.failed,
+.fail,
+.FAIL,
+.Fail,
+.PENDING,
+.pending,
+.Pending
+{
+  color: #E42323;
+}
+
+.DEVIATION,
+.Deviation,
+.deviation {
+  color: #ffac30;
+}

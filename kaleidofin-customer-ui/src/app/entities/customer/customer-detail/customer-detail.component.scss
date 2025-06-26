@@ -1,0 +1,22 @@
+p {
+  font-weight: 500;
+  font-size: 18px;
+  color: #000000;
+}
+
+h4 {
+  font-weight: 500;
+  color: #000000;
+}
+
+mat-expansion-panel {
+  margin-top: 15px;
+  min-height: 130px !important;
+  border-radius: 4px;
+}
+
+mat-expansion-panel-header {
+  padding-top: 15px !important;
+  padding-bottom: 15px !important;
+  min-height: 130px !important;
+}

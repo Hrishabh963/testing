@@ -1,0 +1,51 @@
+<table class="tid-table">
+    <thead>
+        <tr>
+            <th>
+                <div>Detail Type</div>
+            </th>
+            <th>
+                <div>Government Database</div>
+            </th>
+            <th>
+                <div>Application Details</div>
+            </th>
+            <th>
+                <div class="match-container" (click)="showDetail = !showDetail" (keypress)="showDetail = !showDetail" >
+                    <div>
+                        <span>Status</span>
+                    </div>
+                    <mat-icon *ngIf="!showDetail">keyboard_arrow_down</mat-icon>
+                    <mat-icon *ngIf="showDetail">keyboard_arrow_up</mat-icon>
+                </div>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let row of tableRow" [ngClass]="['tid-detail-row', showDetail ? 'show' : 'hide-border']">
+            <td>
+                <div class="detail-type-label">
+                    <jhi-null-replace [value]="row?.label">
+                    </jhi-null-replace>
+                </div>
+            </td>
+            <td>
+                <div>
+                    <jhi-null-replace [value]="kycData[row?.propertyKey]?.value?.govData"></jhi-null-replace>
+                </div>
+            </td>
+            <td>
+                <div>
+                    <jhi-null-replace [value]="kycData[row?.propertyKey]?.value?.bcData"></jhi-null-replace>
+                </div>
+            </td>
+            <td>
+                <div>
+                    <span class="match-result"
+                        [class]="getMatchClass(kycData[row?.propertyKey]?.value?.isMatched)">{{
+                        getMatchValue(kycData[row?.propertyKey]?.value?.isMatched)}}</span>
+                </div>
+            </td>
+        </tr>
+    </tbody>
+</table>

@@ -1,0 +1,27 @@
+<mat-accordion>
+    <mat-expansion-panel [expanded]="panelOpenState" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+        <mat-expansion-panel-header>
+            <div class="expansion-panel-title-container">
+                <h1 class="section-title"> Loan Obligation </h1>
+            </div>
+        </mat-expansion-panel-header>
+
+        <ng-container>
+            <app-dynamic-render-component [title]="'Applicant Monthly Loan Obligation'" [uiFields]="applicantLoanObligation" *ngIf = "applicantLoanObligationMap?.length"
+                [uiFieldsMap]="applicantLoanObligationMap" [isSubHeading]="true" [loanId]="loanId" [hideEditAction]="true"
+                [enableEdit]="enableEdit"></app-dynamic-render-component>
+        </ng-container>
+
+        <ng-container>
+            <app-dynamic-render-component [title]="coappTitle" [uiFields]="coapplicantLoanObligation" *ngIf = "coapplicantLoanObligationMap?.length"
+                [uiFieldsMap]="coapplicantLoanObligationMap" [isSubHeading]="true" [loanId]="loanId"
+                [hideEditAction]="true" [enableEdit]="enableEdit"></app-dynamic-render-component>
+        </ng-container>
+
+        <ng-container>
+            <app-dynamic-render-component [title]="guarentorTitle" [uiFields]="guarentorLoanObligation" *ngIf = "guarentorLoanObligationMap?.length"
+                [uiFieldsMap]="guarentorLoanObligationMap" [isSubHeading]="true" [loanId]="loanId"
+                [hideEditAction]="true" [enableEdit]="false"></app-dynamic-render-component>
+        </ng-container>
+    </mat-expansion-panel>
+</mat-accordion>

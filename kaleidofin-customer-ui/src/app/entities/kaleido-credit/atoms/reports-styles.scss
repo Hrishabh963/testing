@@ -1,0 +1,150 @@
+#report {
+  width: auto;
+  padding: 35px;
+}
+
+.report-logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 5vw;
+}
+
+.report-title-container {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-direction: column;
+  gap: 10vh;
+}
+
+.report-static-logo {
+  height: 30vh;
+  width: 32vw;
+  position: absolute;
+  top: 2rem;
+  right: 0rem;
+}
+
+.report-logo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.report-container {
+  box-sizing: border-box;
+  color: #ffffff;
+  background: var(--kcredit-primary-color1);
+  border: 2px solid #ecf0f7;
+  border-radius: 16px;
+  padding: 10px;
+}
+
+.report-row {
+  margin: 7px 0;
+}
+
+.report-row strong {
+  font-weight: bold;
+}
+
+.split-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  height: auto;
+}
+
+th {
+  background-color: var(--kcredit-primary-color1) !important;
+  font-family: Arial, Verdana, Tahoma, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: initial;
+  line-height: 10px;
+  color: #ffffff !important;
+  height: 10vh;
+  text-align: left;
+  padding: 20px;
+  border: 1px solid #ebebeb;
+}
+
+thead {
+  border-radius: 8px;
+}
+
+td {
+  text-align: left;
+  padding: 15px;
+  border: 1px solid #ebebeb;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead th:first-child {
+  border-top-left-radius: 16px;
+  border-bottom-left-radius: 16px;
+}
+
+thead th:last-child {
+  border-top-right-radius: 16px;
+  border-bottom-right-radius: 16px;
+}
+
+table td {
+  font-size: small;
+}
+
+table th {
+  font-size: small;
+}
+
+.row-0 {
+  background-color: #fff !important;
+}
+
+.row-1 {
+  background-color: #f3fafe !important;
+}
+
+table tr {
+  height: 10vh;
+}
+
+.subtitle {
+  margin-top: 10px;
+  font-size: large;
+}
+
+.caption {
+  margin-top: 10px;
+  font-size: medium;
+}
+
+.section-container {
+  padding-left: 1vw;
+  padding-bottom: 1vh;
+}
+
+
+.section-title-container {
+  display: flex;
+  width: 90vw;
+  justify-content: space-between;
+}
+
+.download-button {
+  z-index: 1;
+  width: 8rem;
+  background: #0f547e !important;
+}
+
+.download-button-container {
+  margin-top: 2rem;
+  margin-right: 3rem;
+}

@@ -1,0 +1,122 @@
+<div class="business-container">
+  <!-- Title -->
+  <div class="title-search-container">
+    <div class="business-title-text">Business Onboarding</div>
+    <jhi-search
+      (searchEvent)="onSearch($event)"
+      [placeholder]="searchPlaceholder"
+    ></jhi-search>
+  </div>
+
+  <!-- Tab Section -->
+  <div class="tab-buttons">
+    <button
+      mat-button
+      [class.active-tab]="selectedTab === 'businessReview'"
+      (click)="onTabClick('businessReview')"
+    >
+      Business Review • {{ subStageCounts["businessReviewAll"] | async }}
+    </button>
+    <mat-icon class="stage-icon">keyboard_arrow_right</mat-icon>
+    <button
+      mat-button
+      [class.active-tab]="selectedTab === 'businessAgreement'"
+      (click)="onTabClick('businessAgreement')"
+    >
+      Business Agreement • {{ subStageCounts["businessAgreementAll"] | async }}
+    </button>
+  </div>
+
+  <!-- Sub-Stage Section -->
+  <div class="sub-stage-section">
+    <button
+      mat-button
+      *ngFor="let stage of stageMapping[selectedTab]"
+      [class.active]="selectedStage === stage"
+      (click)="handleSubStageClick(stage)"
+    >
+      {{ stageLabelMap[stage] }} • {{ subStageCounts[stage] | async }}
+    </button>
+  </div>
+
+  <!-- Table Section -->
+  <table mat-table [dataSource]="businessData" class="mat-elevation-z8" matSort>
+    <!-- Table Columns -->
+    <ng-container matColumnDef="dateAndTime">
+      <th mat-header-cell *matHeaderCellDef>Date & Time</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.submittedDate | date : "dd MMM, hh:mm" || "--" }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="businessName">
+      <th mat-header-cell *matHeaderCellDef>Business Name</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.businessName || "--" }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="businessID">
+      <th mat-header-cell *matHeaderCellDef>Business ID</th>
+      <td mat-cell *matCellDef="let element">{{ element.id || "--" }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="businessMobile">
+      <th mat-header-cell *matHeaderCellDef>Business Mobile Number</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.businessMobileNumber || "--" }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="exportedGoods">
+      <th mat-header-cell *matHeaderCellDef>Exported Goods</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.exportedGoods || "--" }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="location">
+      <th mat-header-cell *matHeaderCellDef>Location</th>
+      <td mat-cell *matCellDef="let element">{{ element.location || "--" }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef>Status</th>
+      <td mat-cell *matCellDef="let element">
+        <ng-container>
+          <div [ngClass]="[element?.reviewStatus && 'status-badge', element?.reviewStatus]">
+            {{ stageLabelMap[element?.reviewStatus] || '--' }}
+          </div>
+        </ng-container>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef>Action</th>
+      <td mat-cell *matCellDef="let element">
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="openBusinessReview(element)"
+        >
+          Review
+        </button>
+      </td>
+    </ng-container>
+
+    <!-- Header and Rows -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+
+  <!-- Paginator -->
+  <mat-paginator
+    [length]="resultsLength"
+    [pageSize]="pageSize"
+    [pageSizeOptions]="[5, 10, 25]"
+    showFirstLastButtons
+    hidePageSize
+    (page)="onPageChange($event)"
+  >
+  </mat-paginator>
+</div>

@@ -1,0 +1,28 @@
+<mat-accordion>
+    <mat-expansion-panel [expanded]="panelOpenState" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+        <mat-expansion-panel-header>
+            <div class="expansion-panel-title-container">
+                <h1 class="section-title"> Household Profile </h1>
+            </div>
+        </mat-expansion-panel-header>
+
+        <ng-container>
+            <app-dynamic-render-component [title]="'Progress Out Of Poverty Index (PPI) Questions'" [uiFields]="outOfPoverty" *ngIf = "outOfPovertyMap?.length"
+                [uiFieldsMap]="outOfPovertyMap" [isSubHeading]="true" [loanId]="loanId" [editSections]="editSections"
+                [enableEdit]="enableEdit" [nestedInputKey] = "'progressOutOfPovertyIndex'" [uiApiKey]="sectionKey"></app-dynamic-render-component>
+        </ng-container>
+
+        <ng-container>
+            <app-dynamic-render-component [title]="'Assets And Possessions'" [uiFields]="assetsAndPossessions" *ngIf = "assetsAndPossessionsMap?.length"
+                [uiFieldsMap]="assetsAndPossessionsMap" [isSubHeading]="true" [loanId]="loanId"
+                [editSections]="editSections" [enableEdit]="enableEdit" [nestedInputKey] = "'assetsAndPossessions'" [uiApiKey]="sectionKey"></app-dynamic-render-component>
+        </ng-container>
+
+        <ng-container>
+            <app-dynamic-render-component [title]="'Household Assets'"
+                [uiFields]="hhAssets" [uiFieldsMap]="hhAssetsMap" *ngIf = "hhAssetsMap?.length"
+                [isSubHeading]="true" [loanId]="loanId" [editSections]="editSections"
+                [enableEdit]="enableEdit" [nestedInputKey] = "'householdAssets'" [uiApiKey]="sectionKey"></app-dynamic-render-component>
+        </ng-container>
+    </mat-expansion-panel>
+</mat-accordion>

@@ -1,0 +1,23 @@
+.activity-section-container {
+  display: flex;
+  justify-content: flex-start;
+  align-items: baseline;
+}
+.mat-tab {
+  min-width: 85px !important;
+}
+.mat-tab-group.mat-tab-label{
+  min-width: 85px !important;
+}
+.mat-tab-styles{
+  height: 75vh;
+  overflow-y: auto;
+
+}
+.tab-container{
+  display: flex;
+  align-items: baseline;
+}
+.mat-tab-label {
+min-width: 50px !important; 
+}

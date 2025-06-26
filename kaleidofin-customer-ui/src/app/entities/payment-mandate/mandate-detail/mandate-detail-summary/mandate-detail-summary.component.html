@@ -1,0 +1,42 @@
+<div class="container download-search-container">
+  <div class="summary-container">
+    <div>
+      <p class="sub-text">Customer ID</p>
+      <p>{{ mandateInfo.customerId || "--" }}</p>
+    </div>
+    <div>
+      <p class="sub-text">Mandate ID</p>
+      <p>{{ mandateInfo.mandateReferenceId || "--" }}</p>
+    </div>
+    <div>
+      <p class="sub-text">Loan ID</p>
+      <p>{{ mandateInfo.loanId || "--" }}</p>
+    </div>
+    <div>
+      <p class="sub-text">EMI Collected</p>
+      <p>{{ mandateInfo.emisCollected }}</p>
+    </div>
+    <div>
+      <p class="sub-text">EMI amount</p>
+      <p>&#8377; {{ mandateInfo.amount }}</p>
+    </div>
+    <div>
+      <p class="sub-text">SBM PM frequency</p>
+      <p>{{ mandateInfo.frequency || "--" }}</p>
+    </div>
+    <div>
+      <p class="sub-text">End Date</p>
+      <p>{{ mandateInfo.endDate || "--" }}</p>
+    </div>
+    <div>
+      <p class="sub-text">No of retries enabled</p>
+      <p>{{ mandateInfo.carryForwardLimit || "--" }}</p>
+    </div>
+  </div>
+  <div class="summary-container" *ngIf="mandateInfo?.status === 'CLOSED'">
+    <div>
+      <p class="sub-text">Reason for closure</p>
+      <p>{{ mandateInfo.closureReason || "--" }}</p>
+    </div>
+  </div>
+</div>

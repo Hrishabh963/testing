@@ -1,0 +1,19 @@
+.inner-table th:first-child {
+    border-radius: 0px;
+    border-top-right-radius: 0px !important;
+}
+
+.land-holding {
+    text-align: center;
+    border-radius: 0px 16px 0px 0px !important;
+}
+
+.total-land {
+    border-radius: 0px 0px 16px 0px !important;
+}
+
+.data-field {
+    background-color: white !important;
+    color: var(--kcredit-primary-color1) !important;
+    font-weight: 600 !important;
+}

@@ -1,0 +1,28 @@
+<div class="main-container">
+  <h1>Upload new demand</h1>
+  <h5>View upload and edit your demands</h5>
+  <br />
+  <ul>
+    <li><h5>Make sure your file has all columns for all the fields</h5></li>
+    <li><h5>Upload Only Xlsx/Xls/CSV files</h5></li>
+    <li><h5>Make sure the date format in your file is dd/mm/yyyy</h5></li>
+  </ul>
+  <div class="dropzone">
+    <img src="../../../../assets/images/common/upload-demands.svg" alt="" />
+    <h3>Drag & drop XLS,XLXS file here</h3>
+    <label for="file-upload">Browse File</label>
+    <input
+      id="file-upload"
+      accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+      type="file"
+      (change)="onBrowseFile($event)"
+      [multiple]="false"
+      #fileInput
+      />
+    <div *ngIf="fileName">{{ fileName }}</div>
+  </div>
+  <div style="text-align: center; margin-top: 10px">
+    <div class="link">Our system support only a specific table format</div>
+    <a class="download-link" (click)="exportFile()">Download a sample format</a>
+  </div>
+</div>

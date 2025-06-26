@@ -1,0 +1,42 @@
+<div class="table-container">
+    <table>
+        <caption></caption>
+        <thead>
+            <tr>
+                <th colspan="2" class="table-heading"> Household Profile </th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let row of tableRow; let index = index" [ngSwitch]="row?.type">
+                <tr *ngSwitchDefault>
+                    <td [class]="'row-' + (1 - index % 2)" class="table-span"> {{ row?.title }}</td>
+                    <td [class]="'row-' + (1 - index % 2)" class="table-span">
+                        <jhi-null-replace [value]="houseHoldProfile[row?.propertyKey]">
+                        </jhi-null-replace>
+                    </td>
+                </tr>
+                <tr *ngSwitchCase="'availability'">
+                    <td [class]="'row-' + (1 - index % 2)" class="table-span"> {{ row?.title }}</td>
+                    <td [class]="'row-' + (1 - index % 2)" class="table-span">
+                        <jhi-null-replace
+                            [value]="getAvailabilityStatus(houseHoldProfile[row?.propertyKey], row?.viewMapper)">
+                        </jhi-null-replace>
+                    </td>
+                </tr>
+                <tr *ngSwitchCase="'neighbour'">
+                    <td [class]="'row-' + (1 - index % 2)" class="table-span"> {{ row?.title }}</td>
+                    <td [class]="'row-' + (1 - index % 2)" class="table-span">
+                        <div class="neighbour-container">
+                            <jhi-null-replace [value]="houseHoldProfile?.neighbourReference">
+                            </jhi-null-replace>
+                            <jhi-null-replace [value]="houseHoldProfile?.neighbourName">
+                            </jhi-null-replace>
+                            <jhi-null-replace [value]="houseHoldProfile?.neighbourMobileNumber">
+                            </jhi-null-replace>
+                        </div>
+                    </td>
+                </tr>
+            </ng-container>
+        </tbody>
+    </table>
+</div>

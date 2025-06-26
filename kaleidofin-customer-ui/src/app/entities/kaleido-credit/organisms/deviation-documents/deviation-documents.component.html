@@ -1,0 +1,16 @@
+<div class="deviation-document-container">
+    <div class="deviation-header">
+        <h5>Attatchments</h5>
+        <div>
+            <button (click)="closePopup()"><mat-icon>close</mat-icon> </button>
+        </div>
+    </div>
+    <div class="document-container">
+        <button *ngFor="let document of documentDTOs" class="document" (click)="openDocument(document)">
+                <img [src]="document?.fileIcon" [alt]="document?.fileIcon" *ngIf="isDocumentFormat(document)" />
+                <img [src]="document?.image" [alt]="document?.image" *ngIf="!isDocumentFormat(document)" />
+                <span style="text-decoration: underline;"> {{ document?.documentName }} </span>
+                <span> {{ document?.size ?? '--' }} </span>
+        </button>
+    </div>
+</div>

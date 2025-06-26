@@ -1,0 +1,42 @@
+:host{
+  width: 100%;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  width: 100%;
+  padding-top: 4vh;
+}
+
+.container{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding-top: 7vh;
+
+}
+
+
+.form-header{
+  font-size: 2.2em;
+  line-height: 1;
+  font-weight: 600;
+}
+
+.form-subheader{
+  font-size: 1.2em;
+  line-height: 1;
+  margin-top: 1rem;
+}
+
+
+a{
+  color: green;
+  text-decoration: none;
+}
+
+.form-forgetPassword{
+  font-size: 1.3em;
+}

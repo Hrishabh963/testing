@@ -1,0 +1,93 @@
+<br>
+<br>
+<div class="d-flex justify-content-between col-10 mx-auto mb-3  p-0">
+  <h2 class="k-font-1">Prefilled Nach Mandate</h2>
+  <div class="d-flex" style="gap: 16px;">
+    <button mat-button class="generate-btn k-primary-color-1 k-bg-color-1" (click)="redirectNachUpload()"><mat-icon>save_alt</mat-icon> Generate prefilled nach form</button>
+    <div class="search-container d-flex" [class.active-input]="searchInputWidth">
+      <mat-icon matPrefix (click)=" searchInputWidth = !searchInputWidth" (keypress)="searchInputWidth = !searchInputWidth" tabindex="0">search</mat-icon>
+      <input [formControl]="nameFilter" type="text" />
+    </div>
+    <custom-datepicker *ngIf='partnerId' (datesEventEmitter)="getDateRange($event)"></custom-datepicker>
+  </div>
+  
+</div>
+<div>
+  <div class="mat-elevation-z8 col-10 p-0 mx-auto customer-table-container">
+    <table mat-table [dataSource]="dataSource" matSort  (matSortChange)="sortData($event)" class="customTable">
+    <caption ></caption>
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Task ID </th>
+        <td mat-cell *matCellDef="let row"> {{row.taskId}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="uploadedDate">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Date </th>
+        <td mat-cell *matCellDef="let row"> {{row.uploadedDate }} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="fileName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header disabled> File Name </th>
+        <td mat-cell *matCellDef="let row"> {{row.fileName}} </td>
+      </ng-container>
+  
+      <ng-container matColumnDef="total">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header disabled> Total </th>
+        <td mat-cell *matCellDef="let row"> {{row.status!='Ready'?row.total:'-'}} </td>
+      </ng-container>
+      <ng-container matColumnDef="success">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header disabled> Success </th>
+        <td mat-cell *matCellDef="let row"> {{row.status!='Ready'?row.success:'-'}} </td>
+      </ng-container>
+      <ng-container matColumnDef="failure">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header disabled> Failure </th>
+        <td mat-cell *matCellDef="let row"> {{row.status!='Ready'?row.failure:'-'}} </td>
+      </ng-container>
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header disabled> Status </th>
+        <td mat-cell *matCellDef="let row"> 
+          <span class="status-col success" 
+          [class.success]="row.status == 'Processed'" 
+          [class.cancelled]="row.status == 'Cancelled'" 
+          [class.executing]="!(row.status == 'Processed' || row.status == 'Cancelled')">
+          {{row.status == 'Processed' || row.status == 'Cancelled'  ? row.status: 'Executing..'}} 
+          <!-- {{row.status}} -->
+        </span> </td>
+      </ng-container>
+      <ng-container matColumnDef="action">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header disabled> Action </th>
+        <td mat-cell *matCellDef="let row">
+          <div class="d-flex">
+            <button mat-icon-button [disabled]="row.status != 'Processed' || !row.fileId" title="Download file" (click)="getNachForm(row,'download')">
+              <mat-icon class="action-btn-icon">save_alt</mat-icon>
+            </button>
+            <button mat-icon-button [disabled]="row.status != 'Processed' || !row.fileId" title="Print file" (click)="getNachForm(row,'print')"> 
+              <mat-icon class="action-btn-icon">print</mat-icon>
+            </button>
+            <button mat-icon-button [disabled]="row.status != 'Processed' || !row.errorFileId" title="Exception file" (click)="getExceptionFile(row.errorFileId,row.taskId)"> 
+              <mat-icon class="action-btn-icon">report_problem</mat-icon>
+            </button>
+          </div>
+        </td>
+      </ng-container>
+      
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+    <mat-card class="norecord" *ngIf="isPageEmpty">
+      <br>
+      <div class="text-center">
+        <h3>No records yet</h3>
+        <p>Upload customer informations by clicking generate pre filled nach form</p>
+        <button mat-button class="generate-btn k-primary-color-1 k-bg-color-1" (click)="redirectNachUpload()"><mat-icon>save_alt</mat-icon> Generate prefilled nach form</button>
+      </div>
+      <br>
+    </mat-card>
+  
+    <mat-paginator [length]="reponseDatasource?.totalElements" #paginator
+    [pageSize]="reponseDatasource?.size"
+    (page)="onPageChange($event)"
+    aria-label="Select page" [pageSizeOptions]="[10]" *ngIf="dataSource" class="custom-paginator" showFirstLastButtons></mat-paginator>
+  </div>
+</div>
+<br/>

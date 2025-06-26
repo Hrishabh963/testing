@@ -1,0 +1,28 @@
+<mat-accordion>
+  <mat-expansion-panel [expanded]="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <div class="section-title-text" id="businessProfileDetails">
+          Business profile details
+        </div></mat-panel-title
+      >
+      <mat-panel-description>
+        <app-section-level-reject
+          [sectionKey]="'BusinessProfile'"
+          rejectReasonKey="businessDetailsDTO.reviewRemark"
+          rejectStatusKey="businessDetailsDTO.businessReviewStatus"
+        ></app-section-level-reject>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+
+    <!-- Dynamic Fields -->
+    <div class="details-grid">
+      <div *ngFor="let field of fields" class="field-item">
+        <span class="business-review-label">{{ field.label }}</span>
+        <strong class="business-review-value">{{
+          getValue(field?.valueProperty)
+        }}</strong>
+      </div>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>

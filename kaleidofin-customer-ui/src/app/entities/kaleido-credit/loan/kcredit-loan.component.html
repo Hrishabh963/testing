@@ -1,0 +1,423 @@
+<div class="col-12 row no-space">
+  <div class="col-1 no-space"></div>
+  <div class="col-11 no-space">
+    <jhi-alert></jhi-alert>
+    <div class="col-md-12 no-space" (scroll)="onWindowScroll($event)">
+      <div class="card card-override">
+        <div class="card-header row">
+          <div>
+            <span>Review</span>
+          </div>
+        </div>
+        <form name="editForm" novalidate #editForm="ngForm">
+          <div class="card-body card-body-override">
+            <div class="card-title flex-container">
+              <div class="title-container">
+                <div class="data-container">
+                  <div id="container" *ngIf="loanDetails?.customerDTO">
+                    <div id="name">
+                      {{ getCustomerName() || "--" }}
+                    </div>
+                  </div>
+                  <div class="data-container-row">
+                    <div class="data-container">
+                      <div class="title-text form-control-label" *ngIf="loanDetails?.customerDTO?.title">
+                        Title
+                      </div>
+                      <div class="name-text form-control-label">Name</div>
+                      <div class="mobile-text form-control-label">
+                        Mobile Number
+                      </div>
+                      <div class="partner-text form-control-label" *ngIf="!isDCB">{{ isDcbMfiLender ? 'BC Name' :
+                        'Partner' }}</div>
+                      <div class="customer-id-text form-control-label">
+                        Customer ID
+                      </div>
+                    </div>
+                    <div class="data-container">
+                      <div class="title-text" *ngIf="loanDetails?.customerDTO?.title">
+                        <jhi-null-replace id="loan-customer-name"
+                          [value]="loanDetails?.customerDTO?.title"></jhi-null-replace>
+                      </div>
+                      <div class="name-text">
+                        <jhi-null-replace id="loan-customer-name"
+                          [value]="loanDetails?.customerDTO?.name"></jhi-null-replace>
+                      </div>
+                      <div class="mobile-text">
+                        <jhi-null-replace id="loan-customer-mobile-number" [value]="
+                            loanDetails?.customerDTO?.primaryMobileNumber
+                          "></jhi-null-replace>
+                      </div>
+                      <div class="partner-text" *ngIf="!isDCB">
+                        <jhi-null-replace id="loan-partner" [value]="loanDetails?.partnerDTO?.name"></jhi-null-replace>
+                      </div>
+                      <div class="customer-id-text" *ngIf="!isDcbLender">
+                        <jhi-null-replace id="loan-customer-Id"
+                          [value]="loanDetails?.customerDTO?.id"></jhi-null-replace>
+                      </div>
+                      <div class="customer-id-text" *ngIf="isDcbLender">
+                        <jhi-null-replace id="loan-customer-Id" [value]="
+                            loanDetails?.loanApplicationDTO?.lenderCustomerId
+                          "></jhi-null-replace>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="title-button-section-container button-container">
+                    <app-assign-to-user [fromEntry]="fromEntry" [loanId]="loanId" [selectedAssignee]="
+                        loanDetails?.loanApplicationDTO?.assignee
+                      "></app-assign-to-user>
+                  <div *ngIf="validateDownloadReports(loanDetails)">
+                    <app-download-loan-report [inputAuthority]="authority?.downloadReportView"
+                      [loanIds]="[loanApplication?.applicationNumber]"
+                      [loanStage]="loanApplication?.applicationStatus"></app-download-loan-report>
+                  </div>
+                  <div *ngIf="isDcbLender">
+                    <app-common-reports-download [fromEntry]="fromEntry" [loanId]="[loanApplication?.id]"
+                      [downloadCams]="authority?.downloadCams"></app-common-reports-download>
+                  </div>
+                  <div>
+                    <app-dedupe-loan-selection [dedupeLoans]="dedupeLoans"></app-dedupe-loan-selection>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="isDcbMfiLender">
+                <div style="margin-left: 80px">
+                  <div class="form-control-label" style="padding-bottom: 8px">
+                    Loan Application Date
+                  </div>
+                  <div>
+                    {{ loanDetails?.loanApplicationDTO?.applicationDate }}
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Common Error Message Component. -->
+            <custom-error [showError]="
+                getErrorMessageDisplay(
+                  loanDetails && loanDetails.loanApplicationDTO
+                )
+              " [message]="errorConstants.minJlgBreach"></custom-error>
+          </div>
+        </form>
+      </div>
+      <div id="make-it-stick">
+        <app-notifications [actionRequired]="loanDetails?.loanApplicationDTO?.actionRequired"
+          [remarks]="loanDetails?.loanApplicationDTO?.remarks" [applicationStatus]="
+            loanDetails?.loanApplicationDTO?.applicationStatus
+          " [reviewDateTime]="loanDetails?.loanApplicationDTO?.lastReviewAt"
+          [lender]="loanDetails?.loanApplicationDTO?.lendingPartnerCode"
+          [loanId]="loanDetails?.loanApplicationDTO?.id"
+          [workflow]="loanDetails?.loanApplicationDTO?.workflow"
+          [isReferred]="loanDetails?.loanApplicationDTO?.isReferred" class="notifications">
+        </app-notifications>
+
+        <div>
+          <nav class="navbar navbar-expand-sm section-nav animated fadeInDown nav-padding">
+            <ul class="navbar-nav navbar-container">
+              <ng-container *ngFor="let key of objectKeys(navSectionList)">
+                <li class="nav-item">
+                  <button class="nav-button" [ngClass]="{'nav-button-highlighted': key === currentSection}" (click)="scrollTo(key)">
+                    {{
+                    navSectionList[key].title || navSectionList[key].navTitle
+                    }}
+                  </button>
+                </li>
+              </ng-container>
+              <li *ngIf="showMoreButton">
+                <button class="nav-button" [matMenuTriggerFor]="menu">
+                  <div class="more-button">
+                    More
+                    <mat-icon>more_vert</mat-icon>
+                  </div>
+                </button>
+              </li>
+              <mat-menu class="more-menu" #menu="matMenu" xPosition="before" yPosition="below">
+                <ng-container *ngFor="let key of objectKeys(navSectionMoreList)">
+                  <button class="nav-button menu-button" mat-menu-item (click)="scrollTo(key)" 
+                    [ngClass]="{'nav-button-highlighted': key === currentSection}">
+                    {{
+                    navSectionMoreList[key].title ||
+                    navSectionMoreList[key].navTitle
+                    }}
+                  </button>
+                </ng-container>
+              </mat-menu>
+            </ul>
+          </nav>
+          <div class="nav-notification-border"></div>
+        </div>
+      </div>
+
+      <div class="col-md-12 info-section-scroll">
+        <div id="parentDiv" scrollSpy [spiedTags]="['DIV']" (sectionChange)="onSectionChange($event)"
+          *ngFor="let key of objectKeys(LoanDetailSections)" [ngSwitch]="key">
+          <!-- 
+
+          -->
+          <container [id]="key" appTrackSectionVisibility
+           (visibilityChange)="handleSectionVisibility($event)" [startObservation]="startViewObservation">
+            <div>
+              <h2 class="section-title">
+                {{ LoanDetailSections[key].title }}
+              </h2>
+              <div *ngIf="(loanId) !== null">
+                <app-beneficiary-check-details *ngSwitchCase="'beneficiaryCheck'" [loanDetails]="loanDetails"
+                  [editSections]="authority.editSections && !isRecalculationInProgress">
+                </app-beneficiary-check-details>
+              </div>
+              <jhi-agent-info *ngSwitchCase="'agentInfo'" [loanDetails]="loanDetails">
+              </jhi-agent-info>
+              <div *ngIf="(loanId) !== null">
+                <app-loan-overview *ngSwitchCase="'loanOverview'" [loanId]="loanId"
+                  [workflow]="loanDetails?.loanApplicationDTO?.workflow"
+                  [editSections]="authority.editSections && !isRecalculationInProgress">
+                </app-loan-overview>
+              </div>
+            </div>
+            <div *ngIf="(loanId) !== null">
+              <jhi-basic-customer-info *ngSwitchCase="'basicCustomerInfo'"
+                [familyDetailsList]="loanDetails.familyDetailsList" [customer]="customer" [addressList]="addressList"
+                [kycDetailsList]="kycDetailsList" (reloadAfterSave)="reloadAfterSave($event)"
+                [loanApplicationDTO]="loanDetails.loanApplicationDTO" [loanDetails]="loanDetails"
+                [coApplicantKycDetails]="coApplicantKYCDetailsList" [loanId]="loanId" [coApplicants]="coApplicants">
+              </jhi-basic-customer-info>
+              <jhi-kyc *ngSwitchCase="'kyc'" [loanDetails]="loanDetails" [loanId]="loanId"
+                [kycDetailsList]="kycDetailsList" [partnerId]="loanDetails.customerDTO.partnerId"
+                [customerId]="loanDetails?.customerDTO?.id">
+              </jhi-kyc>
+              <app-kyc-details *ngSwitchCase="'kycDetails'" [loanDetails]="loanDetails"
+                [coApplicantKycDocumentList]="coApplicantKYCDetailsList" [loanId]="loanId">
+              </app-kyc-details>
+              <app-anti-money-laundering *ngSwitchCase="'aml'" [loanDetails]="loanDetails" [loanApplicationId]="loanId">
+              </app-anti-money-laundering>
+              <app-fraud-check *ngSwitchCase="'fraudCheck'" [partnerCustomerId]="
+                  loanDetails?.loanApplicationDTO?.partnerCustomerId
+                " [partnerLoanId]="loanDetails?.loanApplicationDTO?.partnerLoanId"
+                [loanApplicationId]="loanDetails?.loanApplicationDTO?.id">
+              </app-fraud-check>
+  
+              <jhi-ki-score *ngSwitchCase="'kiScore'" [loanDetails]="loanDetails">
+              </jhi-ki-score>
+              <app-eligibility-rules *ngSwitchCase="'eligibilityRules'" [loanDetails]="loanDetails">
+              </app-eligibility-rules>
+              <app-business-rule-engine *ngSwitchCase="'bre'" [partnerCustomerId]="
+                  loanDetails?.loanApplicationDTO?.partnerCustomerId
+                " [partnerApplicationId]="
+                  loanDetails?.loanApplicationDTO?.partnerLoanId
+                " [breNeeded]="loanDetails?.isBreNeeded" [loanApplicationId]="
+                  loanDetails?.loanApplicationDTO?.applicationNumber
+                ">
+              </app-business-rule-engine>
+              <app-bre *ngSwitchCase="'breWithEligiblities'" [loanDetails]="loanDetails" [partnerCustomerId]="
+                  loanDetails?.loanApplicationDTO?.partnerCustomerId
+                " [partnerApplicationId]="
+                  loanDetails?.loanApplicationDTO?.partnerLoanId
+                " [enableRecalculateBre]="authority.recalculateBre" [breNeeded]="loanDetails?.isBreNeeded"
+                [loanApplicationId]="
+                  loanDetails?.loanApplicationDTO?.applicationNumber
+                " [fromEntry]="fromEntry" [editSections]="authority.editSections && !isRecalculationInProgress">
+              </app-bre>
+              <div *ngIf="loanId">
+                <app-deviations-table *ngSwitchCase="'breDeviations'" [loanId]="loanId">
+                </app-deviations-table>
+              </div>
+              <jhi-about-the-entrepreneur *ngSwitchCase="'aboutTheEntrepreneur'" [loanDetails]="loanDetails"
+                (reloadAfterSave)="reloadAfterSave($event)">
+              </jhi-about-the-entrepreneur>
+              <jhi-about-the-loan *ngSwitchCase="'aboutTheLoan'" [loanApplication]="loanApplication"
+                [loanDetails]="loanDetails" (reloadAfterSave)="reloadAfterSave($event)">
+              </jhi-about-the-loan>
+              <jhi-family-info *ngSwitchCase="'familyInfo'" [familyDetailsList]="loanDetails.familyDetailsList"
+                (reloadAfterSave)="reloadAfterSave($event)" [customer]="customer">
+              </jhi-family-info>
+              <jhi-about-the-business *ngSwitchCase="'aboutTheBusiness'" [loanDetails]="loanDetails"
+                (reloadAfterSave)="reloadAfterSave($event)">
+              </jhi-about-the-business>
+              <jhi-family-assets *ngSwitchCase="'familyAssets'" [loanDetails]="loanDetails"
+                (reloadAfterSave)="reloadAfterSave($event)"></jhi-family-assets>
+              <jhi-all-bank-details *ngSwitchCase="'bankDetails'" [loanDetails]="loanDetails"
+                (reloadAfterSave)="reloadAfterSave($event)"></jhi-all-bank-details>
+              <jhi-nominee-info *ngSwitchCase="'nomineeInfo'" [loanDetails]="loanDetails"
+                [coApplicantKYCDetailsList]="coApplicantKYCDetailsList"
+                (reloadAfterSave)="reloadAfterSave($event)"></jhi-nominee-info>
+              <jhi-witnesses *ngSwitchCase="'witnesses'" [loanDetails]="loanDetails">
+              </jhi-witnesses>
+              <jhi-co-applicants *ngSwitchCase="'coApplicant'" [coApplicants]="coApplicants" [loanDetails]="loanDetails"
+                [loanId]="loanId" [partnerId]="loanDetails.customerDTO.partnerId"
+                (reloadAfterSave)="reloadAfterSave($event)"></jhi-co-applicants>
+              <jhi-references *ngSwitchCase="'reference'" [loanDetails]="loanDetails">
+              </jhi-references>
+              <jhi-guarantor *ngSwitchCase="'guarantor'" [loanDetails]="loanDetails" [loanId]="loanId"
+                [partnerId]="loanDetails.customerDTO.partnerId">
+              </jhi-guarantor>
+              <div *ngIf="loanId">
+                <app-pre-sanction-docs *ngSwitchCase="'preSanctionDocuments'" [loanId]="loanId"
+                  [partnerId]="loanDetails.customerDTO.partnerId" [loanDetailDocuments]="
+                    categorizedLoanApplicationDocumentList['PRE_SANCTION']" [customerId]="loanDetails?.customerDTO?.id">
+                </app-pre-sanction-docs>
+              </div>
+              <div *ngIf="loanId">
+                <app-post-sanction-docs *ngSwitchCase="'postSanctionDocuments'" [loanId]="loanId"
+                  [partnerId]="loanDetails.customerDTO.partnerId" [loanDetailDocuments]="
+                    categorizedLoanApplicationDocumentList['POST_SANCTION']" [customerId]="loanDetails?.customerDTO?.id">
+                </app-post-sanction-docs>
+              </div>
+              <div *ngIf="loanId">
+                <app-post-booking-docs *ngSwitchCase="'postBookingDocuments'" [loanId]="loanId"
+                  [partnerId]="loanDetails.customerDTO.partnerId" [loanDetailDocuments]="
+                    categorizedLoanApplicationDocumentList['POST_BOOKING']
+                  "></app-post-booking-docs>
+              </div>
+              <div *ngIf="loanId">
+                <app-post-disbursement-docs *ngSwitchCase="'postDisbursementDocuments'" [loanId]="loanId"
+                  [partnerId]="loanDetails.customerDTO.partnerId" [loanDetailDocuments]="
+                    categorizedLoanApplicationDocumentList['POST_DISBURSEMENT']
+                  "></app-post-disbursement-docs>
+              </div>
+              <jhi-additional-documents *ngSwitchCase="'additionalDocuments'" [loanDetails]="loanDetails"
+                [loanId]="loanId" [partnerId]="loanDetails.customerDTO.partnerId" [editSections]="authority?.editSections"
+                [loanApplicationDocuments]="loanApplicationDocumentList"
+                [coApplicantLoanApplicationDocuments]="coApplicantLoanApplicationDocumentList">
+              </jhi-additional-documents>
+              <jhi-existing-loans *ngSwitchCase="'existingLoans'" [loanDetails]="loanDetails"></jhi-existing-loans>
+              <jhi-loan *ngSwitchCase="'loan'" [loanDetails]="loanDetails"
+                [breNeeded]="loanDetails?.isBreNeeded"></jhi-loan>
+              <jhi-kcpl-fee-details *ngSwitchCase="'kcplFeeDetails'" [loanDetails]="loanDetails"></jhi-kcpl-fee-details>
+              <jhi-associate-entity *ngSwitchCase="'associateEntity'" [loanDetails]="loanDetails"></jhi-associate-entity>
+              <jhi-project-funding-details *ngSwitchCase="'projectFundingDetails'"
+                [loanDetails]="loanDetails"></jhi-project-funding-details>
+              <jhi-trade-references *ngSwitchCase="'tradeReferences'" [loanDetails]="loanDetails"></jhi-trade-references>
+              <jhi-financial-details *ngSwitchCase="'financialDetails'" [loanDetails]="loanDetails"
+                [disableEdit]="disableEdit" (reloadAfterSave)="reloadAfterSave($event)"></jhi-financial-details>
+              <jhi-property-details *ngSwitchCase="'propertyDetails'" [loanDetails]="loanDetails"></jhi-property-details>
+              <app-credit-bureau-data *ngSwitchCase="'creditBureauInfo'"></app-credit-bureau-data>
+              <jhi-partner-info *ngSwitchCase="'partnerInfo'" [loanDetails]="loanDetails">
+              </jhi-partner-info>
+  
+              <jhi-contact-person *ngSwitchCase="'contactPerson'" [loanDetails]="loanDetails"></jhi-contact-person>
+              <jhi-additional-data *ngSwitchCase="'additionalData'" [loanDetails]="loanDetails"></jhi-additional-data>
+              <app-dedupe *ngSwitchCase="'dedupe'" [loanDetails]="loanDetails" [dedupeData]="dedupeDataMap"
+              [applicantKycDetailList]="kycDetailsList" [coApplicationKycList]="coApplicantKYCDetailsList"
+
+              ></app-dedupe>
+              <app-loan-incomplete-reason *ngSwitchCase="'incompleteReasons'" [loanDetails]="loanDetails">
+              </app-loan-incomplete-reason>
+  
+              <group-info-details *ngSwitchCase="'groupInfo'"
+                [loanId]="loanDetails.loanApplicationDTO.id"></group-info-details>
+
+              <app-household-income-expense [loanId]="loanId" *ngSwitchCase="'householdIncomeExpense'">
+              </app-household-income-expense>
+
+              <app-business-income-expense [loanId]="loanId" *ngSwitchCase="'businessIncomeExpense'">
+              </app-business-income-expense>
+
+              <app-household-profile [loanId]="loanId" *ngSwitchCase="'householdProfile'">
+              </app-household-profile>
+
+              <app-loan-eligiblity [loanId]="loanId" *ngSwitchCase="'loanEligiblity'">
+              </app-loan-eligiblity>
+
+              <app-loan-obligator-income [loanId]="loanId" *ngSwitchCase="'loanObligatorIncome'">
+              </app-loan-obligator-income>
+  
+              <div *ngIf="(loanId) !== null">
+                <app-dynamic-render-component *ngSwitchDefault [data]="LoanDetailSections[key]" [loanId]="loanId"
+                  [editSections]="authority.editSections && !isRecalculationInProgress"
+                  [status]="loanDetails?.loanApplicationDTO?.applicationStatus"
+                  [workflow]="loanDetails?.loanApplicationDTO?.workflow"></app-dynamic-render-component>
+  
+                <app-collateral-maintenance-vehicle *ngSwitchCase="'collateralMaintanceVehicle'"
+                  [editSections]="authority.editSections && !isRecalculationInProgress" [loanId]="loanId"
+                  [editSections]="authority.editSections && !isRecalculationInProgress">
+                </app-collateral-maintenance-vehicle>
+  
+                <app-insurance-details *ngSwitchCase="'insuranceDetails'" [editSections]="authority.editSections"
+                  [loanId]="loanId">
+                </app-insurance-details>
+  
+                <app-business-data-sheet *ngSwitchCase="'businessDataSheet'"
+                  [editSections]="authority.editSections && !isRecalculationInProgress" [loanId]="loanId"
+                  [editSections]="authority.editSections && !isRecalculationInProgress">
+                </app-business-data-sheet>
+                <app-borrower-details *ngSwitchCase="'borrowerDetails'"
+                  [editSections]="authority.editSections && !isRecalculationInProgress" [loanDetails]="loanDetails">
+                </app-borrower-details>
+                <app-land-and-crop *ngSwitchCase="'landAndCropDetails'"
+                  [editSections]="authority.editSections && !isRecalculationInProgress" [loanId]="loanId">
+                </app-land-and-crop>
+                <app-other-income-details *ngSwitchCase="'otherIncomeDetails'"
+                  [editSections]="authority.editSections && !isRecalculationInProgress" [loanId]="loanId">
+                </app-other-income-details>
+  
+                <app-expense-section *ngSwitchCase="'expense'"
+                  [editSections]="authority.editSections && !isRecalculationInProgress" [loanId]="loanId">
+                </app-expense-section>
+  
+                <app-customer-demand-schedule *ngSwitchCase="'demandSchedule'"
+                  [editSections]="authority.editSections && !isRecalculationInProgress" [loanId]="loanId">
+                </app-customer-demand-schedule>
+                <app-cb-data *ngSwitchCase="'cbData'"
+                  [editSections]="authority.editSections && !isRecalculationInProgress" [loanId]="loanId">
+                </app-cb-data>
+                <app-dedupe-info *ngSwitchCase="'dedupeSection'"
+                  [editSections]="authority.editSections && !isRecalculationInProgress" [loanId]="loanId">
+                </app-dedupe-info>
+                <app-household-details *ngSwitchCase="'householdDetails'"
+                  [editSections]="authority.editSections && !isRecalculationInProgress" [loanId]="loanId">
+                </app-household-details>
+                <app-nominee-details *ngSwitchCase="'nomineeDetails'"
+                  [editSections]="authority.editSections && !isRecalculationInProgress" [loanId]="loanId">
+                </app-nominee-details>
+                <app-applicant-financial-liabilities *ngSwitchCase="'applicantFinancialLiabilities'"
+                  [editSections]="authority.editSections && !isRecalculationInProgress" [loanId]="loanId">
+                </app-applicant-financial-liabilities>
+                <app-ekyc-section *ngSwitchCase="'ekycSection'" [loanId]="loanId">
+                </app-ekyc-section>
+                <app-occupation-details *ngSwitchCase="'occupationDetails'"
+                  [editSections]="authority.editSections && !isRecalculationInProgress" [loanId]="loanId">
+                </app-occupation-details>
+                <app-detailed-data-entry *ngSwitchCase="'detailedDataSection'"
+                  [editSections]="authority.editSections && !isRecalculationInProgress" [loanId]="loanId">
+                </app-detailed-data-entry>
+                <app-mfi-income-details *ngSwitchCase="'otherIncomeMFI'"
+                  [editSections]="authority.editSections && !isRecalculationInProgress" [loanId]="loanId">
+                </app-mfi-income-details>
+              </div>
+              <hr class="section-hr" />
+            </div>
+          </container>
+          
+        </div>
+        <form name="submitForm" (ngSubmit)="openConfirmDialog($event.submitter.id)" class="review-button-form-group">
+          <div class="btn-group float-right">
+            <button [disabled]="
+                !validateEditAccess ||
+                disableOnLoanEntry ||
+                !enableRejectButton ||
+                disableApprovalButton()
+              " mat-raised-button class="mat-btn-danger" type="submit" id="reject">
+              Evaluate Application</button>&nbsp;
+            <button mat-raised-button class="mat-btn-success" type="submit" id="conditionalapprove" [disabled]="
+                !validateEditAccess ||
+                !enableApproveButton ||
+                disableOnLoanEntry || 
+                isRecalculationInProgress
+              ">
+              Approve Application</button>&nbsp;
+          </div>
+          <button class="recalculate-bre-display" type="button" *ngIf="recalculationTriggered"
+            (click)="openBreResultPopup($event)">
+            <app-recalculate-bre>
+            </app-recalculate-bre>
+          </button>
+        </form>
+        <div *ngIf="(loanId) !== null">
+          <app-loan-activity [loanId]="loanId" [viewComment]="authority?.viewComment"
+            [updateComment]="authority?.updateComment"></app-loan-activity>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,20 @@
+.action-buttons {
+  display: flex;
+  justify-content: center;
+}
+.dialog-content-text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: auto;
+}
+.dialog-content-text img {
+  font-size: 50px;
+  height: 50px;
+  width: 50px;
+}
+.mat-dialog-title {
+  margin: 0;
+  display: block;
+}

@@ -1,0 +1,197 @@
+<mat-accordion>
+  <mat-expansion-panel
+    [expanded]="panelOpenState"
+    (opened)="panelOpenState = true"
+    (closed)="panelOpenState = false"
+  >
+    <mat-expansion-panel-header>
+      <div class="expansion-panel-title-container">
+        <div class="section-title">About the Entrepreneur</div>
+        <app-section-edit-action
+          (onCancelHandler)="cancel($event)"
+          (onSaveHandler)="save($event)"
+          [panelOpenState]="panelOpenState"
+          [isEditing]="isEditing"
+          (onEditHandler)="toggleEditDetails($event)"
+        ></app-section-edit-action>
+      </div>
+    </mat-expansion-panel-header>
+
+    <div class="card-title">
+      <form name="editForm"  novalidate #editForm="ngForm">
+        <br />
+        <div class="card-body">
+          <div class="card-title">
+            <div class="row">
+              <div class="form-group col-md-3">
+                <mat-form-field appearance="outline" [hidden]="!isEditing">
+                  <mat-label>Coverage under PMSBY/ PMJJBY/ APY</mat-label>
+                  <input
+                    matInput
+                    [disabled]="!isEditing"
+                    name="name"
+                    id="field_coverage"
+                    [(ngModel)]="profile.coverage"
+                  />
+                </mat-form-field>
+                <div [hidden]="isEditing">
+                  <label
+                    class="form-control-label"
+                    jhiTranslate="kCredit.aboutTheEntrepreneur.coverage"
+                    for="field_coverage"
+                    >Coverage under PMSBY/ PMJJBY/ APY</label
+                  >
+                  <jhi-null-replace
+                    [value]="profile.coverage"
+                  ></jhi-null-replace>
+                </div>
+              </div>
+              <div class="form-group col-md-3">
+                <mat-form-field appearance="outline" [hidden]="!isEditing">
+                  <mat-label>Validity period of PMSBY/ PMJJBY/ APY</mat-label>
+                  <input
+                    matInput
+                    [disabled]="!isEditing"
+                    name="validity"
+                    id="field_validity"
+                    [(ngModel)]="profile.validity"
+                  />
+                </mat-form-field>
+
+                <div [hidden]="isEditing">
+                  <label
+                    class="form-control-label"
+                    jhiTranslate="kCredit.aboutTheEntrepreneur.validity"
+                    for="field_validity"
+                    >Validity period of PMSBY/ PMJJBY/ APY</label
+                  >
+
+                  <jhi-null-replace
+                    [value]="profile.validity"
+                  ></jhi-null-replace>
+                </div>
+              </div>
+
+              <div class="form-group col-md-3">
+                <mat-form-field appearance="outline" [hidden]="!isEditing">
+                  <mat-label>Caste</mat-label>
+                  <input
+                    matInput
+                    [disabled]="!isEditing"
+                    name="caste"
+                    id="field_caste"
+                    [(ngModel)]="profile.caste"
+                  />
+                </mat-form-field>
+
+                <div [hidden]="isEditing">
+                  <label
+                    class="form-control-label"
+                    jhiTranslate="kCredit.aboutTheEntrepreneur.caste"
+                    for="field_caste"
+                    >Caste</label
+                  >
+                  <jhi-null-replace [value]="profile.caste"></jhi-null-replace>
+                </div>
+              </div>
+              <div class="form-group col-md-3">
+                <mat-form-field appearance="outline" [hidden]="!isEditing">
+                  <mat-label>Profession</mat-label>
+                  <input
+                    matInput
+                    [disabled]="!isEditing"
+                    name="profession"
+                    id="field_profession"
+                    [(ngModel)]="profile.profession"
+                  />
+                </mat-form-field>
+                <div [hidden]="isEditing">
+                  <label
+                    class="form-control-label"
+                    jhiTranslate="kCredit.aboutTheEntrepreneur.profession"
+                    for="field_profession"
+                    >Profession</label
+                  >
+                  <jhi-null-replace
+                    [value]="profile.profession"
+                  ></jhi-null-replace>
+                </div>
+              </div>
+              <div class="form-group col-md-3">
+                <mat-form-field appearance="outline" [hidden]="!isEditing">
+                  <mat-label>Qualification</mat-label>
+                  <input
+                    matInput
+                    [disabled]="!isEditing"
+                    name="educationalQualification"
+                    id="field_qualification"
+                    [(ngModel)]="profile.educationalQualification"
+                  />
+                </mat-form-field>
+                <div [hidden]="isEditing">
+                  <label
+                    class="form-control-label"
+                    jhiTranslate="kCredit.aboutTheEntrepreneur.educationQualification"
+                    for="field_qualification"
+                    >Qualification</label
+                  >
+                  <jhi-null-replace
+                    [value]="profile.educationalQualification"
+                  ></jhi-null-replace>
+                </div>
+              </div>
+              <div class="form-group col-md-3">
+                <mat-form-field appearance="outline" [hidden]="!isEditing">
+                  <mat-label>Land Holding</mat-label>
+                  <input
+                    matInput
+                    [disabled]="!isEditing"
+                    name="landHolding"
+                    id="field_land_holding"
+                    [(ngModel)]="profile.landHolding"
+                  />
+                </mat-form-field>
+
+                <div [hidden]="isEditing">
+                  <label
+                    class="form-control-label"
+                    jhiTranslate="kCredit.aboutTheEntrepreneur.landHolding"
+                    for="field_land_holding"
+                    >Land Holding</label
+                  >
+                  <jhi-null-replace
+                    [value]="profile.landHolding"
+                  ></jhi-null-replace>
+                </div>
+              </div>
+              <div class="form-group col-md-3">
+                <mat-form-field appearance="outline" [hidden]="!isEditing">
+                  <mat-label>House Type</mat-label>
+                  <input
+                    matInput
+                    [disabled]="!isEditing"
+                    name="house_type"
+                    id="field_house_type"
+                    [(ngModel)]="profile.houseType"
+                  />
+                </mat-form-field>
+
+                <div [hidden]="isEditing">
+                  <label
+                    class="form-control-label"
+                    jhiTranslate="kCredit.aboutTheEntrepreneur.houseType"
+                    for="field_house_type"
+                    >House Type</label
+                  >
+                  <jhi-null-replace
+                    [value]="profile.houseType"
+                  ></jhi-null-replace>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>

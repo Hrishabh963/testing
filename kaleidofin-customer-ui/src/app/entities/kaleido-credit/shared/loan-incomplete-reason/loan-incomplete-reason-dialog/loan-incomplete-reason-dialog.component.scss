@@ -1,0 +1,44 @@
+
+.custom-panel {
+  height: fit-content !important;
+  max-height: 100vh !important;
+}
+.reason {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+}
+.reason-title {
+  font-weight: bold;
+}
+.reason-border {
+  border-bottom: 1px solid var(--kcredit-secondary-background);
+}
+p {
+  font-family: "HK Grotesk",sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 31px;
+  letter-spacing: 0.17307710647583008px;
+}
+.dialog-title {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 5px;
+  border-bottom: 1px solid #eaf2ff;
+}
+.close-icon {
+  color: var(--kcredit-failure-red);
+}
+.dialog-content-text {
+  overflow: auto;
+  padding: 0px 15px;
+}
+.action-buttons {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}

@@ -1,0 +1,102 @@
+<div>
+  <div>
+    <div class="ekyc-title-container">
+      <h3 class="section-sub-heading">UIDAI Aadhaar Details</h3>
+      <div class="report-button-container">
+        <button
+          mat-raised-button
+          type="button"
+          *ngIf="!isFailure()"
+          (click)="openEkycReport()"
+          class="btn btn-primary"
+          data-dismiss="modal"
+        >
+          <mat-icon svgIcon="pdf-icon"></mat-icon>
+          <span style="margin-left: 5px">Download KYC</span>
+        </button>
+      </div>
+    </div>
+    <div class="container">
+      <div class="col-lg-3 field">
+        <label for="dateTime" class="form-control-label">Date and Time</label
+        ><jhi-null-replace
+          [value]="kycData?.dateTime?.value"
+        ></jhi-null-replace>
+      </div>
+      <div class="col-lg-3 field">
+        <label for="reference" class="form-control-label"
+          >Reference Number</label
+        >
+        <jhi-null-replace
+          [value]="kycData?.referenceNumber?.value"
+        ></jhi-null-replace>
+      </div>
+      <div *ngIf="isFailure()" class="col-lg-3 field">
+        <label for="reference" class="form-control-label"> Error </label>
+        <jhi-null-replace
+          class="error-field"
+          [value]="kycData?.message?.value"
+        ></jhi-null-replace>
+      </div>
+    </div>
+  </div>
+  <div>
+    <h3 class="section-sub-heading">Aadhaar Data</h3>
+    <div class="container">
+      <div class="col-lg-3 field">
+        <label for="dateTime" class="form-control-label">Reference Key</label
+        ><jhi-null-replace
+          [value]="kycData?.referenceKey?.value"
+        ></jhi-null-replace>
+      </div>
+    </div>
+  </div>
+  <div class="kyc-details-container">
+    <app-ekyc-image
+      [fileId]="kycData?.fileId?.value"
+      [kycName]="kycData?.name?.value"
+    >
+    </app-ekyc-image>
+    <div class="table-container" *ngIf="!isFailure()">
+      <app-ekyc-table [kycData]="kycData"> </app-ekyc-table>
+    </div>
+    <div class="button-container" *ngIf="isPending()">
+      <div class="review-status-container">
+        <button
+          mat-raised-button
+          class="btn-secondary reject-button"
+          (click)="rejectDocument(doc)"
+        >
+          Reject
+          <!-- [hidden]="checkAndDisableActions(doc) || !isApplicationAssigned"
+              [disabled]="
+                !disableEditAccess || checkForTags() || !isApplicationAssigned
+              " -->
+        </button>
+        <button
+          mat-flat-button
+          (click)="updateDocReviewStatus()"
+          [disabled]="isReject"
+          class="btn-primary"
+        >
+          Accept
+        </button>
+      </div>
+    </div>
+    <!-- <div class="status-container" *ngIf="!isPending() && !isFailure()">
+      <span>{{ getReviewStatus() }}</span>
+      <span *ngIf="reviewSatus.toLowerCase() === 'rejected'">
+        Reason - {{ kycData?.message?.value }}
+      </span>
+    </div> -->
+    <div
+      class="status-container document-subtype-container"
+      *ngIf="!isPending() && !isFailure()"
+    >
+      <document-review-status-alert
+        [reviewStatus]="getReviewStatus()"
+        [rejectReasons]="kycData?.message?.value"
+      ></document-review-status-alert>
+    </div>
+  </div>
+</div>

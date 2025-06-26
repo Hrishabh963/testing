@@ -1,0 +1,59 @@
+.menu-container {
+    width: 19em;
+    height: 13em;
+    display: flex;
+    flex-direction: column;
+    padding: 0.5em;
+    justify-content: space-between;
+}
+
+.menu-button-container {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1em;
+}
+
+.placeholder-text {
+    color: #696767;
+}
+
+.menu-close {
+    background: none;
+    border: none;
+}
+
+textarea {
+    resize: none;
+}
+
+.close-button {
+    background: none;
+    border: none;
+    color: #96AABD;
+}
+
+.close-button-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.review-container {
+    width: 20em;
+    height: 13em;
+    padding: 0 0.7em;
+}
+
+.remark {
+    padding-bottom: 1.5em;
+}
+
+h2 {
+    font-size: 1.1em;
+    font-weight: 400;
+    color: #496684;
+}
+
+span {
+    color: #38526C;
+    font-size: 1.2em;
+}

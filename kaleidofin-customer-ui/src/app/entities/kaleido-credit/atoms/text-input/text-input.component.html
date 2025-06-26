@@ -1,0 +1,11 @@
+<div class="email-container" [formGroup]="myForm">
+  <label [for]="id">{{ title }}</label>
+  <input
+    type="email"
+    required
+    placeholder=""
+    autocomplete="off"
+    [formControlName]="id"
+    [appDisablePaste]="disablePaste"
+  />
+</div>

@@ -1,0 +1,216 @@
+<mat-accordion>
+  <mat-expansion-panel
+    [expanded]="panelOpenState"
+    (opened)="panelOpenState = true"
+    (closed)="panelOpenState = false"
+  >
+    <mat-expansion-panel-header>
+      <div class="expansion-panel-title-container">
+        <div class="section-title">Family Assets</div>
+        <app-section-edit-action
+          (onCancelHandler)="cancel($event)"
+          (onSaveHandler)="save($event)"
+          [panelOpenState]="panelOpenState"
+          [isEditing]="isEditing"
+          (onEditHandler)="toggleEditDetails($event)"
+        ></app-section-edit-action>
+      </div>
+    </mat-expansion-panel-header>
+
+    <div class="card-title">
+      <form name="familyAssets" novalidate #editForm="ngForm">
+        <div class="card-body">
+          <div class="card-title">
+            <div class="row row-spacing">
+              <div class="form-group col-md-3">
+                <mat-form-field appearance="outline" [hidden]="!isEditing">
+                  <mat-label>Livestock</mat-label>
+                  <input
+                    matInput
+                    [disabled]="!isEditing"
+                    name="name"
+                    id="field_livestock"
+                    [(ngModel)]="profile.livestock"
+                  />
+                </mat-form-field>
+
+                <div [hidden]="isEditing">
+                  <label
+                    class="form-control-label"
+                    jhiTranslate="kCredit.familyAssets.livestock"
+                    for="field_livestock"
+                    >Livestock</label
+                  >
+                  <jhi-null-replace
+                    [value]="profile.livestock"
+                  ></jhi-null-replace>
+                </div>
+              </div>
+              <div class="form-group col-md-3">
+                <mat-form-field appearance="outline" [hidden]="!isEditing">
+                  <mat-label>Agriculture Implements</mat-label>
+                  <input
+                    matInput
+                    [disabled]="!isEditing"
+                    name="agriculture_implements"
+                    id="field_agriculture_implements"
+                    [(ngModel)]="profile.agricultureImplements"
+                  />
+                </mat-form-field>
+                <div [hidden]="isEditing">
+                  <label
+                    class="form-control-label"
+                    jhiTranslate="kCredit.familyAssets.agricultureImplements"
+                    for="field_agriculture_implements"
+                    >Agriculture Implements</label
+                  >
+                  <jhi-null-replace
+                    [value]="profile.agricultureImplements"
+                  ></jhi-null-replace>
+                </div>
+              </div>
+              <div class="form-group col-md-3">
+                <mat-form-field appearance="outline" [hidden]="!isEditing">
+                  <mat-label>Vehicles</mat-label>
+                  <input
+                    matInput
+                    [disabled]="!isEditing"
+                    name="vehicles"
+                    id="field_vehicles"
+                    [(ngModel)]="profile.vehicles"
+                  />
+                </mat-form-field>
+                <div [hidden]="isEditing">
+                  <label
+                    class="form-control-label"
+                    jhiTranslate="kCredit.familyAssets.vehicles"
+                    for="field_vehicles"
+                    >Vehicles</label
+                  >
+                  <jhi-null-replace
+                    [value]="profile.vehicles"
+                  ></jhi-null-replace>
+                </div>
+              </div>
+              <div class="form-group col-md-3">
+                <mat-form-field appearance="outline" [hidden]="!isEditing">
+                  <mat-label>House</mat-label>
+                  <input
+                    matInput
+                    [disabled]="!isEditing"
+                    name="field_house"
+                    id="field_house"
+                    [(ngModel)]="profile.house"
+                  />
+                </mat-form-field>
+
+                <div [hidden]="isEditing">
+                  <label
+                    class="form-control-label"
+                    jhiTranslate="kCredit.familyAssets.house"
+                    for="field_house"
+                    >House</label
+                  >
+                  <jhi-null-replace [value]="profile.house"></jhi-null-replace>
+                </div>
+              </div>
+            </div>
+            <div class="row row-spacing">
+              <div class="form-group col-md-3">
+                <mat-form-field appearance="outline" [hidden]="!isEditing">
+                  <mat-label>Factory Premise</mat-label>
+                  <input
+                    matInput
+                    [disabled]="!isEditing"
+                    name="factory_premise"
+                    id="field_factory_premise"
+                    [(ngModel)]="profile.factoryPremise"
+                  />
+                </mat-form-field>
+                <div [hidden]="isEditing">
+                  <label
+                    class="form-control-label"
+                    jhiTranslate="kCredit.familyAssets.factoryPremise"
+                    for="field_factory_premise"
+                    >Factory Premise</label
+                  >
+                  <jhi-null-replace
+                    [value]="profile.factoryPremise"
+                  ></jhi-null-replace>
+                </div>
+              </div>
+              <div class="form-group col-md-3">
+                <mat-form-field appearance="outline" [hidden]="!isEditing">
+                  <mat-label>Jewellery</mat-label>
+                  <input
+                    matInput
+                    [disabled]="!isEditing"
+                    name="jewellery"
+                    id="field_jewellery"
+                    [(ngModel)]="profile.jewellery"
+                  />
+                </mat-form-field>
+                <div [hidden]="isEditing">
+                  <label
+                    class="form-control-label"
+                    jhiTranslate="kCredit.familyAssets.jewellery"
+                    for="field_jewellery"
+                    >Jewellery</label
+                  >
+                  <jhi-null-replace
+                    [value]="profile.jewellery"
+                  ></jhi-null-replace>
+                </div>
+              </div>
+              <div class="form-group col-md-3">
+                <mat-form-field appearance="outline" [hidden]="!isEditing">
+                  <mat-label>Residential</mat-label>
+                  <input
+                    matInput
+                    [disabled]="!isEditing"
+                    name="residential"
+                    id="field_residential"
+                    [(ngModel)]="profile.residential"
+                  />
+                </mat-form-field>
+                <div [hidden]="isEditing">
+                  <label
+                    class="form-control-label"
+                    jhiTranslate="kCredit.familyAssets.residential"
+                    for="field_residential"
+                    >Residential</label
+                  >
+                  <jhi-null-replace
+                    [value]="profile.residential"
+                  ></jhi-null-replace>
+                </div>
+              </div>
+              <div class="form-group col-md-3">
+                <mat-form-field appearance="outline" [hidden]="!isEditing">
+                  <mat-label>Any Other</mat-label>
+                  <input
+                    matInput
+                    [disabled]="!isEditing"
+                    name="others"
+                    id="field_others"
+                    [(ngModel)]="profile.others"
+                  />
+                </mat-form-field>
+                <div [hidden]="isEditing">
+                  <label
+                    class="form-control-label"
+                    jhiTranslate="kCredit.familyAssets.others"
+                    for="field_others"
+                    >Any Other</label
+                  >
+                  <jhi-null-replace [value]="profile.others"></jhi-null-replace>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+      <br />
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>

@@ -1,0 +1,37 @@
+<div class="error-container">
+    <mat-accordion>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <h3 class="error-section-title"> {{ title }} </h3>
+            </mat-expansion-panel-header>
+            <div class="errors-list">
+                <div class="errors">
+                    <h6 class="errors-header">Errors: &nbsp;</h6>
+                    <ul>
+                        <ng-container *ngFor="let errors of (sectionErrors | keyvalue)"
+                            [ngSwitch]="errors?.value?.type">
+                            <ng-container *ngSwitchCase="'subsection'">
+                                <h6 class="sub-error-header">{{ errors?.value?.title }}</h6>
+                                <ul>
+                                    <li *ngFor="let error of (errors?.value?.errors | keyvalue)"> {{error?.value}} </li>
+                                </ul>
+                            </ng-container>
+                            <ng-container *ngSwitchCase="'dependent'">
+                                <h6 class="sub-error"> Dependent Errors: </h6>
+                                <div *ngFor="let error of (errors?.value?.errors | keyvalue)">
+                                    <h6 class="sub-error-header">{{ getDependentErrorTitle(error.key) }}:</h6>
+                                    <ul>
+                                        <li>{{ error.value }} </li>
+                                    </ul>
+                                </div>
+                            </ng-container>
+                            <ng-container *ngSwitchDefault>
+                                <li> {{ errors?.value }} </li>
+                            </ng-container>
+                        </ng-container>
+                    </ul>
+                </div>
+            </div>
+        </mat-expansion-panel>
+    </mat-accordion>
+</div>

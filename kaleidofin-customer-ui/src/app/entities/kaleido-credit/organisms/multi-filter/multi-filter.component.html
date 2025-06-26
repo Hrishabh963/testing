@@ -1,0 +1,54 @@
+<div class="more-filters-container">
+    <div class="filters-title-container">
+        <h1 class="title"> All Filter </h1> <img class="close-icon" src="assets\images\common\filter-close.svg"
+            alt="Close" (click)="toggleDrawer.emit()"  (keypress)="toggleDrawer.emit()" />
+    </div>
+    <div class="filters-container">
+        <div class="filter-list">
+            <div *ngFor="let filter of requiredFilters; let i = index" class="filter-name-container"
+                [ngClass]="selectedFilterIndex === i ? 'clicked' : ''" (click)="setFilterValue(filter?.value, i)"  (keypress)="setFilterValue(filter?.value, i)">
+                <div class="filter-name">
+                    <span>{{ filter?.label }}</span>
+                    <div class="filter-selected-count"
+                        *ngIf="selectedFilterIndex !== i && filter?.count && filter?.count !== 0">
+                        {{ filter?.count }}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="horizontal-divider"></div>
+        <div class="filter-value">
+            <div>
+                <mat-form-field class="search-box" appearance="outline">
+                    <mat-label> Search </mat-label>
+                    <input matInput type="text" [formControl]="searchFieldFormControl" />
+                    <mat-icon matSuffix class="icon">search</mat-icon>
+                </mat-form-field>
+            </div>
+            <div class="options">
+                <mat-checkbox (change)="toggleAll($event)" [checked]="allChecked"> <span class="option-label">All</span>
+                </mat-checkbox>
+            </div>
+
+            <div class="options"> 
+                <ng-container *ngIf="requiredFilters[selectedFilterIndex]?.enableDefaultValue && requiredFilters[selectedFilterIndex]?.value !== 'LOAN_TYPES'">
+                    <mat-checkbox (change)="checkOption($event, requiredFilters[selectedFilterIndex]?.defaultValue, true)" [checked]="requiredFilters[selectedFilterIndex]?.defaultCheck">
+                        <span class="option-label"><i>{{ requiredFilters[selectedFilterIndex]?.defaultValue?.label
+                        }}</i></span></mat-checkbox>
+                </ng-container>
+            </div>
+
+            <div *ngFor="let option of currentOptions" class="options">
+                <mat-checkbox (change)="checkOption($event, option)" [checked]="option?.checked"> <span
+                        class="option-label">{{ option?.label
+                        }}</span></mat-checkbox>
+            </div>
+        </div>
+    </div>
+    <div class="vertical-divider"></div>
+    <div class="button-container">
+        <div><button class="clear-button" mat-flat-button (click)="clearAllSelected()">Clear all</button></div>
+        <div><button class="btn-primary" mat-flat-button color="primary" (click)="applyFilter()"> Apply Filter
+            </button></div>
+    </div>
+</div>

@@ -1,0 +1,24 @@
+{
+        "role" : {
+            "home": {
+                "title": "Roles",
+                "createLabel": "Create a new Role",
+                "editRole": "Edit a Role"
+            },
+            "delete": {
+                "question": "Are you sure you want to delete Role {{ id }}?"
+            },
+            "detail": {
+                "title": "View Role |"
+            },
+            "name": "Name",
+            "code": "Code",
+            "clientDataAccess": "Client Data Access",
+            "emptyData":"-",
+            "authorities" : "Authorities",
+            "messages" : {
+                "save" : "Successfully saved role '{{value}}'",
+                "update" : "Successfully updated role '{{value}}'"
+            }
+        }
+}

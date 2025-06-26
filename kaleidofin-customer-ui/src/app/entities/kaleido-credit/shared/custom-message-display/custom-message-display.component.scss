@@ -1,0 +1,68 @@
+.dialog-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: column;
+}
+
+p {
+  font-family: "HK Grotesk", sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 31px;
+  letter-spacing: 0.17307710647583008px;
+  text-align: center;
+}
+.dialog-title {
+  width: 100%;
+}
+.closeicon {
+  float: right;
+}
+.dialog-content-text {
+  text-align: center;
+}
+.dialog-content-text img {
+  font-size: 65px;
+  height: 65px;
+  width: 65px;
+  margin-bottom: 10px;
+}
+.cancel {
+  background-color: var(--kcredit-primary);
+  color: var(--kcredit-primary-white);
+  width: 9rem;
+  height: 3rem !important;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    border-bottom: 1.5px solid #EBEBEB;
+}
+
+.close-button,
+.close-button:focus,
+.close-button:active {
+    background: none;
+    border: none;
+}
+
+h5 {
+    color: #38526C;
+    font-size: 1em;
+    margin: 0 !important;
+}
+
+.success-container {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  text-align: center;
+  gap: 0.8em;
+  img {
+    width: 3em;
+  }
+}

@@ -1,0 +1,33 @@
+body {
+  background-color: var(--kcredit-page-background) !important;
+}
+
+.main-container {
+  width: 90vw;
+  margin: 0 0 2rem 0 !important;
+}
+
+.image-container {
+  height: 12vh;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-end;
+
+  .image-logo {
+    min-width: 10rem;
+    max-width: 12rem;
+    margin-left: 4rem;
+  }
+}
+
+.profile-section-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem 3.5rem 0 3.5rem;
+  gap: 1.3em;
+}
+
+.profile-info {
+  min-height: 30rem;
+  width: 64rem;
+}

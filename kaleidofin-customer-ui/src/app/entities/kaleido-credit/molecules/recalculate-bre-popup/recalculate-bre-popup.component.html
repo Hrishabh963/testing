@@ -1,0 +1,16 @@
+<div class="recalculate-container">
+    <div class="rules-icon-container">
+        <div class="rules-icon">
+            <img src="/assets/images/BRE/recalculate-rules-icon.svg" alt="rules">
+        </div>
+    </div>
+    <div class="popup-description-container">
+        <h1>Recalculating BRE</h1>
+        <span>Do not make any changes while we check all parameters to re-calculate the BRE</span>
+    </div>
+    <div>
+        <button class="popup-hide-button" (click)="closePopup()">Hide</button>
+    </div>
+</div>
+<app-custom-progress-bar [progressValue]="progressValue" [accentHex]="'#FF7B52'">
+</app-custom-progress-bar>

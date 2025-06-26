@@ -1,0 +1,159 @@
+<div class="card-title">
+  <div class="cb-report-container">
+    <div class="section-title">Credit Bureau Data</div>
+    <div>
+      <button
+        [disabled]="!bankDetails.reportFileId"
+        mat-raised-button
+        [hidden]="!authority.view"
+        type="button"
+        class="btn-primary"
+        (click)="viewReport()"
+      >
+        <span>VIEW REPORT</span>
+      </button>
+    </div>
+  </div>
+  <form
+    name="creditBureauInfoForm"
+    
+    novalidate
+    #creditBureauInfoForm="ngForm"
+  >
+    <div style="margin-top: 5ex">
+      <div class="row row-spacing">
+        <div class="col-3">
+          <label
+            class="form-control-label"
+            jhiTranslate="kCredit.creditBureauInfo.cbScoreErs"
+            for="field_cb_score"
+            >CB Score</label
+          >
+          <div [hidden]="editBankDetails">
+            <jhi-null-replace [value]="bankDetails.cbScoreErs"></jhi-null-replace>
+          </div>
+        </div>
+        <div class="col-3">
+          <label
+            class="form-control-label"
+            jhiTranslate="kCredit.creditBureauInfo.cbScoreMrs"
+            for="field_cb_score"
+            >CB Score (MRS)</label
+          >
+          <div [hidden]="editBankDetails">
+            <jhi-null-replace
+              [value]="bankDetails.cbScoreMrs"
+            ></jhi-null-replace>
+          </div>
+        </div>
+        <div class="col-3">
+            <label
+              class="form-control-label"
+              jhiTranslate="kCredit.creditBureauInfo.emiDate"
+              for="field_emi_date"
+              >CB EMI date</label
+            >
+            <div [hidden]="editBankDetails">
+              <jhi-null-replace
+                [value]="bankDetails.emiDate"
+              ></jhi-null-replace>
+            </div>
+        </div>
+        <div class="col-3">
+            <label
+              class="form-control-label"
+              jhiTranslate="kCredit.creditBureauInfo.writtenOffAccounts"
+              for="field_written_off_accounts"
+              >CB no. of written off accounts</label
+            >
+            <div [hidden]="editBankDetails">
+              <jhi-null-replace
+                [value]="bankDetails.writtenOffAccounts"
+              ></jhi-null-replace>
+            </div>
+        </div>
+      </div>
+      <div class="row row-spacing">
+        <div class="col-3">
+            <label
+              class="form-control-label"
+              jhiTranslate="kCredit.creditBureauInfo.overdueStatus"
+              for="field_overdue_status"
+              >CB Overdue status</label
+            >
+            <div [hidden]="editBankDetails">
+              <jhi-null-replace
+                [value]="bankDetails.overdueStatus"
+              ></jhi-null-replace>
+            </div>
+        </div>
+        <div class="col-3">
+            <label
+              class="form-control-label"
+              jhiTranslate="kCredit.creditBureauInfo.totalOutstandingAmount"
+              for="field_total_outstanding_amount"
+              >CB total O/S excluding new loan</label
+            >
+            <div [hidden]="editBankDetails">
+              <jhi-null-replace
+                [value]="bankDetails.totalOutstandingAmount"
+              ></jhi-null-replace>
+            </div>
+        </div>
+        <div class="col-3">
+            <label
+              class="form-control-label"
+              jhiTranslate="kCredit.creditBureauInfo.noOfMFI"
+              for="field_no_of_mfi"
+              >No. of MFIs as per CB</label
+            >
+            <div [hidden]="editBankDetails">
+              <jhi-null-replace
+                [value]="bankDetails.noOfMFI"
+              ></jhi-null-replace>
+            </div>
+        </div>
+        <div class="col-3">
+            <label
+              class="form-control-label"
+              jhiTranslate="kCredit.creditBureauInfo.noOfBanks"
+              for="field_no_of_banks"
+              >No. of Banks as per CB</label
+            >
+            <div [hidden]="editBankDetails">
+              <jhi-null-replace
+                [value]="bankDetails.noOfBanks"
+              ></jhi-null-replace>
+            </div>
+        </div>
+      </div>
+      <div class="row row-spacing">
+        <div class="col-3">
+        
+            <label
+              class="form-control-label"
+              jhiTranslate="kCredit.creditBureauInfo.cbName"
+              for="field_cb_name"
+              >Credit Bureau name</label
+            >
+            <div [hidden]="editBankDetails">
+              <jhi-null-replace [value]="bankDetails.cbName"></jhi-null-replace>
+            </div>
+        </div>
+        <div class="col-3">
+          <label
+            class="form-control-label"
+            jhiTranslate="kCredit.creditBureauInfo.noOfLenders"
+            for="field_no_of_lenders"
+            >No. of active lenders as per CB</label
+          >
+          <div [hidden]="editBankDetails">
+            <jhi-null-replace
+              [value]="bankDetails.noOfLenders"
+            ></jhi-null-replace>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,19 @@
+<div *ngIf="isClickjacked" class="error-container">
+  <h1>Security Warning</h1>
+  <p>
+    The application is being accessed in an insecure manner. Please ensure you
+    are accessing this app directly and not embedded in another site.
+  </p>
+</div>
+<ng-container *ngIf="!isClickjacked">
+  <ng-http-loader
+    [filteredUrlPatterns]="filteredEndpoints"
+    spinner="sk-cube-grid"
+  ></ng-http-loader>
+  <div class="nav-route">
+    <router-outlet name="navbar"></router-outlet>
+    <router-outlet></router-outlet>
+    <router-outlet name="popup"></router-outlet>
+  </div>
+  <ig-footer *ngIf="useFooter && checkFooter()"></ig-footer>
+</ng-container>

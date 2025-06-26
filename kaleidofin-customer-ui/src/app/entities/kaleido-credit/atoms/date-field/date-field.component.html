@@ -1,0 +1,26 @@
+<mat-form-field
+  class="date-picker"
+  appearance="outline"
+  [matTooltip]="toolTipLabel"
+  [matTooltipDisabled]="!showToolTip"
+  matTooltipPosition="above"
+>
+  <mat-label>{{ label }}</mat-label>
+  <input
+    matInput
+    [disabled]="!editable"
+    format="yyyy-MM-dd"
+    [matDatepicker]="dateOfBirth"
+    [placeholder]="label"
+    [min]="minDate"
+    (dateChange)="edit($event, 'value', dataObj)"
+    [max]="maxDate"
+    [value]="getDate(dataObj)"
+    [required]="isRequired"
+    [formControl]="dateFormField"
+  />
+  <mat-datepicker-toggle matSuffix [for]="dateOfBirth"></mat-datepicker-toggle>
+  <mat-datepicker #dateOfBirth></mat-datepicker>
+  <mat-error *ngIf="dateFormField?.hasError('required')">Please select a date.</mat-error>
+</mat-form-field>
+<mat-error>{{ dataObj?.error || "" }}</mat-error>

@@ -1,0 +1,28 @@
+<div class="table-container">
+    <table>
+        <caption></caption>
+        <thead>
+            <tr>
+                <th [colSpan]="otherIncome.length + 1" class="table-heading"> Other Income Yearly </th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let row of tableRow; let index = index" [ngSwitch]="row?.type">
+                <tr *ngSwitchCase="'otherIncome'">
+                    <td [class]="'row-' + (1 - index % 2)" class="table-span">
+                        {{ row?.title }}
+                    </td>
+                    <td [class]="'row-' + (1 - index % 2)" class="table-span" *ngFor="let income of otherIncome">
+                        <jhi-null-replace [value]="income[row?.propertyKey] | dynamicDataTransform : row?.pipe"></jhi-null-replace>
+                    </td>
+                </tr>
+                <tr *ngSwitchCase="'overall'">
+                    <td [class]="'row-' + (1 - index % 2)" class="table-span talbe-span-overall"> {{ row?.title }} </td>
+                    <td [class]="'row-' + (1 - index % 2)" class="table-span table-span-overall"
+                        [colSpan]="otherIncome?.length"> <jhi-null-replace
+                            [value]="reportData[row?.propertyKey] | dynamicDataTransform : row?.pipe"></jhi-null-replace> </td>
+                </tr>
+            </ng-container>
+        </tbody>
+    </table>
+</div>

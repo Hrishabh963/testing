@@ -1,0 +1,101 @@
+<div class="kcredit-upload-container">
+  <div class="col-md-12">
+    <jhi-alert></jhi-alert>
+    <h3>Upload Report</h3>
+  </div>
+  <br />
+  <div class="col-md-12 filter-container">
+    <mat-form-field appearance="fill" class="custom-mat-form-field">
+      <mat-label>Report Type</mat-label>
+      <mat-select placeholder="Report Type" (selectionChange)="updateReportType()" [(ngModel)]="selectedReportType">
+        <mat-option *ngFor="let report of reportTypes" [value]="report">{{
+          report.viewValue
+        }}</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button
+      mat-raised-button
+      class="btn-primary upload-button"
+      [disabled]="!selectedReportType"
+      (click)="openUploadDialog()"
+    >
+      Upload
+    </button>
+  </div>
+
+  <div class="col-md-12">
+    <table class="table table-light col-md-12 table-bordered table-list-size">
+    <caption></caption>
+      <thead class="thead-inverse">
+        <tr>
+          <th><span>Date</span></th>
+          <th><span>File name</span></th>
+          <th><span>User name</span></th>
+          <th><span>Report type</span></th>
+          <th><span>Status</span></th>
+          <th><span>Action</span></th>
+          <th><span>File Status</span></th>
+        </tr>
+      </thead>
+      <tbody *ngIf="uploadReports.length > 0">
+        <tr *ngFor="let uploadReport of uploadReports">
+          <td>{{ uploadReport.createdDate | customDate }}</td>
+          <td>
+            {{ uploadReport.fileName }}
+          </td>
+          <td>{{ uploadReport.username }}</td>
+          <td>{{ getReportType(uploadReport.uploadPhase) }}</td>
+          <td [class]="getClass(uploadReport.status)">
+            {{ getStatus(uploadReport.status) }}
+          </td>
+          <td>
+            <div class="col-md-3">
+              <button
+                mat-icon-button
+                class="kcredit-primary-color"
+                [disabled]="uploadReport.fileId == null"
+                (click)="downLoadFile(uploadReport.fileId, uploadReport)"
+              >
+                <span class="material-icons">download_for_offline</span>
+              </button>
+            </div>
+          </td>
+          <td>{{ getFileStatusMessage(uploadReport) }}</td>
+        </tr>
+      </tbody>
+      <tfoot *ngIf="uploadReports.length > 0">
+        <tr class="bg-light">
+          <td colspan="12">
+            <div class="row pagination-align">
+              <jhi-item-count
+                [page]="page"
+                [itemsPerPage]="itemsPerPage"
+                [total]="totalItems"
+              >
+              </jhi-item-count>
+            </div>
+            <div class="row pagination-align">
+              <ngb-pagination
+                class="text-center-div"
+                [collectionSize]="totalItems"
+                [(page)]="page"
+                [pageSize]="itemsPerPage"
+                (pageChange)="loadPage(page)"
+                [maxSize]="3"
+                [rotate]="true"
+                [boundaryLinks]="true"
+              >
+              </ngb-pagination>
+            </div>
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+    <div *ngIf="uploadReports.length === 0">
+      <hr />
+      <h3 class="text-center kcredit-failure-color">No Reports found</h3>
+      <hr />
+    </div>
+  </div>
+</div>

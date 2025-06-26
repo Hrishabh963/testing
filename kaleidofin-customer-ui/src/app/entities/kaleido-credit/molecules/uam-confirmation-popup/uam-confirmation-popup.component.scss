@@ -1,0 +1,63 @@
+
+main {
+    width: 40vw;
+    height: fit-content;
+    display: flex;
+    flex-flow: column;
+    gap: 1em;
+}
+
+.close-button {
+    background: none;
+    border: none;
+    color: var(--kcredit-text-dark);
+    align-self: flex-start;
+}
+
+h1 {
+    color: var(--kcredit-text-dark);
+    font-size: 1.3em;
+    margin: 0;
+    align-self: flex-end;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.cancel-button {
+    background: none;
+    color: var(--kcredit-primary);
+    border: none;    
+}
+
+.cancel-button:hover {
+    background: none;
+    color: var(--kcredit-primary);
+    border: none;    
+}
+
+.cancel-button:focus {
+    background: none;
+    color: var(--kcredit-primary);
+    border: none;    
+}
+
+::ng-deep .custom-panel .mat-dialog-container {
+    padding: 0.7em 1.2em !important;
+}
+
+.button-container {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1em;
+}
+
+.confirmation-text {
+    color: var(--kcredit-text-dark);
+    font-size: 1.3em;
+    line-height: normal;
+    width: 60%;
+}

@@ -1,0 +1,55 @@
+<div class="file-upload-container mat-elevation-z1">
+  <!-- Drag and Drop Area -->
+  <div
+    class="upload-area"
+    (drop)="onFileDrop($event)"
+    (dragover)="onDragOver($event)"
+    *ngIf="!isUploading"
+  >
+    <p class="upload-title">Drag & drop Customers data for Scoring</p>
+    <p class="file-size-info">Max file size should be within 100MB</p>
+    <button mat-raised-button class="browse-button" (click)="fileInput.click()">
+      Browse file
+    </button>
+    <input
+      #fileInput
+      type="file"
+      (change)="onFileSelected($event)"
+      hidden
+      multiple
+      [accept]="acceptedFileTypes"
+    />
+
+    <!-- Upload Tips -->
+    <div class="upload-tips">
+      <!-- Add icons or informational text about supported file formats -->
+      <div class="first-icon">
+        <img src="assets/images/kiscore/image1.svg" alt="" />
+        <p>Make sure your file has all columns filled</p>
+      </div>
+      <div>
+        <img src="assets/images/kiscore/image2.svg" alt="" />
+        <p>Upload separate zip files having customer data & CB data</p>
+      </div>
+      <div>
+        <img src="assets/images/kiscore/image3.svg" alt="" />
+        <p>Make sure customer data file has extensions like XLS or XLSX</p>
+      </div>
+      <div>
+        <img src="assets/images/kiscore/image4.svg" alt="" />
+        <p>Make sure CB data file has extensions XML or JSON</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Loading / Progress Area -->
+  <div *ngIf="isUploading" class="uploading">
+    <h6>Uploading...</h6>
+    <mat-progress-bar
+      mode="determinate"
+      [value]="uploadProgress"
+    ></mat-progress-bar>
+    <p>{{ uploadedSize.toFixed(2) }} out of {{ totalSize.toFixed(2) }} MB</p>
+    <button mat-button color="primary" (click)="cancelUpload()">Cancel</button>
+  </div>
+</div>

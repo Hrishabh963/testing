@@ -1,0 +1,16 @@
+<div id="report">
+  <div class="report-logo">
+    <div class="report-title-container">
+      <div class="report-logo-container">
+        <img src="assets/images/lender/dcb-logo.svg" alt="Kaleidofin" />
+      </div>
+      <div class="section-title-container">
+        <div class="section-title">ATD Sheet</div>
+        <button mat-flat-button class="btn-primary download-button" id="pdf-download-button" (click)="downloadPdf()">
+          Download </button>
+      </div>
+    </div>
+    <img class="report-static-logo atd-report-logo" src="assets/images/common/report-heading-image.svg" alt="Reports" />
+  </div>
+  <app-report-table [reportData]="reportData"></app-report-table>
+</div>

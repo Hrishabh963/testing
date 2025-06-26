@@ -1,0 +1,143 @@
+.match-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+$cell-padding: 8px;
+
+p {
+  font-family: Lato, sans-serif;
+}
+
+table,
+th,
+td {
+  border: 1px solid #ebebeb;
+  border-collapse: collapse;
+  padding-top: 1vw;
+}
+
+th,
+td {
+  padding: $cell-padding;
+  text-align: left;
+}
+
+table.tid-table {
+  width: 100%;
+  border: 0;
+  box-shadow: none !important;
+  th {
+    background-color: #f9f9f9 !important;
+    > div {
+      font-size: small;
+    }
+  }
+  tr {
+    &.tid-detail-row {
+      > td {
+        padding: 10px;
+        border: 1px solid #ebebeb;
+        box-shadow: none;
+        max-width: 40vw;
+        word-wrap: break-word;
+        word-break: break-all;
+        white-space: normal;
+        > div {
+          width: 100%;
+          font-size: small;
+          box-sizing: border-box;
+          max-height: 0;
+          transition: max-height 0.5s cubic-bezier(0, 1, 0, 1);
+          overflow: hidden;
+          > div {
+            padding: $cell-padding;
+          }
+        }
+      }
+      &.show > td > div {
+        max-height: 1000px;
+        transition: max-height 1s ease-in-out;
+        font-size: small;
+      }
+    }
+    &.tid-even {
+      background-color: #dbdbdb;
+    }
+  }
+}
+.kyc-verification-container {
+  padding: 10px;
+}
+
+.accept {
+  color: #0bc07f;
+}
+.failed {
+  color: #e42323;
+}
+.pending {
+  color: #FFAC30;
+}
+th {
+  font-weight: bold;
+}
+.hide-border {
+  td {
+    border: 0 !important;
+    box-shadow: none !important;
+  }
+}
+.verification-container {
+  display: flex;
+  flex-direction: row;
+  max-width: 56vw;
+}
+.verify-btn-container {
+  margin-left: 20px;
+}
+
+.info-icon {
+  font-size: 16px;
+  color: blue;
+  height: auto;
+  width: auto;
+}
+.govt-record {
+  display: flex;
+  align-items: center;
+  gap: 0.25em;
+}
+
+.subtitle {
+  font-weight: 400;
+  font-size: smaller !important;
+}
+
+.match-text {
+  width: 80px;
+}
+.update-btn {
+  float: right;
+}
+
+.error-container {
+  display: flex;
+  flex-flow: column nowrap;
+  gap: 0.3em;
+}
+
+.error {
+  display: flex;
+  gap: 0.7em;
+}
+
+.error > span:first-child {
+  font-weight: 800;
+}
+
+.error > span:last-child {
+  font-size: 0.89em;
+}

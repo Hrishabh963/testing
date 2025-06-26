@@ -1,0 +1,19 @@
+.kyc-image {
+    max-width: 9rem;
+    border-radius: 10px;
+    border: 5px solid #E0F3FE;
+}
+
+.ekyc-image-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.image-name {
+    padding: 1rem 0 0 0.5rem;
+    font-family: Lexend Deca, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: #96AABD;
+}

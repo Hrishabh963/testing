@@ -1,0 +1,280 @@
+<div class="main-container">
+  <div fxLayout="row wrap" style="justify-content: space-between">
+    <div>
+      <h1>Dashboard</h1>
+      <h5>Welcome, everything looks great!</h5>
+    </div>
+    <custom-datepicker
+      (datesEventEmitter)="getDateRange($event)"
+    ></custom-datepicker>
+  </div>
+  <h2>Nach Mandates</h2>
+  <div
+    fxLayout="row wrap"
+    fxLayout.lt-sm="column"
+    fxLayoutWrap
+    fxLayoutGap="20px"
+    fxLayoutAlign="start"
+  >
+    <div fxFlex="0 1 calc(50.0% - 10px)" fxLayoutGap="20px">
+      <mat-card fxFlex="0 1 calc(50.0% - 10px)" class="dashboard-small-card">
+        <mat-card-content>
+          <div class="detail1">Total</div>
+          <div class="main-header">
+            <img src="assets/images/dashboard/nachblue.svg" alt="Total" />
+            {{ nachMandatesData.total }}
+          </div>
+          <div *ngIf="showYesterday" class="detail-description">
+            Yesterday {{ nachMandatesData.yesterdayData.total }}
+          </div>
+        </mat-card-content>
+      </mat-card>
+      <mat-card fxFlex="0 1 calc(50.0% - 10px)" class="dashboard-small-card">
+        <mat-card-content>
+          <div class="detail1">Approved</div>
+          <div class="main-header">
+            <img src="assets/images/dashboard/nachgreen.svg" alt="Approved" />
+            {{ nachMandatesData.approved }}
+          </div>
+          <div *ngIf="showYesterday" class="detail-description">
+            Yesterday {{ nachMandatesData.yesterdayData.approved }}
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+    <div fxFlex="0 1 calc(50.0% - 10px)" fxLayoutGap="20px">
+      <mat-card fxFlex="0 1 calc(50.0% - 10px)" class="dashboard-small-card">
+        <mat-card-content>
+          <div class="detail1">Processing</div>
+          <div class="main-header">
+            <img
+              src="assets/images/dashboard/nachyellow.svg"
+              alt="Processing"
+            />
+            {{ nachMandatesData.processing }}
+          </div>
+          <div *ngIf="showYesterday" class="detail-description">
+            Yesterday {{ nachMandatesData.yesterdayData.processing }}
+          </div>
+        </mat-card-content>
+      </mat-card>
+      <mat-card fxFlex="0 1 calc(50.0% - 10px)" class="dashboard-small-card">
+        <mat-card-content>
+          <div class="detail1">Rejected</div>
+          <div class="main-header">
+            <img src="assets/images/dashboard/nachred.svg" alt="Rejected" />
+            {{ nachMandatesData.rejected }}
+          </div>
+          <div *ngIf="showYesterday" class="detail-description">
+            Yesterday {{ nachMandatesData.yesterdayData.rejected }}
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+  <div
+    fxLayout="row wrap"
+    fxLayout.lt-md="column"
+    fxLayoutWrap
+    fxLayoutGap="20px"
+    fxLayoutAlign="start"
+  >
+    <mat-card
+      fxFlex="0 1 calc(50.0% - 10px)"
+      fxFlex.lt-sm="0 1 calc(100.0%)"
+      class="dashboard-card"
+    >
+      <mat-card-content>
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="detail1">Mandate TAT</div>
+            <div class="main-header">
+              <img
+                src="assets/images/dashboard/clockblue.svg"
+                alt="Mandate TAT"
+              />
+              {{ nachMandatesData.tatDays }}D {{ nachMandatesData.tatHours }}H
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="detail1">Overall Mandate TAT</div>
+            <div class="main-header">
+              <img
+                src="assets/images/dashboard/clockgreen.svg"
+                alt="Overall Mandate"
+              />
+              {{ nachMandatesData.overallTatDays }}D
+              {{ nachMandatesData.overallTatHours }}H
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+    <mat-card
+      fxFlex="0 1 calc(50.0% - 10px)"
+      fxFlex.lt-sm="0 1 calc(100.0%)"
+      class="dashboard-card"
+    >
+      <mat-card-content>
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="detail1">Mandate Approval Rate</div>
+            <div class="main-header">
+              <img
+                src="assets/images/dashboard/checkblue.svg"
+                alt="Mandate Approval"
+              />
+              {{ nachMandatesData.approvalRate }}%
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="detail1">Overall Mandate Approval Rate</div>
+            <div class="main-header">
+              <img
+                src="assets/images/dashboard/checkgreen.svg"
+                alt="Overall Mandate"
+              />
+              {{ nachMandatesData.overallApprovalRate }}%
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div *ngIf="chart" fxLayout="row wrap">
+    <mat-card fxFlex="0 1 100.0%" class="dashboard-chart-card">
+      <mat-card-content>
+        <div fxLayout="row wrap" style="justify-content: space-between">
+          <h3>Overview</h3>
+          <button
+            *ngIf="barChart && chart"
+            mat-button
+            class="button4"
+            (click)="barChart = !barChart"
+          >
+            <mat-icon>waves</mat-icon>
+          </button>
+          <button
+            *ngIf="!barChart && chart"
+            mat-button
+            class="button4"
+            (click)="barChart = !barChart"
+          >
+            <mat-icon>bar_chart</mat-icon>
+          </button>
+        </div>
+        <div class="barcanvas">
+          <canvas
+            *ngIf="barChart && chart"
+            baseChart
+            [datasets]="barChartData"
+            [labels]="barChartLabels"
+            [options]="barChartOptions"
+            [plugins]="barChartPlugins"
+            [colors]="barChartColors"
+            [legend]="barChartLegend"
+            [chartType]="barChartType"
+          >
+          </canvas>
+          <canvas
+            *ngIf="!barChart && chart"
+            baseChart
+            [datasets]="barChartData"
+            [labels]="barChartLabels"
+            [options]="barChartOptions"
+            [plugins]="barChartPlugins"
+            [colors]="lineChartColors"
+            [legend]="barChartLegend"
+            [chartType]="lineChartType"
+          >
+          </canvas>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <h2>Payments</h2>
+  <div
+    fxLayout="row wrap"
+    fxLayout.lt-sm="column"
+    fxLayoutWrap
+    fxLayoutGap="20px"
+    fxLayoutAlign="start"
+  >
+    <mat-card
+      fxFlex="0 1 calc(75.0%-10px)"
+      fxFlex.lt-sm="0 1 calc(100.0%)"
+      class="dashboard-card"
+    >
+      <mat-card-content>
+        <div class="row">
+          <div class="col-sm-3">
+            <div class="detail1">Total</div>
+            <div class="main-header">
+              <img src="assets/images/dashboard/paymentblue.svg" alt="Total" />
+              {{ paymentsData.total }}
+            </div>
+            <div class="detail-description" *ngIf="showYesterday">
+              Yesterday {{ paymentsData.yesterdayData.total }}
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="detail1">Success</div>
+            <div class="main-header">
+              <img
+                src="assets/images/dashboard/paymentgreen.svg"
+                alt="Success"
+              />
+              {{ paymentsData.successful }}
+            </div>
+            <div class="detail-description" *ngIf="showYesterday">
+              Yesterday {{ paymentsData.yesterdayData.successful }}
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="detail1">Failure</div>
+            <div class="main-header">
+              <img src="assets/images/dashboard/paymenyred.svg" alt="Failure" />
+              {{ paymentsData.failure }}
+            </div>
+            <div class="detail-description" *ngIf="showYesterday">
+              Yesterday {{ paymentsData.yesterdayData.failure }}
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="detail1">Scheduled</div>
+            <div class="main-header">
+              <img
+                src="assets/images/dashboard/paymentyellow.svg"
+                alt="Scheduled"
+              />
+              {{ paymentsData.scheduled }}
+            </div>
+            <div class="detail-description" *ngIf="showYesterday">
+              Yesterday {{ paymentsData.yesterdayData.scheduled }}
+            </div>
+          </div>
+        </div>
+      </mat-card-content>
+    </mat-card>
+    <mat-card
+      fxFlex="0 1 calc(25.0%-10px)"
+      fxFlex.lt-sm="0 1 calc(100.0%)"
+      class="dashboard-card"
+    >
+      <mat-card-content>
+        <h4 class="detail1">Amount Collected</h4>
+        <h1>
+          <img src="assets/images/dashboard/amount.svg" alt="Amount" />
+          {{ paymentsData.totalAmountCollected | currency : "INR" : "symbol" }}
+        </h1>
+        <h6 *ngIf="showYesterday" class="detail-description">
+          Yesterday
+          {{
+            paymentsData.yesterdayData.totalAmountCollected
+              | currency : "INR" : "symbol"
+          }}
+        </h6>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

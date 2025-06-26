@@ -1,0 +1,52 @@
+<mat-accordion>
+  <mat-expansion-panel [expanded]="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <div class="section-title-text" id="factoringLimit">
+          Factoring Limit
+        </div></mat-panel-title
+      >
+    </mat-expansion-panel-header>
+    <div class="flex-container">
+      <div class="details-grid">
+        <div class="field-item">
+          <span class="business-review-label">Currency</span>
+          <select
+            id="outstanding-limit"
+            class="styled-select"
+            [(ngModel)]="selectedCurrency"
+          >
+            <option [value]="null" disabled hidden>Select</option>
+            <option *ngFor="let currency of currencyList" [value]="currency">
+              {{ currency }}
+            </option>
+          </select>
+        </div>
+        <div class="field-item">
+          <span class="business-review-label">Business Credit Limit</span>
+          <input [(ngModel)]="businessCreditLimit" type="number" />
+        </div>
+        <div class="field-item">
+          <span class="business-review-label">Outstanding invoice limit</span>
+          <select
+            id="outstanding-limit"
+            class="styled-select"
+            [(ngModel)]="selectedLimit"
+          >
+            <option [value]="null" disabled hidden>Select</option>
+            <option *ngFor="let limit of outstandingLimits" [value]="limit">
+              {{ limit }}
+            </option>
+          </select>
+        </div>
+        <div class="field-item">
+          <span class="business-review-label">Invoice credit limit</span>
+          <input [(ngModel)]="invoiceCreditLimit" type="number" />
+        </div>
+      </div>
+      <div>
+        <button class="btn-primary" mat-raised-button (click)="onSaveFactoringLimit($event)">Save</button>
+      </div>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>

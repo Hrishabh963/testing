@@ -1,0 +1,135 @@
+<div class="split-container">
+  <mat-card class="left-side">
+    <div class="profile-pic">
+      <mat-card class="profile-card">
+        <img src="assets/images\dashboard/profile.svg" alt="Profile" class="profile-image" />
+      </mat-card>
+    </div>
+  </mat-card>
+
+  <mat-card class="right-side">
+    <div class="row">
+      <div class="col-md-3">
+        <mat-form-field class="input-field">
+          <input matInput readonly placeholder="Pre processing customer ID"
+            [value]="data?.partnerCustomerId || '---'" />
+        </mat-form-field>
+      </div>
+      <div class="col-md-3">
+        <mat-form-field class="input-field">
+          <input matInput readonly placeholder="Sur Name" [value]="data?.lastName || '---'" />
+        </mat-form-field>
+        <mat-error class="params-error" *ngIf="paramsObject?.['LastName']">already exists</mat-error>
+      </div>
+      <div class="col-md-3">
+        <mat-form-field class="input-field">
+          <input matInput readonly placeholder="First Name" [value]="data?.name || '---'" />
+        </mat-form-field>
+        <mat-error class="params-error" *ngIf="paramsObject?.['FirstName']">already exists</mat-error>
+      </div>
+      <div class="col-md-3">
+        <mat-form-field class="input-field">
+          <input matInput readonly placeholder="Last Name" [value]="data?.lastName || '---'" />
+        </mat-form-field>
+        <mat-error class="params-error" *ngIf="paramsObject?.['LastName']">already exists</mat-error>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3">
+        <mat-form-field class="input-field">
+          <input matInput readonly placeholder="Mother's Maiden Name" [value]="data?.motherName || '---'" />
+        </mat-form-field>
+        <mat-error class="params-error" *ngIf="paramsObject?.['MotherMaidenName']">already exists</mat-error>
+      </div>
+      <div class="col-md-3">
+        <mat-form-field class="input-field">
+          <input matInput readonly placeholder="Email" [value]="data?.email || '---'" />
+        </mat-form-field>
+        <mat-error class="params-error" *ngIf="paramsObject?.['Email']">already exists</mat-error>
+      </div>
+      <div class="col-md-3">
+        <mat-form-field class="input-field">
+          <input matInput readonly placeholder="Phone" [value]="data?.primaryMobileNumber || data?.mobileNo || '---'" />
+        </mat-form-field>
+        <mat-error class="params-error" *ngIf="paramsObject?.['Phone']">already exists</mat-error>
+      </div>
+      <div class="col-md-3">
+        <mat-form-field class="input-field">
+          <input matInput readonly placeholder="Address" [value]="addressInfo || '---'" />
+        </mat-form-field>
+        <mat-error class="params-error" *ngIf="paramsObject?.['Address']">already exists</mat-error>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3">
+        <mat-form-field class="input-field">
+          <input matInput readonly placeholder="City" [value]="data?.city || '---'" />
+        </mat-form-field>
+        <mat-error class="params-error" *ngIf="paramsObject?.['City']">already exists</mat-error>
+      </div>
+      <div class="col-md-3">
+        <mat-form-field class="input-field">
+          <input matInput readonly placeholder="State" [value]="data?.state || '---'" />
+        </mat-form-field>
+        <mat-error class="params-error" *ngIf="paramsObject?.['State']">already exists</mat-error>
+      </div>
+      <div class="col-md-3">
+        <mat-form-field class="input-field">
+          <input matInput readonly placeholder="Postal Code" [value]="data?.pinCode || data?.pincode || '---'" />
+        </mat-form-field>
+        <mat-error class="params-error" *ngIf="paramsObject?.['PostalCode']">already exists</mat-error>
+      </div>
+      <div class="col-md-3">
+        <mat-form-field class="input-field">
+          <input matInput readonly placeholder="Age" [value]="getAge(data) || '---'" />
+        </mat-form-field>
+        <mat-error class="params-error" *ngIf="paramsObject?.['DOB']">already exists</mat-error>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-3">
+        <mat-form-field class="input-field">
+          <input matInput readonly placeholder="Created at" [value]="(data?.createdDate | date : 'short') || '---'" />
+        </mat-form-field>
+      </div>
+      <div class="col-md-3">
+        <mat-form-field class="input-field">
+          <input matInput readonly placeholder="Updated at"
+            [value]="(data?.lastModifiedDate | date : 'short') || '---'" />
+        </mat-form-field>
+      </div>
+      <div class="col-md-3">
+        <mat-form-field class="input-field">
+          <input matInput readonly placeholder="Aadhaar" [value]="getNumberFromKycDocs('aadhaar') || '--'" />
+        </mat-form-field>
+        <mat-error class="params-error" *ngIf="paramsObject?.['Aadhaar']">already exists</mat-error>
+      </div>
+      <div class="col-md-3">
+        <mat-form-field class="input-field">
+          <input matInput readonly placeholder="Pan" [value]="getNumberFromKycDocs('pan') || '--'" />
+        </mat-form-field>
+        <mat-error class=" params-error" *ngIf="paramsObject?.['Pan']">already exists</mat-error>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-4">
+        <mat-form-field class="input-field">
+          <input matInput readonly placeholder="Voter ID" [value]="getNumberFromKycDocs('voterid') || '--'" />
+        </mat-form-field>
+        <mat-error class="params-error" *ngIf="paramsObject?.['Voterid']">already exists</mat-error>
+      </div>
+      <div class="col-md-4">
+        <mat-form-field class="input-field">
+          <input matInput readonly placeholder="Driving License" [value]="getNumberFromKycDocs('dl') || '--'" />
+        </mat-form-field>
+        <mat-error class="params-error" *ngIf="paramsObject?.['DrivingLicense'] || paramsObject?.['Dl']">already exists</mat-error>
+      </div>
+      <div class="col-md-4">
+        <mat-form-field class="input-field">
+          <input matInput readonly placeholder="Bank Account Number" [value]="data?.accountNum || '--'" />
+        </mat-form-field>
+        <mat-error class="params-error" *ngIf="paramsObject?.['BankAccountNumber']">already exists</mat-error>
+      </div>
+    </div>
+  </mat-card>
+</div>

@@ -1,0 +1,29 @@
+:host{
+	width: 100%;
+}
+
+
+span{
+	margin-top: 6vh;
+	font-size: 1em;
+	line-height: 1;
+}
+
+span span{
+	color: var(--kcredit-primary);
+	font-size: 1.1em;
+	cursor: pointer;
+	text-decoration: underline;
+}
+
+a {
+	color: var(--kcredit-primary);
+	font-size: 1.1em;
+	cursor: pointer;
+	text-decoration: underline;
+}
+.PoweredBy-container{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}

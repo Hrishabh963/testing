@@ -1,0 +1,20 @@
+<form name="reviewForm">
+    <div class="modal-header">
+        <div class="modal-title">Confirmation</div>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div>
+            Are you sure want to reject application which is <b>{{noOfEntries}}</b>?
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" mat-raised-button class="btn-secondary" (click)="cancel()" data-dismiss="modal">
+            <span >Cancel</span>
+        </button>
+        <button type="button" mat-raised-button class="btn-primary" (click)="approve()">
+            <span >Continue</span>
+        </button>
+    </div>
+
+</form>

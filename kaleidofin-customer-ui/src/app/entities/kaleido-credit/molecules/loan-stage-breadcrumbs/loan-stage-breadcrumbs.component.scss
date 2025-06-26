@@ -1,0 +1,64 @@
+.horizontal-mat-list-item {
+  float: right;
+  display: list-item;
+  content: " > ";
+}
+.inline-list {
+  display: flex;
+  content: " > ";
+}
+span {
+  font-size: 13px;
+}
+span.active {
+  user-select: black;
+  font-weight: bold;
+  background: none;
+  color: var(--kcredit-primary);
+}
+
+mat-nav-list.list-horizontal {
+  padding: 0;
+  content: " > ";
+}
+mat-nav-list.list-horizontal .mat-list-item {
+  display: inline-block;
+  height: 50px;
+  width: auto;
+  content: " > ";
+  background-color: none;
+  color: var(--kcredit-text-light);
+  margin-right: 10px;
+}
+
+a.active {
+  background-color: #ffffff !important;
+  color: var(--kcredit-primary);
+}
+.loan-entry-table {
+  background-color: var(--kcredit-failure-red);
+}
+.loan-entry-table:disabled {
+  background-color: var(--kcredit-failure-red);
+}
+.flex-center-align {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 40%;
+}
+
+.dot {
+  font-size: 20px; /* Adjust the font size as needed for a larger dot */
+}
+.status-container {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.loan-stage-ruler {
+  border-bottom: 1px solid #eaf2ff;
+}
+.loan-stage{
+  border-bottom: 1px solid var(--kcredit-primary);
+}

@@ -1,0 +1,68 @@
+<app-topnavfullwidth [title]='title' (onBack)='back()'></app-topnavfullwidth>
+<div class="main-container" style="margin-right: 110px;">
+    
+    <h1>Upload customer information</h1>
+    <h5>Upload bulk customer details xl sheet to generate prefilled NACH forms</h5>
+    <br>
+    <ul>
+        <li><h5>Make sure your file has all columns for all the fields</h5>
+        </li>
+        <li><h5>Upload Only Xlsx/Xls/CSV files</h5>
+        </li>
+        <li><h5>Make sure bank name, account number, account holder name & IFSC code as per customers passbook</h5>
+        </li>
+    </ul>
+    <ng-container *ngIf="uploadScreen; then thenTemplate; else elseTemplate"></ng-container>
+    <ng-template #thenTemplate >
+        <div class="dropzone" >
+            <img *ngIf='!fileStatus.status' src="../../../../assets/images/common/upload-demands.svg" alt="">
+            <h3 *ngIf='!fileStatus.status'>Drag & drop XLS, XLSX, CSV file here</h3>
+            <label for="file-upload" *ngIf='!fileStatus.status'>Browse File</label>
+            
+            <input *ngIf='!fileStatus.status' id="file-upload"
+                accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel"
+                type="file" (change)="onBrowseFile($event)" name="files" [multiple]="false" #fileInput />
+            <mat-progress-bar *ngIf='fileStatus.status' style="position: absolute;top: 0;left: 0;height: 100%;" [value]="fileStatus?.percent"></mat-progress-bar>
+            <div class="uploadingInfo" *ngIf='fileStatus.status'>
+                <h3 *ngIf='fileStatus.status=="progress"'>Uploading...</h3>
+                <h3 *ngIf='fileStatus.status=="done"'>Uploaded</h3>
+                <p *ngIf="fileStatus.status" class="subtext">{{niceBytes(fileStatus?.loaded)}} out of {{niceBytes(fileStatus?.total)}}Kb</p>
+                <div *ngIf="fileName" class="filename">{{ fileName }}</div>
+                <a (click)='cancelUpload()' class="download-link" *ngIf='fileStatus.status == "done"'>Delete upload</a>
+            </div>
+            
+        </div>
+        <div style="text-align: center; margin-top: 10px;">
+            <div class="link">Our system support only a specific table format</div>
+            <a class="download-link" (click)="downloadSample()">Download a sample format</a>
+        </div>
+        
+    </ng-template>
+    <ng-template #elseTemplate >
+        <div class="uploadedFileListContainer">
+            <div class="uploadedFileInfoBar" *ngFor='let uploadedFileBar of nachFormsList; let i = index'>
+                <div class="self-center">{{uploadedFileBar.taskId}}</div>
+                <div class="self-center">{{uploadedFileBar.uploadedDate}}</div>
+                <div class="self-center fileLink"><a href="#">{{uploadedFileBar.fileName}}</a></div>
+                <div class="self-center">{{uploadedFileBar.total}} Record<span *ngIf="uploadedFileBar.total > 1">s</span> found</div>
+                <div class="flex-between">
+                    <a (click)='reupload([uploadedFileBar.taskId],i)' class="download-link">Reupload</a>
+                    <a (click)='removeFile([uploadedFileBar.taskId],i)' class="remove-link">Remove</a>
+                </div>
+            </div>
+            <div *ngIf="nachFormsList?.length == 0">
+                <br>
+                <h3 class="text-center">Add File to generate the NACH form</h3>
+                <br/>
+            </div>
+            <div class="bottomButtonList">
+                <button mat-raised-button (click)="showUploadScreen()" class="subtleOrangeBtn">+ Add more</button>
+                <div class="saveCancel">
+                    <button mat-raised-button [disabled]="nachFormsList?.length == 0" (click)="proceedGenerateNachForm()" class="orangeBtn">Proceed</button>
+                    <button mat-raised-button class="grayBtn" (click)="cancelJobDetails()">Cancel</button>
+                </div>
+            </div>
+        </div>
+        
+    </ng-template>
+</div>

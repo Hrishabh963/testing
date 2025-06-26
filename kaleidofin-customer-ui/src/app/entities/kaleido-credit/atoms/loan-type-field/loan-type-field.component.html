@@ -1,0 +1,26 @@
+<form
+  name="editForm"
+  novalidate
+  #editForm="ngForm"
+  [formGroup]="reportService.form"
+>
+  <mat-form-field appearance="none" class="select-boxes">
+    <mat-label>Select</mat-label>
+    <mat-select
+      placeholder="Customer Type"
+      formControlName="loanTypes"
+      multiple
+      [(ngModel)]="reportService.selectedLoanType"
+    >
+      <app-select-all-combo-box
+        [model]="reportService.form.get('loanTypes')"
+        [values]="loanTypes"
+        text="All"
+      >
+      </app-select-all-combo-box>
+      <mat-option *ngFor="let loanType of loanTypes" [value]="loanType">{{
+        loanType
+      }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</form>

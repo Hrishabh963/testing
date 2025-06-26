@@ -1,0 +1,14 @@
+<mat-accordion>
+    <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+            <div class="section-title">Business Data Sheet (MIS sheet)</div>
+        </mat-expansion-panel-header>
+        <ng-container *ngFor="let fields of businessDataSheetMap; let i = index">
+            <app-dynamic-render-component [title]="fields?.title" [isSubHeading]="true"
+                [uiFields]="businessDataSheet[i]?.fields ? businessDataSheet[i]?.fields : {}"
+                [editSections]="editSections" [uiFieldsMap]="fields?.uiFields" [loanId]="loanId"
+                [uiApiKey]="'BUSINESS_DATA_SHEET'" [payloadTypeKey]="fields?.payloadKey">
+            </app-dynamic-render-component>
+        </ng-container>
+    </mat-expansion-panel>
+</mat-accordion>

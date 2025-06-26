@@ -1,0 +1,53 @@
+<div class="dialog-container">
+  <div mat-dialog-title class="dialog-title">
+    {{ dialogTitle }}
+    <mat-icon
+      class="closeicon"
+      (click)="cancel()"
+      tabindex="0"
+      (keypress)="cancel()"
+      >close</mat-icon
+    >
+  </div>
+  <div mat-dialog-content class="row">
+    <div class="col upload-container">
+      <app-file-upload
+        (passFileSelected)="receiveFileSelected($event)"
+        (removeSelectedDocument)="data?.removeDocuments($event)"
+        [uploadInfoText]="uploadInfoText"
+        [acceptedFileTypes]="acceptedFileTypes"
+        [canAllowMultiple]="canAllowMultiple"
+        [openByDefault]="openByDefault"
+        [selectedDocuments]="selectedDocuments"
+        [uploadedDocuments]="uploadedDocuments"
+      ></app-file-upload>
+    </div>
+  </div>
+  <div
+    mat-dialog-actions
+    [ngClass]="[downloadSampleFile ? 'download-sample-link-container' : '']"
+  >
+    <a
+      *ngIf="downloadSampleFile"
+      [href]="downloadSampleFile?.downloadFilePath"
+      [download]="downloadSampleFile?.downloadFileName"
+      class="download-sample-link"
+    >
+      {{ downloadSampleFile?.downloadText }}
+    </a>
+    <div class="action-buttons">
+      <button mat-raised-button class="btn-secondary" (click)="cancel()">
+        Cancel
+      </button>
+      <button
+        mat-raised-button
+        class="btn-primary"
+        cdkFocusInitial
+        (click)="proceed()"
+        [disabled]="!isFilesSelected"
+      >
+        Proceed
+      </button>
+    </div>
+  </div>
+</div>

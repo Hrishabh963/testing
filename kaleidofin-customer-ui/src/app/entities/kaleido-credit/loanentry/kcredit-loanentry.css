@@ -1,0 +1,137 @@
+.horizontal-mat-list-item {
+  float: right;
+  display: list-item;
+  content: " > ";
+}
+.inline-list {
+  display: flex;
+  content: " > ";
+}
+span {
+  font-size: 13px;
+}
+span.active {
+  user-select: black;
+  font-weight: bold;
+  background-color: var(--kcredit-primary-blue-background);
+  color: var(--kcredit-primary);
+}
+
+mat-nav-list.list-horizontal {
+  padding: 0;
+  content: " > ";
+}
+mat-nav-list.list-horizontal .mat-list-item {
+  display: inline-block;
+  height: 50px;
+  width: auto;
+  content: " > ";
+  background-color: none;
+  color: var(--kcredit-text-light);
+  margin-right: 10px;
+}
+
+a.active {
+  background-color: var(--kcredit-primary-blue-background) !important;
+  color: var(--kcredit-primary);
+}
+.loan-entry-table {
+  background-color: var(--kcredit-failure-red);
+}
+.loan-entry-table:disabled {
+  background-color: var(--kcredit-failure-red);
+}
+.flex-center-align {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 40%;
+}
+.incomplete {
+  color: var(--kcredit-failure-red);
+  font-weight: bold;
+  border-bottom: 1px solid;
+  cursor: pointer;
+}
+.complete {
+  color: var(--kcredit-success-green);
+  font-weight: bold;
+}
+.dot {
+  font-size: 20px;
+}
+.status-container {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  border-radius: 8px;
+}
+.loan-entry-container {
+  margin-left: 85px;
+}
+.title-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 15vw;
+  margin-left: 1.4vw;
+}
+.title {
+  font-family: "Lexend Deca", sans-serif;
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 30px;
+  letter-spacing: 0.17307710647583008px;
+  text-align: left;
+}
+td,
+th {
+  padding: 8px 16px !important;
+  color: var(--Text-medium, #496684) !important;
+  font-family: "Lexend Deca", sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.173px;
+  border-bottom: 1px solid #eaf2ff;
+}
+.loan-stage-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 15px 20px;
+}
+.pagination-container {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column-reverse;
+  margin: 20px;
+}
+.tableFixHead {
+  overflow: auto;
+  max-height: 60vh;
+}
+.table-container thead th {
+  position: sticky;
+  top: 0;
+  z-index: 0;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+th {
+  background: #eee;
+}
+
+table::-webkit-scrollbar {
+  width: 10px;
+}
+
+table::-webkit-scrollbar-thumb {
+  background-color: #888;
+}
+

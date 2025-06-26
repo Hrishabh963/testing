@@ -1,0 +1,42 @@
+.info-container {
+    display: flex;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    background-color: white;
+    white-space: pre-line !important;
+  }
+  
+  .label {
+    font-weight: bold;
+    margin-right: 5px;
+  }
+  
+  .info-icon {
+    cursor: pointer;
+    font-size: 14px;
+    margin-left: 5px;
+  }
+  
+  .value {
+    margin-left: 10px;
+    font-size: 16px;
+  }
+  
+  ::ng-deep .mat-tooltip {
+    background-color: white !important;
+    color: black !important;
+    opacity: 1 !important;
+    font-size: 12px;
+    font-weight: 200;
+    white-space: pre-line;
+    padding: 6px;
+    border-radius: 4px;
+    transform: translateX(10px) translateY(4px) !important;
+  }
+
+  .custom-tooltip {
+    white-space: pre-line;
+    max-width: 300px;
+    text-align: left;
+  }
+  

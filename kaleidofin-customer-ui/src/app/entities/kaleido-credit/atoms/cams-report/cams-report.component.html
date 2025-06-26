@@ -1,0 +1,106 @@
+<div id="report">
+  <div class="report-logo">
+    <div class="report-title-container" style="margin-left: 15px">
+      <div class="report-logo-container">
+        <img src="assets/images/lender/dcb-logo.svg" alt="Kaleidofin" />
+      </div>
+      <div class="section-title-container">
+        <div class="section-title"> Credit Analysis Memorandum (CAM) Report</div>
+        <div class="download-button-container" id="pdf-download-button">
+        <button mat-flat-button class="btn-primary download-button" (click)="downloadPdf()"> Download </button>
+        </div> 
+      </div>
+    </div>
+    <div>
+      <img
+        class="report-static-logo"
+        src="assets/images/common/report-heading-image.svg"
+        alt="Reports"
+      />
+    </div>
+  </div>
+
+  <div class="customer-data-container" *ngIf="customerData?.fileUrl">
+    <img
+      class="image"
+      [src]="customerData?.fileUrl"
+      [alt]="customerData?.name"
+    />
+    <div>
+      <h1>{{ customerData?.name }}</h1>
+      <h4>
+        {{ customerData?.dateOfBirth }} &#183;
+        <span>{{ customerData?.gender }}</span>
+      </h4>
+    </div>
+  </div>
+  <div class="section-container">
+    <div
+      *ngFor="let section of camSheetSections; let index = index"
+      [ngSwitch]="section"
+    >
+      <app-customer-criteria
+        *ngSwitchCase="'customerCriteria'"
+        [index]="index"
+        [reportData]="reportData?.customerCriteriaAndKycDto"
+      ></app-customer-criteria>
+      <br />
+      <app-field-visit-reference
+        *ngSwitchCase="'fieldVisitReference'"
+        [index]="index"
+        [reportData]="reportData?.referencesDuringFieldVisitDto"
+      ></app-field-visit-reference>
+
+      <app-financial-liability-details
+        *ngSwitchCase="'financialLiabilityDetails'"
+        [index]="index"
+        [reportData]="reportData?.customerFinancialLiabilityDto"
+      ></app-financial-liability-details>
+      <app-customer-asset-requirement
+        *ngSwitchCase="'customerAssetRequirement'"
+        [index]="index"
+        [reportData]="reportData?.customerRequirementDto"
+      ></app-customer-asset-requirement>
+      <app-vehicle-insurance-details
+        [index]="index"
+        *ngSwitchCase="'vehicleInsuranceDetails'"
+        [reportData]="reportData?.vehicleLoanInsuranceDetailDtos"
+      >
+      </app-vehicle-insurance-details>
+      <app-eligibility-calculation
+        [index]="index"
+        *ngSwitchCase="'eligibilityCalculation'"
+        [reportData]="reportData?.eligibilityCalculationDto"
+      ></app-eligibility-calculation>
+
+      <app-bank-funding
+        *ngSwitchCase="'bankFunding'"
+        [index]="index"
+        [reportData]="reportData?.bankFundingCalculationDto"
+      ></app-bank-funding>
+
+      <app-credit-feedback
+        [index]="index"
+        *ngSwitchCase="'creditFeedback'"
+        [reportData]="reportData?.creditFeedBackAndCheckListDto"
+      ></app-credit-feedback>
+
+      <app-deviations
+        *ngSwitchCase="'deviations'"
+        [index]="index"
+        [reportData]="reportData?.deviations"
+      ></app-deviations>
+
+      <app-approval-authority
+        [index]="index"
+        *ngSwitchCase="'approvalAuthority'"
+        [reportData]="reportData?.approvalAuthorityAndDesignationDto"
+      ></app-approval-authority>
+      <app-mfi-cam-report
+        *ngSwitchCase="'mfiCamSheetDto'"
+        [reportData]="reportData?.mfiCamSheetDto"
+      >
+      </app-mfi-cam-report>
+    </div>
+  </div>
+</div>

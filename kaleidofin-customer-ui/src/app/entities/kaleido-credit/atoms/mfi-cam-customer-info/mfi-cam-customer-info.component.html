@@ -1,0 +1,14 @@
+<div class="customer-info-table">
+    <table aria-hidden="true">
+        <caption></caption>
+        <tbody>
+            <tr *ngFor="let row of tableRow; let index = index">
+                <td [class]="'row-' + (1 - index % 2)" class="table-span"> {{ row?.title }}</td>
+                <td [class]="'row-' + (1 - index % 2)" class="table-span">
+                    <jhi-null-replace [value]="customerInfo[row?.propertyKey]">
+                    </jhi-null-replace>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

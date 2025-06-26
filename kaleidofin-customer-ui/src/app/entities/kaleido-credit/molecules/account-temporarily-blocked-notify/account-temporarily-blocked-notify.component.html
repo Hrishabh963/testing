@@ -1,0 +1,5 @@
+<app-notify-message [imageSrc]="'assets/images/login/landing_alert_image.svg'" [title]="'Your account is temporarily locked'"
+	[content]="accountLockedErrorText" [widthOfImage]="'7vw'">
+</app-notify-message>
+
+<app-login-page-button *ngIf="!hideResetPassword" [title]="'Proceed to reset password'" (click)="redirectToResetPassword()"></app-login-page-button>

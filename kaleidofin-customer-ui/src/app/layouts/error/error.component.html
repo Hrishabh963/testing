@@ -1,0 +1,16 @@
+<div>
+    <div>
+        <h1>Error Page!</h1>
+
+        <div [hidden]="!errorMessage">
+            <mat-error>
+                <div>{{errorMessage}}
+                </div>
+            </mat-error>
+        </div>
+        <div [hidden]="!error403">
+            <mat-error>You are not authorized to access this page.
+            </mat-error>
+        </div>
+    </div>
+</div>

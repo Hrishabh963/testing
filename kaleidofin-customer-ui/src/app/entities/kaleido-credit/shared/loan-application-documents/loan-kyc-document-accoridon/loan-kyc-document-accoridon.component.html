@@ -1,0 +1,124 @@
+<div class="document-subtype-container">
+  <div>Document Type {{ subtype ? " - " + subtype : "" }}</div>
+  <div class="document-action-button-container" *ngIf="hideRejectAllSection()">
+    <button
+      mat-raised-button
+      class="btn-secondary"
+      [hidden]="!checkForTags() || isApplicationAssigned"
+      (click)="tagAllDocuments()"
+      [disabled]="!disableEditAccess"
+    >
+      Tag All
+    </button>
+    <button
+      mat-raised-button
+      class="btn-secondary reject-button"
+      [disabled]="
+        !disableEditAccess ||
+        validateRejectAll() ||
+        !isApplicationAssigned
+      "
+      (click)="acceptRejectAllDocuments('REJECT')"
+    >
+      Reject All
+    </button>
+    <button
+      mat-raised-button
+      class="btn-primary"
+      [disabled]="
+        !disableEditAccess ||
+        validateRejectAll() ||
+        !isApplicationAssigned
+      "
+      (click)="acceptRejectAllDocuments('ACCEPT')"
+    >
+      Accept All
+    </button>
+  </div>
+</div>
+<div [ngClass]="['doc-container', 'align-start']">
+  <div class="document-container">
+    <div class="item item-container" *ngFor="let doc of documents">
+      <div
+        *ngIf="doc?.fileId || doc?.documentFileId"
+        class="document-item-container"
+      >
+        <app-doc-title-container
+          [doc]="doc"
+          [tagDocumentFrom]="tagDocumentFrom"
+          [documentCategory]="documentCategory"
+          (editImage)="editImage(doc, 'CROP')"
+          [hideEditButtons]="checkAndDisableActions(doc) || !isApplicationAssigned"
+          [isApplicationAssigned]="isApplicationAssigned"
+          [disableEditButtons]="checkForTags()"
+          (onReject)="acceptRejectDocument(doc, 'REJECT')"
+          (onAccept)="acceptRejectDocument(doc, 'ACCEPT')"
+        ></app-doc-title-container>
+        <br />
+        <div class="image-container" *ngIf="doc?.image">
+          <img
+            *ngIf="!isPdf(doc)"
+            class="d-inline-block nach-image fill-image"
+            [src]="doc?.image"
+            [alt]="doc?.documentName"
+          />
+          <img
+            *ngIf="isPdf(doc)"
+            class="d-inline-block nach-image fill-image"
+            src="assets/images/common/pdf-icon.svg"
+            [alt]="doc?.documentName"
+          />
+        </div>
+        <br />
+        <div class="document-name-with-size">
+          {{ doc?.documentName }} &nbsp; &#x2022; &nbsp;
+          <span [class]="doc?.docSizeClass">{{ doc?.size }}</span>
+        </div>
+        <br />
+        <div class="document-action-container">
+          <button
+            mat-raised-button
+            class="btn-secondary reject-button"
+            (click)="acceptRejectDocument(doc,'REJECT')"
+            [hidden]="checkAndDisableActions(doc) || !isApplicationAssigned"
+            [disabled]="
+              !disableEditAccess || checkForTags() || !isApplicationAssigned
+            "
+          >
+            Reject
+          </button>
+          <button
+            mat-raised-button
+            class="btn-primary"
+            (click)="acceptRejectDocument(doc,'ACCEPT')"
+            [hidden]="checkAndDisableActions(doc) || !isApplicationAssigned"
+            [disabled]="
+              !disableEditAccess ||
+              doc?.rejectStatus ||
+              checkForTags() ||
+              !isApplicationAssigned
+            "
+          >
+            Accept
+          </button>
+        </div>
+        <div class="document-subtype-container">
+          <document-review-status-alert
+            [reviewStatus]="doc?.reviewStatus || doc?.verificationStatus"
+            [rejectReasons]="doc?.reviewRemarks || doc?.message"
+          ></document-review-status-alert>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="enableKycVerification">
+    <app-kyc-results-table
+      [idNo]="idNo"
+      [type]="subtype"
+      [loanId]="loanId"
+      [entityId]="doc?.entityId || entityId"
+      [entityType]="entityType"
+      [purpose]="purpose"
+    ></app-kyc-results-table>
+  </div>
+</div>

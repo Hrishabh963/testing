@@ -1,0 +1,53 @@
+<div class="select-block">
+  <mat-form-field>
+    <mat-select
+      multiple
+      [panelClass]="'select-field'"
+      [formControl]="selectedReasons"
+      multiple
+      (selectionChange)="changeReason()"
+      (openedChange)="resetFields()"
+    >
+      <mat-select-trigger
+        *ngIf="selectedReasons && selectedReasons.value.length > 0"
+      >
+        <button
+          class="chip-container"
+          (click)="$event.stopPropagation()"
+          tabindex="0"
+          aria-label="Close"
+          (keydown)="$event.stopPropagation()"
+        >
+          <app-multi-select-chip
+            *ngFor="let reason of selectedReasons.value; let i = index"
+            [chipContent]="reason?.label"
+            [hideClose]="reason?.disabled"
+            (removeSelection)="removeSelection(i)"
+          >
+          </app-multi-select-chip>
+        </button>
+      </mat-select-trigger>
+
+      <div class="search-block">
+        <mat-form-field>
+          <input matInput type="text" [formControl]="searchFieldFormControl" (keydown.space)="$event.stopPropagation()"/>
+          <mat-placeholder class="search-placeholder">Search</mat-placeholder>
+          <mat-icon matSuffix class="icon">search</mat-icon>
+        </mat-form-field>
+      </div>
+      <div class="option-container">
+        <mat-option
+          *ngFor="let reason of filteredOptions"
+          [value]="reason"
+          [disabled]="reason?.disabled"
+          class="option-field"
+        >
+          {{ reason?.label }}
+        </mat-option>
+      </div>
+    </mat-select>
+    <mat-placeholder class="select-placeholder">{{
+      placeholder
+    }}</mat-placeholder>
+  </mat-form-field>
+</div>

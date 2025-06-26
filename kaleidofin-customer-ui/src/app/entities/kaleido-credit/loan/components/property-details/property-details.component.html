@@ -1,0 +1,168 @@
+<div class="card-title">
+    <form name="propertyDetailsForm" novalidate #propertyDetailsForm="ngForm">
+        <div style="margin-top: 5ex;" >
+            <div class="row row-spacing">
+                <div class="col-3">
+                    <ig-input  [inputField]="propertyDetailsForm.controls.noOfProperties" [inputErrors]="propertyDetailsForm.controls.noOfProperties?.errors">
+                        <label class="form-control-label" jhiTranslate="kCredit.propertyDetails.noOfProperties" for="field_no_of_properties">No of property owned</label>
+                        <input [hidden]="!editBankDetails" [disabled]="!editBankDetails" type="text" class="form-control" name="field_no_of_properties"
+                               [(ngModel)]="bankDetails.noOfProperties" required="required" id="field_no_of_properties"/>
+                        <div [hidden]="editBankDetails">
+                            <jhi-null-replace [value]="bankDetails.noOfProperties"></jhi-null-replace>
+                        </div>
+                    </ig-input>
+                </div>
+                <div class="col-3">
+                    <ig-input  [inputField]="propertyDetailsForm.controls.propertyType" [inputErrors]="propertyDetailsForm.controls.propertyType?.errors">
+                        <label class="form-control-label" jhiTranslate="kCredit.propertyDetails.propertyType" for="field_property_type">Type of property</label>
+                        <input [hidden]="!editBankDetails" [disabled]="!editBankDetails" type="text" class="form-control" name="field_property_type"
+                               [(ngModel)]="bankDetails.propertyType" required="required" id="field_property_type"/>
+                        <div [hidden]="editBankDetails">
+                            <jhi-null-replace [value]="bankDetails.propertyType"></jhi-null-replace>
+                        </div>
+                    </ig-input>
+                </div>
+                <div class="col-3">
+                    <ig-input  [inputField]="propertyDetailsForm.controls.propertyValue" [inputErrors]="propertyDetailsForm.controls.propertyValue?.errors">
+                        <label class="form-control-label" jhiTranslate="kCredit.propertyDetails.propertyValue" for="field_property_value">Property Value</label>
+                        <input [hidden]="!editBankDetails" [disabled]="!editBankDetails" type="text" class="form-control" name="field_property_value"
+                               [(ngModel)]="bankDetails.propertyValue" required="required" id="field_property_value"/>
+                        <div [hidden]="editBankDetails">
+                            <jhi-null-replace [value]="bankDetails.propertyValue"></jhi-null-replace>
+                        </div>
+                    </ig-input>
+                </div>
+                <div class="col-3">
+                    <ig-input  [inputField]="propertyDetailsForm.controls.charge" [inputErrors]="propertyDetailsForm.controls.charge?.errors">
+                        <label class="form-control-label" jhiTranslate="kCredit.propertyDetails.charge" for="field_charge">Charge</label>
+                        <input [hidden]="!editBankDetails" [disabled]="!editBankDetails" type="text" class="form-control" name="field_charge"
+                               [(ngModel)]="bankDetails.charge" required="required" id="field_charge"/>
+                        <div [hidden]="editBankDetails">
+                            <jhi-null-replace [value]="bankDetails.charge"></jhi-null-replace>
+                        </div>
+                    </ig-input>
+                </div>
+                <div class="col-3">
+                    <ig-input  [inputField]="propertyDetailsForm.controls.propertyStatus" [inputErrors]="propertyDetailsForm.controls.propertyStatus?.errors">
+                        <label class="form-control-label" jhiTranslate="kCredit.propertyDetails.propertyStatus" for="field_property_status">Present status of the property</label>
+                        <input [hidden]="!editBankDetails" [disabled]="!editBankDetails" type="text" class="form-control" name="field_property_status"
+                               [(ngModel)]="bankDetails.propertyStatus" required="required" id="field_property_status"/>
+                        <div [hidden]="editBankDetails">
+                            <jhi-null-replace [value]="bankDetails.propertyStatus"></jhi-null-replace>
+                        </div>
+                    </ig-input>
+                </div>
+                <div class="col-3">
+                    <ig-input  [inputField]="propertyDetailsForm.controls.propertyOwner" [inputErrors]="propertyDetailsForm.controls.propertyOwner?.errors">
+                        <label class="form-control-label" jhiTranslate="kCredit.propertyDetails.propertyOwner" for="field_property_owner">Property owner name</label>
+                        <input [hidden]="!editBankDetails" [disabled]="!editBankDetails" type="text" class="form-control" name="field_property_owner"
+                               [(ngModel)]="bankDetails.propertyOwner" required="required" id="field_property_owner"/>
+                        <div [hidden]="editBankDetails">
+                            <jhi-null-replace [value]="bankDetails.propertyOwner"></jhi-null-replace>
+                        </div>
+                    </ig-input>
+                </div>
+                <div class="col-3">
+                    <ig-input  [inputField]="propertyDetailsForm.controls.address" [inputErrors]="propertyDetailsForm.controls.address?.errors">
+                        <label class="form-control-label" jhiTranslate="kCredit.propertyDetails.address" for="field_address">Property Address</label>
+                        <input [hidden]="!editBankDetails" [disabled]="!editBankDetails" type="text" class="form-control" name="field_address"
+                               [(ngModel)]="bankDetails.address" required="required" id="field_address"/>
+                        <div [hidden]="editBankDetails">
+                            <jhi-null-replace [value]="bankDetails.address"></jhi-null-replace>
+                        </div>
+                    </ig-input>
+                </div>
+                <div class="col-3">
+                    <ig-input  [inputField]="propertyDetailsForm.controls.city" [inputErrors]="propertyDetailsForm.controls.city?.errors">
+                        <label class="form-control-label" jhiTranslate="kCredit.propertyDetails.city" for="field_city">City</label>
+                        <input [hidden]="!editBankDetails" [disabled]="!editBankDetails" type="text" class="form-control" name="field_city"
+                               [(ngModel)]="bankDetails.city" required="required" id="field_city"/>
+                        <div [hidden]="editBankDetails">
+                            <jhi-null-replace [value]="bankDetails.city"></jhi-null-replace>
+                        </div>
+                    </ig-input>
+                </div>
+                <div class="col-3">
+                    <ig-input  [inputField]="propertyDetailsForm.controls.country" [inputErrors]="propertyDetailsForm.controls.country?.errors">
+                        <label class="form-control-label" jhiTranslate="kCredit.propertyDetails.country" for="field_country">Country</label>
+                        <input [hidden]="!editBankDetails" [disabled]="!editBankDetails" type="text" class="form-control" name="field_country"
+                               [(ngModel)]="bankDetails.country" required="required" id="field_country"/>
+                        <div [hidden]="editBankDetails">
+                            <jhi-null-replace [value]="bankDetails.country"></jhi-null-replace>
+                        </div>
+                    </ig-input>
+                </div>
+                <div class="col-3">
+                    <ig-input  [inputField]="propertyDetailsForm.controls.state" [inputErrors]="propertyDetailsForm.controls.state?.errors">
+                        <label class="form-control-label" jhiTranslate="kCredit.propertyDetails.state" for="field_state">State</label>
+                        <input [hidden]="!editBankDetails" [disabled]="!editBankDetails" type="text" class="form-control" name="field_state"
+                               [(ngModel)]="bankDetails.state" required="required" id="field_state"/>
+                        <div [hidden]="editBankDetails">
+                            <jhi-null-replace [value]="bankDetails.state"></jhi-null-replace>
+                        </div>
+                    </ig-input>
+                </div>
+                <div class="col-3">
+                    <ig-input  [inputField]="propertyDetailsForm.controls['landmark']" [inputErrors]="propertyDetailsForm.controls['landmark']?.errors">
+                        <label class="form-control-label" jhiTranslate="kCredit.propertyDetails.landmark" for="field_landmark">Landmark</label>
+                        <input [hidden]="!editBankDetails" [disabled]="!editBankDetails" type="text" class="form-control" name="field_landmark"
+                               [(ngModel)]="bankDetails.landmark" required="required" id="field_landmark"/>
+                        <div [hidden]="editBankDetails">
+                            <jhi-null-replace [value]="bankDetails.landmark"></jhi-null-replace>
+                        </div>
+                    </ig-input>
+                </div>
+                <div class="col-3">
+                    <ig-input  [inputField]="propertyDetailsForm.controls['district']" [inputErrors]="propertyDetailsForm.controls['district']?.errors">
+                        <label class="form-control-label" jhiTranslate="kCredit.propertyDetails.district" for="field_district">District</label>
+                        <input [hidden]="!editBankDetails" [disabled]="!editBankDetails" type="text" class="form-control" name="field_district"
+                               [(ngModel)]="bankDetails.district" required="required" id="field_district"/>
+                        <div [hidden]="editBankDetails">
+                            <jhi-null-replace [value]="bankDetails.district"></jhi-null-replace>
+                        </div>
+                    </ig-input>
+                </div>
+                <div class="col-3">
+                    <ig-input  [inputField]="propertyDetailsForm.controls['pincode']" [inputErrors]="propertyDetailsForm.controls['pincode']?.errors">
+                        <label class="form-control-label" jhiTranslate="kCredit.propertyDetails.pincode" for="field_pincode">Pincode</label>
+                        <input [hidden]="!editBankDetails" [disabled]="!editBankDetails" type="text" class="form-control" name="field_pincode"
+                               [(ngModel)]="bankDetails.pincode" required="required" id="field_pincode"/>
+                        <div [hidden]="editBankDetails">
+                            <jhi-null-replace [value]="bankDetails.pincode"></jhi-null-replace>
+                        </div>
+                    </ig-input>
+                </div>
+                <div class="col-3">
+                    <ig-input  [inputField]="propertyDetailsForm.controls['buildUpArea']" [inputErrors]="propertyDetailsForm.controls['buildUpArea']?.errors">
+                        <label class="form-control-label" jhiTranslate="kCredit.propertyDetails.buildUpArea" for="field_build_up_area">Build up area of the property</label>
+                        <input [hidden]="!editBankDetails" [disabled]="!editBankDetails" type="text" class="form-control" name="field_build_up_area"
+                               [(ngModel)]="bankDetails.buildUpArea" required="required" id="field_build_up_area"/>
+                        <div [hidden]="editBankDetails">
+                            <jhi-null-replace [value]="bankDetails.buildUpArea"></jhi-null-replace>
+                        </div>
+                    </ig-input>
+                </div>
+                <div class="col-3">
+                    <ig-input  [inputField]="propertyDetailsForm.controls['propertyAge']" [inputErrors]="propertyDetailsForm.controls['propertyAge']?.errors">
+                        <label class="form-control-label" jhiTranslate="kCredit.propertyDetails.propertyAge" for="field_property_age">Age of the property</label>
+                        <input [hidden]="!editBankDetails" [disabled]="!editBankDetails" type="text" class="form-control" name="field_property_age"
+                               [(ngModel)]="bankDetails.propertyAge" required="required" id="field_property_age"/>
+                        <div [hidden]="editBankDetails">
+                            <jhi-null-replace [value]="bankDetails.propertyAge"></jhi-null-replace>
+                        </div>
+                    </ig-input>
+                </div>
+                <div class="col-3">
+                    <ig-input  [inputField]="propertyDetailsForm.controls['occupancyDetails']" [inputErrors]="propertyDetailsForm.controls['occupancyDetails']?.errors">
+                        <label class="form-control-label" jhiTranslate="kCredit.propertyDetails.occupancyDetails" for="field_occupancy_details">Occupancy details</label>
+                        <input [hidden]="!editBankDetails" [disabled]="!editBankDetails" type="text" class="form-control" name="field_occupancy_details"
+                               [(ngModel)]="bankDetails.occupancyDetails" required="required" id="field_occupancy_details"/>
+                        <div [hidden]="editBankDetails">
+                            <jhi-null-replace [value]="bankDetails.occupancyDetails"></jhi-null-replace>
+                        </div>
+                    </ig-input>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

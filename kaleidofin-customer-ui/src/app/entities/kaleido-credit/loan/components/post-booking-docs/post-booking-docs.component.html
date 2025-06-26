@@ -1,0 +1,21 @@
+<div *ngIf="documentTypes && documentTypes.length">
+    <mat-accordion>
+        <mat-expansion-panel [expanded]="panelOpenState" (opened)="panelOpenState = true"
+            (closed)="panelOpenState = false">
+            <mat-expansion-panel-header>
+                <mat-panel-title class="document-type-title">
+                    <h2 class="section-title">Post Booking Documents</h2>
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div *ngFor="let documentType of documentTypes">
+                <app-loan-document-accordion [loanId]="loanId" [partnerId]="partnerId"[documentData]="loanDetailDocuments[documentType]" [title]="documentType"
+                >
+                </app-loan-document-accordion>
+            </div>
+        </mat-expansion-panel>
+    </mat-accordion>
+</div>
+<div *ngIf="documentTypes && !documentTypes.length">
+  <h2 class="section-title">Post Booking Documents</h2>
+  <h6><b> No Documents Available </b></h6>
+</div>

@@ -1,0 +1,6 @@
+<div class="recalculate-container">
+    <h4>Recalculating BRE</h4>
+<app-custom-progress-bar *ngIf="progressValue !== 100" [progressValue]="progressValue" [accentHex]="'#0BC07F'">
+</app-custom-progress-bar>
+<div *ngIf="progressValue === 100" [class]="decision">Completed - {{decision}}</div>
+</div>

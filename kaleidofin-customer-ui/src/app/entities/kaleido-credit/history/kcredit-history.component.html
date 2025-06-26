@@ -1,0 +1,144 @@
+<div class="col-12 row no-space">
+<div class="col-1 no-space"></div>
+<div class="col-11 no-space">
+<div>
+  <jhi-alert></jhi-alert>
+</div>
+<div>
+  <form name="editForm"  novalidate #editForm="ngForm">
+    <div class="row col-md-12" style="margin: auto"></div>
+    <div class="col-md-12">&nbsp;</div>
+    <div class="row col-md-12">
+      <div class="col-md-9"><b>&nbsp; Loan History </b></div>
+      <div class="col-md-2 filter-dropdown">
+        <mat-form-field appearance="fill">
+          <mat-label>Customer Type</mat-label>
+          <mat-select
+            [(value)]="selectedCustomerTypes"
+            (selectionChange)="inputChange($event.value, 'customerType')"
+          >
+            <mat-option *ngFor="let ct of customerTypeList" [value]="ct">{{
+              ct
+            }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="col-md-1">&nbsp;</div>
+  </form>
+</div>
+
+<div class="col-md-12">
+  <div class="col-md-12">
+    <table class="table table-light col-md-12 table-list-size full-width">
+    <caption>></caption>
+      <thead class="thead-inverse">
+        <tr>
+          <th><span jhiTranslate="kCredit.dateTime">Date & Time</span></th>
+          <th>
+            <span jhiTranslate="kCredit.applicationId">Application Id</span>
+          </th>
+          <th><span jhiTranslate="kCredit.name">Name</span></th>
+          <th>
+            <span jhiTranslate="kCredit.mobileNumber">Mobile Number</span>
+          </th>
+          <th><span jhiTranslate="kCredit.partner">{{ isDCBMFI ? 'BC Name' : 'Partner' }}</span></th>
+          <th><span jhiTranslate="kCredit.customerId">Customer Id</span></th>
+
+          <th>
+            <span>Current Status</span>
+            <mat-select [formControl]="loanAppStatus" (selectionChange)="inputChange($event.value, 'loanAppStatus')">
+              <mat-option
+                *ngFor="let status of loanAppStatusList"
+                [value]="status"
+                >{{ status }}</mat-option
+              >
+            </mat-select>
+          </th>
+          <th><span>Last Reviewer</span></th>
+          <th><span>Remarks</span></th>
+          <th><span jhiTranslate="kCredit.action">Action</span></th>
+        </tr>
+      </thead>
+      <tbody *ngIf="loanDetails">
+        <tr *ngFor="let application of loanDetails; trackBy: trackIdentity">
+          <td>{{ application.createdDate | date:'YYYY-MM-dd, HH:mm' }}</td>
+          <td>{{ application.partnerLoanId }}</td>
+          <td>{{ application.customerName }}</td>
+          <td>{{ application.secondaryMobileNumber }}</td>
+          <td>{{ application.partnerId }}</td>
+          <td>{{ application.partnerCustomerId }}</td>
+          <td>
+            <span
+              [ngStyle]="
+                application.applicationStatus == 'incomplete' ||
+                application.applicationStatus == 'error'
+                  ? { color: 'red', 'font-weight': 'bold' }
+                  : { color: 'green', 'font-weight': 'bold' }
+              "
+              >{{ application.applicationStatus }}</span
+            >
+          </td>
+          <td>
+            <span
+              *ngIf="
+                application &&
+                application.lastReviewAt &&
+                application.lastReviewer &&
+                application.lastReviewer.login
+              "
+              title="{{ application['lastReviewAt'] }}"
+              >{{ application["lastReviewer"]["login"] }}
+            </span>
+          </td>
+          <td>{{ application?.remarks || '--' }}</td>
+          <td class="text-right">
+            <div class="btn-group flex-btn-group-container">
+              <button
+                mat-flat-button
+                type="submit"
+                *ngIf="application && application.id"
+                [routerLink]="['/kcredit/loan', application.id]"
+                class="btn-review review-button"
+              >
+                <span class="hidden-md-down btn-review-text">Review</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+      <tfoot>
+        <tr class="bg-light">
+          <td colspan="12">
+            <div class="row pagination-align">
+              <jhi-item-count
+                [page]="page"
+                [total]="queryCount"
+                [itemsPerPage]="itemsPerPage"
+              >
+              </jhi-item-count>
+            </div>
+            <div class="row pagination-align">
+              <ngb-pagination class="text-center-div"
+                              [collectionSize]="totalItems"
+                              [(page)]="page"
+                              [pageSize]="itemsPerPage"
+                              (pageChange)="loadPage(page)"
+                              [maxSize]="3"
+                              [rotate]="true"
+                              [boundaryLinks]="true"
+              >
+              </ngb-pagination>
+            </div>
+          </td>
+        </tr>
+      </tfoot>
+    </table>
+  </div>
+  <ng-template #noloans>
+    <hr />
+    <h3 class="text-center kcredit-failure-color">No Loans found</h3>
+  </ng-template>
+</div>
+</div>
+</div>

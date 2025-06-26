@@ -1,0 +1,44 @@
+<div class="logout-container">
+  <div class="recent-login-container">
+    <div class="login-time-info" *ngIf="userInfo.recentLogin">
+      <img src="assets/images/dashboard/checkgreen.svg" alt="success">
+      <div>
+        <span class="login-time">{{ formatDateTime(userInfo.recentLogin) }}</span>
+        <span class="login-status">Last Successful login</span>
+      </div>
+    </div>
+    <div class="login-time-info" *ngIf="userInfo.recentFailedLogin">
+      <img src="assets/images/common/info-exclamation-hollow.svg" alt="fail">
+      <div>
+        <span class="login-time">{{ formatDateTime(userInfo.recentFailedLogin) }}</span>
+        <span class="login-status">Last Unsuccessful login</span>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="username-container flex-container" [matMenuTriggerFor]="menu" disableRipple="true">
+      <span class="username">{{ username }}</span>
+      <div class="username-avatar-container flex-container">
+        <button mat-icon-button>
+          <mat-icon>keyboard_arrow_down</mat-icon>
+        </button>
+        <app-avatar-badge [username]="username" [avatarRadius]="'46px'">
+        </app-avatar-badge>
+      </div>
+    </div>
+    <mat-menu #menu="matMenu" yPosition="below" xPosition="after" class="user-profile-menu" panelClass="custom-menu">
+      <button *ngIf="!appMenuConfig.DISABLE_PROFILE_INFO" mat-menu-item disableRipple="true" (click)="navigatePage('kcredit/profile', true, 'basicDetails')">
+        <mat-icon>account_circle</mat-icon> Profile
+      </button>
+      <button *ngIf="!appMenuConfig.DISABLE_CHANGE_PASSWORD" mat-menu-item disableRipple="true" (click)="navigatePage('kcredit/profile', true, 'changePassword')">
+        <mat-icon>lock_outline</mat-icon> Change Password
+      </button>
+      <button *ngIf="!appMenuConfig.DISABLE_HELP" mat-menu-item disableRipple="true" (click)="navigatePage('contact')">
+        <mat-icon>help_outline</mat-icon> Help
+      </button>
+      <button *ngIf="!appMenuConfig.DISABLE_LOGOUT" mat-menu-item disableRipple="true" (click)="logout()">
+        <mat-icon>logout</mat-icon> Logout
+      </button>
+    </mat-menu>
+  </div>
+</div>

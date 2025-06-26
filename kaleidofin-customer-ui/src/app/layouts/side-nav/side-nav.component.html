@@ -1,0 +1,133 @@
+<div
+  class="sidenav_container"
+  (mouseenter)="onSinenavToggle(true)"
+  (mouseleave)="onSinenavToggle(false)"
+  [@onSideNavChange]="sideNavState ? 'open' : 'close'"
+>
+  <div
+    class="no-space"
+    fxLayout="column"
+    fxLayoutGap="15px"
+    style="height: 100%"
+  >
+    <div class="no-space">
+      <a mat-list-item style="margin-bottom: 10px">
+        <span [@animateText]="linkText ? 'hide' : 'show'">
+          <img
+            *ngIf="role === 'ROLE_KP_PARTNER'"
+            class="ki-pay-logo"
+            src="assets/images/kaleidopay-icon.svg"
+            alt=""
+          />
+          <img
+            *ngIf="role !== 'ROLE_KP_PARTNER'"
+            [ngClass]="['kicredit-logo', 'logo', logoClass | async]"
+            src=""
+            alt=""
+          />
+        </span>
+        <span [@animateText]="linkText ? 'show' : 'hide'">
+          <img
+            *ngIf="role === 'ROLE_KP_PARTNER'"
+            class="ki-pay-logo"
+            src="assets/images/kaleidopay.svg"
+            alt=""
+          />
+
+          <img
+            *ngIf="role !== 'ROLE_KP_PARTNER'"
+            [ngClass]="['kicredit-logo', 'image-logo', logoClass | async]"
+            [src]="logoIcon | async"
+            alt="Logo"
+          />
+        </span>
+      </a>
+    </div>
+    <div class="no-space">
+      <mat-nav-list>
+        <span *ngIf="role === 'ROLE_KP_PARTNER'">
+          <a
+            routerLink="/nachForms/prefilledNachForms"
+            routerLinkActive
+            #rla7="routerLinkActive"
+            mat-list-item
+            style="margin-bottom: 10px"
+          >
+            <span [ngSwitch]="rla7.isActive">
+              <img
+                *ngSwitchCase="false"
+                class="icon"
+                src="../../../assets/images/sidenav/Nach Mandate_Normal.svg"
+                alt="" />
+              <img
+                *ngSwitchCase="true"
+                class="icon"
+                src="../../../assets/images/sidenav/Nach Mandate_Selected.svg"
+                alt=""
+            /></span>
+            <span [@animateText]="linkText ? 'show' : 'hide'" class="link"
+              >Forms</span
+            >
+          </a>
+          <a
+            routerLink="/paymentMandate"
+            routerLinkActive
+            #rla8="routerLinkActive"
+            mat-list-item
+            style="margin-bottom: 10px"
+          >
+            <span [ngSwitch]="rla8.isActive">
+              <img
+                *ngSwitchCase="false"
+                class="icon"
+                src="../../../assets/images/sidenav/payment-mandate.svg"
+                alt="" />
+              <img
+                *ngSwitchCase="true"
+                class="icon"
+                src="../../../assets/images/sidenav/payment-mandate-active.svg"
+                alt=""
+            /></span>
+            <span [@animateText]="linkText ? 'show' : 'hide'" class="link"
+              >SBM SI Mandate</span
+            >
+          </a>
+        </span>
+
+        <span *ngIf="role !== 'ROLE_KP_PARTNER'" class="route-nav-container">
+          <a
+            *ngFor="let route of routes; let index = index"
+            mat-list-item
+            [routerLink]="route.routerLink"
+            routerLinkActive="active"
+            class="route-link"
+            (click)="selectedIndex = index"
+            [ngClass]="selectedIndex === index ? 'nav-selected' : ''"
+          >
+            <span
+              *ngIf="route?.routeIconType !== 'svg'"
+              class="material-icons-outlined"
+              >{{ route.routeIcon }}</span
+            >
+            <span
+              *ngIf="route?.routeIconType === 'svg'"
+              class="material-icons-outlined"
+            >
+              <img
+                [src]="route?.routeIcon"
+                [ngClass]="[
+                  'svg-icon',
+                  selectedIndex === index ? 'active-svg-icon' : ''
+                ]"
+                alt="''"
+            /></span>
+            <span [@animateText]="linkText ? 'show' : 'hide'" class="link"
+              >&ensp;&ensp;{{ route.routeTitle }}
+            </span>
+          </a>
+        </span>
+      </mat-nav-list>
+      <br />
+    </div>
+  </div>
+</div>

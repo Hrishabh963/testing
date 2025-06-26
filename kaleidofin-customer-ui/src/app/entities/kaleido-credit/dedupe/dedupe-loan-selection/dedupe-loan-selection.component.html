@@ -1,0 +1,15 @@
+<div *ngIf="!disableDedupe && dedupeLoans.length > 0">
+  <button class="selection-menu" mat-button [matMenuTriggerFor]="menu">
+    Previous Loan <mat-icon>expand_more</mat-icon>
+  </button>
+  <mat-menu class="custom-style"  #menu="matMenu">
+    <button mat-menu-item *ngFor="let dedupeLoan of dedupeLoans; let i = index">
+      <div (click)="openLoan(dedupeLoan)" (keypress)="openLoan(dedupeLoan)" >
+        <div>Loan {{ dedupeLoans.length - i }}</div>
+        <div class="date-display">
+          {{ dedupeLoan?.createdDate | date : "dd MMM yyyy" }}
+        </div>
+      </div>
+    </button>
+  </mat-menu>
+</div>

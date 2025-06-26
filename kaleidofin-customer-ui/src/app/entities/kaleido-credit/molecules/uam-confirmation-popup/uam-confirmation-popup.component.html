@@ -1,0 +1,66 @@
+<main>
+    <header  [style]="{'height' : title?.length ? 'fit-content' : '1.6em'}">
+        <h1> {{ title }} </h1>
+        <button mat-icon-button class="close-button" (click)="closeDialog('cancelled')"> <mat-icon>close</mat-icon> </button>
+    </header>
+    <ng-container [ngSwitch]="popupType">
+        <ng-container *ngSwitchCase="'CREATE_UPDATE_USER'">
+            <div class="confirmation-container">
+                <div class="confirmation-text">{{confirmationText}}</div>
+                <div class="button-container">
+                    <button mat-flat-button class="btn-primary" (click)="createUpdateUser()"> {{buttonText}} </button>
+                    <button class="cancel-button" (click)="closeDialog()">cancel</button>
+                </div>
+            </div>
+        </ng-container>
+        
+        <ng-container *ngSwitchCase="'CHANGE_STATUS'">
+            <div class="confirmation-container">
+                <div class="confirmation-text">{{confirmationText}}</div>
+                <div class="button-container">
+                    <button mat-flat-button class="btn-primary" (click)="changeStatus()"> {{buttonText}} </button>
+                    <button class="cancel-button" (click)="closeDialog('cancelled')">cancel</button>
+                </div>
+            </div>
+        </ng-container>
+
+        <ng-container *ngSwitchCase="'CHANGE_PASSWORD'">
+            <div class="confirmation-container">
+                <section style="padding: 1em 0;">
+                    <app-user-change-password 
+                      [failedRequirement]="failedRequirements?.[0]"  
+                      [passwordFormGroup]="passwordFormGroup">
+                    </app-user-change-password>
+                </section>
+                <div class="button-container">
+                    <button mat-flat-button class="btn-primary" [disabled]="!this.passwordFormGroup?.valid" (click)="changePassword()"> {{buttonText}} </button>
+                    <button class="cancel-button" (click)="closeDialog()">cancel</button>
+                </div>
+            </div>
+        </ng-container>
+        <ng-container *ngSwitchCase="'SUSPEND_USER'">
+            <div class="confirmation-container">
+                <h5>How many days you want to suspend the user?</h5>
+                <section>
+                    <mat-form-field>
+                        <mat-label>Select Date</mat-label>
+                        <input 
+                          matInput format="yyyy-MM-dd" 
+                          [formControl]="suspendedDays" 
+                          placeholder="Select Date"
+                          [matDatepicker]="suspendedDate" 
+                          [formControl]="suspendedDays"
+                          [min]="minDate"
+                        />
+                        <mat-datepicker-toggle matSuffix [for]="suspendedDate"></mat-datepicker-toggle>
+                        <mat-datepicker #suspendedDate></mat-datepicker>
+                     </mat-form-field>
+                </section>
+                <div class="button-container">
+                    <button mat-flat-button class="btn-primary" (click)="changeStatus()" [disabled]="suspendedDays?.invalid"> {{buttonText}} </button>
+                    <button class="cancel-button" (click)="closeDialog()">cancel</button>
+                </div>
+            </div>
+        </ng-container> 
+    </ng-container>
+</main>

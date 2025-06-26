@@ -1,0 +1,58 @@
+<ng-container>
+    <div *ngIf="paymentSchedule.length > 0">
+        <h3 class="section-sub-heading">Payment Schedule</h3>
+        <mat-error class="repayment-error" *ngIf="repaymentScheduleError"> <img src="assets/images/common/hollow-error-alert.svg" alt="error" /> {{ repaymentScheduleError }} </mat-error>
+        <mat-error class="repayment-error" *ngIf="showTenureError"> <img src="assets/images/common/hollow-error-alert.svg" alt="error" /> 
+            Number of Instalments in the schedule don't match the value of Tenure divided by Frequency. Click 'Re-Calculate Demand Schedule' to fix this
+        </mat-error>
+        <div class="table-container">
+            <table>
+                <caption></caption>
+                <thead>
+                    <tr>
+                        <th class="table-heading" *ngFor="let column of tableMap">
+                            <div style="width: max-content">
+                                {{ column?.label }}
+                            </div>
+                            <mat-error *ngIf="column?.showError && principalAmountException">
+                                {{ principalAmountException }}
+                            </mat-error>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let schedule of paymentSchedule; let i = index">
+                        <ng-container *ngFor="let column of tableMap" [ngSwitch]="column?.type">
+                            <td *ngSwitchDefault>
+                                <jhi-null-replace [value]="schedule?.[column?.propertyKey]
+                                     | dynamicDataTransform : column?.displayFormat : column?.format">
+                                </jhi-null-replace>
+                            </td>
+                            <td *ngSwitchCase="'dateEdit'">
+                                <jhi-null-replace [hidden]="enableEdit && i === 0" [value]="schedule?.[column?.propertyKey]
+                                    | dynamicDataTransform : column?.displayFormat : column?.format">
+                                </jhi-null-replace>
+                                <app-repayment-table-date-field *ngIf="enableEdit && i === 0" [valueObj]="schedule"
+                                    [key]="column?.propertyKey" [disableEdit]="disableEdit" (saveDetails)="saveDetails.emit(i)" 
+                                    (checkForError)="checkForError.emit($event)"
+                                >
+                                </app-repayment-table-date-field>
+                            </td>
+                            <td *ngSwitchCase="'emiEdit'">
+                                <jhi-null-replace [hidden]="enableEdit && i < (paymentSchedule?.length - 1)"
+                                     [value]="schedule?.[column?.propertyKey]
+                                    | dynamicDataTransform : column?.displayFormat">
+                                </jhi-null-replace>
+                                <app-repayment-table-input-field *ngIf="enableEdit && i < (paymentSchedule?.length - 1)"
+                                    [valueObj]="schedule" [key]="column?.propertyKey" (saveDetails)="saveDetails.emit(i)"
+                                    [finalLoanAmount]="finalLoanAmount" [disableEdit]="disableEdit" (checkForError)="checkForError.emit($event)"
+                                >
+                                </app-repayment-table-input-field>
+                            </td>
+                        </ng-container>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</ng-container>

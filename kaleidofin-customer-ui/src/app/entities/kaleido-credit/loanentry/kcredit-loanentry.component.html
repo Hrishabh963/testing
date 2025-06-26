@@ -1,0 +1,48 @@
+<div class="loan-entry-container">
+  <div class="title-container">
+    <div class="title">Loan Entry</div>
+    <div *ngIf="authority.search">
+      <jhi-search
+        (searchEvent)="onSearch($event)"
+        [placeholder]="searchPlaceholder"
+      ></jhi-search>
+    </div>
+  </div>
+
+  <div class="loan-stage-container">
+    <mat-nav-list class="list-horizontal">
+      <a
+        mat-list-item
+        routerLinkActive="active"
+        *ngFor="let applicationStatus of applicationStatuses; let i = index"
+        (click)="onApplicationStateSelection(applicationStatus, i)"
+        [class.active]="selectedIndex === i"
+        class="status-container"
+      >
+        <span
+          [ngClass]="[selectedIndex === i ? 'active' : '']"
+          class="status-container"
+        >
+          {{ applicationStatus?.label }}
+          <span class="dot"> &middot;</span>
+          {{ applicationStatus?.count }}
+        </span>
+      </a>
+    </mat-nav-list>
+    <app-loan-application-search-filter
+      *ngIf="(requiredFilters | async)?.length"
+      (updateFilter)="onFilterChange($event)"
+      [requiredFilters]="requiredFilters | async"
+    ></app-loan-application-search-filter>
+  </div>
+  <app-loan-application-table
+    [loanDetails]="loanDetails"
+    [tableData]="tableData"
+    [queryCount]="queryCount"
+    [itemsPerPage]="itemsPerPage"
+    [totalItems]="totalItems"
+    [page]="page"
+    [previousPage]="previousPage"
+    (loadPage)="loadPage($event)"
+  ></app-loan-application-table>
+</div>

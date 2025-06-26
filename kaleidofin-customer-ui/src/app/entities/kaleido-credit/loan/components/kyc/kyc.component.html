@@ -1,0 +1,65 @@
+<ng-container *ngIf="poiDocuments && poiDocuments.length > 0">
+  <div class="col-2" *ngIf="eKycStatus">
+      <label class="form-control-label" for="ekycStatus">KYC Status</label>
+      <jhi-null-replace [value]="eKycStatus"></jhi-null-replace>
+  </div>
+  <mat-accordion>
+    <mat-expansion-panel
+      [expanded]="poiPanelOpenState"
+      (opened)="poiPanelOpenState = true"
+      (closed)="poiPanelOpenState = false"
+    >
+      <mat-expansion-panel-header>
+        <mat-panel-title class="document-type-title">
+          Document Category - Proof of Identity
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div *ngIf="poiPanelOpenState">
+        <app-loan-kyc-document-accoridon
+          [loanId]="loanId"
+          [partnerId]="partnerId"
+          [subtype]="poiDocuments[0].documentType"
+          [idNo]="poiDocuments[0]?.idNo || poiDocuments[1]?.idNo || ''"
+          [fileData]="poiDocuments"
+          [metaData]="customerFileMappingDtoList"
+          [entityId]="customerId"
+          [entityType]="'APPLICANT'"
+          documentCategory="Proof of Identity"
+          [purpose]="poiDocuments[0]?.purpose"
+        >
+        </app-loan-kyc-document-accoridon>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</ng-container>
+<ng-container *ngIf="poaDocuments && poaDocuments.length > 0">
+  <mat-accordion>
+    <mat-expansion-panel
+      [expanded]="poaPanelOpenState"
+      (opened)="poaPanelOpenState = true"
+      (closed)="poaPanelOpenState = false"
+    >
+      <mat-expansion-panel-header>
+        <mat-panel-title class="document-type-title">
+          Document Category - Proof of Address
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+
+      <div *ngIf="poaPanelOpenState">
+        <app-loan-kyc-document-accoridon
+          [loanId]="loanId"
+          [partnerId]="partnerId"
+          [subtype]="poaDocuments[0].documentType"
+          [idNo]="poaDocuments[0]?.idNo || poaDocuments[1]?.idNo || ''"
+          [fileData]="poaDocuments"
+          [metaData]="customerFileMappingDtoList"
+          [entityId]="customerId"
+          [entityType]="'APPLICANT'"
+          documentCategory="Proof of Address"
+          [purpose]="poaDocuments[0]?.purpose"
+        >
+        </app-loan-kyc-document-accoridon>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</ng-container>

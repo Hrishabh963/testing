@@ -1,0 +1,77 @@
+.dialog-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: column;
+}
+p {
+  font-family: HK Grotesk, sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 31px;
+  letter-spacing: 0.17307710647583008px;
+  text-align: center;
+}
+.dialog-title {
+  width: 100%;
+  border-bottom: 1px solid#EAF2FF;
+  font-size: 16px;
+}
+.closeicon {
+  float: right;
+  text-align: center;
+  font-size: 20px;
+  margin-top: 5px;
+}
+.dialog-content-text {
+  text-align: center;
+  max-height: 55vh;
+  overflow: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: column;
+}
+.cancel {
+  background-color: var(--kcredit-app-secondary);
+  color: var(--kcredit-primary-white);
+}
+.proceed {
+  background-color: var(--kcredit-primary);
+  color: var(--kcredit-primary-white);
+}
+.mat-form-field {
+  background-color: #e6ebf5;
+  border-radius: 8px;
+  height: 50px;
+  width: 100%;
+}
+.mat-form-field-wrapper {
+  border: none;
+}
+.mat-form-field input {
+  padding: 0 10px 6px 10px;
+}
+button {
+  width: 100px;
+}
+.mat-dialog-actions {
+  justify-content: flex-end;
+  width: 100%;
+}
+.mat-label {
+  padding: 2px 5px;
+}
+.mat-dialog-content {
+  overflow: hidden !important;
+}
+.download-sample-link {
+  text-decoration: none;
+  color: var(--kcredit-primary);
+}
+.download-sample-link-container{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}

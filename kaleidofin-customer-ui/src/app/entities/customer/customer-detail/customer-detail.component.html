@@ -1,0 +1,309 @@
+<div class="main-container">
+  <div fxLayout="row wrap">
+    <button mat-icon-button (click)="backToCustomers()">
+      <mat-icon>arrow_back</mat-icon>
+    </button>
+    <h1>Customers Details</h1>
+  </div>
+  <ng-template #isNullBlock>
+    <h4>-</h4>
+  </ng-template>
+  <mat-accordion>
+    <mat-expansion-panel
+      (opened)="panelOpenState = true"
+      (closed)="panelOpenState = false"
+    >
+      <mat-expansion-panel-header>
+        <div class="row" style="width: 100%">
+          <div class="col-sm-12">
+            <p>Customer Details</p>
+          </div>
+          <div class="col-sm-2">
+            <h5>Name</h5>
+            <h4>{{ customerDetailsDTO.customerName }}</h4>
+          </div>
+          <div class="col-sm-2"></div>
+          <div class="col-sm-2">
+            <h5>Customer ID</h5>
+            <h4>{{ customerDetailsDTO.customerId }}</h4>
+          </div>
+          <div class="col-sm-2">
+            <h5>Mobile Number</h5>
+            <h4>{{ customerDetailsDTO.primaryMobileNumber }}</h4>
+          </div>
+          <div class="col-sm-2">
+            <h5>Email Address</h5>
+            <h4 *ngIf="customerDetailsDTO.email !== null; else isNullBlock">
+              {{ customerDetailsDTO.email }}
+            </h4>
+          </div>
+        </div>
+      </mat-expansion-panel-header>
+      <mat-divider></mat-divider>
+      <br />
+      <p>KYC Details</p>
+      <div class="row">
+        <div class="col-sm-2">
+          <h5>Pan number</h5>
+          <h4 *ngIf="customerDetailsDTO.panNumber !== null; else isNullBlock">
+            {{ customerDetailsDTO.panNumber }}
+          </h4>
+        </div>
+        <div class="col-sm-2">
+          <h5>PEKRN no</h5>
+          <h4 *ngIf="customerDetailsDTO.pekrnNumber !== null; else isNullBlock">
+            {{ customerDetailsDTO.pekrnNumber }}
+          </h4>
+        </div>
+        <div class="col-sm-2">
+          <h5>Aadhaar no</h5>
+          <h4
+            *ngIf="customerDetailsDTO.aadhaarNumber !== null; else isNullBlock"
+          >
+            {{ customerDetailsDTO.aadhaarNumber }}
+          </h4>
+        </div>
+      </div>
+      <br />
+      <mat-divider></mat-divider>
+      <br />
+      <p>Branch & Center Details</p>
+      <div class="row">
+        <div class="col-sm-2">
+          <h5>Center Name</h5>
+          <h4>{{ customerDetailsDTO.center }}</h4>
+        </div>
+        <div class="col-sm-2">
+          <h5>Center ID</h5>
+          <h4>{{ customerDetailsDTO.centerCode }}</h4>
+        </div>
+        <div class="col-sm-2">
+          <h5>Branch Name</h5>
+          <h4>{{ customerDetailsDTO.branch }}</h4>
+        </div>
+        <div class="col-sm-2">
+          <h5>Branch Id</h5>
+          <h4>{{ customerDetailsDTO.branchCode }}</h4>
+        </div>
+        <div class="col-sm-2">
+          <h5>City</h5>
+          <h4 *ngIf="customerDetailsDTO.branchCity !== null; else isNullBlock">
+            {{ customerDetailsDTO.branchCity }}
+          </h4>
+        </div>
+        <div class="col-sm-2">
+          <h5>State</h5>
+          <h4 *ngIf="customerDetailsDTO.branchState !== null; else isNullBlock">
+            {{ customerDetailsDTO.branchState }}
+          </h4>
+        </div>
+      </div>
+      <br />
+      <mat-divider></mat-divider>
+      <br />
+      <p>Agent Details</p>
+      <div
+        *ngFor="let agent of customerDetailsDTO.agentDetailsList"
+        class="row"
+      >
+        <div class="col-sm-2">
+          <h5>Name</h5>
+          <h4>{{ agent.agentName }}</h4>
+        </div>
+        <div class="col-sm-2">
+          <h5>Agent ID</h5>
+          <h4>{{ agent.agentId }}</h4>
+        </div>
+        <div class="col-sm-2">
+          <h5>Mobile Number</h5>
+          <h4 *ngIf="agent.mobileNumber !== null; else isNullBlock">
+            {{ agent.mobileNumber }}
+          </h4>
+        </div>
+        <div class="col-sm-2">
+          <h5>Email Address</h5>
+          <h4 *ngIf="agent.agentEmail !== null; else isNullBlock">
+            {{ agent.agentEmail }}
+          </h4>
+        </div>
+        <div class="col-sm-2">
+          <h5>Agent Branch</h5>
+          <h4 *ngIf="agent.branchCode !== null; else isNullBlock">
+            {{ agent.branchCode }}
+          </h4>
+        </div>
+        <div class="col-sm-2">
+          <h5>Agent Center</h5>
+          <h4 *ngIf="agent.centerCode !== null; else isNullBlock">
+            {{ agent.centerCode }}
+          </h4>
+        </div>
+        <br />
+        <br />
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <br />
+  <mat-accordion
+    *ngFor="
+      let subscription of customerDetailsDTO.customerSubscriptionsList;
+      let i = index
+    "
+  >
+    <mat-expansion-panel
+      (opened)="loadPaymentsData(i)"
+      (closed)="panelOpenState = false"
+    >
+      <mat-expansion-panel-header>
+        <div class="row" style="width: 100%">
+          <div class="col-sm-12">
+            <p>Personal Loan {{ subscription.accountNum }}</p>
+          </div>
+          <div class="col-sm-2">
+            <h5>Enrolled on</h5>
+            <h4>
+              {{ subscription.createdDate | date: "dd MMM yyyy" }},
+              {{ subscription.createdDate | date: "shortTime" }}
+            </h4>
+          </div>
+          <div class="col-sm-2"></div>
+          <div class="col-sm-2">
+            <h5>Product name</h5>
+            <h4>{{ subscription.goal }}</h4>
+          </div>
+          <div class="col-sm-2">
+            <h5>Loan ID</h5>
+            <h4>{{ subscription.accountNum }}</h4>
+          </div>
+          <div class="col-sm-2">
+            <h5>Status</h5>
+            <div
+              class="success"
+              *ngIf="
+                subscription.statusString == 'Approved' ||
+                subscription.statusString == 'Active'
+              "
+            >
+              {{ subscription.statusString }}
+            </div>
+            <div
+              class="failure"
+              *ngIf="subscription.statusString == 'Rejected'"
+            >
+              {{ subscription.statusString }}
+            </div>
+            <div
+              class="other"
+              *ngIf="
+                subscription.statusString != 'Approved' &&
+                subscription.statusString != 'Active' &&
+                subscription.statusString != 'Rejected'
+              "
+            >
+              {{ subscription.statusString }}
+            </div>
+          </div>
+        </div>
+      </mat-expansion-panel-header>
+      <mat-divider></mat-divider>
+      <br />
+      <p>Payment Details</p>
+      <div class="row" style="width: 100%">
+        <div class="col-sm-2">
+          <h5>Payment Activated on</h5>
+          <h4
+            *ngIf="
+              subscription.nachReviewAcceptedDate !== null;
+              else isNullBlock
+            "
+          >
+            {{ subscription.nachReviewAcceptedDate | date: "dd MMM yyyy" }}
+          </h4>
+        </div>
+        <div class="col-sm-2">
+          <h5>Payment Expiry on</h5>
+          <h4 *ngIf="subscription.endDate !== null; else isNullBlock">
+            {{ subscription.endDate | date: "dd MMM yyyy" }}
+          </h4>
+        </div>
+        <div class="col-sm-2">
+          <h5>Payment mode</h5>
+          <h4 *ngIf="subscription.paymentMode !== null; else isNullBlock">
+            {{ subscription.paymentMode }}
+          </h4>
+        </div>
+        <div class="col-sm-2">
+          <h5>Nach id</h5>
+          <h4 *ngIf="subscription.nachMandateId !== null; else isNullBlock">
+            {{ subscription.nachMandateId }}
+          </h4>
+        </div>
+        <div class="col-sm-4">
+          <h5>Status</h5>
+          <h4 *ngIf="subscription.nachReviewStatus !== null; else isNullBlock">
+            {{ subscription.nachReviewStatus }}
+          </h4>
+        </div>
+      </div>
+      <br />
+      <mat-divider *ngIf="hasPayments"></mat-divider>
+      <p *ngIf="hasPayments">List of Payments</p>
+      <div *ngIf="hasPayments">
+        <div>
+          <table mat-table [dataSource]="paymentsList" id="listtable">
+            <caption></caption>
+            <ng-container matColumnDef="date">
+              <th mat-header-cell *matHeaderCellDef>DATE</th>
+              <td mat-cell *matCellDef="let row">
+                <h4>{{ row.paymentDate | date: "dd MMM, yyyy" }}</h4>
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="payment">
+              <th mat-header-cell *matHeaderCellDef>PAYMENT</th>
+              <td mat-cell *matCellDef="let row">
+                <h4>{{ row.totalAmount | currency: "INR":"symbol" }}</h4>
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="transactionId">
+              <th mat-header-cell *matHeaderCellDef>TRANSACTION ID</th>
+              <td mat-cell *matCellDef="let row">
+                <h4
+                  *ngIf="row.transactionReferenceId !== null; else isNullBlock"
+                >
+                  {{ row.transactionReferenceId }}
+                </h4>
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="status">
+              <th mat-header-cell *matHeaderCellDef>STATUS</th>
+              <td mat-cell *matCellDef="let row">
+                <h4>{{ row.status }}</h4>
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="mode">
+              <th mat-header-cell *matHeaderCellDef>PAYMENT MODE</th>
+              <td mat-cell *matCellDef="let row">
+                <h4>{{ row.paymentMode }}</h4>
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="info">
+              <th mat-header-cell *matHeaderCellDef>INFO</th>
+              <td mat-cell *matCellDef="let row">
+                <h4>--</h4>
+              </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+          </table>
+        </div>
+      </div>
+      <br />
+      <h5>
+        *Please note : Transactions will happen only on working days. In case
+        the transaction for a non working day, it will get executed the next
+        working day
+      </h5>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

@@ -1,0 +1,49 @@
+.comment-container {
+    padding: 15px 0px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-direction: row;
+  }
+  .comment-section{
+    gap: 6px;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+  }
+  .comment-title-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: row;
+    gap: 10px;
+  }
+  /* styles.css */
+  .mat-avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 400;
+    background-color: var(--kcredit-background-grey);
+    color: #212529;
+    border-radius: 50%;
+    height: 48px;
+    width: 48px;
+  }
+  .comment-title {
+    font-weight: 500;
+  }
+  .comment-date {
+    opacity: 50%;
+  }
+  
+  .comment-data {
+    margin-top: -10px;
+    margin-left: 64px;
+    color: #212529;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+  }
+  

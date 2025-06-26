@@ -1,0 +1,46 @@
+<mat-accordion>
+    <mat-expansion-panel [expanded]="panelOpenState" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+        <mat-expansion-panel-header>
+            <div class="expansion-panel-title-container">
+                <h1 class="section-title"> Household Income And Expense </h1>
+            </div>
+        </mat-expansion-panel-header>
+
+        <ng-container>
+            <app-dynamic-render-component [title]="'Household Income (Monthly)'" [uiFields]="hhIncomeMonthly" *ngIf="hhIncomeMonthlyMap?.length"
+                [uiFieldsMap]="hhIncomeMonthlyMap" [isSubHeading]="true" [loanId]="loanId" [editSections]="editSections"
+                [enableEdit]="enableEdit" [nestedInputKey] = "'monthlyHouseHoldIncome'" [uiApiKey]="sectionKey"></app-dynamic-render-component>
+        </ng-container>
+
+        <ng-container>
+            <app-dynamic-render-component [title]="'Household Expenditure (Monthly)'" [uiFields]="hhExpendituremonthly" *ngIf="hhExpendituremonthlyMap?.length"
+                [uiFieldsMap]="hhExpendituremonthlyMap" [isSubHeading]="true" [loanId]="loanId"
+                [editSections]="editSections" [enableEdit]="enableEdit" [nestedInputKey] = "'monthlyHouseHoldExp'" [uiApiKey]="sectionKey"></app-dynamic-render-component>
+        </ng-container>
+
+        <ng-container>
+            <app-dynamic-render-component [title]="'Monthly Household Financial Overview'" *ngIf="hhFinancialOverviewMonthlyMap?.length"
+                [uiFields]="hhFinancialOverviewMonthly" [uiFieldsMap]="hhFinancialOverviewMonthlyMap"
+                [isSubHeading]="true" [loanId]="loanId" [editSections]="editSections"
+                [enableEdit]="enableEdit" [nestedInputKey] = "'monthlyHouseholdFinancialOverview'" [hideEditAction]="true" [uiApiKey]="sectionKey"></app-dynamic-render-component>
+        </ng-container>
+        <ng-container>
+            <app-dynamic-render-component [title]="'Annual Household Financial Overview'" *ngIf="hhFinancialOverviewAnnualMap?.length"
+                [uiFields]="hhFinancialOverviewAnnual" [uiFieldsMap]="hhFinancialOverviewAnnualMap"
+                [isSubHeading]="true" [loanId]="loanId" [editSections]="editSections"
+                [enableEdit]="enableEdit" [nestedInputKey] = "'annualHouseholdFinancialOverview'" [hideEditAction]="true" [uiApiKey]="sectionKey"></app-dynamic-render-component>
+        </ng-container>
+
+        <ng-container>
+            <app-dynamic-render-component [title]="'Co-applicant Income (Monthly)'" [uiFields]="cpIncomeMonthly" *ngIf="cpIncomeMonthlyMap?.length"
+                [uiFieldsMap]="cpIncomeMonthlyMap" [isSubHeading]="true" [loanId]="loanId" [editSections]="editSections"
+                [enableEdit]="enableEdit" [nestedInputKey] = "'coapplicantHouseHoldIncome'" [uiApiKey]="sectionKey"></app-dynamic-render-component>
+        </ng-container>
+
+        <ng-container>
+            <app-dynamic-render-component [title]="'Income Assessment'" [uiFields]="incomeAssesment" *ngIf="incomeAssesmentMap?.length"
+                [uiFieldsMap]="incomeAssesmentMap" [isSubHeading]="true" [loanId]="loanId" [editSections]="editSections"
+                [enableEdit]="enableEdit" [nestedInputKey] = "'incomeAssessment'" [uiApiKey]="sectionKey"></app-dynamic-render-component>
+        </ng-container>
+    </mat-expansion-panel>
+</mat-accordion>

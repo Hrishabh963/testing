@@ -1,0 +1,40 @@
+export enum PEPCompliance {
+  COMPLIANT = "COMPLIANT",
+  CHECK_PENDING = "CHECK_PENDING",
+  NOT_COMPLIANT = "NOT_COMPLIANT",
+  NOT_APPLICABLE = "NOT_APPLICABLE",
+}
+
+export enum PEPStatus {
+  NOT_PEP = "NOT_PEP",
+  SELF = "SELF",
+  FATHER = "FATHER",
+  MOTHER = "MOTHER",
+  SPOUSE = "SPOUSE",
+  SON = "SON",
+  DAUGHTER = "DAUGHTER",
+  SON_IN_LAW = "SON_IN_LAW",
+  DAUGHTER_IN_LAW = "DAUGHTER_IN_LAW",
+  BROTHER = "BROTHER",
+  SISTER = "SISTER",
+  UNCLE = "UNCLE",
+  AUNT = "AUNT",
+  NEPHEW = "NEPHEW",
+  NIECE = "NIECE",
+  COUSIN = "COUSIN",
+  GRANDFATHER = "GRANDFATHER",
+  GRANDMOTHER = "GRANDMOTHER",
+  GRANDSON = "GRANDSON",
+  GRANDDAUGHTER = "GRANDDAUGHTER",
+  CLOSE_FRIENDS = "CLOSE_FRIENDS",
+  LEAGAL_ADVISORS = "LEAGAL_ADVISORS",
+  BUSINESS_ASSOCIATES = "BUSINESS_ASSOCIATES",
+  NOT_AVAILABLE = "NOT_AVAILABLE",
+}
+
+export const PEPComplianceList = [
+  { displayName: "Compliance check pending", id: PEPCompliance.CHECK_PENDING },
+  { displayName: "PEP Compliant", id: PEPCompliance.COMPLIANT },
+  { displayName: "NOT PEP Compliant", id: PEPCompliance.NOT_COMPLIANT },
+  { displayName: "Not Applicable", id: PEPCompliance.NOT_APPLICABLE },
+];

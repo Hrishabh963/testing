@@ -1,0 +1,44 @@
+<mat-form-field
+  appearance="fill"
+  class="status-container custom-mat-form-field"
+  mat-button
+  [matMenuTriggerFor]="belowMenu"
+>
+  <mat-label>Status</mat-label>
+  <div class="input-container">
+    <input
+      matInput
+      placeholder="Status"
+      [value]="selectedItemsString"
+      readonly
+    />
+    <mat-icon matSuffix>arrow_drop_down</mat-icon>
+  </div>
+</mat-form-field>
+<mat-menu class="custom-style" #belowMenu="matMenu" yPosition="below" xPosition="before" 
+>
+  <div *ngFor="let menu of statusMenus">
+    <div>
+      <div class="main-menu-text">
+        {{ menu.viewValue }}
+      </div>
+      <div *ngFor="let submenu of menu.subStatus">
+        <div
+          mat-menu-item
+          class="sub-text"
+          [value]="submenu.value"
+          (click)="onSubmenuSelection($event, submenu, menu)"
+          (keypress)="onSubmenuSelection($event, submenu, menu)"
+        >
+          <mat-checkbox
+            [(ngModel)]="submenu.isChecked"
+            (click)="handleCheckboxClick($event, submenu, menu)"
+            (keypress)="handleCheckboxClick($event, submenu, menu)"
+            tabindex="0"
+            >{{ submenu.viewValue }}</mat-checkbox
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</mat-menu>

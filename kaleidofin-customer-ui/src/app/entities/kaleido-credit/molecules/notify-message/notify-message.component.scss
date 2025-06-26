@@ -1,0 +1,32 @@
+:host{
+	width: 100%;
+}
+
+.notify-container{
+	display: flex;
+	padding-top: 10vh;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.notify-header{
+	font-size: 1.7em;
+	font-weight: 800;
+	line-height: 1em;
+	padding-bottom: 3vh;
+	text-align: center;
+}
+
+.notify-paragraph{
+	text-align: center;
+	font-size: 1.1em;
+	line-height: 1.5em;
+}
+
+img{
+	padding-bottom: 3vh;
+}
+
+
+

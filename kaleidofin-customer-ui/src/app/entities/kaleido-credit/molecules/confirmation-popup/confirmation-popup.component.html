@@ -1,0 +1,21 @@
+<div class="popup-container">
+    <div class="header-container">
+        <h3>{{ title }}</h3>
+        <button (click)="closeDialog()">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+    <div class="form-container">
+        <div>
+            <p> {{popupText}} </p>
+        </div>
+        <mat-form-field appearance="fill" class="form-field" *ngIf="enableTextField">
+            <mat-label>{{textFieldLabel}}</mat-label>
+            <input matInput type="text" placeholder="Type Your Remarks" [(ngModel)]="comment" />
+        </mat-form-field>
+        <div class="approve-button-container">
+            <button (click)="closeDialog()" mat-flat-button class="cancel-button">Cancel</button>
+            <button mat-flat-button (click)="approveDialog()" class="action-button" [class]="popupStyle">{{ confirmButtonText }}</button>
+        </div>
+    </div>
+</div>

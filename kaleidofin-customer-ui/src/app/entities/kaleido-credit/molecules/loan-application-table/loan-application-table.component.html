@@ -1,0 +1,266 @@
+<div class="table-div-container">
+  <table class="fixed_header">
+    <caption>
+      &nbsp;
+    </caption>
+    <thead>
+      <tr class="table-headers">
+        <th *ngFor="let column of tableData" [ngSwitch]="column?.type">
+          <ng-container *ngSwitchDefault>
+            <span class="header-span">{{ column?.label }} </span>
+          </ng-container>
+          <ng-container *ngSwitchCase="'checkbox'">
+            <mat-checkbox
+              class="checkbox"
+              (change)="column?.headerHandler($event)"
+              [checked]="checkAll"
+              [disabled]="!loanDetails?.length"
+            ></mat-checkbox>
+          </ng-container>
+          <ng-container *ngSwitchCase="'selectbox'">
+            <span>{{ column?.label }}</span>
+            <mat-select
+              value="All"
+              (selectionChange)="onFilterChange($event, column?.filterType)"
+            >
+              <mat-option
+                *ngFor="let option of column?.options"
+                [value]="option?.value || 'All'"
+                >{{ option?.viewValue }}</mat-option
+              >
+            </mat-select>
+          </ng-container>
+          <ng-container *ngSwitchCase="'multi-selectbox'">
+            <app-table-header-multi-select
+              [column]="column"
+              (onFilterChange)="onFilterChange($event, column?.filterType)"
+            >
+            </app-table-header-multi-select>
+          </ng-container>
+        </th>
+      </tr>
+    </thead>
+    <tbody class="table-body" *ngIf="localLoanDetails?.length > 0">
+      <tr *ngFor="let rowData of localLoanDetails" class="table-rows">
+        <ng-container *ngFor="let column of tableData">
+          <td
+            [ngSwitch]="column.type"
+            matTooltip="{{
+              rowData[column.propertyKey] | dynamicDataTransform : column?.pipe
+            }}
+        "
+            matTooltipPosition="above"
+            [matTooltipDisabled]="!column?.enableToolTip"
+          >
+            <ng-container *ngSwitchCase="'checkbox'">
+              <mat-checkbox
+                class="checkbox"
+                [(ngModel)]="rowData.isLoanSelected"
+                (change)="column?.handler(rowData, $event)"
+              ></mat-checkbox>
+            </ng-container>
+            <ng-container *ngSwitchCase="'button'">
+              <button
+                class="btn-review"
+                [matTooltip]="column?.disableHoverText"
+                matTooltipPosition="above"
+                [matTooltipDisabled]="!disableCheck(column, rowData)"
+                [disabled]="disableCheck(column, rowData)"
+                [ngClass]="column.class"
+                (click)="column.handler(rowData)"
+              >
+                <span class="hidden-md-down btn-review-text">{{
+                  column?.buttonText
+                }}</span>
+              </button>
+            </ng-container>
+            <ng-container *ngSwitchCase="'buttonWithNotification'">
+              <button
+                *ngIf="rowData?.notificationCount === 0"
+                [matTooltip]="column?.disableHoverText"
+                matTooltipPosition="above"
+                [matTooltipDisabled]="!disableCheck(column, rowData)"
+                [disabled]="disableCheck(column, rowData)"
+                class="btn-review"
+                [ngClass]="column.class"
+                (click)="column.handler(rowData)"
+              >
+                <span class="hidden-md-down btn-review-text">{{
+                  column?.buttonText
+                }}</span>
+              </button>
+              <button
+                *ngIf="rowData?.notificationCount !== 0"
+                [matTooltip]="column?.disableHoverText"
+                matTooltipPosition="above"
+                [matTooltipDisabled]="!disableCheck(column, rowData)"
+                [disabled]="disableCheck(column, rowData)"
+                class="btn-review badge"
+                [ngClass]="column.class"
+                matBadge="{{ rowData?.notificationCount }}"
+                matBadgeIconColor="orange"
+                matBadgePosition="before"
+                (click)="column.handler(rowData)"
+              >
+                <span class="hidden-md-down btn-review-text">{{
+                  column?.buttonText
+                }}</span>
+              </button>
+            </ng-container>
+
+            <ng-container *ngSwitchCase="'clickable'">
+              <span
+                (click)="column.handler(rowData)"
+                (keypress)="column.handler(rowData)"
+                [ngClass]="rowData[column.classWithProperty]"
+                >{{ column?.value }}</span
+              >
+            </ng-container>
+            <ng-container *ngSwitchCase="'staticText'">
+              <span
+                (click)="column.handler(rowData)"
+                (keypress)="column.handler(rowData)"
+                [ngClass]="rowData[column.classWithProperty] + ''"
+              >
+                <jhi-null-replace
+                  [value]="
+                    column?.useViewMapper
+                      ? column?.viewMapper[rowData[column?.propertyKey] + '']
+                      : rowData[column?.propertyKey]
+                  "
+                ></jhi-null-replace>
+              </span>
+            </ng-container>
+            <ng-container *ngSwitchCase="'applicationStatus'">
+              <span
+                (click)="column.handler(rowData)"
+                (keypress)="column.handler(rowData)"
+                [ngClass]="
+                  column?.useViewMapper
+                    ? column?.viewMapper[rowData[column.classWithProperty]]
+                    : rowData[column.classWithProperty]
+                "
+              >
+                {{ rowData.applicationStatus }}</span
+              >
+            </ng-container>
+
+            <ng-container *ngSwitchCase="'selectbox'">
+              <span
+                (click)="column.handler(rowData)"
+                (keypress)="column.handler(rowData)"
+                [ngClass]="rowData[column.classWithProperty]"
+                >{{
+                  column?.useViewMapper
+                    ? column?.viewMapper[rowData[column?.propertyKey]] ||
+                      column?.defaultValue
+                    : rowData[column?.propertyKey]
+                }}</span
+              >
+            </ng-container>
+            <ng-container *ngSwitchCase="'multi-selectbox'">
+              <span
+                (click)="column.handler(rowData)"
+                (keypress)="column.handler(rowData)"
+                [ngClass]="
+                  column?.useViewMapper
+                    ? column?.viewMapper[rowData[column.classWithProperty]]
+                    : rowData[column.classWithProperty]
+                "
+                >{{
+                  column?.useViewMapper
+                    ? column?.viewMapper[rowData[column?.propertyKey]] ||
+                      column?.defaultValue
+                    : rowData[column?.propertyKey]
+                }}</span
+              >
+            </ng-container>
+            <ng-container *ngSwitchCase="'resentIndicator'">
+              <div class="flex-center-aligned">
+                <img
+                  src="assets/images/resent-indicator.svg"
+                  alt="Resent"
+                  *ngIf="rowData?.hasResentIndicator"
+                  [matTooltip]="
+                    'This application received from loan booking rejection stage.'
+                  "
+                  matTooltipClass="white-tooltip"
+                  [matTooltipPosition]="'below'"
+                  [matTooltipHideDelay]="100"
+                />
+                {{
+                  (rowData[column.propertyKey]
+                    | dynamicDataTransform : column?.pipe : column?.format) ||
+                    "--"
+                }}
+              </div>
+            </ng-container>
+            <ng-container *ngSwitchCase="'dedupeType'">
+              <div [ngSwitch]="rowData?.dedupeType">
+                <span class="dedupe-match full-dedupe" *ngSwitchCase="'FULL'">
+                  <img src="assets\images\BRE\recalculate-result-fail.svg" alt="fullMatch">
+                  100% Match
+                </span>
+                <span class="dedupe-match hard-dedupe" *ngSwitchCase="'HARD'">
+                  <img src="assets\images\common\info-exclamation-hollow.svg" alt="hardMatch">
+                  Hard Match
+                </span>
+                <span class="dedupe-match soft-dedupe" *ngSwitchCase="'SOFT'">
+                  <img src="assets\images\common\alert-circle.svg" alt="softMatch">
+                  Soft Match
+                </span>
+                <span class="dedupe-match no-dedupe" *ngSwitchCase="'NO_MATCH'">
+                  <img src="assets\images\dashboard\checkgreen.svg" alt="noMatch">
+                  No Match
+                </span>
+                <span *ngSwitchDefault>
+                  <jhi-null-replace [value]="
+                    column?.useViewMapper
+                      ? column?.viewMapper[rowData[column?.propertyKey] + '']
+                      : rowData[column?.propertyKey]
+                  "></jhi-null-replace>
+                </span>
+              </div>
+            </ng-container>
+            <ng-container *ngSwitchDefault>
+              {{
+                (rowData[column.propertyKey]
+                  | dynamicDataTransform : column?.pipe : column?.format) ||
+                  "--"
+              }}
+            </ng-container>
+          </td>
+        </ng-container>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div *ngIf="loanDetails?.length == 0">
+  <hr />
+  <h3 class="text-center kcredit-failure-color">No Loans found</h3>
+</div>
+
+<div class="pagination-container" *ngIf="loanDetails?.length > 0">
+  <div class="row pagination-align">
+    <jhi-item-count
+      [page]="page"
+      [total]="queryCount"
+      [itemsPerPage]="itemsPerPage"
+    >
+    </jhi-item-count>
+  </div>
+  <div class="row pagination-align">
+    <ngb-pagination
+      class="text-center-div"
+      [collectionSize]="totalItems"
+      [(page)]="page"
+      [pageSize]="itemsPerPage"
+      (pageChange)="onLoadPage(page)"
+      [maxSize]="3"
+      [rotate]="true"
+      [boundaryLinks]="true"
+    >
+    </ngb-pagination>
+  </div>
+</div>

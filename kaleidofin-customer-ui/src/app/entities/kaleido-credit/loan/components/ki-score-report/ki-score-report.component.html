@@ -1,0 +1,191 @@
+<div id="bre-report">
+  <div class="report-logo">
+    <img src="assets/images/kaleidofin-new-logo.svg" alt="Kaleidofin" />
+    <img src="assets/images/common/report-heading-image.svg" alt="Reports" />
+  </div>
+  <div>
+    <div class="section-title">ki score Report</div>
+    <br />
+    <div class="bre-report-contianer">
+      <div class="row report-row mb-4">
+        <div class="col-md-2">Partner Customer ID</div>
+        <div class="col-md-2">
+          <strong>{{ kiScoreData.partnerCustomerId }}</strong>
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-2">ki score value</div>
+        <div class="col-md-2">
+          <strong>{{ kiScoreData?.kiScoreReport?.kiScoreValue }}</strong>
+        </div>
+      </div>
+      <div class="row report-row mb-4">
+        <div class="col-md-2">Partner Loan ID</div>
+        <div class="col-md-2">
+          <strong>{{ kiScoreData.partnerLoanId }}</strong>
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-2">ki score cut-off value</div>
+        <div class="col-md-2">
+          <strong>{{ kiScoreData?.kiScoreReport?.kiScoreCutOffValue || "--" }}</strong>
+        </div>
+      </div>
+      <div class="row report-row mb-4">
+        <div class="col-md-2">Loan Application ID</div>
+        <div class="col-md-2">
+          <strong>{{ kiScoreData.loanId }}</strong>
+        </div>
+        <div class="col-md-1"></div>
+        <div class="col-md-2">Customer type</div>
+        <div class="col-md-2">
+          <strong>{{ kiScoreData?.kiScoreReport?.customerType }}</strong>
+        </div>
+      </div>
+      <div class="row report-row mb-4">
+        <div class="col-md-2">ki score Decision</div>
+        <div class="col-md-2">
+          <img
+            id="actionIcon"
+            *ngIf="kiScoreData?.kiScoreReport?.kiScoreDecision"
+            [src]="fetchDecisionIcon(kiScoreData?.kiScoreReport?.kiScoreDecision)"
+            [alt]="kiScoreData?.kiScoreReport?.kiScoreDecision"
+          />
+          <strong>{{ " " + kiScoreData?.kiScoreReport?.kiScoreDecision }}</strong>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <div class="section-title subtitle">ki score Feature Summary</div>
+    <br />
+    <div>
+      <table>
+      <caption></caption>
+        <thead>
+          <tr>
+            <th class="feature-description">Feature Description</th>
+            <th class="feature-type">Feature Type</th>
+            <th class="feature-value">Actual Value</th>
+            <th class="cutoff-value">Cutoff Value</th>
+            <th class="decision">Cutoff decision</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let row of tableData">
+            <ng-container
+              *ngFor="let cutoffValue of row.cutOffValue; let i = index"
+            >
+              <tr>
+                <td
+                  class="feature-description"
+                  *ngIf="i === 0"
+                  [attr.rowspan]="row.cutOffValue.length"
+                >
+                  {{ row.description }}
+                </td>
+                <td
+                  class="feature-type"
+                  *ngIf="i === 0"
+                  [attr.rowspan]="row.cutOffValue.length"
+                >
+                  {{ row.type }}
+                </td>
+                <td
+                  class="feature-value"
+                  *ngIf="i === 0"
+                  [attr.rowspan]="row.cutOffValue.length"
+                >
+                  {{ row.actualValue }}
+                </td>
+                <td class="cutoff-value">
+                  {{ getCutOffValue(cutoffValue) }}
+                </td>
+                <td
+                  [class]="getDecisionClass(row.cutOffDecision)"
+                >
+                  {{ getCutOffValue(row.cutOffDecision[i]) }}
+                </td>
+              </tr>
+            </ng-container>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div>
+    <div class="section-title subtitle">ki score Rule Summary</div>
+    <br />
+    <div>
+      <table>
+      <caption></caption>
+        <thead>
+          <tr>
+            <th class="rule-feature-type">Rule Description</th>
+            <th class="rule-hit">Rule Hit</th>
+            <th class="rule-feature-description">Feature Description</th>
+            <th class="rule-feature-value">Actual Value</th>
+            <th class="rule-cutoff-value">Cutoff Value</th>
+            <th class="rule-decision">Cutoff decision</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let row of ruleData; let rowIndex = index">
+            <ng-container
+              *ngFor="let feature of row.features; let featureIndex = index"
+            >
+              <ng-container
+                *ngFor="
+                  let cutOffValue of feature.cutOffValue;
+                  let cutOffValueIndex = index
+                "
+              >
+                <tr>
+                  <td
+                    class="rule-description"
+                    *ngIf="featureIndex === 0"
+                    [attr.rowspan]="row.features.length"
+                  >
+                    <div [hidden]="cutOffValueIndex !== 0">
+                      {{ row.description }}
+                    </div>
+                  </td>
+                  <td
+                    [ngClass]="['rule-hit', getDecisionClass(row.ruleHit)]"
+                    *ngIf="featureIndex === 0"
+                    [attr.rowspan]="row.features.length"
+                  >
+                    <div [hidden]="cutOffValueIndex !== 0">
+                      {{ row.ruleHit }}
+                    </div>
+                  </td>                
+                  <td
+                    class="rule-feature-description"
+                    *ngIf="cutOffValueIndex === 0"
+                    [attr.rowspan]="feature.cutOffValue.length"
+                  >
+                    {{ feature.description }}
+                  </td>
+                  <td
+                    class="rule-feature-value"
+                    *ngIf="cutOffValueIndex === 0"
+                    [attr.rowspan]="feature.cutOffValue.length"
+                  >
+                    {{ feature.actualValue }}
+                  </td>
+                  <td class="rule-cutoff-value">{{ getCutOffValue(cutOffValue) }}</td>
+                  <td
+                    [ngClass]="[
+                      'rule-decision',
+                      getDecisionClass(feature.cutOffDecision)
+                    ]"
+                  >
+                    {{ getCutOffValue(feature.cutOffDecision[cutOffValueIndex]) }}
+                  </td>
+                </tr>
+              </ng-container>
+            </ng-container>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

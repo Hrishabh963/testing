@@ -1,0 +1,31 @@
+<div class="reports-container">
+  <div class="col-12 no-space">
+    <div class="flex-container title-container">
+      <div class="flex-container">
+        <h3 class="title-text">Reports</h3>
+        <div>
+          <app-search-filter></app-search-filter>
+        </div>
+      </div>
+      <div>
+        <button mat-button class="btn btn-primary" (click)="openGenerateReport()">
+          Generate new report
+        </button>
+        
+      </div>
+    </div>
+    <app-reports-data 
+    [config]="uiConfig" 
+    [tableData]="jobDetailsList" 
+    [totalItems]="totalItems" 
+    [page]="page"
+    [itemsPerPage]="itemsPerPage" 
+    [links]="links" 
+    (loadPage)="loadPage($event)"
+    ></app-reports-data>
+  </div>
+</div>
+
+
+
+

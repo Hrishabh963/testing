@@ -1,0 +1,11 @@
+<div class="kyc-documents-container">
+    <app-kyc-details-accordion [title]="'Coapplicant'" [partnerId]="loanDetails?.customerDTO?.partnerId"
+        [kycDocumentList]="coApplicantKycDocumentList" [entityType]="'CO_APPLICANT'" [loanId]="loanId">
+    </app-kyc-details-accordion>
+
+    <div class="guarantor-container">
+        <app-kyc-details-accordion [title]="'Guarantor'" [partnerId]="loanDetails?.customerDTO?.partnerId"
+            [kycDocumentList]="coApplicantKycDocumentList" [entityType]="'GUARANTOR'" [loanId]="loanId">
+        </app-kyc-details-accordion>
+    </div>
+</div>

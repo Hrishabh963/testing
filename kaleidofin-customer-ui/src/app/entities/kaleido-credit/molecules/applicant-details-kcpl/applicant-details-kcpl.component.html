@@ -1,0 +1,276 @@
+<mat-accordion>
+    <mat-expansion-panel [expanded]="panelState" (opened)="panelState = true" (closed)="panelState = false">
+        <mat-expansion-panel-header>
+            <div class="section-sub-heading section-container">Applicant Details
+                <app-section-edit-action (onCancelHandler)="cancel($event)" (onSaveHandler)="save($event)"
+                    [panelOpenState]="panelState" [isEditing]="enableEdit" (onEditHandler)="toggleEditDetails($event)">
+                </app-section-edit-action>
+            </div>
+        </mat-expansion-panel-header>
+        <div class="card-title">
+            <form name="customerInfoForm" novalidate #customerInfoForm="ngForm">
+                <div class="container">
+                    <div class="col-lg-3 field">
+                        <div [hidden]="!enableEdit">
+                            <mat-form-field appearance="outline">
+                                <mat-label for="applicantName">Applicant Name</mat-label>
+                                <input matInput name="applicantName" id="applicantName" [(ngModel)]="customer.name"
+                                    required="required" />
+                            </mat-form-field>
+                        </div>
+                        <div [hidden]="enableEdit">
+                            <label class="form-control-label" for="applicantName">Applicant Name</label>
+                            <jhi-null-replace [value]="customer.name"></jhi-null-replace>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 field">
+                        <div [hidden]="!enableEdit">
+                            <mat-form-field appearance="outline">
+                                <mat-label for="partnerCustomerId">Partner Customer Id</mat-label>
+                                <input matInput name="partnerCustomerId" id="partnerCustomerId"
+                                    [(ngModel)]="customer.partnerCustomerId" required="required" />
+                            </mat-form-field>
+                        </div>
+                        <div [hidden]="enableEdit">
+                            <label class="form-control-label" for="partnerCustomerId">Partner Customer Id</label>
+                            <jhi-null-replace [value]="customer.partnerCustomerId"></jhi-null-replace>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 field">
+                        <div [hidden]="!enableEdit">
+                            <mat-form-field appearance="outline">
+                                <mat-label for="fatherName">Father Name</mat-label>
+                                <input matInput name="fatherName" id="fatherName" [(ngModel)]="customer.fatherName" />
+                            </mat-form-field>
+                        </div>
+                        <div [hidden]="enableEdit">
+                            <label class="form-control-label" for="fatherName">Father Name</label>
+                            <jhi-null-replace [value]="customer.fatherName"></jhi-null-replace>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 field">
+                        <div [hidden]="!enableEdit">
+                            <mat-form-field appearance="outline">
+                                <mat-label for="gender2">Gender</mat-label>
+                                <mat-select [(ngModel)]="customer.gender" name="gender2" id="gender2">
+                                    <mat-option *ngFor="let gender of genders" [value]="gender.code">
+                                        {{ gender.name }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                        <div [hidden]="enableEdit">
+                            <label class="form-control-label" for="gender2">Gender</label>
+                            <jhi-null-replace [value]="customer.gender"></jhi-null-replace>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 field">
+                        <div [hidden]="!enableEdit">
+                            <mat-form-field appearance="outline">
+                                <mat-label for="spouseName">Spouse Name</mat-label>
+                                <input matInput name="spouseName" id="spouseName" [(ngModel)]="customer.spouseName" />
+                            </mat-form-field>
+                        </div>
+                        <div [hidden]="enableEdit">
+                            <label class="form-control-label" for="spouseName">Spouse Name</label>
+                            <jhi-null-replace [value]="customer.spouseName"></jhi-null-replace>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 field">
+                        <div [hidden]="!enableEdit" class="input-group">
+                            <mat-form-field style="width: 80%" appearance="outline">
+                                <mat-label for="dateOfBirth">Date of Birth</mat-label>
+                                <input matInput [matDatepicker]="dateOfBirth" placeholder="Date of Birth"
+                                    [max]="maxDate" [min]="minDate" (dateChange)="updateDate($event)"
+                                    [value]="dateDisplay" id="dateOfBirth" name="dateOfBirth" />
+                                <mat-datepicker-toggle matSuffix [for]="dateOfBirth"></mat-datepicker-toggle>
+                                <mat-datepicker #dateOfBirth></mat-datepicker>
+                            </mat-form-field>
+                        </div>
+                        <div [hidden]="enableEdit">
+                            <label class="form-control-label" for="dateOfBirth">Date Of Birth</label>
+                            <jhi-null-replace [value]="customer.dateOfBirth" inputType="date"></jhi-null-replace>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 field">
+                        <div [hidden]="!enableEdit">
+                            <div class="verification-container">
+                                <mat-form-field appearance="outline">
+                                    <mat-label for="aadhaarNumber">Aadhaar Number</mat-label>
+                                    <input matInput name="aadhaarNumber" id="aadhaarNumber"
+                                        [(ngModel)]="customer.maskedAadhaar" minlength="12" maxlength="12" type="number"
+                                        pattern="^[0-9]{12}$" [errorStateMatcher]="errorMatcher" required="required" />
+                                    <mat-error>{{ errorConstants.aadhaarNumber }}</mat-error>
+                                </mat-form-field>
+                                <jhi-aadhaar-idfy *ngIf="isAadhaarVerificationNeeded" [customer]="customer"
+                                    [loanApplicationDTO]="loanDetails?.loanApplicationDTO"></jhi-aadhaar-idfy>
+                            </div>
+                        </div>
+                        <div [hidden]="enableEdit">
+                            <label class="form-control-label" for="aadhaarNumber">Aadhaar Number</label>
+                            <div class="verification-container">
+                                <jhi-null-replace [value]="customer.maskedAadhaar"></jhi-null-replace>
+                                <jhi-aadhaar-idfy *ngIf="isAadhaarVerificationNeeded" [customer]="customer"
+                                    [loanApplicationDTO]="loanDetails?.loanApplicationDTO"></jhi-aadhaar-idfy>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 field">
+                        <div [hidden]="!enableEdit">
+                            <div class="verification-container">
+                                <mat-form-field appearance="outline">
+                                    <mat-label for="panNumber">Pan Number</mat-label>
+                                    <input matInput name="panNumber" id="panNumber" [(ngModel)]="customer.panNumber"
+                                        [disabled]="!enableEdit" pattern="^([a-zA-Z]){5}([0-9]){4}([a-zA-Z]){1}?$"
+                                        minlength="10" maxlength="10" [errorStateMatcher]="errorMatcher" />
+                                    <mat-error>{{ errorConstants.panNumber }}</mat-error>
+                                </mat-form-field>
+                                <jhi-aadhaar-idfy *ngIf="isPanVerificationNeeded && customer?.panNumber" [customer]="customer"
+                                    [loanApplicationDTO]="loanDetails?.loanApplicationDTO" [isPan]="true">
+                                </jhi-aadhaar-idfy>
+                            </div>
+                        </div>
+                        <div [hidden]="enableEdit">
+                            <label class="form-control-label" for="panNumber">Pan Number</label>
+                            <div class="verification-container">
+                                <jhi-null-replace [value]="customer?.panNumber"></jhi-null-replace>
+                                <jhi-aadhaar-idfy *ngIf="isPanVerificationNeeded && customer?.panNumber" [isPan]="true" [customer]="customer"
+                                    [loanApplicationDTO]="loanDetails?.loanApplicationDTO">
+                                </jhi-aadhaar-idfy>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 field">
+                        <div [hidden]="!enableEdit">
+                            <mat-form-field appearance="outline">
+                                <mat-label for="maritalStatus">Marital Status</mat-label>
+                                <mat-select name="maritalStatus" [(ngModel)]="customer.maritalStatus"
+                                    id="maritalStatus">
+                                    <mat-option *ngFor="let maritalStatus of maritalStatuses"
+                                        [value]="maritalStatus.code">
+                                        {{ maritalStatus.name }}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+
+                        <div [hidden]="enableEdit">
+                            <label class="form-control-label" for="maritalStatus">Marital Status</label>
+                            <jhi-null-replace [value]="customer.maritalStatus"></jhi-null-replace>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 field">
+                        <div [hidden]="!enableEdit">
+                            <mat-form-field appearance="outline">
+                                <mat-label for="primaryMobileNumber">Mobile Number</mat-label>
+                                <input matInput name="primaryMobileNumber" id="primaryMobileNumber" pattern="^\d{0,10}$"
+                                    type="number" minlength="10" maxlength="10"
+                                    [(ngModel)]="customer.primaryMobileNumber" required />
+                            </mat-form-field>
+                        </div>
+                        <div [hidden]="enableEdit">
+                            <label class="form-control-label" for="primaryMobileNumber">Mobile Number</label>
+                            <jhi-null-replace [value]="customer.primaryMobileNumber"></jhi-null-replace>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 field">
+                        <div>
+                            <label class="form-control-label" for="poiType">KYC POI Document type</label>
+                            <jhi-null-replace [value]="docType?.poi"></jhi-null-replace>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 field">
+                        <div>
+                            <label class="form-control-label" for="poiNumber">KYC POI Proof number</label>
+                            <div class="verification-container">
+                                <jhi-null-replace [value]="docId?.poi"></jhi-null-replace>
+                                <jhi-aadhaar-idfy *ngIf="riskCategoryEnabled" [isPoaPoi]="true" [customerType]="'APPLICANT'" [doc]="poiDoc"
+                                  [entityId]="customer?.id"  [loanId]="loanId">
+                                </jhi-aadhaar-idfy>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 field">
+                        <div>
+                            <label class="form-control-label" for="poiType">KYC POA Document type</label>
+                            <jhi-null-replace [value]="docType?.poa"></jhi-null-replace>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 field">
+                        <div>
+                            <label class="form-control-label" for="poaNumber">KYC POA Proof number</label>
+                            <div class="verification-container">
+                                <jhi-null-replace [value]="docId?.poa"></jhi-null-replace>
+                                <jhi-aadhaar-idfy *ngIf="riskCategoryEnabled" [isPoaPoi]="true" [customerType]="'APPLICANT'" [doc]="poaDoc"
+                                    [loanId]="loanId">
+                                </jhi-aadhaar-idfy>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 field" *ngIf="riskCategoryEnabled">
+                        <div>
+                            <label class="form-control-label" for="poaNumber">PEP status</label>
+                            <jhi-null-replace [ngClass]="riskProfile?.pepStatus ? riskProfile?.pepStatus : ''"
+                                [value]="riskProfile?.pepStatus | titlecase"></jhi-null-replace>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 field" *ngIf="riskCategoryEnabled">
+                        <div>
+                            <label class="form-control-label" for="poaNumber">KYC Risk Category</label>
+                            <jhi-null-replace
+                                [ngClass]="riskProfile?.kycIdRiskCategory ? riskProfile?.kycIdRiskCategory : ''"
+                                [value]="riskProfile?.kycIdRiskCategory | titlecase"></jhi-null-replace>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 field" *ngIf="riskCategoryEnabled">
+                        <div>
+                            <label class="form-control-label" for="poaNumber">Overall Risk Category</label>
+                            <jhi-null-replace
+                                [ngClass]="riskProfile?.kycRiskCategory ? riskProfile?.kycRiskCategory : ''"
+                                [value]="riskProfile?.kycRiskCategory | titlecase"></jhi-null-replace>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 field" *ngIf="riskCategoryEnabled">
+                        <div>
+                            <label class="form-control-label" for="poaNumber">Occupation</label>
+                            <jhi-null-replace [value]="occupation | titlecase"></jhi-null-replace>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 field" *ngIf="riskCategoryEnabled">
+                        <div>
+                            <label class="form-control-label" for="poaNumber">Occupation Risk</label>
+                            <jhi-null-replace
+                                [ngClass]="riskProfile?.occupationStatus ? riskProfile?.occupationStatus : ''"
+                                [value]="riskProfile?.occupationStatus | titlecase"></jhi-null-replace>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div *ngFor="let address of addressList; let i = index">
+                <div style="margin-top: 5ex" *ngIf="
+                    address?.addressType === 'BUSINESS' ||
+                    address?.addressType === 'CURRENT' ||
+                    address?.addressType === 'PERMANENT' ||
+                    address?.addressType === 'BUSINESS_OPERATING'
+                ">
+                    <jhi-basic-customer-address [address]="address" [index]="i"
+                        (reloadAfterSave)="onSuccess()"></jhi-basic-customer-address>
+                </div>
+            </div>
+        </div>
+        <div class="kyc-details">
+            <mat-accordion>
+                <mat-expansion-panel 
+                [expanded]="kycPanelState"
+                (opened)="kycPanelState = true" (closed)="kycPanelState = false">
+                    <mat-expansion-panel-header>
+                        <h1 class="section-title section-sub-heading">KYC Documents</h1>
+                    </mat-expansion-panel-header>
+                    <jhi-kyc [loanDetails]="loanDetails" [loanId]="loanId" [kycDetailsList]="kycDetailsList"
+                        [partnerId]="loanDetails.customerDTO.partnerId" [customerId]="loanDetails?.customerDTO?.id">
+                    </jhi-kyc>
+                </mat-expansion-panel>
+            </mat-accordion>
+        </div>
+    </mat-expansion-panel>
+</mat-accordion>

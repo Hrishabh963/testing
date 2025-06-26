@@ -1,0 +1,21 @@
+<mat-accordion>
+    <mat-expansion-panel [expanded]="panelOpenState" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+        <mat-expansion-panel-header>
+            <div class="expansion-panel-title-container">
+                <h1 class="section-title"> Loan Eligiblity </h1>
+            </div>
+        </mat-expansion-panel-header>
+
+        <ng-container>
+            <app-dynamic-render-component [title]="'Income & Expense Summary'" [uiFields]="incomeExpenseSummary" *ngIf = "incomeExpenseSummaryMap?.length"
+                [uiFieldsMap]="incomeExpenseSummaryMap" [isSubHeading]="true" [loanId]="loanId" [editSections]="editSections"
+                [enableEdit]="enableEdit" [hideEditAction]="true" ></app-dynamic-render-component>
+        </ng-container>
+
+        <ng-container>
+            <app-dynamic-render-component [title]="'FOIR Based Eligiblity Criteria'" [uiFields]="foirEligiblity" *ngIf = "foirEligiblityMap?.length"
+                [uiFieldsMap]="foirEligiblityMap" [isSubHeading]="true" [loanId]="loanId"
+                [editSections]="editSections" [hideEditAction]="true" [enableEdit]="enableEdit"></app-dynamic-render-component>
+        </ng-container>
+    </mat-expansion-panel>
+</mat-accordion>

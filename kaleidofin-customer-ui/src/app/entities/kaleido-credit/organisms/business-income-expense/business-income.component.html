@@ -1,0 +1,34 @@
+<mat-accordion>
+    <mat-expansion-panel [expanded]="panelOpenState" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+        <mat-expansion-panel-header>
+            <div class="expansion-panel-title-container">
+                <h1 class="section-title"> Business Income & Expense </h1>
+            </div>
+        </mat-expansion-panel-header>
+
+        <ng-container>
+            <app-dynamic-render-component [title]="'Business Income (Monthly)'" [uiFields]="businessIncomeMonthly" *ngIf = "businessIncomeMonthlyMap?.length"
+                [uiFieldsMap]="businessIncomeMonthlyMap" [isSubHeading]="true" [loanId]="loanId" [editSections]="editSections"
+                [enableEdit]="enableEdit" [uiApiKey]="sectionKey" [nestedInputKey] = "'businessIncomeMonthly'"></app-dynamic-render-component>
+        </ng-container>
+
+        <ng-container>
+            <app-dynamic-render-component [title]="'Business Expenditure (Monthly)'" [uiFields]="businessExpMonthly" *ngIf = "businessExpMonthlyMap?.length"
+                [uiFieldsMap]="businessExpMonthlyMap" [isSubHeading]="true" [loanId]="loanId"
+                [editSections]="editSections" [enableEdit]="enableEdit" [uiApiKey]="sectionKey" [nestedInputKey] = "'businessExpenditureMonthly'"></app-dynamic-render-component>
+        </ng-container>
+
+        <ng-container>
+            <app-dynamic-render-component [title]="'Monthly Business Financial Overview'" *ngIf = "businessFinancialOverviewMonthlyMap?.length"
+                [uiFields]="businessFinancialOverviewMonthly" [uiFieldsMap]="businessFinancialOverviewMonthlyMap"
+                [isSubHeading]="true" [loanId]="loanId" [editSections]="editSections"
+                [enableEdit]="enableEdit" [hideEditAction]="true" [uiApiKey]="sectionKey" [nestedInputKey] = "'monthlyBusinessFinancialOverview'"></app-dynamic-render-component>
+        </ng-container>
+        <ng-container>
+            <app-dynamic-render-component [title]="'Annual Business Financial Overview'" *ngIf = "businessFinancialOverviewAnnualMap?.length"
+                [uiFields]="businessFinancialOverviewAnnual" [uiFieldsMap]="businessFinancialOverviewAnnualMap"
+                [isSubHeading]="true" [loanId]="loanId" [editSections]="editSections"
+                [enableEdit]="enableEdit" [hideEditAction]="true" [uiApiKey]="sectionKey" [nestedInputKey] = "'annualBusinessFinancialOverview'"></app-dynamic-render-component>
+        </ng-container>
+    </mat-expansion-panel>
+</mat-accordion>

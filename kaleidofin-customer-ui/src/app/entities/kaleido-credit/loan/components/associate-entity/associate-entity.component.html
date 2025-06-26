@@ -1,0 +1,197 @@
+<mat-accordion>
+  <mat-expansion-panel
+    [expanded]="panelOpenState"
+    (opened)="panelOpenState = true"
+    (closed)="panelOpenState = false"
+  >
+    <mat-expansion-panel-header>
+      <div class="expansion-panel-title-container">
+        <div class="section-title">Associate Entity</div>
+        <app-section-edit-action
+          (onCancelHandler)="cancel($event)"
+          (onSaveHandler)="save($event)"
+          [panelOpenState]="panelOpenState"
+          [isEditing]="isEditing"
+          (onEditHandler)="toggleEditDetails($event)"
+        ></app-section-edit-action>
+      </div>
+    </mat-expansion-panel-header>
+
+    <div class="card-title">
+      <br />
+      <form name="associateEntity" novalidate #editForm="ngForm">
+        <div class="card-body">
+          <div class="card-title">
+            <br />
+            <div class="row row-spacing">
+              <div class="form-group col-md-3">
+                <mat-form-field appearance="outline" [hidden]="!isEditing">
+                  <mat-label>Id Proof No</mat-label>
+                  <input
+                    matInput
+                    [disabled]="!isEditing"
+                    name="name"
+                    id="field_id_proof_no"
+                    [(ngModel)]="profile.idProofNo"
+                  />
+                </mat-form-field>
+                <div [hidden]="isEditing">
+                  <label
+                    class="form-control-label"
+                    jhiTranslate="kCredit.associateEntity.idProofNo"
+                    for="field_id_proof_no"
+                    >Id Proof No</label
+                  >
+                  <jhi-null-replace
+                    [value]="profile.idProofNo"
+                  ></jhi-null-replace>
+                </div>
+              </div>
+              <div class="form-group col-md-3">
+                <mat-form-field appearance="outline" [hidden]="!isEditing">
+                  <mat-label>Id Proof Type</mat-label>
+                  <input
+                    matInput
+                    [disabled]="!isEditing"
+                    name="id_proof_type"
+                    id="field_id_proof_type"
+                    [(ngModel)]="profile.idProofType"
+                  />
+                </mat-form-field>
+                <div [hidden]="isEditing">
+                  <label
+                    class="form-control-label"
+                    jhiTranslate="kCredit.associateEntity.idProofType"
+                    for="field_id_proof_type"
+                    >Id Proof Type</label
+                  >
+                  <jhi-null-replace
+                    [value]="profile.idProofType"
+                  ></jhi-null-replace>
+                </div>
+              </div>
+              <div class="form-group col-md-3">
+                <mat-form-field appearance="outline" [hidden]="!isEditing">
+                  <mat-label>Name of entity</mat-label>
+                  <input
+                    matInput
+                    [disabled]="!isEditing"
+                    name="name_of_entity"
+                    id="field_name_of_entity"
+                    [(ngModel)]="profile.nameOfEntity"
+                  />
+                </mat-form-field>
+
+                <div [hidden]="isEditing">
+                  <label
+                    class="form-control-label"
+                    jhiTranslate="kCredit.associateEntity.nameOfEntity"
+                    for="field_name_of_entity"
+                    >Name of entity</label
+                  >
+                  <jhi-null-replace
+                    [value]="profile.nameOfEntity"
+                  ></jhi-null-replace>
+                </div>
+              </div>
+              <div class="form-group col-md-3">
+                <mat-form-field appearance="outline" [hidden]="!isEditing">
+                  <mat-label>Nature of business</mat-label>
+                  <input
+                    matInput
+                    [disabled]="!isEditing"
+                    name="nature_of_business"
+                    id="field_nature_of_business"
+                    [(ngModel)]="profile.natureOfBusiness"
+                  />
+                </mat-form-field>
+                <div [hidden]="isEditing">
+                  <label
+                    class="form-control-label"
+                    jhiTranslate="kCredit.associateEntity.natureOfBusiness"
+                    for="field_nature_of_business"
+                    >Nature of business</label
+                  >
+                  <jhi-null-replace
+                    [value]="profile.natureOfBusiness"
+                  ></jhi-null-replace>
+                </div>
+              </div>
+            </div>
+            <div class="row row-spacing">
+              <div class="form-group col-md-3">
+                <mat-form-field appearance="outline" [hidden]="!isEditing">
+                  <mat-label>Net Profit</mat-label>
+                  <input
+                    matInput
+                    [disabled]="!isEditing"
+                    name="net_profit"
+                    id="field_net_profit"
+                    [(ngModel)]="profile.netProfit"
+                  />
+                </mat-form-field>
+                <div [hidden]="isEditing">
+                  <label
+                    class="form-control-label"
+                    jhiTranslate="kCredit.associateEntity.netProfit"
+                    for="field_net_profit"
+                    >Net Profit</label
+                  >
+                  <jhi-null-replace
+                    [value]="profile.netProfit"
+                  ></jhi-null-replace>
+                </div>
+              </div>
+              <div class="form-group col-md-3">
+                <mat-form-field appearance="outline" [hidden]="!isEditing">
+                  <mat-label>Net Worth</mat-label>
+                  <input
+                    matInput
+                    [disabled]="!isEditing"
+                    name="net_worth"
+                    id="field_net_worth"
+                    [(ngModel)]="profile.netWorth"
+                  />
+                </mat-form-field>
+                <div [hidden]="isEditing">
+                  <label
+                    class="form-control-label"
+                    jhiTranslate="kCredit.associateEntity.netWorth"
+                    for="field_net_worth"
+                    >Net Worth</label
+                  >
+                  <jhi-null-replace
+                    [value]="profile.netWorth"
+                  ></jhi-null-replace>
+                </div>
+              </div>
+              <div class="form-group col-md-3">
+                <mat-form-field appearance="outline" [hidden]="!isEditing">
+                  <mat-label>Net Sales</mat-label>
+                  <input
+                    matInput
+                    [disabled]="!isEditing"
+                    name="net_sales"
+                    id="field_net_sales"
+                    [(ngModel)]="profile.netSales"
+                  />
+                </mat-form-field>
+                <div [hidden]="isEditing">
+                  <label
+                    class="form-control-label"
+                    jhiTranslate="kCredit.associateEntity.netSales"
+                    for="field_net_sales"
+                    >Net Sales</label
+                  >
+                  <jhi-null-replace
+                    [value]="profile.netSales"
+                  ></jhi-null-replace>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>

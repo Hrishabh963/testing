@@ -1,0 +1,41 @@
+{
+    "register": {
+        "title": "Registration",
+        "subTitle": "Share your contact information",
+        "form": {
+            "button": "VERIFY"
+        },
+        "otp": {
+            "subTitle": "We have sent an OTP (One Time Password) to this number: {{ param }}",
+            "form": {
+                "button": "Continue",
+                "resend": "Resend OTP"
+            },
+            "messages": {
+                "validate": {
+                    "otpCode": {
+                        "required": "Your otp is required.",
+                        "minlength": "Your otp is required to be at least 6 character.",
+                        "maxlength": "Your otp cannot be longer than 6 characters."
+                    }
+                }
+            }
+        },
+        "messages": {
+            "validate": {
+                "login": {
+                    "required": "Your phone number is required.",
+                    "minlength": "Your phone number is required to be at least 10 character.",
+                    "maxlength": "Your phone number cannot be longer than 50 characters.",
+                    "pattern": "Your phone number can only contain digits."
+                }
+            },
+            "success": "<strong>Registration saved!</strong> Please check your email for confirmation.",
+            "error": {
+                "fail": "<strong>Registration failed!</strong> Please try again later.",
+                "userexists": "<strong>Login name already registered!</strong> Please choose another one.",
+                "emailexists": "<strong>Email is already in use!</strong> Please choose another one."
+            }
+        }
+    }
+}

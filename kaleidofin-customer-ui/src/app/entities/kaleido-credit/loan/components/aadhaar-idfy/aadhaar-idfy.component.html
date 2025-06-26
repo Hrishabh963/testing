@@ -1,0 +1,45 @@
+<div [ngSwitch]="verificationStatus">
+  <button *ngSwitchCase="'VERIFIED'" mat-stroked-button matBadge="default" class="aadhaarIdfyVerified"
+    matBadgeIcon="info" matBadgeIconColor="green" matBadgeIconBackgroundColor="white" matBadgePosition="after"
+    [matTooltip]="isPan || isPoaPoi ?  'Verified' : 'Verified by IDFY'" [matTooltipPosition]="'right'">
+    <mat-icon class="mat-success-icon custom-icon">check_circle</mat-icon>
+    VERIFIED
+  </button>
+
+  <button *ngSwitchCase="'UNVERIFIED'" mat-stroked-button matBadge="default" class="aadhaarIdfyUnverified"
+    matBadgeIcon="info" matBadgeIconColor="red" matBadgeIconBackgroundColor="white" matBadgePosition="after"
+    matTooltip="Invalid ID/ID not found" [matTooltipPosition]="'right'">
+    <img class="custom-icon img-icon" src="assets/images/common/close-filled-button.svg" alt="" />
+    UNVERIFIED
+  </button>
+
+  <button *ngSwitchCase="'ERROR'" mat-stroked-button matBadge="default" class="aadhaarIdfyError" matBadgeIcon="info"
+    matBadgeIconColor="#FF820F" matBadgeIconBackgroundColor="white" matBadgePosition="after"
+    [matTooltip]="isPoaPoi || isPan ? 'Unable to verify . Please verify manually' :'Unable to verify through IDFY. Please verify manually'"
+    [matTooltipPosition]="'right'">
+    <mat-icon class="custom-icon">help</mat-icon>
+    API ERROR
+  </button>
+
+  <button *ngSwitchCase="'VERIFY'" mat-raised-button matBadge="default" (click)="verifyAadhaar()"
+    class="aadhaarIdfyToBeVerified" matBadgeIcon="info" matBadgeIconColor="red" matBadgeIconBackgroundColor="white"
+    matBadgePosition="after" matTooltip="IDFY timed out" [matTooltipPosition]="'right'">
+    <mat-icon class="custom-icon">autorenew</mat-icon>
+    VERIFY
+  </button>
+
+  <button *ngSwitchCase="'IN_PROGRESS'" mat-raised-button matBadge="default" class="aadhaarIdfyInProgress"
+    matBadgeIcon="info" matBadgeIconColor="coral" matBadgeIconBackgroundColor="white" matBadgePosition="after"
+    matTooltip="IDFY verification in progress" [matTooltipPosition]="'right'">
+    <mat-icon class="custom-icon">sync</mat-icon>
+    IN PROGRESS
+  </button>
+
+  <button *ngSwitchDefault mat-raised-button matBadge="default" (click)="verifyAadhaar()"
+    class="aadhaarIdfyToBeVerified" matBadgeIcon="info" matBadgeIconColor="red" matBadgeIconBackgroundColor="white"
+    matBadgePosition="after" [matTooltip]="isPan || isPoaPoi ?  'Verification Timed Out' : 'IDFY Timed Out'"
+    [matTooltipPosition]="'right'">
+    <mat-icon class="custom-icon">autorenew</mat-icon>
+    VERIFY
+  </button>
+</div>

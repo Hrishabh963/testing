@@ -1,0 +1,76 @@
+<div>
+    <div *ngFor="let reference of references; let i = index" class="card-title">
+        <h5 jhiTranslate="kCredit.loanObligators.reference" class="section-sub-heading">Reference {{i+1}} </h5>
+        <div class="row row-spacing">
+            <div class="col-3">
+                <label class="form-control-label" jhiTranslate="kCredit.loanObligators.name" htmlFor="label-1">
+                    Name
+                </label>
+                <jhi-null-replace [value]="reference.name"></jhi-null-replace>
+                
+            </div>
+            <div class="col-3">
+                <label class="form-control-label" jhiTranslate="kCredit.loanObligators.relationship" htmlFor="label-2">
+                    Relationship
+                </label>
+                <jhi-null-replace [value]="reference.relationship"></jhi-null-replace>
+                
+            </div>
+            <div class="col-3">
+                <label class="form-control-label" jhiTranslate="kCredit.loanObligators.mobileNo" htmlFor="label-3">
+                    Contact Number
+                </label>
+                <jhi-null-replace [value]="reference.mobileNo"></jhi-null-replace>
+                
+            </div>
+            <div class="col-3">
+                <label class="form-control-label" jhiTranslate="kCredit.loanObligators.dateOfBirth" htmlFor="label-4">
+                    Date of birth (YYYY-MM-DD)
+                </label>
+                <jhi-null-replace [value]="reference.dateOfBirth"></jhi-null-replace>
+                
+            </div>
+            <div class="col-3">
+                <label class="form-control-label" jhiTranslate="kCredit.loanObligators.remarks" htmlFor="label-5">
+                    Remarks
+                </label>
+                <jhi-null-replace [value]="reference.remarks"></jhi-null-replace>
+                
+            </div>
+        </div>
+        <div *ngIf="reference.addressDTO" class="row row-spacing">
+            <div class="col-3">
+                <label class="form-control-label" jhiTranslate="kCredit.loanObligators.address" htmlFor="label-6">
+                    Address
+                </label>
+                <jhi-null-replace [value]="reference.addressDTO.address1"></jhi-null-replace>
+                <jhi-null-replace [value]="reference.addressDTO.address2"></jhi-null-replace>
+                <jhi-null-replace [value]="reference.addressDTO.address3"></jhi-null-replace>
+                
+            </div>
+            <div class="col-3">
+                <label class="form-control-label" jhiTranslate="kCredit.loanObligators.district" htmlFor="label-7">
+                    District
+                </label>
+                <jhi-null-replace [value]="reference.addressDTO.district"></jhi-null-replace>
+                
+            </div>
+            <div class="col-3">
+                <label class="form-control-label" jhiTranslate="kCredit.loanObligators.state" htmlFor="label-8">
+                    State
+                </label>
+                <jhi-null-replace [value]="reference.addressDTO.state"></jhi-null-replace>
+               
+
+            </div>
+            <div class="col-3">
+                <label class="form-control-label" jhiTranslate="kCredit.loanObligators.pincode" htmlFor="label-9">
+                    Pincode
+                </label>
+                <jhi-null-replace [value]="reference.addressDTO.pincode"></jhi-null-replace>
+                
+            </div>
+        </div>
+    </div>
+    <span  *ngIf="!references.length">--</span>
+</div>

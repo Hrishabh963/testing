@@ -1,0 +1,62 @@
+<div class="col-12 row no-space">
+  <div class="col-12 no-space">
+    <div>
+      <jhi-alert></jhi-alert>
+    </div>
+    <div class="col-md-12 no-space">&nbsp;</div>
+    <div class="col-md-12 no-space title-container">
+      <div class="title">Overview</div>
+      <div class="search-filters">
+        <app-loan-application-search-filter *ngIf="requiredFilters.length > 0" [requiredFilters]="requiredFilters"
+          (updateFilter)="onFilterChange($event)">
+        </app-loan-application-search-filter>
+      </div>
+    </div>
+    <div class="no-space">
+      <div class="col-md-12">&nbsp;</div>
+      <div class="table-container">
+        <table>
+          <caption></caption>
+          <thead>
+            <tr>
+              <th><span>{{ isDCBMFI ? "BC Name" : "Partner Name" }}</span></th>
+              <th><span>Loan Entry</span></th>
+              <th><span>Loan Review</span></th>
+              <th><span>Loan Agreement</span></th>
+              <th><span>Loan Booking</span></th>
+              <th><span>Loan Disbursal</span></th>
+              <th><span>Total</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let application of tableData">
+              <td>{{ application.partnerName }}</td>
+              <td>{{ application.loanEntry }}</td>
+              <td>{{ application.loanReview }}</td>
+              <td>{{ application.loanAgreement }}</td>
+              <td>{{ application.loanBooking }}</td>
+              <td>{{ application.loanDisbursal }}</td>
+              <td>{{ application.all }}</td>
+
+            </tr>
+            <tr *ngIf="tableData?.length > 1" class="total-row">
+              <td> Total </td>
+              <td>{{ tableTotal.loanEntry }}</td>
+              <td>{{ tableTotal.loanReview }}</td>
+              <td>{{ tableTotal.loanAgreement }}</td>
+              <td>{{ tableTotal.loanBooking }}</td>
+              <td>{{ tableTotal.loanDisbursal }}</td>
+              <td>{{ tableTotal.all }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div *ngIf="!tableData || tableData?.length === 0">
+        <hr />
+        <h3 class="text-center kcredit-failure-color error">No Loans found</h3>
+      </div>
+    </div>
+
+  </div>
+</div>

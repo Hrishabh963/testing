@@ -1,0 +1,40 @@
+
+export class NachMandate {
+    constructor(
+        public id?: number,
+        public version?: number,
+        public bankName?: string,
+        public ifscCode?: string,
+        public bankAccountId?: string,
+        public customerId?: number,
+        public startDate?: any,
+        public endDate?: any,
+        public transactionId?: string,
+        public requestJson?: string,
+        public registrationResponseJson?: string,
+        public verificationResponseJson?: string,
+        public statusCode?: string,
+        public statusMessage?: string,
+        public status?: string,
+        public registrationDate?: any,
+        public nachStatus?: string,
+        public verificationRequestJson?: string,
+        public verificationUrl?: string,
+        public consumerId?: number,
+        public mandateRegistrationNumber?: string,
+        public bankAccountHolderName?: string,
+        public branchName?: string,
+        public micr?: string,
+        public accountType?: string,
+        public nachMode?: any,
+        public reviewStatus?: string,
+        public rejectReason?: string,
+        public formNo?: string,
+        public bankCode?: string,
+        public subscriptionId?: number,
+        public reviewOptionList?: any,
+        public techIssueStatus?: boolean,
+        public isEMandate?:boolean
+    ) {
+    }
+}

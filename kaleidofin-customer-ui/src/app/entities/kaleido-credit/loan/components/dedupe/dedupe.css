@@ -1,0 +1,46 @@
+
+.table-responsive {
+    display: block;
+    overflow-x: scroll;
+}
+
+th:first-child,
+td:first-child  {
+    position: sticky;
+    left: 0px;
+    z-index: 100;
+    background: #F8F9FA;
+}
+
+thead th {
+    opacity: 70%;
+    font-size: 2ex !important;
+}
+
+tbody td {
+    font-size: 2ex !important;
+}
+
+.success-color {
+	color: #41ae3e;
+}
+
+.ucicSuccess {
+    display: table;
+    margin: 0 auto;
+}
+
+.dedupeDisabled {
+    text-align: center;
+    opacity: 60%;
+}
+
+.mat-simple-snackbar span {
+   margin:auto;
+   text-align: center;
+}
+
+.mat-badge-content {
+    font-family: 'Material Icons',sans-serif;
+}
+

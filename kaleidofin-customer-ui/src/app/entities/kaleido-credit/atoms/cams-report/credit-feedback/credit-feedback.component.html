@@ -1,0 +1,24 @@
+<div>
+  <div class="section-title subtitle">
+    {{ index + 1 }}. &nbsp;Credit Feedback &amp; Checklist
+  </div>
+  <table>
+    <caption></caption>
+    <thead>
+      <tr>
+        <th *ngFor="let key of getKeys()">
+          <div>{{ key }}</div>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of reportData; let rowIndex = index">
+        <td *ngFor="let key of getKeys()">
+          <div [class]="'row-' + (rowIndex % 2)">{{ item[tableMap[key]?.propertyKey] | dynamicDataTransform
+            : tableMap[key]?.pipe
+            : tableMap[key]?.format }}</div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

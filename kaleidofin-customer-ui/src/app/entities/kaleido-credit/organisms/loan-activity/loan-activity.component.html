@@ -1,0 +1,44 @@
+<div *ngIf="enableActivitySection">
+  <div class="section-title">Activity</div>
+  <br />
+  <div class="loan-activity-container">
+    <mat-tab-group
+      class="mat-tab-styles"
+      (selectedIndexChange)="handleTabChange($event)"
+      [selectedIndex]="selectedTabIndex"
+    >
+      <mat-tab disabled class="mat-tab" label="Show:"> </mat-tab>
+      <mat-tab class="mat-tab" label="All">
+        <app-activity-all
+          *ngIf="selectedTabIndex === 1"
+          [loanId]="loanId"
+          [userName]="userName"
+          [data]="data"
+        ></app-activity-all>
+      </mat-tab>
+      <mat-tab class="mat-tab" label="Comments">
+        <app-add-comment
+          *ngIf="selectedTabIndex === 2 && updateComment"
+          [loanId]="loanId"
+          (reloadComments)="fetchActivities('COMMENT')"
+          [userName]="userName"
+        ></app-add-comment>
+        <app-activity-comments
+          *ngIf="selectedTabIndex === 2"
+          [activityData]="data"
+          [loanId]="loanId"
+          [userName]="userName"
+          [disableEdit]="updateComment"
+          [updateComment]="updateComment"
+          (reloadComments)="fetchActivities('COMMENT')"
+        ></app-activity-comments>
+      </mat-tab>
+      <mat-tab class="mat-tab" label="History">
+        <app-activity-history
+          *ngIf="selectedTabIndex === 3"
+          [data]="data"
+        ></app-activity-history>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+</div>

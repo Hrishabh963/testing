@@ -1,0 +1,11 @@
+<div class="activity-container">
+  <div class="activity" *ngFor="let activity of data">
+    <app-history-activity
+      [showLabel]="false"
+      [data]="activity?.history || {}"
+    ></app-history-activity>
+  </div>
+  <div class="no-activity" *ngIf="data.length === 0">
+    No activities found for this loan application
+  </div>
+</div>

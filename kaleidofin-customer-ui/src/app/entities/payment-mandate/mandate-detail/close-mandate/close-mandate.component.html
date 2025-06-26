@@ -1,0 +1,57 @@
+<div class="dialog-container">
+  <div mat-dialog-title class="dialog-title">
+    <div class="title-container">
+      <p>Confirm closure of SBM SI mandate</p>
+      <mat-icon class="closeicon" (click)="cancel()" (keypress)="cancel()" tabindex="0">close</mat-icon>
+    </div>
+  </div>
+  <div mat-dialog-content class="dialog-content-text">
+    <p>
+      Are you sure you want to close SBM SI mandate against loan ID:
+      {{ mandateInfo?.loanId }} for {{ mandateInfo?.customerName }}?
+    </p>
+    <div class="sub-text">
+      Total repayment amount pending
+      <p class="amount">
+        {{ mandateInfo?.amount | currency : "INR" : "symbol" : "1.0-0" }}
+      </p>
+    </div>
+    <mat-form-field appearance="fill" class="mat-form-field-filled" fullWidth>
+      <mat-label>Reason</mat-label>
+      <mat-select [(ngModel)]="selectedReason">
+        <mat-option *ngFor="let reason of reasons" [value]="reason?.value">
+          {{ reason?.viewValue }}</mat-option
+        >
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="mat-form-field-filled" fullWidth>
+      <mat-label
+        >Type Remarks
+        {{ !selectedReason || selectedReason === "Others" ? "" : "( Optional )" }}</mat-label
+      >
+      <input matInput placeholder="Your Remarks" [(ngModel)]="remarks" />
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions>
+    <div class="action-buttons">
+      <button
+        *ngIf="!enableReports"
+        mat-button
+        class="button4 cancel"
+        (click)="cancel()"
+      >
+        No
+      </button>
+      <button
+        *ngIf="!enableReports"
+        mat-button
+        class="button4 proceed"
+        cdkFocusInitial
+        [disabled]="disableConfirmWithOtp()"
+        (click)="confirmWithOtp()"
+      >
+        CONFIRM WITH OTP
+      </button>
+    </div>
+  </div>
+</div>

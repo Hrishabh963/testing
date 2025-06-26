@@ -1,0 +1,59 @@
+<div *ngIf="isAuthenticated" [hidden]="hidden" class="navbar-container">
+  <mat-sidenav-container>
+    <mat-sidenav
+      #drawer
+      fixedInViewport
+      [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+      [mode]="(isHandset$ | async) ? 'over' : 'side'"
+      [opened]="(isHandset$ | async) === false"
+    >
+      <app-side-nav></app-side-nav>
+    </mat-sidenav>
+    <mat-sidenav-content style="margin-left: 85px">
+      <mat-toolbar
+        [ngClass]="{
+          noTopNav: !(topNavService.topNav$ | async),
+          topNav: topNavService.topNav$ | async
+        }"
+      >
+        <button
+          type="button"
+          aria-label="Toggle sidenav"
+          mat-icon-button
+          (click)="drawer.toggle()"
+          *ngIf="isHandset$ | async"
+        >
+          <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        </button>
+        <div class="example-spacer-left" *ngIf="!kcreditUi">
+          <span>{{ partnerName }}</span>
+          <div
+            class="tabsContainer"
+            *ngIf="!(isHandset$ | async) && (topNavService.topNav$ | async)"
+          >
+            <div
+              class="tab"
+              *ngFor="let tab of topNavService.tabs$ | async"
+              [ngClass]="{ activeTab: tab.active, disabled: !tab.route }"
+              (click)="topNavService.navigate(tab)"
+              (keypress)="topNavService.navigate(tab)"
+            >
+              {{ tab.name }}
+            </div>
+          </div>
+        </div>
+        <div *ngIf="kcreditUi" class="example-spacer-left">
+          <img
+            [ngClass]="['image-logo', logoClass | async]"
+            [src]="logoIcon | async"
+            alt="Logo"
+          />
+        </div>
+        <span class="example-spacer"></span>
+        <div style="margin-right: 30px">
+          <ig-logout></ig-logout>
+        </div>
+      </mat-toolbar>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

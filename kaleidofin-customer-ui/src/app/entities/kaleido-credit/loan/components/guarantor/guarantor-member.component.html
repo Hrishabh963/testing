@@ -1,0 +1,152 @@
+<mat-accordion>
+  <mat-expansion-panel [expanded]="panelState" (opened)="panelState = true" (closed)="panelState = false">
+    <mat-expansion-panel-header>
+      <div class="section-container">
+        <div>
+          <h1 class="section-sub-heading">Guarantor {{ index + 1 }}</h1>
+        </div>
+        <div>
+          <app-section-edit-action *ngIf="panelState" (onCancelHandler)="cancelEdit($event)" (onSaveHandler)="save($event, guarantor)"
+            [panelOpenState]="true" [isEditing]="editGuarantor"
+            (onEditHandler)="enableEdit($event)"></app-section-edit-action>
+        </div>
+      </div>
+    </mat-expansion-panel-header>
+    <form name="guarantorForm" novalidate #guarantorForm="ngForm">
+      <div style="margin-top: 5ex">
+        <div class="row row-spacing">
+          <div class="col-3">
+            <ig-input [inputField]="guarantorForm.controls.name" [inputErrors]="guarantorForm.controls.name?.errors">
+              <label jhiTranslate="kCredit.loanObligators.name" class="form-control-label" for="name">Name</label>
+              <div [hidden]="!editGuarantor">
+                <mat-form-field appearance="outline">
+                  <input matInput [disabled]="!editGuarantor" name="guarantorName" [(ngModel)]="guarantor.name" />
+                </mat-form-field>
+              </div>
+            </ig-input>
+            <div [hidden]="editGuarantor">
+              <jhi-null-replace [value]="guarantor.name"></jhi-null-replace>
+            </div>
+          </div>
+          <div class="col-3">
+            <ig-input [inputField]="guarantorForm.controls.relationship"
+              [inputErrors]="guarantorForm.controls.relationship?.errors">
+              <label jhiTranslate="kCredit.loanObligators.relationship" class="form-control-label"
+                for="Relationship">Relationship</label>
+              <div [hidden]="!editGuarantor">
+                <mat-form-field appearance="outline">
+                  <input matInput [disabled]="!editGuarantor" name="guarantorRelationship"
+                    [(ngModel)]="guarantor.relationship" />
+                </mat-form-field>
+              </div>
+              <div [hidden]="editGuarantor">
+                <jhi-null-replace [value]="guarantor.relationship"></jhi-null-replace>
+              </div>
+            </ig-input>
+          </div>
+          <div class="col-3">
+            <ig-input [inputField]="guarantorForm.controls.mobileNo"
+              [inputErrors]="guarantorForm.controls.mobileNo?.errors">
+              <label jhiTranslate="kCredit.loanObligators.mobileNo" class="form-control-label"
+                for="contactNumber">Contact Number</label>
+              <div [hidden]="!editGuarantor">
+                <mat-form-field appearance="outline">
+                  <input matInput [disabled]="!editGuarantor" name="guarantorMobileNo"
+                    [(ngModel)]="guarantor.mobileNo" />
+                </mat-form-field>
+              </div>
+              <div [hidden]="editGuarantor">
+                <jhi-null-replace [value]="guarantor.mobileNo"></jhi-null-replace>
+              </div>
+            </ig-input>
+          </div>
+          <div class="col-3">
+            <ig-input [inputField]="guarantorForm.controls.dateOfBirth"
+              [inputErrors]="guarantorForm.controls.dateOfBirth?.errors">
+              <label jhiTranslate="kCredit.loanObligators.dateOfBirth" class="form-control-label" for="dob">Date of
+                birth (YYYY-MM-DD)</label>
+              <div [hidden]="!editGuarantor" class="input-group">
+                <mat-form-field class="date-picker" appearance="outline">
+                  <input matInput [disabled]="!editGuarantor" format="yyyy-MM-dd" [matDatepicker]="dateOfBirth"
+                    placeholder="Date of Birth" [max]="maxDate" [min]="minDate" (dateChange)="updateDate($event)"
+                    [value]="guarantor.dateOfBirth" />
+                  <mat-datepicker-toggle matSuffix [for]="dateOfBirth"></mat-datepicker-toggle>
+                  <mat-datepicker #dateOfBirth></mat-datepicker>
+                </mat-form-field>
+              </div>
+
+              <div [hidden]="editGuarantor">
+                <jhi-null-replace [value]="guarantor?.dateOfBirth | date : 'yyyy-MM-dd'"></jhi-null-replace>
+              </div>
+            </ig-input>
+          </div>
+        </div>
+        <div class="row row-spacing">
+          <div class="col-3">
+            <div>
+              <label class="form-control-label" for="">KYC POI Document Type</label>
+              <jhi-null-replace [value]="guarantorDocType?.poi"></jhi-null-replace>
+            </div>
+          </div>
+          <div class="col-3">
+            <div>
+              <label class="form-control-label" for="">KYC POI Proof Number</label>
+              <div class="verification-container">
+                <jhi-null-replace [value]="guarantorDocId?.poi"></jhi-null-replace>
+                <jhi-aadhaar-idfy *ngIf="riskCategoryEnabled" [isPoaPoi]="true" [customerType]="'GUARANTOR'" [doc]="poiDoc"
+                  [entityId]="guarantor?.id" [loanId]="loanDetails?.loanApplicationDTO?.id">
+                </jhi-aadhaar-idfy>
+              </div>
+            </div>
+          </div>
+          <div class="col-3">
+            <div>
+              <label class="form-control-label" for="">KYC POA Document Type</label>
+              <jhi-null-replace [value]="guarantorDocType?.poa"></jhi-null-replace>
+            </div>
+          </div>
+          <div class="col-3">
+            <div>
+              <label class="form-control-label" for="">KYC POA Proof Number</label>
+              <div class="verification-container">
+                <jhi-null-replace [value]="guarantorDocId?.poa"></jhi-null-replace>
+                <jhi-aadhaar-idfy *ngIf="riskCategoryEnabled" [isPoaPoi]="true" [customerType]="'GUARANTOR'" [doc]="poaDoc"
+                  [entityId]="guarantor?.id" [loanId]="loanDetails?.loanApplicationDTO?.id">
+                </jhi-aadhaar-idfy>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row row-spacing">
+          <div class="col-3" *ngIf="riskCategoryEnabled">
+            <div>
+              <label class="form-control-label" for="">PEP Status</label>
+              <jhi-null-replace [ngClass]="riskProfile?.pepStatus ? riskProfile?.pepStatus : ''"
+                [value]="riskProfile?.pepStatus | titlecase"></jhi-null-replace>
+            </div>
+          </div>
+          <div class="col-3" *ngIf="riskCategoryEnabled">
+            <div>
+              <label class="form-control-label" for="">KYC Risk Category</label>
+              <jhi-null-replace [ngClass]="riskProfile?.kycIdRiskCategory ? riskProfile?.kycIdRiskCategory : ''"
+                [value]="riskProfile?.kycIdRiskCategory | titlecase"></jhi-null-replace>
+            </div>
+          </div>
+          <div class="col-3" *ngIf="riskCategoryEnabled">
+            <div>
+              <label class="form-control-label" for="">Overall Risk Category</label>
+              <jhi-null-replace [ngClass]="riskProfile?.kycRiskCategory ? riskProfile?.kycRiskCategory : ''"
+                [value]="riskProfile?.kycRiskCategory | titlecase"></jhi-null-replace>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+    <div class="kyc-container">
+      <app-kyc-details-accordion [title]="'KYC Documents'" [partnerId]="loanDetails?.customerDTO?.partnerId"
+        [kycDocumentList]="guarantor?.kycDetailsList" [entityType]="'GUARANTOR'"
+        [loanId]="loanDetails?.loanApplicationDTO?.id" [showSubHeading]="true">
+      </app-kyc-details-accordion>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>

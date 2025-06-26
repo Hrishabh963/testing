@@ -1,0 +1,16 @@
+<mat-accordion>
+  <mat-expansion-panel  [expanded]="panelOpenState" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+      <h1 class="section-title" style="font-size: 22px;">Guarantor</h1>
+    </mat-expansion-panel-header>
+    <div class="card-title">
+      <div *ngFor="let guarantor of guarantors; index as i" >
+        <jhi-guarantor-member (reloadGuarantorAfterSave)="reloadGuarantorAfterSave($event)"
+         [disableEdit]="disableEdit" [loanDetails]="loanDetails" [guarantor]="guarantor"
+         [index]="i" (reloadAfterSave)="onSuccess($event)" [riskCategoryEnabled]="riskCategoryEnabled">
+        </jhi-guarantor-member>
+      </div>
+  <span  *ngIf="!guarantors.length">--</span>
+</div>
+  </mat-expansion-panel>
+</mat-accordion>

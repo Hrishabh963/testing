@@ -1,0 +1,54 @@
+<div class="card-title">
+  <form name="contactPerson" novalidate #editForm="ngForm">
+    <div class="card-body">
+      <div class="card-title">
+        <div class="row">
+          <div class="form-group col-md-3">
+            <label
+              class="form-control-label"
+              jhiTranslate="kCredit.contactPerson.fullName"
+              for="field_full_name"
+              >Full Name</label
+            >
+            <jhi-null-replace
+              [value]="contactPerson.fullName"
+            ></jhi-null-replace>
+          </div>
+          <div class="form-group col-md-3">
+            <label
+              class="form-control-label"
+              jhiTranslate="kCredit.contactPerson.phoneNo"
+              for="field_phone_no"
+              >Phone No</label
+            >
+            <jhi-null-replace
+              [value]="contactPerson.phoneNo"
+            ></jhi-null-replace>
+          </div>
+          <div class="form-group col-md-3">
+            <label
+              class="form-control-label"
+              jhiTranslate="kCredit.contactPerson.mobileNo"
+              for="field_mobile_no"
+              >Mobile No</label
+            >
+            <jhi-null-replace
+              [value]="contactPerson.mobileNo"
+            ></jhi-null-replace>
+          </div>
+          <div class="form-group col-md-3">
+            <label
+              class="form-control-label"
+              jhiTranslate="kCredit.contactPerson.emailId"
+              for="field_email_id"
+              >Email Id</label
+            >
+            <jhi-null-replace
+              [value]="contactPerson.emailId"
+            ></jhi-null-replace>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

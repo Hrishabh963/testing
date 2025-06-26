@@ -1,0 +1,49 @@
+<mat-accordion>
+    <mat-expansion-panel [expanded]="panelOpenState" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+        <mat-expansion-panel-header>
+            <div class="expansion-panel-title-container">
+                <h1 class="section-title"> Insurance Details </h1>
+                <div>
+                    <button [hidden]="enableEdit" [disabled]="!hasAuthority || !editSections" mat-raised-button
+                        *ngIf="panelOpenState" type="button" class="btn btn-primary" data-dismiss="modal"
+                        (click)="toggleEditDetails($event)">
+                        <mat-icon>edit</mat-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+                    </button>
+                </div>
+                <div class="confirm-buttons" [hidden]="!enableEdit">
+                    <button mat-raised-button type="button" class="btn-secondary" data-dismiss="modal"
+                        (click)="cancel($event)">
+                        <span jhiTranslate="entity.action.cancel">Cancel</span>
+                    </button>
+                    <button mat-raised-button type="button" class="btn-primary" data-dismiss="modal"
+                        (click)="save($event)">
+                        <span jhiTranslate="entity.action.save">Save</span>
+                    </button>
+                </div>
+            </div>
+        </mat-expansion-panel-header>
+
+        <ng-container *ngIf="loanCoverInsurance && (loanCoverInsurance | keyvalue).length > 0">
+            <app-insurance-data [title]="'Loan Cover Insurance'" [uiFields]="loanCoverInsurance"
+                [uiFieldsMap]="loanCoverUIMap" [isSubHeading]="true" [loanId]="loanId" [editSections]="editSections"
+                [enableEdit]="enableEdit" [hideEditAction]="true" [dropDownValues]="dropdownValues">
+            </app-insurance-data>
+        </ng-container>
+
+        <ng-container *ngIf="loanCoverInsurance && (healthInsurance | keyvalue).length > 0">
+            <app-insurance-data [title]="'Health Insurance'" [uiFields]="healthInsurance" [uiFieldsMap]="healthUIMap"
+                [isSubHeading]="true" [loanId]="loanId" [editSections]="editSections" [enableEdit]="enableEdit"
+                [hideEditAction]="true" [dropDownValues]="dropdownValues">
+            </app-insurance-data>
+        </ng-container>
+
+        <ng-container *ngIf="loanCoverInsurance && (loanCoverInsurance | keyvalue).length > 0">
+            <app-insurance-data [title]="'Vehicle Insurance'" [uiFields]="vehicleInsurance" [uiFieldsMap]="vehicleUIMap"
+                [isSubHeading]="true" [loanId]="loanId" [editSections]="editSections" [enableEdit]="enableEdit"
+                [hideEditAction]="true">
+            </app-insurance-data>
+        </ng-container>
+
+
+    </mat-expansion-panel>
+</mat-accordion>

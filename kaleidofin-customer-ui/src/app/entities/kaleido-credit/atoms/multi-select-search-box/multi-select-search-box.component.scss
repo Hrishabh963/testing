@@ -1,0 +1,49 @@
+/* Add your custom styles here */
+
+.custom-trigger {
+  cursor: pointer;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  display: inline-block;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.custom-button {
+  margin-top: 8px;
+  text-align: right;
+}
+.options-container {
+  max-height: 30vh;
+  overflow-y: auto;
+}
+.submit-button {
+  width: 100%;
+  margin-top: 10px;
+  height: 7vh;
+}
+
+.mat-focused .select-placeholder {
+  padding: auto;
+}
+
+.search-placeholder {
+  padding-left: 1rem;
+}
+
+input.mat-input-element {
+  padding-left: 1rem;
+}
+
+.option-field {
+  padding-left: 1rem;
+}
+
+.mat-form-field-appearance-legacy .mat-form-field-label {
+  padding-left: 1rem !important;
+}
+
+.rule-break {
+  border-bottom: 1px solid #dddddd;
+}

@@ -1,0 +1,98 @@
+.resubmit-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 3vw;
+  margin: 0.5rem 0 1.5rem;
+}
+.pdd-container {
+  width: 30%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3vw;
+}
+.mat-form-field {
+  min-width: 45vw;
+  width: 100%;
+}
+
+::ng-deep .custom-reject-modal .modal-dialog {
+  max-width: 53% !important;
+}
+
+.modal-header,
+.modal-title,
+.close-icon,
+.modal-body {
+  color: #38526c !important;
+}
+.modal-body {
+  margin-left: 1rem;
+}
+.close-icon {
+  border: none;
+  background: none;
+}
+
+.close-icon:focus {
+  outline: none;
+  background: none;
+}
+
+.modal-header {
+  border-bottom: 1px solid #eaf2ff !important;
+  margin-left: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.modal-footer {
+  border-top: 0px !important;
+  gap: 1rem;
+}
+
+::ng-deep .custom-textarea .mat-form-field-underline {
+  display: none;
+}
+
+::ng-deep .custom-textarea .mat-form-field-flex {
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.cancel-button {
+  width: 10rem;
+  height: 3.5rem;
+  margin-right: 0.6rem;
+}
+
+.action-text {
+  color: #496684;
+}
+
+::ng-deep .custom-checkbox .mat-checkbox-inner-container {
+  height: 1.3rem;
+  width: 1.3rem;
+}
+
+.reviewForm {
+  overflow-y: auto;
+}
+.choice-text {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 17.5px;
+  letter-spacing: 0.17307710647583008px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  color: #38526c;
+}
+
+.approve-header {
+  display: inline-block;
+  margin: 0.5rem 0 1rem;
+}

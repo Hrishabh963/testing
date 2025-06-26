@@ -1,0 +1,228 @@
+<div class="card-title">
+  <form
+    name="existingLoanForm"
+    
+    novalidate
+    #existingLoanForm="ngForm"
+  >
+    <div style="margin-top: 5ex">
+      <div class="col-12 row">
+        <div class="col-10">
+          <h5 class="section-sub-heading">Loan {{ index + 1 }}</h5>
+        </div>
+        <div class="col-2" [hidden]="editExistingLoan">
+          <button
+            type="button"
+            style="float: right"
+            class="btn btn-primary"
+            data-dismiss="modal"
+            (click)="enableEdit()"
+            [disabled]="disableEdit"
+          >
+            <mat-icon>edit</mat-icon>&nbsp;<span
+              jhiTranslate="entity.action.edit"
+              >Edit</span
+            >
+          </button>
+        </div>
+        <div class="col-2" [hidden]="!editExistingLoan">
+          <button
+            type="button"
+            class="btn btn-warning"
+            data-dismiss="modal"
+            (click)="cancelEdit()"
+          >
+            <span jhiTranslate="entity.action.cancel">Cancel</span>
+          </button>
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-dismiss="modal"
+            (click)="save(existingLoan)"
+          >
+            <span jhiTranslate="entity.action.save">Save</span>
+          </button>
+        </div>
+      </div>
+      <div class="row row-spacing">
+        <div class="col-3">
+          <ig-input
+            [inputField]="existingLoanForm.controls.loanType"
+            [inputErrors]="existingLoanForm.controls.loanType?.errors"
+          >
+            <label
+              jhiTranslate="kCredit.existingLoans.loanType"
+              class="form-control-label"
+              >
+                Type of Current Loan
+                <input 
+                [hidden]="!editExistingLoan" 
+                type="text" 
+                class="form-control" 
+                name="loanType"
+                [(ngModel)]="existingLoan.loanType" 
+                />
+            </label>
+            <div [hidden]="editExistingLoan">
+              <jhi-null-replace
+                [value]="existingLoan.loanType"
+              ></jhi-null-replace>
+            </div>
+          </ig-input>
+        </div>
+        <div class="col-3">
+          <ig-input
+            [inputField]="existingLoanForm.controls.instituteName"
+            [inputErrors]="existingLoanForm.controls.instituteName?.errors"
+          >
+            <label
+              jhiTranslate="kCredit.existingLoans.instituteName"
+              class="form-control-label"
+              >
+              Name of Institution
+              <input 
+              [hidden]="!editExistingLoan" 
+              [disabled]="!editExistingLoan" 
+              type="text" 
+              class="form-control" 
+              name="instituteName"
+              [(ngModel)]="existingLoan.instituteName" 
+              />
+            </label>
+            
+            <div [hidden]="editExistingLoan">
+              <jhi-null-replace
+                [value]="existingLoan.instituteName"
+              ></jhi-null-replace>
+            </div>
+          </ig-input>
+        </div>
+        <div class="col-3">
+          <ig-input
+            [inputField]="existingLoanForm.controls.accountNumber"
+            [inputErrors]="existingLoanForm.controls.accountNumber?.errors"
+          >
+            <label
+              jhiTranslate="kCredit.existingLoans.accountNumber"
+              class="form-control-label"
+              >
+              Account Number
+              <input 
+              [hidden]="!editExistingLoan" 
+              [disabled]="!editExistingLoan" 
+              type="text" 
+              class="form-control" 
+              name="accountNumber"
+              [(ngModel)]="existingLoan.accountNumber" 
+              />
+            </label>
+            
+            <div [hidden]="editExistingLoan">
+              <jhi-null-replace
+                [value]="existingLoan.accountNumber"
+              ></jhi-null-replace>
+            </div>
+          </ig-input>
+        </div>
+        <div class="col-3">
+          <ig-input
+            [inputField]="existingLoanForm.controls.loanAmount"
+            [inputErrors]="existingLoanForm.controls.loanAmount?.errors"
+          >
+            <label
+              jhiTranslate="kCredit.existingLoans.loanAmount"
+              class="form-control-label"
+              >Loan Amount
+              <div class="input-group">
+                <input [hidden]="!editExistingLoan" [disabled]="!editExistingLoan" type="text" class="form-control"
+                  name="editExistingLoan" [(ngModel)]="existingLoan.loanAmount" />
+                <div [hidden]="editExistingLoan">
+                  <jhi-null-replace [value]="existingLoan.loanAmount"></jhi-null-replace>
+                </div>
+              </div>
+            </label>
+          </ig-input>
+        </div>
+      </div>
+    </div>
+    <div class="row row-spacing">
+      <div class="col-3">
+        <ig-input
+          [inputField]="existingLoanForm.controls.tenure"
+          [inputErrors]="existingLoanForm.controls.tenure?.errors"
+        >
+          <label
+            jhiTranslate="kCredit.existingLoans.tenure"
+            class="form-control-label"
+            >
+            Term (months)
+            <input 
+            [hidden]="!editExistingLoan" 
+            [disabled]="!editExistingLoan" 
+            type="text" 
+            class="form-control" 
+            name="tenure"
+            [(ngModel)]="existingLoan.tenure" />
+          </label>
+          
+          <div [hidden]="editExistingLoan">
+            <jhi-null-replace [value]="existingLoan.tenure"></jhi-null-replace>
+          </div>
+        </ig-input>
+      </div>
+      <div class="col-3">
+        <ig-input
+          [inputField]="existingLoanForm.controls.emiAmount"
+          [inputErrors]="existingLoanForm.controls.emiAmount?.errors"
+        >
+          <label
+            jhiTranslate="kCredit.existingLoans.emiAmount"
+            class="form-control-label"
+            >
+            Monthly Installment amt. (INR)
+            <input 
+            [hidden]="!editExistingLoan" 
+            [disabled]="!editExistingLoan" 
+            type="text" 
+            class="form-control" 
+            name="emiAmount"
+            [(ngModel)]="existingLoan.emiAmount" />
+          </label>
+          
+          <div [hidden]="editExistingLoan">
+            <jhi-null-replace
+              [value]="existingLoan.emiAmount"
+            ></jhi-null-replace>
+          </div>
+        </ig-input>
+      </div>
+      <div class="col-3">
+        <ig-input
+          [inputField]="existingLoanForm.controls.outstandingAmount"
+          [inputErrors]="existingLoanForm.controls.outstandingAmount?.errors"
+        >
+          <label
+            jhiTranslate="kCredit.existingLoans.outstandingAmount"
+            class="form-control-label"
+            >
+            Outstanding Amount (INR)s
+            <input 
+            [hidden]="!editExistingLoan" 
+            [disabled]="!editExistingLoan" 
+            type="text" 
+            class="form-control"
+            name="outstandingAmount" 
+            [(ngModel)]="existingLoan.outstandingAmount" 
+            />
+          </label>
+          
+          <div [hidden]="editExistingLoan">
+            <jhi-null-replace
+              [value]="existingLoan.outstandingAmount"
+            ></jhi-null-replace>
+          </div>
+        </ig-input>
+      </div>
+    </div>
+  </form>
+</div>

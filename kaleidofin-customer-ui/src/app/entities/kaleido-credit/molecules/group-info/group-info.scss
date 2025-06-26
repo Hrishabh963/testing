@@ -1,0 +1,43 @@
+.container {
+  margin: 10px 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  width: 60%;
+  margin-bottom: 10px;
+}
+
+.row>div {
+  flex: 1 0 calc(10% - 10px);
+  /* 25% for each div with some spacing between them */
+  margin-right: 10px;
+  /* Adjust for some spacing between divs */
+  margin-bottom: 10px;
+  /* Adjust for some spacing between rows */
+}
+
+.group-field {
+  margin-top: 20px;
+  margin-left: 40px;
+}
+
+.Group {
+  margin-left: 0px;
+}
+
+.Branch {
+  padding-right: 40px;
+}
+
+.subtitle {
+  font-family: Arial, sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 17px;
+  line-height: 28px;
+}

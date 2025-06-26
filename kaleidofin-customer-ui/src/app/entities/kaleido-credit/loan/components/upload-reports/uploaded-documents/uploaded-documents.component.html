@@ -1,0 +1,22 @@
+<div class="single-file" *ngFor="let file of uploadedDocuments; let i = index">
+    <div class="common-flex-container">
+        <div class="file-icon">
+            <img [src]="file?.fileIcon" class="image-default-style" [alt]="file?.fileIcon"
+                *ngIf="isDocumentFormat(file)" />
+            <img [src]="file?.image" class="image-default-style" [alt]="'doc'"
+                *ngIf="!isDocumentFormat(file)" />
+        </div>
+        <button class="name" (click)="openDocument(file?.fileUrl)" (keydown.enter)="openDocument(file?.fileUrl)">
+            {{ file?.documentName }}
+        </button>
+    </div>
+    <div class="common-flex-container">
+        <p class="size">
+            {{ file?.size }}
+        </p>
+        <div class="delete">
+            <button mat-button class="btn btn-primary" (click)="removeDocument(file)"
+                (keydown.enter)="removeDocument(file)">Remove</button>
+        </div>
+    </div>
+</div>

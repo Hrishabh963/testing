@@ -1,0 +1,22 @@
+<div class="dialog-container">
+  <div mat-dialog-title class="dialog-title title-container">
+    {{dialogTitle}}
+    <mat-icon class="closeicon" (click)="cancel()" (keypress)="cancel()" tabindex="0">close</mat-icon>
+  </div>
+  <div mat-dialog-content [ngClass]= "dialogClass !=='' ? dialogClass : 'dialog-content-text'">
+    <h3 [class]="titleClass">{{ title }}</h3>
+    <h4>{{ description }}</h4>
+  </div>
+  <div class="footer">
+  <div mat-dialog-actions [class]="dialogClass !=='' ? 'bulk-action-buttons' : 'actions-buttons'">
+    <button
+      mat-raised-button
+      *ngFor="let btn of actionButtons"
+      [class]="btn.buttonClassName"
+      (click)="approve(btn)"
+    >
+      {{ btn.buttonText }}
+    </button>
+  </div>
+</div>
+</div>

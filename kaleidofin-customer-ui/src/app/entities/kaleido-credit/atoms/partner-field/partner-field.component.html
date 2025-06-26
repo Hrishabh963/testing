@@ -1,0 +1,23 @@
+<form
+  name="editForm"
+  novalidate
+  #editForm="ngForm"
+  [formGroup]="reportService.form"
+>
+<mat-form-field appearance="none" class="select-boxes">
+    <mat-label>Select</mat-label>  <mat-select
+      formControlName="partners"
+      [(ngModel)]="reportService.selectedPartners"
+      multiple
+    >
+      <app-select-all-combo-box
+        [model]="reportService.form.get('partners')"
+        [values]="reportService?.partnerList"
+        text="All"
+      ></app-select-all-combo-box>
+      <mat-option *ngFor="let partner of reportService?.partnerList" [value]="partner">{{
+        partner.name
+      }}</mat-option>
+    </mat-select>
+  </mat-form-field>
+</form>

@@ -1,0 +1,150 @@
+<mat-accordion>
+  <mat-expansion-panel
+    [expanded]="panelOpenState"
+    (opened)="panelOpenState = true"
+    (closed)="panelOpenState = false"
+  >
+    <mat-expansion-panel-header>
+      <div class="expansion-panel-title-container">
+        <div class="section-title">Project Funding Details</div>
+        <app-section-edit-action
+          (onCancelHandler)="cancel($event)"
+          (onSaveHandler)="save($event)"
+          [panelOpenState]="panelOpenState"
+          [isEditing]="isEditing"
+          (onEditHandler)="toggleEditDetails($event)"
+        ></app-section-edit-action>
+      </div>
+    </mat-expansion-panel-header>
+
+    <div class="card-title">
+      <form name="projectFundingDetails" novalidate #editForm="ngForm">
+        <div class="card-body">
+          <div class="card-title">
+            <div class="row row-spacing">
+              <div class="form-group col-md-3">
+                <mat-form-field appearance="outline" [hidden]="!isEditing">
+                  <mat-label>Own Funds</mat-label>
+                  <input
+                    matInput
+                    [disabled]="!isEditing"
+                    name="own_funds"
+                    id="field_own_funds"
+                    [(ngModel)]="profile.ownFunds"
+                  />
+                </mat-form-field>
+                <div [hidden]="isEditing">
+                  <label
+                    class="form-control-label"
+                    jhiTranslate="kCredit.projectFundingDetails.ownFunds"
+                    for="field_own_funds"
+                    >Own Funds</label
+                  >
+                  <jhi-null-replace
+                    [value]="profile.ownFunds"
+                  ></jhi-null-replace>
+                </div>
+              </div>
+              <div class="form-group col-md-3">
+                <mat-form-field appearance="outline" [hidden]="!isEditing">
+                  <mat-label>Bank Fund</mat-label>
+                  <input
+                    matInput
+                    [disabled]="!isEditing"
+                    name="bank_fund"
+                    id="field_bank_fund"
+                    [(ngModel)]="profile.bankFund"
+                  />
+                </mat-form-field>
+
+                <div [hidden]="isEditing">
+                  <label
+                    class="form-control-label"
+                    jhiTranslate="kCredit.projectFundingDetails.bankFund"
+                    for="field_bank_fund"
+                    >Bank Fund</label
+                  >
+                  <jhi-null-replace
+                    [value]="profile.bankFund"
+                  ></jhi-null-replace>
+                </div>
+              </div>
+              <div class="form-group col-md-3">
+                <mat-form-field appearance="outline" [hidden]="!isEditing">
+                  <mat-label>LTV %</mat-label>
+                  <input
+                    matInput
+                    [disabled]="!isEditing"
+                    name="ltv_in_per"
+                    id="field_ltv_in_per"
+                    [(ngModel)]="profile.ltvInPer"
+                  />
+                </mat-form-field>
+
+                <div [hidden]="isEditing">
+                  <label
+                    class="form-control-label"
+                    jhiTranslate="kCredit.projectFundingDetails.ltvInPer"
+                    for="field_ltv_in_per"
+                    >LTV %</label
+                  >
+                  <jhi-null-replace
+                    [value]="profile.ltvInPer"
+                  ></jhi-null-replace>
+                </div>
+              </div>
+              <div class="form-group col-md-3">
+                <mat-form-field appearance="outline" [hidden]="!isEditing">
+                  <mat-label>PSL Classification</mat-label>
+                  <input
+                    matInput
+                    [disabled]="!isEditing"
+                    name="psl_classification"
+                    id="field_psl_classification"
+                    [(ngModel)]="profile.pslClassification"
+                  />
+                </mat-form-field>
+
+                <div [hidden]="isEditing">
+                  <label
+                    class="form-control-label"
+                    jhiTranslate="kCredit.projectFundingDetails.pslClassification"
+                    for="field_psl_classification"
+                    >PSL Classification</label
+                  >
+                  <jhi-null-replace
+                    [value]="profile.pslClassification"
+                  ></jhi-null-replace>
+                </div>
+              </div>
+            </div>
+            <div class="row row-spacing">
+              <div class="form-group col-md-3">
+                <mat-form-field appearance="outline" [hidden]="!isEditing">
+                  <mat-label>Total</mat-label>
+                  <input
+                    matInput
+                    [disabled]="!isEditing"
+                    name="total"
+                    id="field_total"
+                    [(ngModel)]="profile.total"
+                  />
+                </mat-form-field>
+                <div [hidden]="isEditing">
+                  <label
+                    class="form-control-label"
+                    jhiTranslate="kCredit.projectFundingDetails.total"
+                    for="field_total"
+                    >Total</label
+                  >
+                  <jhi-null-replace [value]="profile.total"></jhi-null-replace>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <br />
+  </mat-expansion-panel>
+</mat-accordion>

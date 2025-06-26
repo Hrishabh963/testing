@@ -1,0 +1,16 @@
+<div class="popup-container">
+    <div class="header-container">
+        <h1>Adverse Media</h1>
+        <button class="close-button" (click)="closePopup()"><mat-icon>close</mat-icon></button>
+    </div>
+    <hr>
+    <div class="link-container">
+        <div class="link" *ngFor="let link of mediaLinks; let i = index">
+            <button class="close-button" (click)="openUrl(link?.['url'])">
+                <img src="assets\images\aml\link.svg" alt="link">
+                <span>Reference {{ i + 1 }}</span>
+            </button>
+            <hr>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,20 @@
+<div *ngIf="reviewStatus === 'REJECT'" class="reject-reason-container">
+  <div class="reject-status">
+    <img src="/assets/images/BRE/recalculate-result-fail.svg" alt="warning">
+    Rejected
+  </div>
+  <div class="reject-reason-list" *ngIf="reasons?.length">
+    <div>Reason</div>
+    <ol>
+      <li *ngFor="let reason of reasons">
+        {{ reason }}
+      </li>
+    </ol>
+  </div>
+</div>
+<div *ngIf="reviewStatus === 'ACCEPT'" class="accept-container">
+  <div class="accept-status">
+    <mat-icon>check</mat-icon>
+    Accepted
+  </div>
+</div>

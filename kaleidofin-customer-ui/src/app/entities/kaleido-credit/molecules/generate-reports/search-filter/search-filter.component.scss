@@ -1,0 +1,132 @@
+.field-container {
+  display: flex;
+  align-items: center;
+}
+.search-field {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+.suffix-icons {
+  display: flex;
+  align-items: center;
+
+  mat-icon-button {
+    margin-left: 8px; /* Adjust spacing between icons if needed */
+  }
+}
+.search-textfield {
+  background-color: #e6ebf5;
+  width: 400px;
+  border-radius: 8px;
+  height: 48px;
+  padding-right: 10px;
+}
+
+.mat-icon-container {
+  overflow: hidden;
+  width: 48px;
+}
+.mat-menu-panel {
+  min-width: 60vw !important; /* Override mat-menu-panel width */
+}
+
+.filter-menu-container {
+  display: flex;
+  flex-direction: column; /* Use column to display all filters together */
+  padding: 16px;
+  width: 100%; /* Ensure the filter menu uses the full width */
+
+  .filter-menu-item {
+    display: flex;
+    align-items: center; /* Align items horizontally */
+    padding-bottom: 10px;
+
+    .filter-menu-label {
+      margin-right: 16px;
+      white-space: nowrap;
+      min-width: 100px;
+      color: var(--kcredit-text-light);
+    }
+
+    .filter-menu-content {
+      flex: 1;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+
+      mat-form-field,
+      app-report-type-field,
+      app-partner-field,
+      app-loan-type-field,
+      app-report-purpose-field,
+      app-loan-status-menu {
+        flex: 1;
+        margin-right: 16px;
+        min-width: 75px;
+      }
+
+      mat-form-field:last-child,
+      app-report-type-field:last-child,
+      app-partner-field:last-child,
+      app-loan-type-field:last-child,
+      app-report-purpose-field:last-child,
+      app-loan-status-menu:last-child {
+        margin-right: 0;
+      }
+
+      /* Align date pickers in a single line */
+      .date-picker-group {
+        display: flex;
+        justify-content: space-between;
+
+        mat-form-field {
+          flex: 0 0 48%; /* Use 48% width for each date picker */
+        }
+      }
+    }
+  }
+}
+
+.filter-menu-actions {
+  display: flex;
+  justify-content: flex-end;
+  padding: 8px;
+  border-top: 1px solid #ddd;
+
+  button {
+    margin-left: 8px;
+  }
+}
+
+::ng-deep {
+  .mat-menu-panel.filter-menu {
+    width: 500px !important;
+    padding: 5px 10px 5px 15px !important;
+    height: auto !important;
+    overflow-y: auto;
+    max-width: 65vw;
+  }
+}
+
+.mat-form-field {
+  background-color: #e6ebf5;
+  border-radius: 8px;
+  height: 50px;
+  width: 100%;
+}
+.label {
+  padding-left: 10px;
+}
+
+.mat-form-field-wrapper {
+  border: none;
+}
+
+.mat-form-field input {
+  padding: 0 10px 6px 10px;
+}
+.date-item {
+  margin-right: 8px !important;
+}

@@ -1,0 +1,83 @@
+<div style="display: flex;">
+
+    
+<div class="kyc-verification-container">
+    <div class="row-container">
+        <div *ngIf ="selectedRowCount > 0" class="item-count"> {{selectedRowCount}} Items Selected</div>
+        <div class="col-2">
+        
+            <button *ngIf ="selectedRowCount > 0" mat-raised-button type="button" class="btn btn-primary reject-button" data-dismiss="modal" (click)="rejectIds()">
+                <img src="assets/images/common/close-button.svg" alt="close" class="cross-image" />
+                <span class="reject-button-text">Reject</span>
+            </button>
+        </div>
+        
+    </div>
+    <div class="verification-container">
+        <table class="tid-table" aria-describedby="Group info table">
+            <thead class="table-header">
+                <th class="row-0">
+                    <mat-checkbox type="checkbox" [(ngModel)]="headerCheckbox" (change)="selectAllRows()"></mat-checkbox>
+                </th>
+                <th>
+                    <div>Sr No.</div>
+                </th>
+                <th>
+                    <div>Name Of The Customer</div>
+                </th>
+                <th>
+                    <div>Partner Customer Id</div>
+                </th>
+                <th>
+                    <div>Partner Loan Id</div>
+                </th>
+                <th>
+                    <div>Loan Application Date</div>
+                </th>
+                <th>
+                    <div>Loan Application Status</div>
+                </th>
+                <th>
+                    <div class="match-container" (click)="updateDetailsDisplay()"  (keypress)="updateDetailsDisplay()">
+                        <div >
+                           Customer Details
+                        </div>
+                        <div>
+                            <mat-icon *ngIf="!showDetail">keyboard_arrow_down</mat-icon>
+                            <mat-icon *ngIf="showDetail">keyboard_arrow_up</mat-icon>
+                        </div>
+                    </div>
+                </th>
+            </thead>
+            <tbody *ngFor="let data of tableData; let i = index" class="tbody-style">
+                <tr *ngIf="showDetail" [ngClass]="['tid-detail-row', showDetail ? 'show' : 'hide-border']">
+                    <td class="row-0" *ngIf="showDetail">
+                        <mat-checkbox type="checkbox" [(ngModel)]="data.selected" (change)="updateSelectedRowCount()"></mat-checkbox>
+                    </td>
+                    <td class="row-0">
+                        <div>{{ i+1 }}</div>
+                    </td>
+                    <td class="row-0">
+                        <jhi-null-replace  [value]="data?.customerName" ></jhi-null-replace>
+                    </td>
+                    <td class="row-0">
+                        <jhi-null-replace [value]="data?.partnerCustomerId"></jhi-null-replace>
+                    </td>
+                    <td class="row-0">
+                        <jhi-null-replace [value]="data?.partnerLoanId"></jhi-null-replace>
+                    </td>
+                    <td class="row-0">
+                        <jhi-null-replace [value]="data?.applicationDate"></jhi-null-replace>
+                    </td>
+                    <td class="row-0">
+                        <jhi-null-replace [value]="data?.applicationStatus"></jhi-null-replace>
+                    </td>
+                    <td class="view-row">
+                        <div (click)="loanReview(data?.loanApplicationId)" (keypress)="loanReview(data?.loanApplicationId)" > View </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>

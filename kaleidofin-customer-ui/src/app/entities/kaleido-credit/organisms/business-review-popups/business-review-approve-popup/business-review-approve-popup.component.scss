@@ -1,0 +1,140 @@
+.modal-header,
+.modal-title,
+.close-icon,
+.modal-body {
+  color: #38526c !important;
+}
+.modal-header {
+  border-bottom: 1px solid #eaf2ff;
+  border-width: thin;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.close-icon {
+  border: none;
+  background: none;
+}
+
+.close-icon:focus {
+  outline: none;
+  background: none;
+}
+.custom-textarea {
+  width: -webkit-fill-available;
+}
+.mat-form-field {
+  border-radius: 10px;
+  background-color: #f5f6fc;
+  min-height: 3.5rem;
+  max-height: fit-content;
+}
+::ng-deep .custom-textarea .mat-form-field-underline {
+  display: none;
+}
+
+::ng-deep .custom-textarea .mat-form-field-flex {
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #f5f6fc;
+  max-width: calc(100% - 10%);
+}
+
+.cancel-button {
+  width: 10rem;
+  height: 3.5rem;
+  margin-right: 0.6rem;
+}
+
+.action-text {
+  color: #496684;
+}
+
+::ng-deep .custom-checkbox .mat-checkbox-inner-container {
+  height: 1.3rem;
+  width: 1.3rem;
+}
+
+.reviewForm {
+  overflow-y: auto;
+}
+
+.action-button {
+  position: relative;
+  border: none;
+  background-color: var(--kcredit-orange-button);
+  cursor: pointer;
+}
+
+.default {
+  background-color: var(--kcredit-orange-button);
+  color: var(--kcredit-primary-white);
+  min-width: 10rem;
+}
+
+.default::after {
+  content: "Yes, Evaluate";
+}
+
+.AGREEMENT_REWORK {
+  background-color: var(--kcredit-orange-button);
+  color: var(--kcredit-primary-white);
+}
+.REWORK {
+  background-color: var(--kcredit-orange-button);
+  color: var(--kcredit-primary-white);
+}
+.AGREEMENT_REWORK::after {
+  content: "Yes, Rework";
+}
+.REWORK::after {
+  content: "Yes, Rework";
+}
+
+.REJECTED {
+  background-color: var(--kcredit-failure-red);
+  color: var(--kcredit-primary-white);
+}
+
+.REJECTED::after {
+  content: "Yes, Reject";
+}
+
+.CANCELLED {
+  background-color: var(--kcredit-failure-red);
+  color: var(--kcredit-primary-white);
+}
+
+.CANCELLED::after {
+  content: "Cancel agreement";
+}
+
+.approve {
+  background-color: var(--kcredit-dark-success-green);
+  color: var(--kcredit-primary-white);
+}
+
+.approve::after {
+  content: "Yes, Approve";
+}
+
+.reject-options {
+  display: flex;
+  align-items: center;
+  width: -webkit-fill-available;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+.evaluation-type-container {
+  margin: 1rem 0;
+  font-size: 14px;
+}
+.dialog-title {
+  margin: 2rem 0;
+  font-size: 16px;
+}
+.modal-footer {
+  margin-top: 1rem;
+  gap: 1rem;
+}

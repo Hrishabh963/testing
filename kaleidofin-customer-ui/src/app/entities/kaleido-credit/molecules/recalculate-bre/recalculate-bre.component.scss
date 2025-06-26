@@ -1,0 +1,52 @@
+.recalculate-container {
+    padding-top: 0.5em;
+    margin-right: 2em;
+    width: 100%;
+    text-align: center;
+    border: 1px solid #EBEBEB;
+    border-radius: 3px;
+    margin-top: 1em;
+    cursor: pointer;
+}
+
+.recalculate-container h4 {
+    color: #38526C;
+    padding: 0.5em 0;
+    font-size: 1.1em;
+}
+
+.accept,
+.pass,
+.PASS,
+.Pass {
+  background: #0BC07F;
+  font-size: 0.8em;
+  color: #FFF;
+  padding: 0.5em;
+}
+
+.failed,
+.fail,
+.FAIL,
+.Fail,
+.PENDING,
+.pending,
+.Pending,
+.ERROR,
+.Error,
+.error
+{
+  background: #E42323;
+  font-size: 0.8em;
+  color: #FFF;
+  padding: 0.5em;
+}
+
+.DEVIATION,
+.Deviation,
+.deviation {
+  background: #ffac30;
+  font-size: 0.8em;
+  color: #FFF;
+  padding: 0.5em;
+}

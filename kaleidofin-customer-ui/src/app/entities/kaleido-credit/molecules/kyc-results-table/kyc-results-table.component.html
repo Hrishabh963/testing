@@ -1,0 +1,110 @@
+<div class="kyc-verification-container">
+  <div class="verification-container">
+    <div>
+      <table class="tid-table">
+        <caption></caption>
+        <thead>
+          <tr>
+            <th>
+              <div>Detail type</div>
+            </th>
+            <th *ngFor="let header of headers; let index = index">
+              <div
+                *ngIf="headingSubtitle && headingSubtitle[header]"
+                class="subtitle"
+              >
+                {{ headingSubtitle[header] }}
+              </div>
+              <div>{{ header }}</div>
+            </th>
+            <th>
+              <div
+                class="match-container"
+                (click)="updateDetailsDisplay()"
+                (keypress)="updateDetailsDisplay()"
+              >
+                <div [ngClass]="[matchValueClass | async, 'match-text']">
+                  {{ matchValueData }}
+                  <span
+                    *ngIf="headingSubtitle && headingSubtitle['match']"
+                    class="subtitle"
+                  >
+                    {{ headingSubtitle["match"] }}
+                  </span>
+                </div>
+                <div>
+                  <mat-icon *ngIf="!showDetail">keyboard_arrow_down</mat-icon>
+                  <mat-icon *ngIf="showDetail">keyboard_arrow_up</mat-icon>
+                </div>
+              </div>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+            *ngFor="let result of results; let rowIndex = index"
+            [ngClass]="['tid-detail-row', showDetail ? 'show' : 'hide-border']"
+          >
+            <td>
+              <div>{{ result?.type || "--" }}</div>
+            </td>
+            <td *ngIf="result?.governmentDatabase || includeGovDB">
+              <div class="govt-record">
+                <span>{{ result?.governmentDatabase || "--" }}</span>
+                <mat-icon
+                  *ngIf="result?.governmentDatabase === 'Not Available'"
+                  [matTooltip]="result?.helperText"
+                  matTooltipPosition="below"
+                  aria-label="Info"
+                  class="info-icon"
+                  >info</mat-icon
+                >
+              </div>
+            </td>
+
+            <td *ngIf="!hideKycColumn">
+              <div>{{ result?.kycDetails || "--" }}</div>
+            </td>
+            <td>
+              <div>{{ result?.applicant || "--" }}</div>
+            </td>
+            <td [ngClass]="[result?.class, 'match-text']">
+              <div>{{ result?.status || "--" }}</div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="error-container">
+        <div *ngIf="ocrError" class="error">
+          <span>OCR Error:</span>
+          <span class="failed"> {{ocrError}} </span>
+        </div>
+        <div *ngIf="nonOcrError" class="error">
+          <span>Non-OCR Error:</span>
+          <span class="failed">{{ nonOcrError }}</span>
+        </div>
+      </div>
+      <button
+        *ngIf="showDetail && resultsToUpdate?.length > 0 && (matchValueData) != 'Match'"
+        mat-raised-button
+        class="btn btn-primary update-btn"
+        (click)="openUpdateDialog()"
+        [disabled]="getDisabledCheck()"
+      >
+        Update
+      </button>
+    </div>
+    <div class="verify-btn-container">
+      &nbsp; &nbsp; &nbsp; &nbsp;
+      <button
+        *ngIf="enableVerifyBtn"
+        mat-raised-button
+        class="mat-btn-success"
+        (click)="verifyKycManually()"
+        [disabled]="getDisabledCheck()"
+      >
+        Verify
+      </button>
+    </div>
+  </div>
+</div>

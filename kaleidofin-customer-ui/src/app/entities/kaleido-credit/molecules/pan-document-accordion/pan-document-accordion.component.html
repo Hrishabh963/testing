@@ -1,0 +1,50 @@
+<mat-accordion *ngIf="applicantPanDocuments?.length">
+    <mat-expansion-panel [expanded]="panelOpenState" (opened)="panelOpenState = true"
+        (closed)="panelOpenState = false">
+        <mat-expansion-panel-header>
+            <mat-panel-title class="document-type-title">
+                PAN Card
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <app-loan-kyc-document-accoridon [loanId]="loanId" [partnerId]="partnerId"
+            [subtype]="applicantPanDocuments[0]?.documentType" [fileData]="applicantPanDocuments"
+            [entityType]="'APPLICANT'"
+            [entityId]="customerId" [idNo]="applicantPanDocuments?.[0]?.idNo || ''"
+            [purpose]="applicantPanDocuments[0]?.purpose" [isTaxDocument]="true">
+        </app-loan-kyc-document-accoridon>
+    </mat-expansion-panel>
+</mat-accordion>
+
+<mat-accordion *ngIf="coApplicantPanDocuments?.length">
+    <mat-expansion-panel [expanded]="coApplicantPanelOpenState" (opened)="coApplicantPanelOpenState = true"
+        (closed)="coApplicantPanelOpenState = false">
+        <mat-expansion-panel-header>
+            <mat-panel-title class="document-type-title">
+                Co-Applicant PAN Card
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <app-loan-kyc-document-accoridon [loanId]="loanId" [partnerId]="partnerId"
+            [subtype]="coApplicantPanDocuments[0]?.documentType" [fileData]="coApplicantPanDocuments"
+            [entityType]="coApplicantPanDocuments[0]?.entityType || 'APPLICANT'"
+            [entityId]="coApplicantPanDocuments[0]?.entityId || customerId" [idNo]="coApplicantPanDocuments?.[0]?.idNo || ''"
+            [purpose]="coApplicantPanDocuments[0]?.purpose" [isTaxDocument]="true">
+        </app-loan-kyc-document-accoridon>
+    </mat-expansion-panel>
+</mat-accordion>
+
+<mat-accordion *ngIf="guarantorPanDocuments?.length">
+    <mat-expansion-panel [expanded]="guarantorPanelOpenState" (opened)="guarantorPanelOpenState = true"
+        (closed)="guarantorPanelOpenState = false">
+        <mat-expansion-panel-header>
+            <mat-panel-title class="document-type-title">
+                Guarantor PAN Card
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <app-loan-kyc-document-accoridon [loanId]="loanId" [partnerId]="partnerId"
+            [subtype]="guarantorPanDocuments[0]?.documentType" [fileData]="guarantorPanDocuments"
+            [entityType]="guarantorPanDocuments[0]?.entityType"
+            [entityId]="guarantorPanDocuments[0]?.entityId" [idNo]="guarantorPanDocuments?.[0]?.idNo || ''"
+            [purpose]="guarantorPanDocuments[0]?.purpose" [isTaxDocument]="true">
+        </app-loan-kyc-document-accoridon>
+    </mat-expansion-panel>
+</mat-accordion>

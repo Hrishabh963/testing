@@ -1,0 +1,48 @@
+<mat-accordion>
+    <mat-expansion-panel [expanded]="panelOpenState" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+        <mat-expansion-panel-header>
+            <div class="expansion-panel-title-container">
+                <div class="section-title">Occupation & Education Details</div>
+                <div>
+                    <button [hidden]="enableEdit" [disabled]="!hasAuthority || !editSections" mat-raised-button *ngIf="panelOpenState"
+                        type="button" class="btn btn-primary" data-dismiss="modal" (click)="toggleEditDetails($event)">
+                        <mat-icon>edit</mat-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+                    </button>
+                </div>
+                <div class="confirm-buttons" [hidden]="!enableEdit">
+                    <button mat-raised-button type="button" class="btn-secondary" data-dismiss="modal"
+                        (click)="cancel($event)">
+                        <span jhiTranslate="entity.action.cancel">Cancel</span>
+                    </button>
+                    <button mat-raised-button type="button" class="btn-primary" data-dismiss="modal"
+                        (click)="save($event)">
+                        <span jhiTranslate="entity.action.save">Save</span>
+                    </button>
+                </div>
+            </div>
+        </mat-expansion-panel-header>
+        <ng-container *ngIf="householdLevelMap.length > 0">
+            <app-dynamic-render-component [title]="'Household Level'" [uiFields]="houseHoldData"
+                [uiFieldsMap]="householdLevelMap" [isSubHeading]="true" [loanId]="loanId" [editSections]="editSections"
+                [enableEdit]="enableEdit" [hideEditAction]="true">
+            </app-dynamic-render-component>
+        </ng-container>
+        <hr class="section-hr" />
+        <ng-container *ngIf="applicantLevelMap.length > 0">
+            <app-dynamic-render-component [title]="'Applicant Level'" [uiFields]="applicantData"
+                [uiFieldsMap]="applicantLevelMap" [isSubHeading]="true" [loanId]="loanId" [editSections]="editSections"
+                [enableEdit]="enableEdit" [hideEditAction]="true">
+            </app-dynamic-render-component>
+        </ng-container>
+        <hr class="section-hr" />
+        <ng-container *ngIf="memberLevelMap.length > 0 && membersData.length > 0">
+            <div *ngFor="let member of membersData; let index = index;">
+                <app-dynamic-render-component [title]="'Household Member ' + (index + 1)" [uiFields]="member?.fields"
+                    [uiFieldsMap]="memberLevelMap" [isSubHeading]="true" [loanId]="loanId" [editSections]="editSections"
+                    [enableEdit]="enableEdit" [hideEditAction]="true">
+                </app-dynamic-render-component>
+                <hr class="section-hr" />
+            </div>
+        </ng-container>
+    </mat-expansion-panel>
+</mat-accordion>

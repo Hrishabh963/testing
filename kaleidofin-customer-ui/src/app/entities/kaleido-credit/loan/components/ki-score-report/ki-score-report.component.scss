@@ -1,0 +1,173 @@
+#bre-report {
+  width: auto;
+  padding: 35px;
+}
+.report-logo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+.subtitle {
+  margin-top: 10px;
+  font-size: large;
+}
+.bre-report-contianer {
+  box-sizing: border-box;
+  color: #ffffff;
+  background: var(--kcredit-primary-color1);
+  border: 2px solid #ecf0f7;
+  border-radius: 16px;
+  padding: 10px;
+}
+.report-row {
+  margin: 7px 0;
+}
+.report-row strong {
+  font-weight: bold;
+}
+.split-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  height: auto; /* Set the desired height of the cell */
+}
+.rule-description {
+  max-width: 125px; /* Adjust the value as per your requirement */
+  word-wrap: break-word;
+}
+.condition {
+  max-width: 100px; /* Adjust the value as per your requirement */
+  word-wrap: break-word;
+}
+.feature-description {
+  max-width: 175px; /* Adjust the value as per your requirement */
+  word-wrap: break-word;
+}
+.rule-feature-description {
+  max-width: 175px; /* Adjust the value as per your requirement */
+  word-wrap: break-word;
+}
+.feature-type {
+  width: 175px;
+  word-wrap: break-word;
+}
+.rule-feature-type {
+  max-width: 70px;
+  word-wrap: break-word;
+}
+.feature-value {
+  max-width: 50px; /* Adjust the value as per your requirement */
+  word-wrap: break-word;
+}
+.rule-feature-value {
+  max-width: 45px; /* Adjust the value as per your requirement */
+  word-wrap: break-word;
+  text-align: center;
+}
+.decision {
+  max-width: 50px; /* Adjust the value as per your requirement */
+  word-wrap: break-word;
+}
+.rule-decision {
+  max-width: 55px; /* Adjust the value as per your requirement */
+  word-wrap: break-word;
+  text-align: center;
+}
+.cutoff-value {
+  max-width: 50px; /* Adjust the value as per your requirement */
+  word-wrap: break-word;
+}
+.rule-cutoff-value{
+  max-width: 55px; /* Adjust the value as per your requirement */
+  word-wrap: break-word;
+}
+//
+th {
+  background-color: var(--kcredit-primary-color1) !important;
+  font-family: Arial, Verdana, Tahoma, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: initial;
+  line-height: 9px;
+  color: #ffffff !important;
+  height: 10vh;
+  text-align: left;
+  padding: 10px;
+  border: 1px solid #ebebeb;
+}
+thead {
+  border-radius: 8px;
+}
+
+td {
+  text-align: left;
+  padding: 10px;
+  border: 1px solid #ebebeb;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead th:first-child {
+  /* Styles for the first child of the <thead> */
+  border-top-left-radius: 16px;
+  border-bottom-left-radius: 16px;
+}
+
+thead th:last-child {
+  /* Styles for the last child of the <thead> */
+  border-top-right-radius: 16px;
+  border-bottom-right-radius: 16px;
+}
+table td {
+  font-size: small;
+}
+table th {
+  font-size: small;
+}
+.feature-description-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#infoIcon {
+  width: 15px;
+  cursor: pointer;
+}
+#actionIcon {
+  width: 20px;
+}
+
+pre.code-snippet {
+  white-space: pre-wrap; /* Allow line breaks to be displayed */
+  padding: 10px; /* Add some padding for better visual separation */
+  background-color: inherit; /* Optional: Apply a background color */
+  border-radius: 4px; /* Optional: Add rounded corners */
+  font-weight: 500;
+  text-align: left;
+  font-family: "Lexend Deca", sans-serif;
+  font-size: small;
+}
+
+.accept {
+  color: #0BC07F;
+}
+.failed {
+  color: #E42323;
+}
+.rule-container{
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  width: 100%;
+  flex-direction: column;
+}
+.rule-hit{
+  max-width: 50px;
+  word-wrap: break-word;
+}

@@ -1,0 +1,68 @@
+h3 {
+    font-size: 1em;
+    font-weight: lighter;
+    color: #38526C;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.5em 0.8em;
+    align-items: flex-end;
+    border-bottom: 1px solid #EAF2FF;
+}
+
+p {
+    color: #38526C;
+}
+
+button {
+    height: 2em;
+    background: none;
+    border: none;
+}
+
+.popup-container {
+    width: 34vw;
+    height: fit-content;
+}
+
+.form-field {
+    width: 95%;
+}
+
+.cancel-button {
+    background: #E7E8F0;
+    height: 6vh;
+    color: #96AABD;
+}
+
+.action-button {
+    height: 6vh;
+    color: #FDFDFD;
+}
+
+.approve {
+    background: #0BC07F;
+}
+
+.reject {
+    background: #E42323;
+}
+
+.approve-button-container {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1em;
+    padding: 1em 0;
+}
+
+.form-container {
+    padding: 0.35em 1em;
+    display: flex;
+    flex-direction: column;
+}
+
+::ng-deep .form-field .mat-form-field-flex {
+    height: 12vh;
+}

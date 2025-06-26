@@ -1,0 +1,19 @@
+<mat-form-field  appearance="outline" [matTooltip]="toolTipLabel"
+  [matTooltipDisabled]="!showToolTip"
+  matTooltipPosition="above">
+  <mat-label>{{ label }}</mat-label>
+  <mat-select [formControl]="selectFieldFormControl">
+    <div class="select-search-block" *ngIf="showSearchBox">
+      <mat-form-field appearance="outline">
+        <input matInput type="text" [formControl]="searchFieldFormControl" />
+        <mat-label class="search-placeholder">Search</mat-label>
+        <mat-icon matSuffix class="icon">search</mat-icon>
+      </mat-form-field>
+    </div>
+    <mat-option *ngIf="!disableDefault">None</mat-option>
+    <mat-option *ngFor="let option of filteredValues" [value]="option">
+      {{ option }}
+    </mat-option>
+  </mat-select>
+  <mat-error *ngIf="selectFieldFormControl?.hasError('required')">Please select an option.</mat-error>
+</mat-form-field>

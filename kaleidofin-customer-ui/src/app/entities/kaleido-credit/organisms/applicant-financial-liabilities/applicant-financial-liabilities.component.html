@@ -1,0 +1,33 @@
+<mat-accordion>
+    <mat-expansion-panel
+      [expanded]="panelOpenState"
+      (opened)="panelOpenState = true"
+      (closed)="panelOpenState = false"
+    >
+      <mat-expansion-panel-header>
+        <div class="expansion-panel-title-container">
+          <div class="section-title">Applicant Financial Liabilities details</div>
+        </div>
+      </mat-expansion-panel-header>
+      <div *ngIf="uiFieldsMap.length > 0">
+        <ng-container *ngFor="let account of financialLiabilities; let index = index">
+            <app-dynamic-render-component
+                [title]="'Account ' + (index + 1)"
+                [uiFields]="account?.fields"
+                [uiFieldsMap]="uiFieldsMap"
+                [isSubHeading]="true"
+                [loanId]="loanId"
+                [editSections]="editSections"
+                [customButtons]="account?.customButtons"
+                [payloadType]="'object'"
+                [uiApiKey]="'FINANCIAL_LIABILITIES'"
+                [sectionTitle]="account?.title"
+                [isSave]="account?.isSave"
+                (saveData)="saveData($event)"
+            >
+            </app-dynamic-render-component>
+        </ng-container>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+  

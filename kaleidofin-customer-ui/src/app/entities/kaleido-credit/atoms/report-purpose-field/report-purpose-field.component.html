@@ -1,0 +1,13 @@
+<mat-form-field appearance="none" class="select-boxes">
+  <mat-label>Select</mat-label>
+  <mat-select
+    [(value)]="reportsService.selectedPurpose"
+    (selectionChange)="updatePurpose($event.value)"
+  >
+    <mat-option
+      *ngFor="let purpose of reportsService?.purposeList"
+      [value]="purpose"
+      >{{ purpose.viewValue }}</mat-option
+    >
+  </mat-select>
+</mat-form-field>

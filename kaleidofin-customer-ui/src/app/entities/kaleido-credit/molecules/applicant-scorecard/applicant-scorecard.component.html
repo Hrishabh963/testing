@@ -1,0 +1,14 @@
+<div>
+  <div class="section-title">Applicant Score Card</div>
+  <div class="container">
+    <div class="col-lg-3 field" *ngFor="let field of uiFieldsMap">
+      <label class="form-control-label" htmlFor="label-1">{{ field?.label }}</label>
+      <jhi-null-replace
+        [value]="
+          uiFields[field?.propertyKey]?.value
+            | dynamicDataTransform : field?.pipe
+        "
+      ></jhi-null-replace>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,5 @@
+<div class="card-title">
+   <div *ngFor="let tradeReference of tradeReferences; index as i" >
+      <jhi-trade-references-item [disableEdit]="disableEdit" [tradeReference]="tradeReference" [loanDetails]="loanDetails"  [index]="i" (reloadAfterSave)="onSuccess($event)"></jhi-trade-references-item>
+   </div>
+</div>

@@ -1,0 +1,13 @@
+.action-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+.save-btn {
+  background-color: #496684;
+  color: var(--kcredit-primary-white);
+}
+.cancel-btn {
+  color: var(--kcredit-primary-white);
+  background-color: #96aabd;
+}

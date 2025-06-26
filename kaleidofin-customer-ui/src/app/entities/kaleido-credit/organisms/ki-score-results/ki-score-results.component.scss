@@ -1,0 +1,144 @@
+.container {
+  margin: 20px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  flex-direction: column;
+  gap: 15px;
+}
+table {
+  width: 100%;
+  tr {
+    border: 1px solid #eaf2ff;
+  }
+}
+
+.mat-header-cell {
+  font-size: 12px;
+}
+
+.mat-cell {
+  font-size: 12px;
+}
+
+tr.example-detail-row {
+  height: 0;
+}
+
+tr.example-element-row:not(.example-expanded-row):hover {
+  background: whitesmoke;
+}
+
+tr.example-element-row:not(.example-expanded-row):active {
+  background: #efefef;
+}
+
+.example-element-row td {
+  border-bottom-width: 0;
+}
+
+.example-element-detail {
+  overflow: hidden;
+  display: flex;
+  background-color: #f5f6fc;
+}
+
+.kiscore-details {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 1rem;
+  width: -webkit-fill-available;
+}
+
+.kiscore-item {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.actions-col {
+  width: 10%;
+}
+.status-container {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  align-items: center;
+}
+.stage-buttons {
+  gap: 2rem;
+  display: flex;
+}
+.stage-buttons button.selected-stage-button {
+  background-color: var(--kcredit-primary-blue-background);
+  color: var(--kcredit-primary);
+}
+
+.status-btn {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  justify-content: space-between;
+  width: -webkit-fill-available;
+  padding: 2px 8px;
+  border-radius: 5px;
+}
+.status-icon {
+  font-size: large;
+  margin-top: 6px;
+}
+
+.approved {
+  background-color: var(--kcredit-success-green);
+  color: var(--kcredit-primary-white);
+}
+
+.rejected {
+  background-color: var(--kcredit-failure-red);
+  color: var(--kcredit-primary-white);
+}
+.cancelled {
+  background-color: var(--kcredit-text-light);
+  color: #fff;
+}
+.pending {
+  background-color: var(--kcredit-background-orange);
+  color: var(--kcredit-primary-white);
+}
+.kiscore-item-label {
+  font-size: 12px;
+}
+.screen-title {
+  font-weight: 500;
+  font-size: 18px;
+  color: #38526c;
+}
+.title-container {
+  margin-left: 0;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+.stage-btn {
+  color: var(--kcredit-text-light);
+  margin-bottom: 1rem;
+}
+.pagination-container {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column-reverse;
+  margin: 20px;
+}
+.title-back-container {
+  display: flex;
+  gap: 8px;
+}
+.repayment-frequency {
+  text-transform: capitalize;
+}
+.date-field {
+  width: 13rem;
+}

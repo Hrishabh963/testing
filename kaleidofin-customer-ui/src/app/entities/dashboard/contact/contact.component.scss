@@ -1,0 +1,25 @@
+h4 {
+  color: #000000;
+  font-weight: 500;
+}
+
+.info {
+  padding-left: 0px;
+  padding-right: 60px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.example-card {
+  border-radius: 8px;
+  border: 1px solid #e9e9e9;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.05);
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.title-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

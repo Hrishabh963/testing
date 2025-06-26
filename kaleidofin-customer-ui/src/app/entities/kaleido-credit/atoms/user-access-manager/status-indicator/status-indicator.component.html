@@ -1,0 +1,7 @@
+<div class="status-container" [ngClass]="status" [matTooltip]="toolTipMap[status]"
+  [matTooltipDisabled]="!status?.length" [matTooltipClass]="{'custom-tool-tip': true}">
+  <mat-icon class="status-icon">
+    {{ getStatusIcon(status) }}
+  </mat-icon>
+  <span class="status-text">{{ status?.length ? status : '--' }}</span>
+</div>

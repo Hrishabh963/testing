@@ -1,0 +1,15 @@
+.inactivity-alert {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  flex-direction: column;
+}
+.btn-container {
+  text-align: center;
+}
+.btn-container > button {
+  padding: 2vh 0;
+  min-width: 9vw;
+  margin: 20px 0 0 0;
+}

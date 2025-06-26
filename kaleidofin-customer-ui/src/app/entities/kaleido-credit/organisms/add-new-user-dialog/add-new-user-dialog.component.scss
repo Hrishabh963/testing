@@ -1,0 +1,131 @@
+::ng-deep .custom-dialog-class .mat-dialog-container {
+    padding: 0.8em 1.5em !important;
+}
+
+.error-text {
+    font-size: 0.8em;
+}
+
+main {
+    width: 55vw;
+    max-height: fit-content;
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+.dialog-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    height: 4vw;
+    padding: 0.5em;
+}
+
+.dialog-header h1 {
+    color: var(--kcredit-text-dark);
+    font-size: 2em;
+    margin: 0;
+    align-self: flex-end;
+}
+
+.close-button {
+    background: none;
+    border: none;
+    color: var(--kcredit-text-dark);
+    align-self: flex-start;
+}
+
+.close-button:hover {
+    background: none;
+    border: none;
+}
+
+.close-button:focus-within {
+    background: none;
+    border: none;
+}
+
+.hrms-search-field {
+    display: flex;
+    gap: 0.8em;
+}
+
+.fetch-button {
+    border: none;
+    height: 2.5em;
+    border-radius: 4px;
+    padding: 0.5em;
+}
+
+.search-field {
+    width: 40%;
+}
+.submit-container {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1em;
+}
+
+.cancel-button {
+    background: none;
+    color: var(--kcredit-primary);
+    border: none;    
+}
+
+
+.cancel-button:hover {
+    background: none;
+    color: var(--kcredit-primary);
+    border: none;    
+}
+
+
+.cancel-button:focus {
+    background: none;
+    color: var(--kcredit-primary);
+    border: none;    
+}
+
+.change-password-container {
+    justify-content: flex-end;
+    gap: 0;
+    padding: 2em 0;
+}
+
+.change-password-container > div:last-child {
+    display: flex;
+    gap: 1em;
+}
+
+.change-password-button {
+    text-decoration: underline;
+}
+
+
+
+.header-container {
+    display: flex;
+    gap: 1em;
+}
+
+.header-container button {
+    color: var(--kcredit-primary);
+    padding: 0 0.3em !important;
+}
+
+.spin {
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  ::ng-deep .custom-snackbar {
+    background: #ffffff !important;
+  }

@@ -1,0 +1,57 @@
+<mat-accordion>
+  <mat-expansion-panel [expanded]="panelState" (opened)="panelState = true" (closed)="panelState = false">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <div class="header-container">
+          <div class="document-type-title">{{AMLDetail?.type}}</div>
+          <button mat-flat-button class="aml-button" *ngIf="AMLDetail?.initiateAml && panelState" (click)="retryAml($event)"> Retry </button>
+        </div>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div class="row row-spacing details-container">
+      <div class="col-3">
+        <label class="form-control-label" htmlFor="label-1">{{nameLabel}}</label>
+        <div class="label-details">
+          {{AMLDetail?.name || "--"}}
+        </div>
+      </div>
+      <div class="col-3">
+        <label class="form-control-label" htmlFor="label-2">Year Of Birth</label>
+        <div class="label-details">
+          {{AMLDetail?.yearOfBirth || "--"}}
+        </div>
+
+      </div>
+      <div class="col-3">
+        <label class="form-control-label" htmlFor="label-3">Match Status</label>
+        <div [ngClass]="getMatchClass(AMLDetail)">
+          <img [src]="fetchDisplayIcon(AMLDetail)" alt="match status">
+          {{ getMatchStatus(AMLDetail) }}
+        </div>
+      </div>
+      <div class="col-3">
+        <label class="form-control-label" htmlFor="label-4">
+          No. of hits
+        </label>
+        <div class="label-details">
+          {{AMLDetail?.noOfHits}}
+        </div>
+      </div>
+    </div>
+    <div class="row row-spacing details-container">
+      <div class="col-3" *ngIf="AMLDetail?.error">
+        <label class="form-control-label" htmlFor="label-4">
+          Error
+        </label>
+        <div class="error-message">
+          <span>{{AMLDetail?.error}}</span>
+        </div>
+      </div>
+    </div>
+    <ng-container>
+      <app-aml-hit-table [hits]="AMLDetail?.amlHits" [yearOfBirth]="AMLDetail?.yearOfBirth" [branchCode]="branchCode"
+        [loanApplicationId]="loanApplicationId">
+      </app-aml-hit-table>
+    </ng-container>
+  </mat-expansion-panel>
+</mat-accordion>

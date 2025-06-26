@@ -1,0 +1,17 @@
+<mat-accordion>
+  <mat-expansion-panel [expanded]="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <div class="document-category-text">
+          Document Category - {{ data?.categoryLabel }}
+        </div>
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+    <app-business-document-item
+      *ngFor="let documentType of documentTypes"
+      [data]="documentType"
+      [category]="category"
+    ></app-business-document-item>
+  </mat-expansion-panel>
+</mat-accordion>

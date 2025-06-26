@@ -1,0 +1,76 @@
+<form name="reviewForm">
+    <div class="modal-header">
+        <div class="modal-title">Confirmation</div>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <span class ="approve-header" *ngIf="!eligibilityFailedForLoanApplication && noOfEntries > 0 && checkedListWithEligibilityFailed == 0">
+            Are you sure you want to approve {{noOfEntries}} applications ?
+        </span>
+        <span class ="approve-header" *ngIf="eligibilityFailedForLoanApplication">
+            This Loan Application has a failed rule.  Are you sure you want to approve this loan application ?
+        </span>
+        <span class ="approve-header" *ngIf="!eligibilityFailedForLoanApplication && noOfEntries == 0">
+            Are you sure you want to approve this loan application ?
+        </span>
+        <span class ="approve-header" *ngIf="!eligibilityFailedForLoanApplication && noOfEntries == -1">
+            If this loan application gets rejected, this will move to agreement pending state
+        </span>
+        <span class ="approve-header" *ngIf="checkedListWithEligibilityFailed > 1 && checkedListWithEligibilityPassed > 0">
+            Are you sure you want to approve {{checkedListWithEligibilityPassed}} applications ?. Out of the {{noOfEntries}} selected , {{checkedListWithEligibilityFailed}} applications have failed rule
+        </span>
+        <span class ="approve-header" *ngIf="checkedListWithEligibilityFailed == 1 && checkedListWithEligibilityPassed > 0">
+            Are you sure you want to approve {{checkedListWithEligibilityPassed}} applications ?. Out of the {{noOfEntries}} selected , 1 application has a failed rule
+        </span>
+        <span class ="approve-header" *ngIf="checkedListWithEligibilityFailed > 1 && checkedListWithEligibilityPassed == 0">
+            All the {{checkedListWithEligibilityFailed}} applications selected have failed rule. Please select passed applications for approve
+        </span>
+        <span class ="approve-header" *ngIf="checkedListWithEligibilityFailed == 1 && checkedListWithEligibilityPassed == 0">
+            The selected application has failed rule. Please select passed applications for approve
+        </span>
+
+        <div class="form-group col-md-9">
+            <mat-form-field class="textarea-full-width" appearance="fill">
+              <mat-label>Type a Reason/comment</mat-label>
+              <textarea
+                matInput
+                cdkAutosizeMinRows="3"
+                cdkAutosizeMaxRows="5"
+                style="resize: none"
+                rows="3"
+                name="comment"
+                [(ngModel)]="comment"
+              ></textarea>
+            </mat-form-field>
+        </div> 
+        <div *ngIf="isPDDEnabled()">
+            <div class="col-md-12">
+                <label class="form-control-label asterix" htmlFor="label-1"
+                  >Is PDD required for this loan application?</label
+                >&nbsp;
+              </div>
+            <div class="form-group col-md-9">
+                <mat-radio-group class="pdd-container" aria-label="Select an option" [(ngModel)]="pddSelection"
+                  name="pddSelection">
+                  <span *ngFor="let rejectType of pddList">
+                    <mat-radio-button [value]="rejectType.value">{{rejectType.label}}</mat-radio-button>
+                  </span>
+                </mat-radio-group>
+            </div>
+            <div *ngIf="showPDDDocuments()">
+                <rework-documents-form (documentsSelected)="onDocumentsUpdate($event)" type="approve">
+                </rework-documents-form>
+            </div>
+        </div>   
+    </div>
+    <div class="modal-footer">
+        <button type="button" mat-raised-button class="btn-secondary"  (click)="cancel()" data-dismiss="modal" >
+            <span >Cancel</span>
+        </button>
+        <button type="button" mat-raised-button class="btn-primary" [disabled]="(checkedListWithEligibilityPassed === 0 && checkedListWithEligibilityFailed > 0) || !comment" (click)="approve()">
+            <span *ngIf="!eligibilityFailedForLoanApplication && noOfEntries == -1;else other_content">Move</span>
+             <ng-template #other_content>Yes, Approve</ng-template>
+        </button>
+    </div>
+
+</form>

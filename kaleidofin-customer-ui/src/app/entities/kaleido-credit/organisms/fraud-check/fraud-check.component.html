@@ -1,0 +1,60 @@
+<div>
+  <div class="section-title-container">
+    <div class="section-title ">Fraud Check Analysis</div>
+    <div class="report-button-container" *ngIf="!showInitiate()">
+      <div class="verify-button-container">
+        <img 
+          *ngIf="fraudCheckData?.verification === 'Verified'"
+          [src]="imagePaths.SUCCESS_CHECK_CIRCLE_OUTLINED"
+          [alt]="fraudCheckData?.verification"
+          class="verify-icon"
+        >
+        <span 
+          (click)="verifyFraudCheck()"
+          (keypress)="verifyFraudCheck()"
+          [ngClass]="fraudCheckData.verification === 'Verify' ? 'verify' : 'verified'"
+        >
+          {{ fraudCheckData?.verification }}
+        </span>
+      </div>
+      <button 
+        class="btn btn-primary report-button"
+        (click)="openFraudCheckReport()"
+        target="_blank"
+      >
+        View Report
+    </button>
+    </div>
+  </div>
+  <div class="container">
+    <div class="col-lg-3 field">
+      <label class="form-control-label" htmlFor="label-1">Sherlock Decision</label>
+      <div>
+        <img
+          [src]="fetchDecisionIcon()"
+          [alt]="fraudCheckData?.decision"
+          class="decision-icon"
+          *ngIf="fraudCheckData?.decision"
+        >
+        <span
+          [ngClass]="fetchDecision()"  
+        >
+          {{ fraudCheckData?.decision || '--' }}
+        </span>
+      </div>
+    </div>
+    <div class="col-lg-3 field" *ngFor="let score of scores | keyvalue">
+      <label class="form-control-label" htmlFor="label-2">{{ score.key }}</label>
+      <jhi-null-replace
+        [value]="score.value"
+      >
+      </jhi-null-replace>
+    </div>
+    <div class="col-lg-3 field" *ngIf="showInitiate()">
+      <button mat-flat-button (click)="initiateCheck()" class="btn btn-primary" >Initiate Fraud Check</button>
+    </div>
+    <div class="col-lg-3 field" *ngIf="showRetry()">
+      <button mat-flat-button (click)="initiateCheck()" class="btn btn-primary" >Retry Fraud Check</button>
+    </div>
+  </div>
+</div>

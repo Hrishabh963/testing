@@ -1,0 +1,13 @@
+<mat-form-field appearance="outline" [matTooltip]="toolTipLabel"
+    [matTooltipDisabled]="!showToolTip"
+    matTooltipPosition="above" [formControl]="selectFieldFormControl">
+    <mat-label>{{ label }}</mat-label>
+    <input *ngIf="showInput" matInput  placeholder="Enter value" [(ngModel)]="dataObj.value" />
+    <mat-select *ngIf="!showInput" [(value)]="dataObj.value" [required]="isRequired" (selectionChange)="showInputField()">
+        <mat-option value="other">Other (Please Specify) </mat-option>
+        <mat-option *ngFor="let option of dropDownValues" [value]="option">
+            {{ option }}
+        </mat-option>
+    </mat-select>
+    <mat-error *ngIf="selectFieldFormControl?.hasError('required')">Please select an option.</mat-error>
+</mat-form-field>

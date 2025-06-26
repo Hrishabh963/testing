@@ -1,0 +1,47 @@
+p {
+  font-family: "HK Grotesk", sans-serif;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 31px;
+  letter-spacing: 0.17307710647583008px;
+  text-align: center;
+}
+.dialog-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  color: #38526c;
+  border-bottom: 1px solid #eaf2ff;
+}
+.closeicon {
+  float: right;
+}
+.action-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  width: 100%;
+}
+.search-textfield {
+  border: 1px black;
+  width: 100%;
+  border-radius: 8px;
+  height: 48px;
+  padding-right: 10px;
+}
+
+.search-textfield-empty {
+  border: 1px solid red;
+}
+
+.search-textfield input {
+  padding: 0px 10px;
+}
+.error {
+  font-size: 12px;
+  margin: 0 0 0 1rem;
+  color: var(--kcredit-failure-red);
+  display: list-item;
+  list-style: decimal;
+}

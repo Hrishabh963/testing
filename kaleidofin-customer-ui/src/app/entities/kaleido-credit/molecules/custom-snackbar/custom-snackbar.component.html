@@ -1,0 +1,8 @@
+<div class="snack-container">
+    <div>
+      <img *ngIf="getImg()" class="icon" [src]="getImg()" alt="success">
+    </div>
+    <div>
+      <span class="message" [class]="getStyle()">{{message}}</span>
+    </div>
+</div>

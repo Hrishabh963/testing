@@ -1,0 +1,33 @@
+<div *ngIf="isRejected" class="rejected-status">
+  {{ rejectReason }} &nbsp; <span class="error-text">Rejected </span>
+  <button mat-button color="secondary" (click)="undoReject($event)">
+    Undo
+  </button>
+</div>
+<!-- Reject Section -->
+<div *ngIf="showRejectField && !isRejected" class="reject-form">
+  <input
+    placeholder="Enter Reason"
+    (click)="handleReasonClick($event)"
+    (keydown)="handleKeyListener($event)"
+    [(ngModel)]="rejectReason"
+  />
+  <div class="reject-actions">
+    <button mat-button color="primary" (click)="rejectSection($event)">
+      Submit
+    </button>
+    <button mat-button color="secondary" (click)="cancelReject($event)">
+      Cancel
+    </button>
+  </div>
+</div>
+<!-- Reject Button on Top -->
+<button
+  mat-button
+  color="secondary"
+  (click)="handleReject($event)"
+  *ngIf="!isRejected && !showRejectField"
+  class="reject-button-top"
+>
+  Reject
+</button>

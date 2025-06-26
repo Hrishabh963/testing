@@ -1,0 +1,40 @@
+.dialog-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: column;
+}
+
+p {
+  font-family: HK Grotesk, sans-serif;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 31px;
+  letter-spacing: 0.17307710647583008px;
+  text-align: center;
+}
+.dialog-title {
+  width: 100%;
+}
+.closeicon {
+  float: right;
+}
+.dialog-content-text {
+  text-align: center;
+}
+.dialog-content-text img {
+  font-size: 65px;
+  height: 65px;
+  width: 65px;
+  margin-bottom: 10px;
+}
+.cancel {
+  background-color: var(--kcredit-primary-background);
+  color: var(--kcredit-primary-orange);
+  text-transform: uppercase;
+}
+.proceed {
+  background-color: var(--kcredit-primary-orange);
+  color: #fff;
+  text-transform: uppercase;
+}

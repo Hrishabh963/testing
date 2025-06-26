@@ -1,0 +1,47 @@
+<div class="title-container">
+  <div>
+    <mat-checkbox
+      [(ngModel)]="doc.tagged"
+      [disabled]="!validateAuthority || getDisabled()"
+      [hidden]="(hideTagging && hideEditButtons) || !isApplicationAssigned"
+      (change)="toggleDocumentSelection(doc?.id)"
+      >Select</mat-checkbox
+    >
+  </div>
+  <div class="button-container">
+    <button
+      mat-raised-button
+      (click)="onTag()"
+      [hidden]="hideTagging || !isApplicationAssigned"
+      class="btn-primary"
+      [disabled]="!validateAuthority || getDisabled()"
+    >
+      <span>Tag</span>
+    </button>
+    &nbsp;&nbsp;
+    <button
+      mat-raised-button
+      type="button"
+      class="btn-primary"
+      data-dismiss="modal"
+      [hidden]="!isPdf(doc)"
+      (click)="openPdf(doc)"
+    >
+      <span [class]="doc?.icon"></span>&nbsp;<span>{{ doc?.actionText }}</span>
+    </button>
+    <button
+      mat-raised-button
+      (click)="onEdit()"
+      class="btn-primary"
+      [disabled]="
+        !validateAuthority || disableEditButtons || !isApplicationAssigned
+      "
+      [hidden]="isPdf(doc) || hideEditButtons || !isApplicationAssigned"
+    >
+      <mat-icon>edit</mat-icon>&nbsp;<span
+        jhiTranslate="entity.action.edit"
+        >Edit&nbsp;&nbsp;
+      </span>
+    </button>
+  </div>
+</div>

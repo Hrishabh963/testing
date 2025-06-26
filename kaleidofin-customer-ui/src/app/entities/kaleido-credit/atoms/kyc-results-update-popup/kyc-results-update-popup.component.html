@@ -1,0 +1,54 @@
+<mat-dialog-title>
+  <div class="title-container">
+    <h3 class="title-text">Confirmation</h3>
+    <button
+      mat-icon-button
+      class="close-icon"
+      tabindex="0"
+      aria-label="Close"
+      (click)="closeDialog()"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+</mat-dialog-title>
+<mat-dialog-content>
+  <div class="header">
+    <div class="header-text">Existing Value</div>
+    <div class="header-text">Updated Value</div>
+  </div>
+  <div *ngFor="let item of data?.results">
+    <div class="item">
+      <div class="existing-value">
+        <label [for]="item?.existingValue">{{ item.label }}</label>
+        <p class="value-text">{{ item.existingValue }}</p>
+      </div>
+      <mat-icon class="arrow-icon">arrow_forward</mat-icon>
+      <div class="updated-value">
+        <label [for]="item?.updatedValue">{{ item.label }}</label>
+        <p class="value-text updated-text">{{ item.updatedValue }}</p>
+      </div>
+    </div>
+    <mat-divider></mat-divider>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="center">
+  <button
+    mat-button    
+    class="btn mid-width-button"
+    [ngClass]="{
+      'btn-primary': updateStatus !== 'success',
+      'btn-success': updateStatus === 'success'
+    }"
+    (click)="updateData()"
+  >
+    <mat-icon *ngIf="updateStatus === 'success'">check_circle</mat-icon>
+    <span *ngIf="updateStatus === 'idle'">Update</span>
+    <span *ngIf="updateStatus === 'success'">Successfully updated</span>
+    <span *ngIf="updateStatus === 'failed'">Retry</span>
+  </button>
+</mat-dialog-actions>
+<div *ngIf="updateStatus === 'failed'" class="error-message">
+  <mat-icon>error</mat-icon>
+  <span>Failed to update</span>
+</div>

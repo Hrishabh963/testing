@@ -1,0 +1,14 @@
+.selection-menu{
+    border: 1px solid;
+    box-shadow: 2px;
+    width: 15vw;
+}
+::ng-deep {
+  .mat-menu-panel.custom-style {
+    width: 25vw !important;
+    height: auto !important;
+    max-height: 35vh !important;
+    padding: 5px 10px 5px 15px !important;
+    background-color: white;
+  }
+}

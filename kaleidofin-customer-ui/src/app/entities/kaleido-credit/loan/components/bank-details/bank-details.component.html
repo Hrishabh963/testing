@@ -1,0 +1,593 @@
+<form name="bankDetailsForm" novalidate #bankDetailsForm="ngForm">
+  <div class="container">
+    <div class="sub-heading-container">
+      <div class="document-type-title">Borrower’s beneficiary check</div>
+      <div class="edit-button-container">
+        <button
+          type="submit"
+          mat-raised-button
+          (click)="openPennyDrop()"
+          [disabled]="disablePennyDrop || !editBankDetails"
+          class="btn btn-primary"
+        >
+          <span jhiTranslate="entity.action.pennyDrop"
+            >Retry Beneficiary Check</span
+          >
+        </button>
+        <app-section-edit-action
+          (onCancelHandler)="cancelEdit()"
+          (onSaveHandler)="saveBankDetails(bankDetails)"
+          [panelOpenState]="true"
+          [isEditing]="editBankDetails"
+          (onEditHandler)="enableEdit()"
+        ></app-section-edit-action>
+      </div>
+    </div>
+
+    <div
+      class="row"
+      *ngIf="
+        bankDetails &&
+        (bankDetails.defaultBank === false || bankDetails.defaultBank === null)
+      "
+    >
+      <div class="col-3">
+        <mat-form-field appearance="outline" [hidden]="!editBankDetails">
+          <mat-label for="bankAccountNumber">Saving Bank Account No</mat-label>
+          <input
+            id="bankAccountNumber"
+            matInput
+            [disabled]="!editBankDetails"
+            type="text"
+            name="bankAccountNumber"
+            [(ngModel)]="bankDetails.bankAccountNum"
+            required="required"
+          />
+        </mat-form-field>
+        <div [hidden]="editBankDetails">
+          <label class="form-control-label" for="bankAccountNumberDisplay"
+            >Saving Bank Account No</label
+          >
+          <jhi-null-replace
+            id="bankAccountNumberDisplay"
+            [value]="bankDetails?.bankAccountNum"
+          ></jhi-null-replace>
+        </div>
+      </div>
+      <div class="col-3">
+        <mat-form-field appearance="outline" [hidden]="!editBankDetails">
+          <mat-label for="bankName">Name of the Bank</mat-label>
+          <input
+            id="bankName"
+            matInput
+            [disabled]="!editBankDetails"
+            type="text"
+            name="bankName"
+            [(ngModel)]="bankDetails.bankName"
+          />
+        </mat-form-field>
+        <div [hidden]="editBankDetails">
+          <label class="form-control-label" for="bankNameDisplay"
+            >Name of the Bank</label
+          >
+          <jhi-null-replace
+            id="bankNameDisplay"
+            [value]="bankDetails?.bankName"
+          ></jhi-null-replace>
+        </div>
+      </div>
+      <div class="col-3">
+        <mat-form-field appearance="outline" [hidden]="!editBankDetails">
+          <mat-label for="bankBranch">Branch</mat-label>
+          <input
+            id="bankBranch"
+            matInput
+            [disabled]="!editBankDetails"
+            name="bankBranch"
+            [(ngModel)]="bankDetails.bankBranch"
+          />
+        </mat-form-field>
+        <div [hidden]="editBankDetails">
+          <label class="form-control-label" for="bankBranchDisplay"
+            >Branch</label
+          >
+          <jhi-null-replace
+            id="bankBranchDisplay"
+            [value]="bankDetails?.bankBranch"
+          ></jhi-null-replace>
+        </div>
+      </div>
+      <div class="col-3">
+        <mat-form-field appearance="outline" [hidden]="!editBankDetails">
+          <mat-label for="ifscCode">IFSC Code</mat-label>
+          <input
+            id="ifscCode"
+            matInput
+            [disabled]="!editBankDetails"
+            name="ifscCode"
+            [(ngModel)]="bankDetails.ifscCode"
+          />
+        </mat-form-field>
+        <div [hidden]="editBankDetails">
+          <label class="form-control-label" for="ifscCodeDisplay"
+            >IFSC Code</label
+          >
+          <jhi-null-replace
+            id="ifscCodeDisplay"
+            [value]="bankDetails?.ifscCode"
+          ></jhi-null-replace>
+        </div>
+      </div>
+
+      <div class="col-3">
+        <label class="form-control-label" for="isAadhaarLinked"
+          >is Aadhar seeded ?</label
+        >
+        <div>
+          <mat-checkbox
+            id="isAadhaarLinked"
+            [hidden]="!editBankDetails"
+            [disabled]="!editBankDetails"
+            name="isAadhaarLinked"
+            [(ngModel)]="bankDetails.isAadhaarLinked"
+          ></mat-checkbox>
+        </div>
+        <div [hidden]="editBankDetails">
+          <jhi-null-replace
+            [value]="bankDetails?.isAadhaarLinked"
+            inputType="checkbox"
+          ></jhi-null-replace>
+        </div>
+      </div>
+    </div>
+
+    <div
+      *ngIf="bankDetails && bankDetails.defaultBank === true"
+      class="container"
+    >
+      <div class="col-lg-3 field">
+        <mat-form-field appearance="outline" [hidden]="!editBankDetails">
+          <mat-label for="bankAccountNum">Beneficiary Account Number</mat-label>
+          <input
+            id="bankAccountNum"
+            matInput
+            [disabled]="!editBankDetails"
+            name="bankAccountNum"
+            id="field_bankAccountNum"
+            required
+            pattern="^\d{9,18}$"
+            [(ngModel)]="bankDetails.bankAccountNum"
+          />
+        </mat-form-field>
+        <div [hidden]="editBankDetails">
+          <label class="form-control-label" for="bankAccountNumDisplay"
+            >Beneficiary Account Number</label
+          >
+          <jhi-null-replace
+            id="bankAccountNumDisplay"
+            [value]="bankDetails?.bankAccountNum"
+          ></jhi-null-replace>
+        </div>
+      </div>
+      <!-- Name -->
+      <div class="col-lg-3 field">
+        <mat-form-field appearance="outline" [hidden]="!editBankDetails">
+          <mat-label for="accountHolderName">Beneficiary Name</mat-label>
+          <input
+            id="accountHolderName"
+            matInput
+            [disabled]="!editBankDetails"
+            name="accountHolderName"
+            id="field_accountHolderName1"
+            required
+            pattern="^[a-zA-Z .']+$"
+            [(ngModel)]="bankDetails.accountHolderName"
+          />
+        </mat-form-field>
+        <div [hidden]="editBankDetails">
+          <label class="form-control-label" for="accountHolderNameDisplay"
+            >Beneficiary Name</label
+          >
+          <jhi-null-replace
+            id="accountHolderNameDisplay"
+            [value]="bankDetails?.accountHolderName"
+          ></jhi-null-replace>
+        </div>
+      </div>
+      <!-- IFSC Code -->
+      <div class="col-lg-3 field">
+        <mat-form-field appearance="outline" [hidden]="!editBankDetails">
+          <mat-label for="ifscCode1">Beneficiary IFSC Code</mat-label>
+          <input
+            id="ifscCode1"
+            matInput
+            [disabled]="!editBankDetails"
+            name="ifscCode"
+            id="field_ifscCode1"
+            pattern="^[A-Za-z]{4}[a-zA-Z0-9]{7}$"
+            required
+            (ngModelChange)="changedIFSC()"
+            [(ngModel)]="bankDetails.ifscCode"
+          />
+        </mat-form-field>
+        <span [hidden]="editBankDetails">
+          <label class="form-control-label" for="ifscCodeDisplay"
+            >Beneficiary IFSC Code</label
+          >
+          <jhi-null-replace
+            id="ifscCodeDisplay"
+            [value]="bankDetails?.ifscCode"
+          ></jhi-null-replace>
+        </span>
+      </div>
+      <!-- IFSC Btn -->
+      <div class="col-lg-3 field">
+        <button
+          mat-raised-button
+          type="button"
+          class="btn btn-primary ifsc-search-btn"
+          data-dismiss="modal"
+          (click)="searchIfsc(bankDetails.ifscCode)"
+          [disabled]="
+            !editBankDetails || bankDetailsForm.controls.ifscCode?.invalid
+          "
+        >
+          <span>Search IFSC</span>
+        </button>
+        &nbsp;&nbsp;
+      </div>
+      <!-- Accpunt Type -->
+      <div class="col-lg-3 field">
+        <mat-form-field appearance="outline" [hidden]="!editBankDetails">
+          <mat-label for="bankAccountType">Account Type</mat-label>
+          <mat-select
+            id="bankAccountType"
+            name="bankAccountType"
+            [(ngModel)]="bankDetails.bankAccountType"
+            required
+          >
+            <mat-option
+              *ngFor="let accountType of accountTypeRefCodes"
+              [value]="accountType.code"
+            >
+              {{ accountType.name }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <div [hidden]="editBankDetails">
+          <label class="form-control-label" for="bankAccountTypeDisplay"
+            >Account Type</label
+          >
+          <jhi-null-replace
+            id="bankAccountTypeDisplay"
+            [value]="bankDetails?.bankAccountType"
+          ></jhi-null-replace>
+        </div>
+      </div>
+      <!-- Bank Name -->
+      <div class="col-lg-3 field">
+        <mat-form-field appearance="outline" [hidden]="!editBankDetails">
+          <mat-label for="bankeNameField">Bank Name</mat-label>
+          <input
+            id="bankNameField"
+            matInput
+            [disabled]="!editBankDetails"
+            name="bankNameField"
+            required
+            [(ngModel)]="bankDetails.bankName"
+          />
+        </mat-form-field>
+        <div [hidden]="editBankDetails">
+          <label class="form-control-label" for="bankNameField"
+            >Bank Name</label
+          >
+          <jhi-null-replace
+            id="bankNameField"
+            [value]="bankDetails?.bankName"
+          ></jhi-null-replace>
+        </div>
+      </div>
+
+      <!-- Branch -->
+      <div class="col-lg-3 field">
+        <mat-form-field appearance="outline" [hidden]="!editBankDetails">
+          <mat-label for="bankBranchName">Bank Branch</mat-label>
+          <input
+            id="bankBranchName"
+            matInput
+            [disabled]="!editBankDetails"
+            name="bankBranchName"
+            id="field_bankBranchName"
+            required
+            [(ngModel)]="bankDetails.bankBranch"
+          />
+        </mat-form-field>
+        <div [hidden]="editBankDetails">
+          <label class="form-control-label" for="bankBranchName"
+            >Bank Branch</label
+          >
+          <jhi-null-replace
+            id="bankBranchName"
+            [value]="bankDetails?.bankBranch"
+          ></jhi-null-replace>
+        </div>
+      </div>
+
+      <!-- Penny drop time -->
+      <div class="col-lg-3 field">
+        <div>
+          <label class="form-control-label" for="bankAccountNumDisplay"
+            >Beneficiary Check Date and Time</label
+          >
+          <jhi-null-replace
+            id="bankAccountNumDisplay"
+            [value]="bankDetails?.pennyDropPerformedAt"
+          ></jhi-null-replace>
+        </div>
+      </div>
+
+      <!-- Bene Name as per bank -->
+      <div class="col-lg-3 field">
+        <div>
+          <label class="form-control-label" for="verifiedName"
+            >Beneficiary Name as per Bank</label
+          >
+          <jhi-null-replace
+            id="verifiedName"
+            [value]="bankDetails?.accountHolderNameInBank"
+          ></jhi-null-replace>
+        </div>
+      </div>
+      <!-- Status -->
+      <div class="col-lg-3 field">
+        <label class="form-control-label" for="accountStatus">Status</label>
+        <p id="accountStatus" style="width: 300px; margin-top: 8px">
+          <span *ngIf="!bankDetails.accountVerificationStatus"
+            >Status not available</span
+          >
+          <span *ngIf="bankDetails.accountVerificationStatus">{{
+            bankDetails.accountVerificationStatus
+          }}</span>
+          <span
+            *ngIf="
+              bankDetails.accountVerificationStatus &&
+              bankDetails.accountVerificationDetailedStatus
+            "
+            >: {{ bankDetails.accountVerificationDetailedStatus }}</span
+          >
+        </p>
+      </div>
+      <!-- Message -->
+      <div class="col-lg-3 field">
+        <div>
+          <label class="form-control-label" for="message">Message</label>
+          <jhi-null-replace
+            id="message"
+            [value]="bankDetails?.providerDescription"
+          ></jhi-null-replace>
+        </div>
+      </div>
+      <!-- IFSC Error Message -->
+      <div class="col-lg-3 field" *ngIf="ifscSearch?.message">
+        <mat-error>{{ ifscSearch?.message }}</mat-error>
+      </div>
+    </div>
+    <div class="sub-heading-container">
+      <div class="document-type-title">Bank Branch Details</div>
+    </div>
+    <div class="container">
+      <div class="col-lg-3 field">
+        <mat-form-field appearance="outline" [hidden]="!editBankDetails">
+          <mat-label for="bankDetailName">Bank Name</mat-label>
+          <input
+            id="bankDetailName"
+            matInput
+            [disabled]="!editBankDetails"
+            name="bankDetailName"
+            id="bankDetailName"
+            pattern="^[a-zA-Z- &.'()]+$"
+            [(ngModel)]="bankDetails.bankName"
+            required
+          />
+        </mat-form-field>
+        <div [hidden]="editBankDetails">
+          <label class="form-control-label" for="bankDetailNameDisplay"
+            >Bank Name</label
+          >
+          <jhi-null-replace
+            id="bankDetailNameDisplay"
+            [value]="bankDetails?.bankName"
+          ></jhi-null-replace>
+        </div>
+      </div>
+      <div class="col-lg-3 field">
+        <mat-form-field appearance="outline" [hidden]="!editBankDetails">
+          <mat-label for="micrCode">MICR Code</mat-label>
+          <input
+            id="micrCode"
+            matInput
+            [disabled]="!editBankDetails"
+            name="micrCode"
+            id="field_micrCode1"
+            [(ngModel)]="bankDetails.micrCode"
+          />
+        </mat-form-field>
+        <div [hidden]="editBankDetails">
+          <label class="form-control-label" for="micrCodeDisplay"
+            >MICR Code</label
+          >
+          <jhi-null-replace
+            id="micrCodeDisplay"
+            [value]="bankDetails?.micrCode"
+          ></jhi-null-replace>
+        </div>
+      </div>
+      <div class="col-lg-3 field">
+        <mat-form-field appearance="outline" [hidden]="!editBankDetails">
+          <mat-label for="bankCode">Bank Code</mat-label>
+          <input
+            id="bankCode"
+            matInput
+            [disabled]="!editBankDetails"
+            name="bankCode"
+            id="field_bankCode"
+            pattern="^[a-zA-Z0-9]+$"
+            required
+            [(ngModel)]="bankDetails.bankCode"
+          />
+        </mat-form-field>
+        <div [hidden]="editBankDetails">
+          <label class="form-control-label" for="bankCodeDisplay"
+            >Bank Code</label
+          >
+          <jhi-null-replace
+            id="bankCodeDisplay"
+            [value]="bankDetails?.bankCode"
+          ></jhi-null-replace>
+        </div>
+      </div>
+      <div class="col-lg-3 field">
+        <mat-form-field appearance="outline" [hidden]="!editBankDetails">
+          <mat-label for="bankBranch">Bank Branch</mat-label>
+          <input
+            id="bankBranch"
+            matInput
+            [disabled]="!editBankDetails"
+            name="bankBranch"
+            id="field_bankBranch"
+            pattern="^[a-zA-Z &.',-]+$"
+            required
+            [(ngModel)]="bankDetails.bankBranch"
+          />
+        </mat-form-field>
+        <div [hidden]="editBankDetails">
+          <label class="form-control-label" for="bankBranchDisplay"
+            >Bank Branch</label
+          >
+          <jhi-null-replace
+            id="bankBranchDisplay"
+            [value]="bankDetails?.bankBranch"
+          ></jhi-null-replace>
+        </div>
+      </div>
+      <div class="col-lg-3 field">
+        <mat-form-field appearance="outline" [hidden]="!editBankDetails">
+          <mat-label for="bankAddress">Bank Address</mat-label>
+          <textarea
+            id="bankAddress"
+            matInput
+            [disabled]="!editBankDetails"
+            name="bankAddress"
+            id="field_bankAddress"
+            [(ngModel)]="bankDetails.bankAddress"
+            style="line-height: unset; resize: none"
+            rows="3"
+          ></textarea>
+        </mat-form-field>
+        <div [hidden]="editBankDetails">
+          <label class="form-control-label" for="bankAddressDisplay"
+            >Bank Address</label
+          >
+          <jhi-null-replace
+            id="bankAddressDisplay"
+            [value]="bankDetails?.bankAddress"
+          ></jhi-null-replace>
+        </div>
+      </div>
+      <div class="col-lg-3 field">
+        <mat-form-field appearance="outline" [hidden]="!editBankDetails">
+          <mat-label for="bankContact">Bank Contact</mat-label>
+          <input
+            id="bankContact"
+            matInput
+            [disabled]="!editBankDetails"
+            name="bankContact"
+            id="field_bankContact"
+            [(ngModel)]="bankDetails.bankContact"
+          />
+        </mat-form-field>
+        <div [hidden]="editBankDetails">
+          <label class="form-control-label" for="bankContactDisplay"
+            >Bank Contact</label
+          >
+          <jhi-null-replace
+            id="bankContactDisplay"
+            [value]="bankDetails?.bankContact"
+          ></jhi-null-replace>
+        </div>
+      </div>
+      <div class="col-lg-3 field">
+        <mat-form-field appearance="outline" [hidden]="!editBankDetails">
+          <mat-label for="bankCity">Bank City</mat-label>
+          <input
+            id="bankCity"
+            matInput
+            [disabled]="!editBankDetails"
+            name="bankCity"
+            id="field_bankCity"
+            pattern="^[a-zA-Z &.'()]+$"
+            required
+            [(ngModel)]="bankDetails.bankCity"
+          />
+        </mat-form-field>
+        <div [hidden]="editBankDetails">
+          <label class="form-control-label" for="bankCityDisplay"
+            >Bank City</label
+          >
+          <jhi-null-replace
+            id="bankCityDisplay"
+            [value]="bankDetails?.bankCity"
+          ></jhi-null-replace>
+        </div>
+      </div>
+      <div class="col-lg-3 field">
+        <mat-form-field appearance="outline" [hidden]="!editBankDetails">
+          <mat-label for="bankDistrict">Bank District</mat-label>
+          <input
+            id="bankDistrict"
+            matInput
+            [disabled]="!editBankDetails"
+            name="bankDistrict"
+            id="field_bankDistrict"
+            pattern="^[a-zA-Z &.']+$"
+            required
+            [(ngModel)]="bankDetails.bankDistrict"
+          />
+        </mat-form-field>
+        <div [hidden]="editBankDetails">
+          <label class="form-control-label" for="bankDistrictDisplay"
+            >Bank District</label
+          >
+          <jhi-null-replace
+            id="bankDistrictDisplay"
+            [value]="bankDetails?.bankDistrict"
+          ></jhi-null-replace>
+        </div>
+      </div>
+      <div class="col-lg-3 field">
+        <mat-form-field appearance="outline" [hidden]="!editBankDetails">
+          <mat-label for="bankState">Bank State</mat-label>
+          <input
+            id="bankState"
+            matInput
+            [disabled]="!editBankDetails"
+            name="bankState"
+            id="field_bankState"
+            pattern="^[a-zA-Z &.']+$"
+            required
+            [(ngModel)]="bankDetails.bankState"
+          />
+        </mat-form-field>
+        <div [hidden]="editBankDetails">
+          <label class="form-control-label" for="bankStateDisplay"
+            >Bank State</label
+          >
+          <jhi-null-replace
+            id="bankStateDisplay"
+            [value]="bankDetails?.bankState"
+          ></jhi-null-replace>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

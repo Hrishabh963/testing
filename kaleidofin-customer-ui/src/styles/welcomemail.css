@@ -1,0 +1,68 @@
+/*  Currently - Not in use */
+.textline {
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  color: #4a4a4a;
+}
+
+.textlinesub {
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  color: #4a4a4a;
+  display: inline;
+}
+
+.textintline {
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  color: #fdad5c;
+}
+
+.textintlinenodecoration {
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  color: #fdad5c;
+  display: inline;
+  text-decoration: none;
+}
+
+.textlinesubmargin {
+  font-family: "Open Sans", sans-serif;
+  font-size: 16px;
+  font-style: normal;
+  color: #4a4a4a;
+  margin: 0;
+  display: inline;
+}
+
+.tab {
+  border-collapse: collapse;
+  border: 1px solid #cccccc;
+  position: absolute;
+  background: #ffffff;
+}
+
+.tabintrow {
+  position: absolute;
+  padding-bottom: 5px;
+  padding-left: 15px;
+  padding-top: 5px;
+  padding-right: 70px;
+  border: 2px solid #c4c4c4;
+  text-align: left;
+}
+
+.tabinthead {
+  position: absolute;
+  padding-bottom: 5px;
+  padding-left: 15px;
+  padding-top: 5px;
+  padding-right: 70px;
+  border: 2px solid #c4c4c4;
+  text-align: left;
+  font-weight: 900;
+}

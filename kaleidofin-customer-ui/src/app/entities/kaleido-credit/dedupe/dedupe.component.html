@@ -1,0 +1,5 @@
+<div *ngIf="!disableDedupe">
+  <div *ngFor="let dedupeDatum of dedupeData; let i = index">
+    <app-dedupe-accordion [id]="i" [data]="dedupeDatum"></app-dedupe-accordion>
+  </div>
+</div>

@@ -1,0 +1,85 @@
+<form name="reviewForm">
+  <div class="modal-header">
+    <h4 class="modal-title">Confirmation</h4>
+    <button
+      class="close-icon"
+      (click)="cancel()"
+      tabindex="0"
+      aria-label="Close"
+      (keydown)="handleKeydown($event)"
+    >
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="dialog-title">{{ title }}</div>
+    <div class="evaluation-type-container" *ngIf="rejectOptions?.length">
+      <div>Choose Evaluation Type</div>
+      <mat-radio-group
+        class="reject-options"
+        aria-label="Select an option"
+        [(ngModel)]="rejectionType"
+        name="rejectionTypeSelect"
+      >
+        <span *ngFor="let rejectType of rejectOptions">
+          <mat-radio-button [value]="rejectType.value">{{
+            rejectType.label
+          }}</mat-radio-button>
+        </span>
+      </mat-radio-group>
+    </div>
+
+    <mat-dialog-content
+      class="reason-category-container"
+      *ngIf="rejectReasons.length > 0"
+    >
+      <app-select-with-search
+        [rejectReasons]="rejectReasons"
+        [defaultSelectedReasons]="defaultRejectedSections"
+        [placeholder]="rejectReasonPlaceholder"
+        (selectedReasonChange)="selectedRejectReasonChange($event)"
+      >
+      </app-select-with-search>
+    </mat-dialog-content>
+
+    <div>
+      <mat-form-field
+        class="textarea-full-width custom-textarea"
+        appearance="fill"
+      >
+        <mat-label class="asterix">{{ remarksLabel }}</mat-label>
+        <textarea
+          matInput
+          [placeholder]="remarksPlaceholder"
+          cdkAutosizeMinRows="3"
+          cdkAutosizeMaxRows="5"
+          style="resize: none"
+          rows="3"
+          name="rejectionReason"
+          [(ngModel)]="remarks"
+        ></textarea>
+      </mat-form-field>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      mat-raised-button
+      class="btn-secondary"
+      (click)="cancel()"
+      data-dismiss="modal"
+    >
+      <span>Cancel</span>
+    </button>
+
+    <button
+      type="button"
+      mat-raised-button
+      (click)="onClickHandler()"
+      [disabled]="isDisabled()"
+      [ngClass]="['action-button', rejectionType || 'default']"
+    >
+      <span class="default-text"></span>
+    </button>
+  </div>
+</form>

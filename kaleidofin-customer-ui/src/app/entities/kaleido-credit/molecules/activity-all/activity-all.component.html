@@ -1,0 +1,9 @@
+<div class="activity-container">
+  <div class="activity" *ngFor="let activity of data" [ngSwitch]="activity?.type">
+    <app-comment [data]="activity?.comment" *ngSwitchCase="'COMMENT'"></app-comment>
+    <app-history-activity [data]="activity?.history" *ngSwitchCase="'HISTORY'"></app-history-activity>
+  </div>
+  <div class="no-activity" *ngIf="data.length === 0">
+    No activities found for this loan application
+  </div>
+</div>

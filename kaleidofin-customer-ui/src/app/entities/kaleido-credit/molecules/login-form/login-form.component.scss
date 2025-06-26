@@ -1,0 +1,59 @@
+:host {
+	width: 100%;
+}
+
+.login-container {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	padding-top: 2vh;
+}
+
+
+.login-contact {
+	margin-top: 3vh;
+	font-size: 1rem;
+	line-height: 1;
+	text-decoration: none;
+	padding-top: 1rem;
+}
+
+
+.login-poweredBy {
+	margin-top: 6vh;
+	font-size: 1em;
+	line-height: 1;
+}
+
+
+.login-forgetPassword-container {
+	display: flex;
+	flex-direction: column;
+	justify-content: start;
+	padding-left: 1.5vh;
+}
+
+.login-forgetPassword-container span {
+	color: var(--kcredit-primary);
+	font-size: 1rem;
+	cursor: pointer;
+	padding-bottom: 1rem;
+}
+
+.login-kaleidofin {
+	color: var(--kcredit-primary);
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.login-contactUs {
+	color: var(--kcredit-primary);
+	font-size: 1.2em;
+	cursor: pointer;
+}
+
+
+.login-error {
+	font-size: 14px;
+	align-self: center;
+}

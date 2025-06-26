@@ -1,0 +1,43 @@
+<div class="sub-heading-container">
+    <div class="section-title">Eligibility Rules</div>
+    <div class="ki-score-button-container">
+        <button mat-raised-button type="button" class="btn-primary" [disabled]="disableKiScoreRetryEligibility"
+            (click)="retryEligibilityRule()">
+            <span>Retry eligibility rule</span>
+        </button>
+    </div>
+</div>
+<br />
+<div class="row">
+    <div class="col-md-2">
+        <label class="form-control-label" htmlFor="label-5">Eligibility Status </label>
+    </div>
+    <div class="col-md-6">
+        <label class="form-control-label" htmlFor="label-6">Rule Description </label>
+    </div>
+    <div class="col-md-3">
+        <label class="form-control-label" htmlFor="label-7">Rule Result </label>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-2">
+        <jhi-null-replace [ngClass]="VIEW_MAPPER[eligibilityStatus]"
+            [value]="VIEW_MAPPER[eligibilityStatus]"></jhi-null-replace>
+    </div>
+    <div class="col-md-6">
+        <ng-container *ngFor="let result of eligibilityResults">
+            <div class="eligibilityRule">
+                <jhi-null-replace [value]="result?.comment"></jhi-null-replace>
+            </div>
+        </ng-container>
+        <jhi-null-replace [value]="null" *ngIf="eligibilityResults?.length === 0"></jhi-null-replace>
+    </div>
+    <div class="col-md-3">
+        <ng-container *ngFor="let result of eligibilityResults">
+            <div class="eligibilityRule">
+                <jhi-null-replace [ngClass]="VIEW_MAPPER[result?.result]"
+                    [value]="VIEW_MAPPER[result?.result]"></jhi-null-replace>
+            </div>
+        </ng-container>
+        <jhi-null-replace [value]="null" *ngIf="eligibilityResults?.length === 0"></jhi-null-replace>
+    </div>

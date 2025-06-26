@@ -1,0 +1,22 @@
+<div>
+  <div class="section-title subtitle">
+    {{ index + 1 }}. &nbsp; References during the Field Visit
+  </div>
+  <table>
+    <caption></caption>
+    <thead>
+      <tr>
+        <th *ngFor="let header of fields">
+          <div>{{ header?.label }}</div>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let data of reportData; let rowIndex = index">
+        <td *ngFor="let field of fields" [class]="'row-' + (rowIndex % 2)">
+          <div>{{ data[field?.propertyKey] }}</div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

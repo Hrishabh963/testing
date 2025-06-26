@@ -1,0 +1,22 @@
+.tooltip-cell {
+  position: relative;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.tooltip-cell:hover:after {
+  content: attr(title);
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #fff;
+  padding: 5px;
+  z-index: 1;
+}
+
+.button-group {
+  display: flex;
+  flex-direction: row;
+}

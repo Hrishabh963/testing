@@ -1,0 +1,43 @@
+<div class="dialog-container">
+  <div class="title-container">
+    <p>Mandate closure OTP</p>
+    <mat-icon class="closeicon" (click)="cancel()" (keypress)="cancel()" tabindex="0">close</mat-icon>
+  </div>
+  <div mat-dialog-content class="dialog-content-text">
+    <p>Enter the OTP that has been sent to the customer's mobile phone</p>
+    <div class="mobile-number">+91 {{ mobileNumber }}</div>
+    <div>
+      <mat-form-field appearance="fill" class="mat-form-field-filled" fullWidth>
+        <mat-label>Enter OTP</mat-label>
+        <input matInput type="number" maxlength="6" [(ngModel)]="otp" />
+        <div matSuffix class="otp-timer" *ngIf="!isExpired">
+          {{ minutes }}:{{ seconds }}
+        </div>
+        <button
+          matSuffix
+          class="text-button"
+          *ngIf="isExpired"
+          (click)="resendOtp()"
+        >
+          RESEND OTP
+        </button>
+        <mat-hint *ngIf="otpFailureMsg" class="error">{{
+          otpFailureMsg
+        }}</mat-hint>
+      </mat-form-field>
+    </div>
+  </div>
+  <div mat-dialog-actions>
+    <div class="action-buttons">
+      <button
+        mat-button
+        class="button4 proceed"
+        cdkFocusInitial
+        [disabled]="!otp"
+        (click)="proceed()"
+      >
+        CONFIRM
+      </button>
+    </div>
+  </div>
+</div>

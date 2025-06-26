@@ -1,0 +1,177 @@
+<form name="familyMemberInfoForm" novalidate #familyMemberInfoForm="ngForm">
+  <div style="margin-top: 5ex">
+    <div class="expansion-panel-title-container">
+      <div class="section-sub-heading">Family member {{ index + 1 }}</div>
+      <div>
+        <app-section-edit-action
+          (onCancelHandler)="cancel()"
+          (onSaveHandler)="save(familyMember)"
+          [isEditing]="editFamilyInfo"
+          [panelOpenState]="true"
+          (onEditHandler)="toggleEditDetails()"
+        ></app-section-edit-action>
+      </div>
+    </div>
+    <div class="row row-spacing">
+      <div class="col-md-3">
+        <div [hidden]="!editFamilyInfo">
+          <mat-form-field appearance="outline">
+            <mat-label>Name</mat-label>
+            <input
+              matInput
+              type="text"
+              name="relationName"
+              [(ngModel)]="familyMember.relationName"
+            />
+          </mat-form-field>
+        </div>
+        <div [hidden]="editFamilyInfo">
+          <label
+            class="form-control-label"
+            jhiTranslate="kCredit.loan.loanAmount"
+            for="field_loanAmount"
+            >Name</label
+          >
+          <jhi-null-replace
+            [value]="familyMember.relationName"
+          ></jhi-null-replace>
+        </div>
+      </div>
+      <div class="col-3">
+        <div [hidden]="!editFamilyInfo">
+          <mat-form-field appearance="outline">
+            <mat-label>Relationship</mat-label>
+            <input
+              matInput
+              type="text"
+              name="fatherSpouseRelationship"
+              id="field_primaryRelationship"
+              [(ngModel)]="familyMember.relationship"
+            />
+          </mat-form-field>
+        </div>
+        <div [hidden]="editFamilyInfo">
+          <label
+            class="form-control-label"
+            jhiTranslate="kCredit.loan.loanAmount"
+            for="field_loanAmount"
+            >Relationship</label
+          >
+          <jhi-null-replace
+            [value]="familyMember.relationship"
+          ></jhi-null-replace>
+        </div>
+      </div>
+      <div class="col-3">
+        <div [hidden]="!editFamilyInfo">
+          <mat-form-field appearance="outline">
+            <mat-label>Sex</mat-label>
+            <input
+              matInput
+              type="text"
+              name="gender"
+              id="gender"
+              [(ngModel)]="familyMember.gender"
+            />
+          </mat-form-field>
+        </div>
+        <div [hidden]="editFamilyInfo">
+          <label
+            class="form-control-label"
+            jhiTranslate="kCredit.loan.loanAmount"
+            for="field_loanAmount"
+            >Sex</label
+          >
+          <jhi-null-replace [value]="familyMember.gender"></jhi-null-replace>
+        </div>
+      </div>
+      <div class="form-group col-md-3">
+        <div [hidden]="!editFamilyInfo">
+          <mat-form-field appearance="outline">
+            <mat-label>Date of birth</mat-label>
+            <input
+              matInput
+              name="primary_date_of_birth"
+              id="primary_date_of_birth"
+              [maxDate]="maxDate"
+              [minDate]="minDate"
+              [(ngModel)]="familyMember.dob"
+              [matDatepicker]="dateOfBirth"
+              (dateChange)="updateDate($event, familyMember)"
+            />
+            <mat-datepicker-toggle
+              matSuffix
+              [for]="dateOfBirth"
+            ></mat-datepicker-toggle>
+            <mat-datepicker #dateOfBirth></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div [hidden]="editFamilyInfo">
+          <label
+            class="form-control-label"
+            jhiTranslate="kCredit.loan.emiStartDate"
+            for="field_emi_start_date"
+            >Date of birth</label
+          >
+          <jhi-null-replace
+            [value]="familyMember.dob"
+            inputType="date"
+          ></jhi-null-replace>
+        </div>
+      </div>
+    </div>
+    <div class="row row-spacing">
+      <div class="col-3">
+        <div [hidden]="!editFamilyInfo">
+          <mat-form-field appearance="outline">
+            <mat-label>Occupation</mat-label>
+            <input
+              matInput
+              type="text"
+              id="fatherSpouseOccupation"
+              name="fatherSpouseOccupation"
+              [(ngModel)]="familyMember.occupation"
+            />
+          </mat-form-field>
+        </div>
+        <div [hidden]="editFamilyInfo">
+          <label
+            class="form-control-label"
+            jhiTranslate="kCredit.loan.loanAmount"
+            for="field_loanAmount"
+            >Occupation</label
+          >
+          <jhi-null-replace
+            [value]="familyMember.occupation"
+          ></jhi-null-replace>
+        </div>
+      </div>
+      <div class="col-3">
+        <div [hidden]="!editFamilyInfo">
+          <mat-form-field appearance="outline">
+            <mat-label>Educational Status</mat-label>
+            <input
+              matInput
+              type="text"
+              id="fatherSpouseEducationalStatus"
+              name="fatherSpouseEducationalStatus"
+              [(ngModel)]="familyMember.educationalStatus"
+            />
+          </mat-form-field>
+        </div>
+        <div [hidden]="editFamilyInfo">
+          <label
+            class="form-control-label"
+            jhiTranslate="kCredit.loan.loanAmount"
+            for="field_loanAmount"
+            >Educational Status</label
+          >
+          <jhi-null-replace
+            [value]="familyMember.educationalStatus"
+          ></jhi-null-replace>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+<br />

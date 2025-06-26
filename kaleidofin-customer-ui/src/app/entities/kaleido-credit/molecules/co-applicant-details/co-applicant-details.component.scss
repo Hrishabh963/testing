@@ -1,0 +1,183 @@
+/*profile pic round */
+#container {
+  width: 64px;
+  height: 64px;
+  margin: auto;
+}
+
+#name {
+  width: 100%;
+  text-align: center;
+  color: #28b2b6;
+  font-size: 36px;
+  background-color: var(--kcredit-primary-blue-background);
+  line-height: 64px;
+  border-radius: 50%;
+}
+
+h6 {
+  color: #777777;
+}
+
+.card-override {
+  border: none;
+}
+
+.card-body-override {
+  margin: 25px;
+}
+
+.page-wrapper {
+  background-color: #ffffff;
+}
+
+.nav-section-title {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.section-secondary-title {
+  font-family: Arial, Verdana, Tahoma, sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 16px;
+  line-height: 18px;
+  color: #000;
+}
+
+.section-nav li {
+  margin: 0 30px;
+}
+
+.section-hr {
+  border: 1px solid #ebebeb;
+  margin: 30px;
+}
+
+.section-sub-heading {
+  font-family: Arial, Verdana, Tahoma, sans-serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 28px;
+}
+
+.sub-heading-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 98%;
+}
+
+.row-spacing {
+  margin-top: 20px;
+}
+
+.info-section-scroll {
+  overflow-y: auto;
+  height: 100%;
+}
+
+.sticky {
+  background: white;
+  color: black;
+  box-shadow: 0 3px 12px 0 rgba(0, 0, 0, 0.08);
+  position: fixed;
+  top: 2px;
+  height: 60px;
+  width: 90%;
+  z-index: 999;
+}
+
+.nav-button {
+  background: none;
+  border: none;
+}
+
+.nav-button:focus {
+  color: #ff7b52;
+  border-bottom: 2px solid #ff7b52;
+  outline: none;
+}
+
+.float-left {
+  float: left;
+}
+
+.float-right {
+  float: right;
+}
+
+.pass-color {
+  color: #0bc07f;
+}
+
+.fail-color {
+  color: #ed7655;
+}
+
+.title-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: row;
+  width: 100%;
+}
+
+.title-section-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.button-container {
+  width: 40%;
+}
+
+.data-container {
+  width: 80%;
+}
+
+.date-picker {
+  width: 80%;
+}
+
+.Yes,
+.YES,
+.yes,
+.High,
+.high,
+.HIGH,
+.Rejected,
+.rejected,
+.REJECTED {
+  color: #e42323;
+}
+
+.no,
+.No,
+.NO,
+.approved,
+.Approved,
+.APPROVED,
+.ACCEPTED,
+.Accepted,
+.accepted,
+.LOW,
+.low,
+.Low {
+  color: #0bc07f;
+}
+
+.medium,
+.Medium,
+.MEDIUM {
+  color: #ffac30;
+}
+
+.verification-container {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}

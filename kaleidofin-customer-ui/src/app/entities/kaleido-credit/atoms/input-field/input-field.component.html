@@ -1,0 +1,15 @@
+<mat-form-field appearance="outline" [matTooltip]="toolTipLabel"
+  [matTooltipDisabled]="!showToolTip"
+  matTooltipPosition="above">
+  <mat-label>{{ label }}</mat-label>
+  <input 
+    matInput 
+    [formControl]="inputFormControl"
+    [maxlength]="inputLength" 
+    [required]="isRequired"
+  />
+  <mat-error *ngIf="inputFormControl?.hasError('required')">Please enter a value.</mat-error>
+</mat-form-field>
+<mat-error *ngIf="inputFormControl.errors?.['invalidPattern']">
+  {{errorMessage}}
+</mat-error>

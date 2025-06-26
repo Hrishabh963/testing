@@ -1,0 +1,6 @@
+{
+    "sonarlint.connectedMode.project": {
+        "connectionId": "kaleidofin-private-limited",
+        "projectKey": "kaleidofin_dashboard-ui"
+    }
+}

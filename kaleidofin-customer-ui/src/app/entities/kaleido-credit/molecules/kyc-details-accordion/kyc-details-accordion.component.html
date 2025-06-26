@@ -1,0 +1,57 @@
+<div *ngIf="checkSectionVisibility('docs')">  
+  <mat-accordion>
+    <mat-expansion-panel [expanded]="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <h3 class="section-sub-heading bank-details-heading" *ngIf="!showSubHeading"> {{ title }} KYC Documents </h3>
+          <h3 class="section-sub-heading bank-details-heading" *ngIf="showSubHeading"> {{ title }}</h3>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="col-2" *ngIf="eKycStatus">
+        <br/>
+        <label class="form-control-label" for="ekycStatus">KYC Status</label>
+        <jhi-null-replace [value]="eKycStatus"></jhi-null-replace>
+    </div>
+      <div *ngIf="poiDocs && poiDocs.length > 0">
+        <mat-accordion>
+          <mat-expansion-panel [expanded]="poiPanelOpenState" (opened)="poiPanelOpenState = true" (closed)="poiPanelOpenState = false">
+            <mat-expansion-panel-header>
+              <mat-panel-title class="document-type-title">
+                Document Category - Proof of Identity
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div *ngIf="poiPanelOpenState">
+              <app-loan-kyc-document-accoridon [loanId]="loanId" [partnerId]="partnerId"
+                [subtype]="poiDocs[0].documentType" [fileData]="poiDocs" [entityType]="entityType"
+                [entityId]="poiDocs[0]?.entityId" [idNo]="poiDocs[0]?.idNo || poiDocs[1]?.idNo || ''" [purpose]="poiDocs[0]?.purpose">
+              </app-loan-kyc-document-accoridon>
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+      <div *ngIf="poaDocs && poaDocs.length > 0">
+        <mat-accordion>
+          <mat-expansion-panel [expanded]="poaPanelOpenState" (opened)="poaPanelOpenState = true" (closed)="poaPanelOpenState = false">
+            <mat-expansion-panel-header>
+              <mat-panel-title class="document-type-title">
+                Document Category - Proof of Address
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div *ngIf="poaPanelOpenState">
+              <app-loan-kyc-document-accoridon [loanId]="loanId" [partnerId]="partnerId"
+                [subtype]="poaDocs[0].documentType" [fileData]="poaDocs" [entityType]="entityType"
+                [entityId]="poaDocs[0]?.entityId" [idNo]="poaDocs[0]?.idNo || poaDocs[1]?.idNo || ''" [purpose]="poaDocs[0]?.purpose">
+              </app-loan-kyc-document-accoridon>
+            </div>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>
+
+<div *ngIf="!checkSectionVisibility('docs')">
+  <h3 class="section-title" *ngIf="!showSubHeading"> {{ title }} KYC Documents </h3>
+  <h3 class="section-sub-heading" *ngIf="showSubHeading"> {{ title }}</h3>
+  <h6><b> No Documents Available </b></h6>
+</div>

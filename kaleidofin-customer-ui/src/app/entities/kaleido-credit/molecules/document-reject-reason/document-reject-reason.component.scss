@@ -1,0 +1,30 @@
+.full-width {
+  width: 100%;
+}
+
+mat-dialog-content {
+  min-width: 300px;
+}
+
+mat-dialog-actions {
+  padding-top: 20px;
+}
+
+.mat-form-field {
+  border-radius: 10px;
+  width: 46.5vw;
+}
+
+::ng-deep .custom-textarea .mat-form-field-underline {
+  display: none;
+}
+
+::ng-deep .custom-textarea .mat-form-field-flex {
+  border-radius: 8px;
+  overflow: hidden;
+  background-color: #f5f6fc;
+}
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+}

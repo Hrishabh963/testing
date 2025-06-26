@@ -1,0 +1,61 @@
+<div class="card card-override">
+  <mat-accordion>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          <div class="notification-section-title">
+            <span
+              [class]="
+                              notificationCount !== 0
+                                ? 'notification-count'
+                                : 'no-notification'
+                            "
+              matBadge="{{ notificationCount }}"
+              matBadgePosition="before"
+            ></span>
+            Notifications
+          </div>
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <span>
+        <span
+          [class]="notificationCount !== 0? 'notification-text': 'no-notification-text'
+                "
+        >
+          <div class="all-notification-container">
+            <div *ngIf="canShowReview">
+              <app-notification-item
+                [remarks]="remarks"
+                [actionRequired]="actionRequired"
+                [reviewDateTime]="reviewDateTime"
+                [applicationStatus]="applicationStatus"
+                [lender]="lender"
+                [workflow]="workflow"
+                [isReferred] = "isReferred"
+              ></app-notification-item>
+            </div>
+            <div class="review-items" *ngIf="notificationsList">
+              <div *ngFor="let item of notificationsList">
+                <app-notification-item
+                  [notification]="item"
+                ></app-notification-item>
+              </div>
+            </div>
+            <div *ngIf="(errors | keyvalue).length > 0">
+              <ng-container *ngFor="let error of (errors | keyvalue)">
+                <app-error-notifications-item
+                  [key]="error.key"
+                  [sectionErrors]="error.value"
+                >
+                </app-error-notifications-item>
+              </ng-container>
+            </div>
+            <div *ngIf="notificationCount===0">
+              <div class="no-notification-text">No notifications</div>
+            </div>
+          </div>
+        </span>
+      </span>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

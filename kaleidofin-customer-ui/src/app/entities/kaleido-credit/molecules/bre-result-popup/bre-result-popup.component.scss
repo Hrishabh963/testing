@@ -1,0 +1,58 @@
+::ng-deep .custom-overlay .mat-dialog-container {
+    padding: 0 !important;
+}
+
+
+.modal-header {
+    padding: 1rem 1rem 0 1rem;
+    border-bottom: 1px solid #EAF2FF;
+}
+
+.modal-header h1 {
+    color: #38526C;
+    font-size: 1.3em;
+}
+
+.popup-close-icon {
+    border: none;
+    background: none;
+}
+
+.result-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.icon-description-container {
+    display: flex;
+    flex-flow: row nowrap;
+    padding: 1rem 1rem 0 1rem;
+}
+
+.description {
+    flex-basis: 85%;
+    color: #38526C;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1rem 0 1rem 1rem;
+    gap: 0.4rem;
+}
+
+.description span {
+    font-size: 1.1rem;
+}
+
+.close-button-container {
+    align-self: flex-end;
+    padding: 1rem;
+    width: 15vw;
+}
+
+button.popup-close-button {
+    width: 95%;
+    height: 6vh;
+    background: #FF7B52;
+    color: white;
+}
+

@@ -1,0 +1,51 @@
+//kcredit color constants
+:root {
+  /* Existing theme  */
+  --table-header-grey: #f5f6fc;
+  --kcredit-primary-orange: #ff7b52;
+  --kcredit-background-orange: #f3683c;
+  --kcredit-success-green: #39b690;
+  --kcredit-failure-red-background: #ffd0d0;
+  --kcredit-success-green: #0bc07f;
+  --kcredit-failure-red: #e42323;
+  --kcredit-primary-black: black;
+  --kcredit-btn-hover-bg: #d5cdcc;
+  --component-background-grey: #f5f5f5;
+  --kcredit-primary-white: #fff;
+  --kcredit-primary-background: #ffe4dc;
+  --kcredit-primary-yellow: #ffc107;
+  --kcredit-secondary-button-background: #d4ecf9;
+  --kcredit-secondary-button-color: #227aab;
+  --kcredit-primary-color1: #0f547e;
+  --kcredit-secondary-background: #f0f9ff;
+  --kcredit-table-primary-row: var(--kcredit-primary-white);
+  --kcredit-table-secondary-row: #f3fafe;
+  --kcredit-background-grey: #d9d9d9;
+  --kcredit-text-light: #96aabd;
+  --kcredit-grey-text: #b0b6bf;
+  --kcredit-notification-text: #ed7655;
+  --kcredit-notification-details-text: #38526c;
+  --kcredit-success-green-light: #e4f8f1;
+  --kcredit-secondary-background: #e3fdfe;
+
+  // New theme colors
+  --kcredit-primary: #28b2b6;
+  --kcredit-primary-background: #c4e9ea;
+  --kcredit-primary-blue-background: #d8eeef;
+  --kcredit-text-medium: #496684;
+  --kcredit-icon-theme-color: #96aabd;
+  --kcredit-icon-theme-color-selected: var(--kcredit-primary);
+  --kcredit-avatar-icon-color: #675ddc;
+  --kcredit-menu-secondary-hover: #f4fbff;
+  --kcredit-page-background: #f4f6fb;
+  --kcredit-profile-secondary-text: var(--kcredit-text-medium);
+  --kcredit-table-header: var(--kcredit-profile-secondary-text);
+  --kcredit-profile-secondary-text-active-background: #cfeff0;
+  --kcredit-background-light-red: #ffd7d7;
+  --kcredit-text-dark: #38526C;
+  --kcredit-app-secondary: #0f547e;
+  --kcredit-dark-success-green: #219653;
+  --kcredit-orange-button: #ff6737;
+  --kcredit-error-color: #e42323;
+  --kcredit-button-disabled-color: #cbd5de;
+}

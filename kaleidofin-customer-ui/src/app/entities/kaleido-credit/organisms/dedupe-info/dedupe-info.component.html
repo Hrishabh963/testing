@@ -1,0 +1,37 @@
+<mat-accordion>
+    <mat-expansion-panel [expanded]="panelOpenState" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+        <mat-expansion-panel-header>
+            <div class="expansion-panel-title-container">
+                <div class="section-title">Dedupe</div>
+            </div>
+        </mat-expansion-panel-header>
+        <ng-container *ngIf="uiFieldMap.length > 0">
+            <app-dedupe-info-details *ngIf="(applicantDedupe | keyvalue).length > 0" [uiFields]="applicantDedupe" [uiFieldsMap]="uiFieldMap" [title]="'Applicant'"
+                [loanId]="loanId" [hideEditAction]="true" [editSections]="editSections" [enableEdit]="enableEdit">
+            </app-dedupe-info-details>
+
+            <hr class="section-hr">
+
+            <ng-container *ngIf="coApplicantDedupe.length > 0">
+                <ng-container *ngFor="let dedupe of coApplicantDedupe; let index = index">
+                    <app-dedupe-info-details [uiFields]="dedupe?.fields" [uiFieldsMap]="uiFieldMap"
+                        [title]="'Co-Applicant ' + (index + 1)" [loanId]="loanId" [hideEditAction]="true"
+                        [editSections]="editSections" [enableEdit]="enableEdit">
+                    </app-dedupe-info-details>
+                    <hr class="section-hr">
+                </ng-container>
+            </ng-container>
+
+            <ng-container *ngIf="guarantorDedupe.length > 0">
+                <ng-container *ngFor="let dedupe of guarantorDedupe; let index = index">
+                    <app-dedupe-info-details [uiFields]="dedupe?.fields" [uiFieldsMap]="uiFieldMap"
+                        [title]="'Guarantor ' + (index + 1)" [loanId]="loanId" [hideEditAction]="true"
+                        [editSections]="editSections" [enableEdit]="enableEdit">
+                    </app-dedupe-info-details>
+                    <hr class="section-hr">
+                </ng-container>
+            </ng-container>
+
+        </ng-container>
+    </mat-expansion-panel>
+</mat-accordion>

@@ -1,0 +1,5 @@
+<div class="card-title">
+   <div *ngFor="let financialDetail of financialDetails; index as i" >
+      <jhi-financial-details-item [disableEdit]="disableEdit" [financialDetail]="financialDetail" [loanDetails]="loanDetails"  [index]="i" (reloadAfterSave)="onSuccess($event)"></jhi-financial-details-item>
+   </div>
+</div>

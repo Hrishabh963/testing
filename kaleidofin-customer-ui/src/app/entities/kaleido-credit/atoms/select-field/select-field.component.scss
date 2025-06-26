@@ -1,0 +1,27 @@
+.select-search-block {
+    padding: 0.7rem 1.5rem 0.5rem 1.5rem;
+    .mat-form-field {
+        height: 3.5rem;
+        margin-bottom: 1rem;
+        border-radius: 5px;
+        width: 16.5rem;
+    }
+}
+
+input.mat-input-element {
+    padding-left: 0.7rem;
+}
+
+::ng-deep .select-search-block .mat-form-field-underline {
+    display: none;
+} 
+
+.search-placeholder {
+    color: #333333;
+    padding-left: 0.5rem;
+}
+.icon {
+    padding-top: 0.3rem;
+    padding-right: 2.5rem;
+    color: #333333;
+}

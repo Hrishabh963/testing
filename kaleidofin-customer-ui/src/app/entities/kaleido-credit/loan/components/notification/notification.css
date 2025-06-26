@@ -1,0 +1,72 @@
+.notification-count {
+  padding-right: 25px;
+  margin-left: 9px;
+}
+
+.no-notification {
+  padding-right: 25px;
+  margin-left: 9px;
+
+  .mat-badge-content {
+    background: var(--kcredit-grey-text);
+  }
+}
+
+.no-notification-text {
+  color: var(--kcredit-grey-text);
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 18px;
+  letter-spacing: 0.17307710647583008px;
+  text-align: left;
+  margin-left: 18px;
+  margin-top: -8px;
+}
+
+.notification-text {
+  color: var(--kcredit-notification-text);
+}
+
+.notification-title {
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.notification-section-title {
+  font-family: Arial, sans-serif;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 28px;
+  color: var(--kcredit-primary-color1);
+  display: flex;
+  align-items: center;
+  margin-left: 13px;
+  border: none !important;
+  vertical-align: middle;
+}
+
+.card-override {
+  border: none;
+}
+
+.all-notification-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin-left: -3px;
+  max-height: 400px;
+  overflow: auto;
+}
+
+jhi-notification-item {
+  flex: 1;
+  margin: 0 1px;
+}
+
+.review-items {
+  margin-top: 8px !important;
+  padding-bottom: 2em;
+}

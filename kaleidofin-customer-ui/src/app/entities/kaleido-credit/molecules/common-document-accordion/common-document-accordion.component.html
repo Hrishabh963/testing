@@ -1,0 +1,19 @@
+<div *ngFor="let documentType of documentTypes">
+    <app-loan-document-accordion
+      [loanId]="loanId"
+      [partnerId]="partnerId"
+      [documentData]="loanDetailDocuments[documentType]"
+      [title]="documentType"
+      [sectionAuthority]="authority"
+    >
+    </app-loan-document-accordion>
+</div>
+<div>
+  <app-pan-document-accordion
+    [loanId]="loanId" 
+    [partnerId]="partnerId"
+    [customerId]="customerId"
+    [panDocuments]="panDocuments"
+  >
+  </app-pan-document-accordion>  
+</div>

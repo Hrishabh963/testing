@@ -1,0 +1,165 @@
+<h1 mat-dialog-title>
+  Generate new report
+  <button mat-icon-button (click)="onCancel()">
+    <mat-icon>close</mat-icon>
+  </button>
+</h1>
+
+<div mat-dialog-content>
+  <form name="editForm" novalidate #editForm="ngForm" [formGroup]="form">
+    <div class="form-row">
+      <mat-form-field appearance="fill">
+        <mat-label>Purpose</mat-label>
+        <mat-select
+          formControlName="purpose"
+          (selectionChange)="updatePurpose($event.value)"
+          [(value)]="selectedPurpose"
+        >
+          <mat-option
+            *ngFor="let purpose of purposeList"
+            [value]="purpose?.value"
+          >
+            {{ purpose.viewValue }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Report Type</mat-label>
+        <mat-select
+          formControlName="reportType"
+          placeholder="Report Type"
+          [multiple]="canSelectMultipleReportType"
+          (selectionChange)="handleReportSelectionChange($event.value)">
+          <app-select-all-combo-box
+            *ngIf="canSelectMultipleReportType"
+            [model]="form.get('reportType')"
+            [values]="reportTypeOptions"
+            text="All"
+          ></app-select-all-combo-box>
+      
+          <mat-option
+            *ngFor="let reportType of reportTypeOptions"
+            [value]="reportType"
+          >
+            {{ reportType.viewValue }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      
+      <mat-form-field appearance="fill">
+        <mat-label>Partner</mat-label>
+        <mat-select
+          formControlName="partners"
+          [(ngModel)]="selectedPartners"
+          multiple
+          [disabled]="partnerListOptions.length === 1"
+        >
+          <app-select-all-combo-box
+            *ngIf="partnerListOptions.length > 1"
+            [model]="form.get('partners')"
+            [values]="partnerListOptions"
+            text="All"
+          ></app-select-all-combo-box>
+          <mat-option
+            *ngFor="let partner of partnerListOptions"
+            [value]="partner"
+          >
+            {{ partner.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="form-row">
+      <mat-form-field appearance="fill">
+        <mat-label>Loan Type</mat-label>
+        <mat-select
+          placeholder="Loan Type"
+          formControlName="loanType"
+          [(ngModel)]="selectedLoanType"
+          multiple
+        >
+          <app-select-all-combo-box
+            *ngIf="loanTypeOptions.length > 1"
+            [model]="form.get('loanType')"
+            [values]="loanTypeOptions"
+            text="All"
+          >
+          </app-select-all-combo-box>
+          <mat-option
+            *ngFor="let loanType of loanTypeOptions"
+            [value]="loanType"
+          >
+            {{ loanType.name }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Start Date</mat-label>
+        <input
+          matInput
+          [matDatepicker]="startDate"
+          formControlName="startDateField"
+          placeholder="Select Start Date"
+          (dateChange)="updateDate($event, 'startDate')"
+          [max]="maxDate"
+          [min]="minDate"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="startDate"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #startDate></mat-datepicker>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>End Date</mat-label>
+        <input
+          matInput
+          [matDatepicker]="endDate"
+          formControlName="endDateField"
+          placeholder="Select End Date"
+          (dateChange)="updateDate($event, 'endDate')"
+          [max]="maxDate"
+          [min]="minDate"
+        />
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="endDate"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #endDate></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div class="form-row">
+      <app-loan-status-menu
+        *ngIf="enableStatusMenu()"
+        [statusMenus]="statusMenus"
+        (updateSelectedStatus)="updateSelectedStatus($event)"
+      ></app-loan-status-menu>
+    </div>
+  </form>
+  <div class="date-error">
+    <div *ngIf="form?.errors?.['dateRangeInvalid']">
+      End Date cannot be before Start Date.
+    </div>
+    <div *ngIf="form?.errors?.['dateExceedsThreeMonths']">
+      The date range cannot exceed 3 months.
+    </div>
+  </div>
+</div>
+<div mat-dialog-actions class="dialog-actions">
+  <div class="spacer"></div>
+  <button mat-button class="btn btn-secondary" (click)="onCancel()">
+    Cancel
+  </button>
+  <button
+    mat-button
+    class="btn btn-primary"
+    type="submit"
+    id="approve"
+    (click)="generateReport()"
+    [disabled]="form.invalid"
+  >
+    Generate Report
+  </button>
+</div>

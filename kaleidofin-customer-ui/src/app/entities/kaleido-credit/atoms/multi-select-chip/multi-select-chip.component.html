@@ -1,0 +1,13 @@
+<div *ngIf="chipContent">
+    <div class="chip-content-container">
+        <span class="chip-content">
+            {{ chipContent }}
+        </span>
+        <button class="close-icon" (click)="remove()" *ngIf="!hideClose"
+            tabindex="0" aria-label="Close"(keydown)="handleKeydown($event)">
+            <mat-icon>
+                close
+            </mat-icon>
+        </button>
+    </div>
+</div>

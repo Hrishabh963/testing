@@ -1,0 +1,18 @@
+<div class="user-profile-info-container">
+    <div class="headers-container">
+        <span class="profile-header">
+            Basic Details
+        </span>
+        <span class="profile-sub-header">
+            Your basic details are here
+        </span>
+    </div>
+    <div class="info">
+        <app-profile-info-card class="info-card" [label]="'Name'" [data]="userInfo.fullName">
+        </app-profile-info-card>
+        <app-profile-info-card class="info-card" [label]="'Email'" [data]="userInfo.email">
+        </app-profile-info-card>
+        <app-profile-info-card class="info-card" [label]="'Mobile No.'" [data]="userInfo.mobileNumber">
+        </app-profile-info-card>
+    </div>
+</div>

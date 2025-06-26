@@ -1,0 +1,12 @@
+<div class="card-title">
+    <div class="row row-spacing">
+        <div class="col-3">
+            <label class="form-control-label" jhiTranslate="kCredit.branchName" htmlFor="label-1">Branch Name</label>
+            <jhi-null-replace [value]="loanDetails?.branchDTO === null ? null : loanDetails?.branchDTO?.name"></jhi-null-replace>
+        </div>
+        <div class="col-3">
+            <label class="form-control-label" jhiTranslate="kCredit.villageOrWardName" htmlFor="label-2">Village/Ward Name</label>
+            <jhi-null-replace [value]="loanDetails?.centerDTO === null ? null : loanDetails?.centerDTO?.name"></jhi-null-replace>
+        </div>
+    </div>
+</div>

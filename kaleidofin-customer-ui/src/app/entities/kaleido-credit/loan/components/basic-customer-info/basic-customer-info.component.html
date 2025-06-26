@@ -1,0 +1,33 @@
+<mat-accordion>
+  <mat-expansion-panel [expanded]="panelOpenState" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+    <mat-expansion-panel-header>
+      <div class="expansion-panel-title-container">
+        <div class="section-title">Borrower Details</div>
+      </div>
+    </mat-expansion-panel-header>
+    <div class="borrower-details-container">
+      <app-applicant-details-kcpl [loanId]="loanId" [loanDetails]="loanDetails" [customer]="customer" [kycDetailsList]="kycDetailsList"
+        [familyDetailsList]="familyDetailsList" (reloadAfterSave)="reloadAfterSave.emit($event)"
+        [addressList]="addressList" [riskCategoryEnabled]="riskCategoryEnabledForApplicant">
+      </app-applicant-details-kcpl>
+      <jhi-co-applicants 
+        [coApplicants]="coApplicants"
+        [loanDetails]="loanDetails"
+        [loanId]="loanId"
+        [partnerId]="loanDetails.customerDTO.partnerId"
+        (reloadAfterSave)="reloadAfterSave.emit($event)"
+        [riskCategoryEnabled]="riskCategoryEnabledForCoApplicant"
+        [coApplicantKycDetails]="coApplicantKycDetails"
+      >
+      </jhi-co-applicants>
+      <jhi-guarantor
+        [loanDetails]="loanDetails"
+        [loanId]="loanId"
+        [partnerId]="loanDetails.customerDTO.partnerId"
+        [riskCategoryEnabled]="riskCategoryEnabledForGuarantor"
+        [coApplicantKycDetails]="coApplicantKycDetails"
+      >
+      </jhi-guarantor>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>

@@ -1,0 +1,20 @@
+<div style="margin-top: 2em;">
+  <mat-accordion>
+    <mat-expansion-panel [expanded]="panelOpenState" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+      <mat-expansion-panel-header>
+        <h1 class="section-sub-heading" style="color: #0F547E; font-size: 1.6em;">Co-applicant</h1>
+      </mat-expansion-panel-header>
+      <div>
+        <form name="coApplicantDetailForm" novalidate #coApplicantDetailForm="ngForm">
+          <div *ngFor="let coApplicant of coApplicants; let i = index" class="card-title">
+            <app-co-applicant-details [coApplicant]="coApplicant"
+              [title]="'Co-applicant ' + (i + 1)"[loanId]="loanId"
+              [loanDetails]="loanDetails" [riskCategoryEnabled]="riskCategoryEnabled">
+            </app-co-applicant-details>
+            <span *ngIf="!coApplicants.length">--</span>
+          </div>
+        </form>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

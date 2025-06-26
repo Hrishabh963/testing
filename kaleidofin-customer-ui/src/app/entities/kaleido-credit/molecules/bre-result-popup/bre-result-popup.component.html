@@ -1,0 +1,22 @@
+<div>
+    <div class="modal-header">
+        <h1>
+            Recalculated BRE - Alert
+        </h1>
+        <button (click)="closePopup()" class="popup-close-icon">
+            <mat-icon>close</mat-icon>
+        </button>
+    </div>
+    <div class="result-container">
+        <div class="icon-description-container">
+            <img [src]="breResult[decision]?.icon || '/assets/images/BRE/recalculate-result-fail.svg'" [alt]="decision">
+            <div class="description">
+                <span>BRE Decision - {{decision}}</span>
+                <span> {{breResult[decision]?.description}} </span>
+            </div>
+        </div>
+        <div class="close-button-container">
+            <button mat-flat-button (click)="closePopup()" class="popup-close-button"> Ok </button>
+        </div>
+    </div>
+</div>

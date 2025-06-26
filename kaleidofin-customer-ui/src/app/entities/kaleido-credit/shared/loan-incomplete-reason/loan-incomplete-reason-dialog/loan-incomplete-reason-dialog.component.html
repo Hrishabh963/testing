@@ -1,0 +1,53 @@
+
+  <div mat-dialog-title class="dialog-title">
+    <div class="reason-title">Reason for incomplete</div>
+    <mat-icon (click)="cancel()" tabindex="0" (keypress)="cancel()">close</mat-icon>
+  </div>
+  <div mat-dialog-content class="dialog-content-text">
+    <div
+      class="reason"
+      *ngIf="!incompleteReasons.length && !missingRequiredDocuments.length"
+    >
+      No Incomplete Reasons
+    </div>
+    <span *ngIf="incompleteReasons.length">
+      <div class="reason reason-title">Invalid Fields</div>
+      <div
+        class="reason"
+        *ngFor="let reason of incompleteReasons; let index = index"
+        [id]="index"
+        [ngClass]="{ 'reason-border': incompleteReasons.length > 1 && !last }"
+      >
+        <span class="material-icons close-icon"> highlight_off </span>
+        &nbsp; &nbsp;
+        <span>{{ reason }}</span>
+      </div>
+    </span>
+    <span *ngIf="missingRequiredDocuments.length">
+      <div class="reason reason-title">Missing Required Documents</div>
+      <div
+        class="reason"
+        *ngFor="let missingDocs of missingRequiredDocuments; let index = index"
+        [id]="index"
+        [ngClass]="{
+          'reason-border': missingRequiredDocuments.length > 1 && !last
+        }"
+      >
+        <span class="material-icons close-icon"> highlight_off </span>
+        &nbsp; &nbsp;
+        <span>{{ missingDocs }}</span>
+      </div></span
+    >
+  </div>
+  <div mat-dialog-actions class="action-buttons">
+    <button
+      mat-button
+      class="btn-primary"
+      [hidden]="!authority?.copy"
+      [disabled]="incompleteReasons.length == 0 && missingRequiredDocuments.length == 0"
+      (click)="copy()"
+    >
+      Copy
+    </button>
+    <button mat-button class="mat-btn-danger" (click)="cancel()">Cancel</button>
+  </div>

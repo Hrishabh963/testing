@@ -1,0 +1,57 @@
+<div class="notification-container">
+  <mat-accordion *ngIf="remarks" class="notification-accordion">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <div class="notification-panel-image">
+          <img
+            src="assets/images/common/notification.svg"
+            alt="close"
+            class="notification-image"
+          />
+        </div>
+        <div class="notification-header">
+          <div class="notification-body">
+            <div *ngIf="notificationHeader" class="header">
+              {{notificationHeader}}
+            </div>
+            <div *ngIf="reviewDateTime" class="date-and-time">
+              {{reviewDateTime}}
+            </div>
+          </div>
+          <div class="notification-header-button">
+            <button class="copy-button btn btn-primary" (click)="copyToClipboard($event)">
+              Copy
+            </button>
+          </div>
+        </div>
+      </mat-expansion-panel-header>
+      <div class="reasons-body">
+        <div *ngIf="!!reasonType" class="comment-header">
+          Category of reasons
+        </div>
+        <div *ngIf="!!reasonType" class="comment">{{reasonType}}</div>
+
+        <div *ngIf="!!reason" class="comment-header">Remarks</div>
+        <div *ngIf="!!reason" class="comment">{{reason}}</div>
+
+        <div *ngIf="!!actionRequired && actionRequired!=='Null'" class="comment-header">
+          Required action
+        </div>
+        <div *ngIf="!!actionRequired && actionRequired!=='Null'" class="comment">{{actionRequired}}</div>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <div *ngIf="notification" class="review-notification">
+    <img
+      src="assets/images/common/notification.svg"
+      alt="close"
+      class="notification-image"
+    />
+    <div class="review-notification-body">
+      <div *ngIf="notification" class="notification">{{notification}}</div>
+      <button class="copy-button btn btn-primary" (click)="copyToClipboard($event)">
+        Copy
+      </button>
+    </div>
+  </div>
+</div>

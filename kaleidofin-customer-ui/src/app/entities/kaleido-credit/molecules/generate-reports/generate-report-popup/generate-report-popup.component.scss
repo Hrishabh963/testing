@@ -1,0 +1,47 @@
+.mat-dialog-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--kcredit-notification-details-text);
+  font-size: 18px;
+
+}
+.mat-dialog-title > span {
+  font-size: 20px;
+}
+.form-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+
+  mat-form-field {
+    width: 30%;
+  }
+
+  .date-picker-group {
+    display: flex;
+    align-items: center;
+
+    mat-form-field {
+      margin-right: 16px; /* Adjust the margin as needed */
+    }
+  }
+}
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.dialog-actions .spacer {
+  flex-grow: 1;
+}
+
+.dialog-actions button {
+  min-width: 120px; /* Adjust the button width as needed */
+}
+
+.dialog-actions button.mat-button {
+  margin-left: 8px; /* Add some spacing between buttons */
+}

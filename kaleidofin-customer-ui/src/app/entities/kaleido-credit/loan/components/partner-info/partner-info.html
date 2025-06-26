@@ -1,0 +1,28 @@
+<div class="card-title">
+  <form name="partner" novalidate #editForm="ngForm">
+    <div class="card-body">
+      <div class="card-title">
+        <div class="row row-spacing">
+          <div class="form-group col-md-3">
+            <label
+              class="form-control-label"
+              jhiTranslate="kCredit.partnerInfo.code"
+              for="field_code"
+              >Partner Code</label
+            >
+            <jhi-null-replace [value]="partner.code"></jhi-null-replace>
+          </div>
+          <div class="form-group col-md-3">
+            <label
+              class="form-control-label"
+              jhiTranslate="kCredit.partnerInfo.name"
+              for="field_name"
+              >Partner Name</label
+            >
+            <jhi-null-replace [value]="partner.name"></jhi-null-replace>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

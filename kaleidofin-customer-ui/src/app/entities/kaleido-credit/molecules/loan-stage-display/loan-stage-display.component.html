@@ -1,0 +1,19 @@
+<mat-nav-list class="list-horizontal">
+  <a
+    mat-list-item
+    routerLinkActive="active"
+    *ngFor="let item of data; let i = index"
+    (click)="onApplicationStateSelection(item, i)"
+    [class.active]="selectedIndex === i"
+    class="status-container"
+  >
+    <span
+      [ngClass]="[selectedIndex === i ? 'active' : '']"
+      class="status-container"
+    >
+      {{ item?.label }}
+      <span class="dot"> &middot;</span>
+      {{ item?.count | async }}
+    </span>
+  </a>
+</mat-nav-list>

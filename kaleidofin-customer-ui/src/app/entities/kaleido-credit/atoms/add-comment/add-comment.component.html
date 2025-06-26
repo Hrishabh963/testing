@@ -1,0 +1,38 @@
+<div class="comment-container" *ngIf="validateAddCommentAuthority">
+  <div>
+    <mat-avatar class="mat-avatar">
+      {{ userName }}
+    </mat-avatar>
+  </div>
+
+  <div class="add-comment" >
+    <div class="text-area-container">
+      <mat-form-field appearance="fill" class="mat-form-field">
+        <textarea
+          matInput
+          rows="3"
+          placeholder="Add a comment..."
+          [(ngModel)]="comment"
+        ></textarea>
+        <button mat-button class="upload-button" *ngIf="!editComment" (click)="uploadDocuments()">Upload</button>
+      </mat-form-field>
+      <div *ngIf="selectedDocuments?.length">
+        <div style="padding-bottom: 15px;"> Selected Documents : </div>
+        <div class="single-file" >
+            <div class="common-flex-container doc-container" *ngFor="let file of selectedDocuments; let i = index">
+              <div class="file-icon">
+                <img [src]="file.fileUrl" alt="Doc"class="image-default-style" />
+              </div>
+              <p class="name">
+                {{ file?.name }}
+              </p>
+            </div>
+          </div>
+      </div>
+    </div>
+    <div class="submit-container" >
+        <button mat-button class="btn btn-primary" (click)="addComment()" [disabled]="!comment">Save</button>
+        <button mat-button class="btn btn-secondary" (click)="cancel()" *ngIf="comment || selectedDocuments?.length || showCancel">Cancel</button>
+    </div>
+  </div>
+</div>

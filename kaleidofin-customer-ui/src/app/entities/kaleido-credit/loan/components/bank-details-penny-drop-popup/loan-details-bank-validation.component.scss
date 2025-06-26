@@ -1,0 +1,30 @@
+.flex-container {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+  gap: 1rem;
+  padding-top: 1rem;
+}
+
+.logo {
+  width: 8rem;
+}
+.icon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: row-reverse;
+}
+.progress-container {
+  display: flex;
+}
+.pending-reject-container {
+  display: flex;
+}
+.success-conatiner {
+  padding: 0 1rem;
+}
+
+.bank-icon-conatiner {
+  display: flex;
+}

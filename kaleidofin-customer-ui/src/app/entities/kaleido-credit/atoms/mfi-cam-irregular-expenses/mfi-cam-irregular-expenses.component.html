@@ -1,0 +1,21 @@
+<div class="table-container">
+    <table>
+        <caption></caption>
+        <thead>
+            <tr>
+                <th class="table-heading" [colSpan]="reportData?.otherYearlyIncome?.length + 1"> Irregular Expenses
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let row of tableRow; let index = index">
+                <tr>
+                    <td [class]="'row-' + (1 - index % 2)" class="table-span table-span-overall"> {{ row?.title }} </td>
+                    <td [class]="'row-' + (1 - index % 2)" [colSpan]="reportData?.otherYearlyIncome?.length"
+                        class="table-span table-span-overall"><jhi-null-replace
+                            [value]="irregularExpenses[row?.propertyKey] | dynamicDataTransform : row?.pipe"></jhi-null-replace> </td>
+                </tr>
+            </ng-container>
+        </tbody>
+    </table>
+</div>

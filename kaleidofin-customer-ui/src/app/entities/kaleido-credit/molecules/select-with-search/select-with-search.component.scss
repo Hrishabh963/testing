@@ -1,0 +1,134 @@
+.mat-form-field {
+  border-radius: 10px;
+  background-color: #f5f6fc;
+  min-height: 3.5rem;
+  max-height: fit-content;
+  width: 100%;
+}
+
+::ng-deep .select-field {
+  left: 3rem;
+  position: absolute;
+  top: 4em;
+  min-width: 100%;
+}
+::ng-deep .mat-select-panel {
+  background-color: #f5f6fc;
+  min-width: 100% !important;
+  max-height: 50vh;
+}
+
+.select-field .mat-select-panel {
+  height: 20rem !important;
+  width: 20rem !important;
+}
+
+::ng-deep .select-field .mat-option-text {
+  font-size: 1.1rem !important;
+  color: #496684;
+  word-spacing: 0.2rem;
+}
+
+::ng-deep .select-block .mat-form-field-underline,
+::ng-deep .search-block .mat-form-field-underline {
+  display: none;
+}
+
+::ng-deep .select-field .mat-select-min-line {
+  padding-left: 1rem;
+}
+
+.select-block {
+  padding-bottom: 1rem;
+}
+
+.search-block {
+  padding: 1.6rem;
+}
+
+.search-block .mat-form-field {
+  width: 33rem;
+  height: 46px;
+  border-radius: 10px;
+  border: 1px solid #e8e8e8;
+  background: #fff;
+  min-height: 4rem !important;
+}
+
+.icon {
+  font-size: 2rem;
+  padding-right: 3rem;
+  color: grey;
+}
+
+.select-placeholder {
+  font-size: 1rem;
+  color: #38526c;
+  padding-left: 1rem;
+}
+
+.mat-focused .select-placeholder {
+  padding: auto;
+}
+
+.search-placeholder {
+  padding-left: 1rem;
+}
+
+.mat-focused .search-placeholder {
+  display: none;
+}
+
+input.mat-input-element {
+  padding-left: 1rem;
+}
+
+.option-field {
+  padding-left: 2rem;
+}
+
+::ng-deep .select-block .mat-select-trigger {
+  height: fit-content !important;
+}
+
+::ng-deep .select-field .mat-pseudo-checkbox {
+  border-radius: 3px !important;
+  height: 18px !important;
+  width: 18px !important;
+  color: #496684;
+}
+
+.chip-container {
+  display: flex;
+  justify-content: space-between;
+  flex-flow: row wrap;
+  gap: 0.5rem;
+  padding: 2rem 1rem 0 1rem;
+  background: none;
+  border: none;
+  cursor: default;
+  height: 7rem;
+  overflow-y: auto;
+  margin-top: 1.5rem;
+}
+
+.chip-container:focus {
+  background: none;
+  outline: none;
+}
+
+::ng-deep .select-block .mat-select-arrow-wrapper {
+  align-self: first baseline;
+  margin-right: 1rem;
+}
+
+::ng-deep .select-block .mat-form-field-label {
+  transform: translateY(-0.28125em) translateX(0.3em) scale(1)
+    perspective(100px) translateZ(0.001px) !important;
+  width: 41% !important;
+  top: 1.81em;
+}
+.option-container {
+  max-height: 10rem;
+  overflow-y: auto;
+}

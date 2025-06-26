@@ -1,0 +1,40 @@
+.status-container {
+  display: flex;
+  align-items: center;
+
+  .status-icon {
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+  }
+
+  &.Active, &.active, &.ACTIVE {
+    color: #219653;
+  }
+
+  &.Inactive, &.inactive, &.INACTIVE {
+    color: #96aabd;
+  }
+
+  &.Locked, &.locked, &.LOCKED {
+    color: #edbc2c;
+  }
+
+  &.Suspended, &.suspended, &.SUSPENDED {
+    color: #ff5d24;
+  }
+
+  &.Deleted, &.DELETED, &.deleted {
+    color: #b03a3c;
+  }
+}
+
+::ng-deep .custom-tool-tip {
+  background: #ffffff !important;
+  color: #38526c !important;
+  padding: 1.2em !important;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.1);
+  border: 1px solid #eef1f4;
+  font-size: 1em !important;
+  font-weight: normal !important;
+}

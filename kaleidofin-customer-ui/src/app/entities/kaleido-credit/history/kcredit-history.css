@@ -1,0 +1,35 @@
+
+  .horizontal-mat-list-item {
+    float: right;
+    display: list-item;
+    content: " > ";
+    }
+  .inline-list {
+      display: flex;
+      content: " > ";
+  }
+
+  span.active {
+    user-select: black;
+    color:orangered;
+    font-weight:bold;
+  }
+  
+  
+  mat-nav-list.list-horizontal {
+    padding: 0;
+    content: " > ";
+    background-color: none;
+  }
+  mat-nav-list.list-horizontal .mat-list-item {
+    display: inline-block;
+    height: 50px;
+    width: auto;
+    content: " > ";
+  
+  }
+  
+  a.active {
+    background-color: rgb(240, 173, 149);
+  }
+  

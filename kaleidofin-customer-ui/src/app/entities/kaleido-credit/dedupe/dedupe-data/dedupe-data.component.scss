@@ -1,0 +1,40 @@
+table {
+  width: 95%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 1.3em;
+  text-align: center;
+}
+
+th.small-width,
+td.small-width {
+  width: 50px;
+}
+
+.mat-column-select {
+  width: 50px;
+}
+.mat-column-name {
+  width: 150px;
+}
+
+.button-container {
+  justify-content: flex-start;
+}
+
+.button-container button {
+  width: 15em;
+}
+
+.result-display {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8em;
+  margin-bottom: 1em;
+  .result-text {
+    color: red;
+  }
+}

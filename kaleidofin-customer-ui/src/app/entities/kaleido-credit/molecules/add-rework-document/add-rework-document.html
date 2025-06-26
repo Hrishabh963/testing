@@ -1,0 +1,51 @@
+<div class="row custom-row">
+  <div class="flex-item">
+    <mat-form-field
+      id="userType"
+      appearance="fill"
+      class="custom-mat-form-field"
+    >
+      <mat-label>Document belongs to</mat-label>
+      <mat-select
+        [(value)]="currentOwner"
+        (selectionChange)="updateDocs($event.value)"
+      >
+        <mat-option *ngFor="let user of ownersList" [value]="user">
+          {{ user.viewValue }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="flex-item">
+    <mat-form-field
+      id="docCategory"
+      appearance="fill"
+      class="custom-mat-form-field"
+    >
+      <mat-label>Document Type</mat-label>
+      <mat-select
+        [(value)]="currentDocument"
+        (selectionChange)="recordDoc($event.value)"
+      >
+        <mat-option *ngFor="let doc of documents" [value]="doc">
+          {{ doc.document }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div *ngIf="type !== 'rework'" class="flex-item remarks-field">
+    <mat-form-field appearance="fill" class="custom-mat-form-field">
+      <mat-label class="asterix">Remarks</mat-label>
+      <textarea
+        matInput
+        cdkAutosizeMinRows="1"
+        cdkAutosizeMaxRows="1"
+        maxlength="50"
+        rows="1"
+        name="remarks"
+        [(ngModel)]="remarks"
+        (input)="recordRemarks($event.target.value)"
+      ></textarea>
+    </mat-form-field>
+  </div>
+</div>

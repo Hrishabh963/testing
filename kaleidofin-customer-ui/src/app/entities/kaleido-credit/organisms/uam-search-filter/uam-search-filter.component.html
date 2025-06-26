@@ -1,0 +1,25 @@
+<div class="search-filter-container">
+    <button mat-icon-button *ngIf="!enableSearch" (click)="toggleSearch()"> <mat-icon> search </mat-icon> </button>
+    <mat-form-field *ngIf="enableSearch" appearance="fill">
+        <input matInput [formControl]="inputForm" (keyup)="onKeyUp($event)" />
+    <button matSuffix mat-icon-button (click)="toggleSearch()"> <mat-icon>close</mat-icon> </button>
+    </mat-form-field>
+    <button mat-icon-button [matMenuTriggerFor]="filterList"> <mat-icon>filter_list_alt</mat-icon> </button>
+    <mat-menu #filterList="matMenu" (closed)="onMenuClose()">
+        <div (click)="$event.stopPropagation()">
+            <h5>Filter By</h5>
+            <h5>Role type</h5>
+            <mat-selection-list class="selection-list" [(ngModel)]="userSearchDto.roles">
+                <mat-list-option [checkboxPosition]="'before'" *ngFor="let role of roleTypeOptions" [value]="role?.value">
+                    {{role?.label}}
+                </mat-list-option>
+            </mat-selection-list>
+            <h5>Status</h5>
+            <mat-selection-list class="selection-list" [(ngModel)]="userSearchDto.status">
+                <mat-list-option [checkboxPosition]="'before'" *ngFor="let status of statusType" [value]="status?.value">
+                    {{status?.label}}
+                </mat-list-option>
+            </mat-selection-list>
+        </div>
+    </mat-menu>
+</div>

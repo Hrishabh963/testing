@@ -1,0 +1,18 @@
+<div>
+    <div *ngFor="let number of docsArray" class="doc-wrapper" >
+      <div *ngIf="number"  class="doc-container">
+        <add-rework-document
+          [docId]="number"
+          [ownersList]="userTypeList"
+          [type]="type"
+          (documentUpdate)="onDocumentUpdate($event)">
+        </add-rework-document>
+      </div>
+      <button (click)="removeDocument(number)" class="icon-button">
+        <img src="assets/images/common/delete.svg" alt="Add Document">
+      </button>
+      <button (click)="addDocument()" class="icon-button">
+        <img src="assets/images/common/add.svg" alt="Add Document">
+      </button>
+  </div>
+</div>

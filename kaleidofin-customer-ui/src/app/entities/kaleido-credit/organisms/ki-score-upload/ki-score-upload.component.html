@@ -1,0 +1,183 @@
+<div style="margin: auto 1rem auto 8rem">
+  <div class="header">
+    <h3 class="screen-title">Customer ki score</h3>
+    <div>
+      <button
+        *ngIf="hadKiscoreData"
+        mat-raised-button
+        color="primary"
+        class="btn-primary"
+        (click)="openKiScoreUploads($event)"
+      >
+        Upload Customers for Scoring
+      </button>
+    </div>
+  </div>
+  <div *ngIf="!hadKiscoreData">
+    <app-upload-kiscore-file
+      (fetchKiscore)="fetchCustomerKiscore()"
+    ></app-upload-kiscore-file>
+  </div>
+  <div *ngIf="hadKiscoreData">
+    <table
+      mat-table
+      [dataSource]="dataSource"
+      class="mat-elevation-z8 custom-table"
+    >
+      <ng-container matColumnDef="uploadedDate">
+        <th mat-header-cell *matHeaderCellDef class="uploaded-date-col">
+          Uploaded Date
+        </th>
+        <td mat-cell *matCellDef="let element" class="uploaded-date-col">
+          {{ element.uploadedDate | date : "dd MMM YYYY, HH:mm" }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="fileName">
+        <th mat-header-cell *matHeaderCellDef class="file-name-col">
+          File name
+        </th>
+        <td mat-cell *matCellDef="let element" class="file-name-col">
+          {{ element.id }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="reportType">
+        <th mat-header-cell *matHeaderCellDef class="report-type-col">
+          Report type
+        </th>
+        <td mat-cell *matCellDef="let element" class="report-type-col">
+          {{ element.reportType }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="kiScored">
+        <th mat-header-cell *matHeaderCellDef class="ki-scored-col">
+          ki scored/Uploaded
+        </th>
+        <td
+          mat-cell
+          *matCellDef="let element"
+          class="ki-scored-col"
+          [ngClass]="{ 'in-progress': element.inProgress }"
+        >
+          <div
+            [ngClass]="['kiscore-upload-status', element.status]"
+            *ngIf="element.status !== 'SUCCESS'"
+          >
+            {{ statusMapper[element.status] }}
+            <br />
+            <div class="info-text">{{ element.statusMessage }}</div>
+          </div>
+          <div
+            class="kiscore-upload-status"
+            *ngIf="element.status === 'SUCCESS'"
+          >
+            {{ element.kiScored }}/{{ element.uploaded }} <br />
+            <div class="info-text">{{ element.statusMessage }}</div>
+          </div>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="approved">
+        <th mat-header-cell *matHeaderCellDef class="approved-col">Approved</th>
+        <td
+          mat-cell
+          *matCellDef="let element"
+          class="approved-col"
+          [ngStyle]="{ color: 'green' }"
+        >
+          {{ element.approved }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="rejected">
+        <th mat-header-cell *matHeaderCellDef class="rejected-col">Rejected</th>
+        <td
+          mat-cell
+          *matCellDef="let element"
+          class="rejected-col"
+          [ngStyle]="{ color: 'red' }"
+        >
+          {{ element.rejected }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="actions">
+        <th mat-header-cell *matHeaderCellDef class="actions-col">Actions</th>
+        <td mat-cell *matCellDef="let element" class="actions-col">
+          <div class="action-btn-container">
+            <button mat-button color="primary" (click)="viewData(element)">
+              View data
+            </button>
+
+            <button
+              mat-button
+              color="primary"
+              class="generate-button"
+              (click)="generateReport(element)"
+              *ngIf="element?.reportStatus === null"
+            >
+              <img src="assets/images/common/rotation.svg" alt="" />
+              Generate Report
+            </button>
+            <div
+              class="download-container"
+              *ngIf="['SUCCESS', 'FAILED'].includes(element?.reportStatus)"
+            >
+              <button
+                mat-button
+                color="primary"
+                (click)="downloadReport(element)"
+              >
+                <mat-icon color="primary">save_alt</mat-icon>
+                Download
+              </button>
+              <mat-icon
+                [matMenuTriggerFor]="menu"
+                style="color: var(--kcredit-text-light)"
+                >more_vert</mat-icon
+              >
+              <mat-menu #menu="matMenu">
+                <div
+                  mat-menu-item
+                  color="primary"
+                  (click)="generateReport(element)"
+                  onkeydown=""
+                >
+                  Regenerate Report
+                </div>
+              </mat-menu>
+            </div>
+            <div
+              [class]="element?.reportStatus"
+              *ngIf="
+                ['SCHEDULED', 'IN_PROGRESS'].includes(element?.reportStatus)
+              "
+            >
+              Generating...
+            </div>
+          </div>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+    <mat-paginator
+      *ngIf="totalItems !== 0"
+      [pageSize]="itemsPerPage"
+      [length]="totalItems"
+      [showFirstLastButtons]="true"
+      [pageIndex]="page"
+      (page)="onLoadPage($event)"
+      [showPageSizeOptions]="false"
+      [hidePageSize]="true"
+    ></mat-paginator>
+    <div *ngIf="totalItems === 0">
+      <hr />
+      <h3 class="text-center kcredit-failure-color">
+        No ki score reports found
+      </h3>
+    </div>
+  </div>
+</div>

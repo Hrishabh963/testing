@@ -1,0 +1,25 @@
+<div>
+  <div class="section-title subtitle">
+    {{ index + 1 }}. &nbsp; Bank Funding Calculation
+  </div>
+  <div class="section-container">
+    <app-cams-section
+      *ngIf="reportData?.tractorInformationList"
+      [title]="tractorDetails?.title"
+      [tableMap]="tractorDetails?.tableMap"
+      [reportData]="reportData?.tractorInformationList"
+    ></app-cams-section>
+    <app-cams-section
+      *ngIf="reportData?.fundingDetails"
+      [title]="fundingDetails?.title"
+      [tableMap]="fundingDetails?.tableMap"
+      [reportData]="reportData?.fundingDetails"
+    ></app-cams-section>
+    <app-cams-section
+      *ngIf="reportData?.usedTractorBankFundingCalculationDto"
+      [title]="bankFundingDetails?.title"
+      [tableMap]="bankFundingDetails?.tableMap"
+      [reportData]="reportData?.usedTractorBankFundingCalculationDto"
+    ></app-cams-section>
+  </div>
+</div>

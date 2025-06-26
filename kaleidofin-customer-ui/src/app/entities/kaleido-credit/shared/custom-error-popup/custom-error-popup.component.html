@@ -1,0 +1,24 @@
+<div class="dialog-container">
+  <div mat-dialog-title class="dialog-title">
+    <div>Status</div>
+    <mat-icon class="closeicon" (click)="cancel()" tabindex="0" (keypress)="cancel()">close</mat-icon>
+  </div>
+  <div mat-dialog-content class="dialog-content-text flex-center-align">
+    <img *ngIf='!errors' src="assets/images/common/upload-success.svg" alt="Success" />
+    <img *ngIf='errors' class="error-icon" src="assets/images/common/close-circle.svg" alt="Error" />
+    &nbsp;
+    <p>{{ description }}</p>
+  </div>
+  <div mat-dialog-actions>
+    <div class="action-buttons">
+      <button
+        mat-button
+        class="btn-primary proceed"
+        cdkFocusInitial
+        (click)="proceed()"
+      >
+        Ok
+      </button>
+    </div>
+  </div>
+</div>

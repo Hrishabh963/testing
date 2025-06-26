@@ -1,0 +1,83 @@
+<div>
+  <div class="sub-heading-container">
+    <div class="section-title">ki score</div>
+    <div class="ki-score-button-container">
+      <button
+        mat-raised-button
+        type="button"
+        class="btn-primary"
+        [disabled]="disableKiScoreRetryEligibility"
+        (click)="retryKiScore()"
+      >
+        <span>Retry ki score</span>
+      </button>
+      <button
+        mat-raised-button
+        type="button"
+        class="btn-primary"
+        [disabled]="hideKiScoreReport"
+        (click)="openKiScoreReport()"
+      >
+        <span>View Report</span>
+      </button>
+    </div>
+  </div>
+  <br />
+  <div class="row">
+    <div class="col-md-3">
+      <label class="form-control-label" htmlFor="label-1">Actual Value </label>
+      <jhi-null-replace
+        [value]="kiScoreReport?.kiScoreValue"
+      ></jhi-null-replace>
+    </div>
+    <div class="col-md-3">
+      <label class="form-control-label" htmlFor="label-2">Cut off Value </label>
+      <jhi-null-replace
+        [value]="kiScoreReport?.kiScoreCutOffValue"
+      ></jhi-null-replace>
+    </div>
+    <div class="col-md-3">
+      <label class="form-control-label" htmlFor="label-3">Result </label>
+      <jhi-null-replace
+        [ngClass]="VIEW_MAPPER[kiScoreReport?.kiScoreDecision]"
+        [value]="VIEW_MAPPER[kiScoreReport?.kiScoreDecision]"
+      ></jhi-null-replace>
+    </div>
+    <div class="col-md-3">
+      <label class="form-control-label" htmlFor="label-3">CB Date</label>
+      <jhi-null-replace
+        [value]="kiScoreReport?.cbFetchedDate"
+      ></jhi-null-replace>
+      <div
+        *ngIf="kiScoreReport?.cbFetchedDate"
+        [class]="'report-expiry-day ' + kiScoreReport?.formattedCbDateClass"
+      >
+        {{ kiScoreReport?.formattedCbDate + " days ago" }}
+      </div>
+    </div>
+  </div>
+  <br />
+  <div class="row">
+    <div class="col-md-3">
+      <label class="form-control-label" htmlFor="label-3">ki score Date </label>
+      <jhi-null-replace
+        [value]="kiScoreReport?.kiscoredDate"
+      ></jhi-null-replace>
+      <div
+        *ngIf="kiScoreReport?.kiscoredDate"
+        [class]="
+          'report-expiry-day ' + kiScoreReport?.formattedKiScoreDateClass
+        "
+      >
+        {{ kiScoreReport?.formattedKiScoreDate + " days ago" }}
+      </div>
+    </div>
+
+    <div class="col-md-4" *ngIf="kiScoreReport?.kiScoreDecision === 'ERROR'">
+      <label class="form-control-label" htmlFor="label-4">Error Message</label>
+      <jhi-null-replace
+        [value]="kiScoreReport?.errorMessage"
+      ></jhi-null-replace>
+    </div>
+  </div>
+</div>

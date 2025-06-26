@@ -1,0 +1,17 @@
+<mat-accordion>
+    <mat-expansion-panel [expanded]="panelOpenState" (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+        <mat-expansion-panel-header>
+            <div class="expansion-panel-title-container">
+                <div class="section-title">Nominee Details</div>
+            </div>
+        </mat-expansion-panel-header>
+        <ng-container *ngIf="uiFieldsMap.length > 0">
+            <ng-container *ngFor="let nomineeInfo of uiFields; let index = index">
+                <app-dynamic-render-component [title]="'Nominee ' + (index + 1)" [uiFields]="nomineeInfo?.fields"
+                    [uiFieldsMap]="uiFieldsMap" [isSubHeading]="true" [loanId]="loanId"
+                    [editSections]="editSections" [payloadType]="'array'" [uiApiKey]="'NOMINEE_DETAILS'"></app-dynamic-render-component>
+                <hr class="section-h4">
+            </ng-container>
+        </ng-container>
+    </mat-expansion-panel>
+</mat-accordion>

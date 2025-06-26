@@ -1,0 +1,40 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit(true)">
+  <div class="flex-content search-container">
+    <mat-icon>search</mat-icon>
+    <div
+      class="editor-tag"
+      (click)="focusTagInput()"
+      (keypress)="focusTagInput()"
+    >
+      <span class="tag-item" *ngFor="let tag of tags">
+        {{ tag }}
+        <span
+          class="remove-tag"
+          (click)="removeTag(tag)"
+          (keypress)="removeTag(tag)"
+          >×</span
+        >
+      </span>
+      <input
+        placeholder="{{ placeholder }}"
+        #tagInput
+        type="text"
+        class="input-tag search-text"
+        (keyup)="onKeyUp($event)"
+        formControlName="tag"
+      />
+    </div>
+    <div class="search-button-container">
+      <button
+        type="button"
+        *ngIf="tags?.length"
+        class="fa fa-times button-close"
+        (click)="removeAllTag()"
+        title="clear all"
+      ></button>
+      <div class="search-button">
+        <button mat-button color="primary" type="submit">Search</button>
+      </div>
+    </div>
+  </div>
+</form>

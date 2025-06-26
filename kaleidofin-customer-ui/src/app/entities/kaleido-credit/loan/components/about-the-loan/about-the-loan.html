@@ -1,0 +1,344 @@
+<mat-accordion>
+  <mat-expansion-panel
+    [expanded]="panelOpenState"
+    (opened)="panelOpenState = true"
+    (closed)="panelOpenState = false"
+  >
+    <mat-expansion-panel-header>
+      <div class="expansion-panel-title-container">
+        <div class="section-title">About the Loan</div>
+        <app-section-edit-action
+          (onCancelHandler)="cancel($event)"
+          (onSaveHandler)="save($event)"
+          [panelOpenState]="panelOpenState"
+          [isEditing]="isEditing"
+          (onEditHandler)="toggleEditDetails($event)"
+        ></app-section-edit-action>
+      </div>
+    </mat-expansion-panel-header>
+
+    <div class="card-title">
+      <form name="aboutTheLoan" novalidate #editForm="ngForm">
+        <div class="card-body">
+          <div class="card-title">
+            <div class="row row-spacing">
+              <div class="form-group col-md-3">
+                <div [hidden]="!isEditing">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Loan Amount</mat-label>
+                    <input
+                      matInput
+                      type="number"
+                      name="name"
+                      id="field_loanAmount"
+                      [(ngModel)]="loanApplication.loanAmount"
+                      pattern="^[0-9]+$"
+                    />
+                  </mat-form-field>
+                </div>
+                <div [hidden]="isEditing">
+                  <label
+                    class="form-control-label"
+                    jhiTranslate="kCredit.loan.loanAmount"
+                    for="field_loanAmount"
+                    >Loan Amount</label
+                  >
+                  <jhi-null-replace
+                    [value]="loanApplication.loanAmount"
+                  ></jhi-null-replace>
+                </div>
+              </div>
+              <div class="form-group col-md-3">
+                <div [hidden]="!isEditing">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Purpose</mat-label>
+                    <input
+                      matInput
+                      type="text"
+                      name="purpose"
+                      id="field_purpose"
+                      [(ngModel)]="loanApplication.purpose"
+                    />
+                  </mat-form-field>
+                </div>
+                <div [hidden]="isEditing">
+                  <label
+                    class="form-control-label"
+                    jhiTranslate="kCredit.loan.purpose"
+                    for="field_purpose"
+                    >Purpose</label
+                  >
+                  <jhi-null-replace
+                    [value]="loanApplication.purpose"
+                  ></jhi-null-replace>
+                </div>
+              </div>
+              <div class="form-group col-md-3">
+                <div [hidden]="!isEditing">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Subsector Code</mat-label>
+                    <input
+                      matInput
+                      type="number"
+                      name="vehicles"
+                      id="field_subsector_code"
+                      [(ngModel)]="loanApplication.subsectorCode"
+                      pattern="^[0-9]+$"
+                    />
+                  </mat-form-field>
+                </div>
+                <div [hidden]="isEditing">
+                  <label
+                    class="form-control-label"
+                    jhiTranslate="kCredit.loan.subsectorCode"
+                    for="field_subsector_code"
+                    >Subsector Code</label
+                  >
+                  <jhi-null-replace
+                    [value]="loanApplication.subsectorCode"
+                  ></jhi-null-replace>
+                </div>
+              </div>
+              <div class="form-group col-md-3">
+                <label
+                  class="form-control-label"
+                  jhiTranslate="kCredit.loan.firstTimeLoan"
+                  for="first_time_loan"
+                  >First Time Loan</label
+                >
+
+                <div [hidden]="!isEditing">
+                  <mat-checkbox
+                    [disabled]="!isEditing"
+                    name="first_time_loan"
+                    [(ngModel)]="loanApplication.isFirstTimeLoan"
+                  >
+                  </mat-checkbox>
+                </div>
+                <div [hidden]="isEditing">
+                  <jhi-null-replace
+                    [value]="loanApplication.isFirstTimeLoan"
+                    inputType="checkbox"
+                  ></jhi-null-replace>
+                </div>
+              </div>
+            </div>
+            <div class="row row-spacing">
+              <div class="form-group col-md-3">
+                <div [hidden]="!isEditing">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Loan Tenure</mat-label>
+                    <input
+                      matInput
+                      [disabled]="!isEditing"
+                      type="number"
+                      name="loan_tenure"
+                      id="field_loan_tenure"
+                      [(ngModel)]="loanApplication.loanTenure"
+                      pattern="^[0-9]+$"
+                    />
+                  </mat-form-field>
+                </div>
+                <div [hidden]="isEditing">
+                  <label
+                    class="form-control-label"
+                    jhiTranslate="kCredit.loan.loanTenure"
+                    for="field_loan_tenure"
+                    >Loan Tenure</label
+                  >
+                  <jhi-null-replace
+                    [value]="loanApplication.loanTenure"
+                  ></jhi-null-replace>
+                </div>
+              </div>
+              <div class="form-group col-md-3">
+                <div [hidden]="!isEditing" *ngIf="!showDropDown">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Emi Amount</mat-label>
+                    <input
+                      matInput
+                      type="text"
+                      name="emiAmount"
+                      id="field_emiAmount"
+                      [(ngModel)]="loanApplication.emiAmount"
+                    />
+                  </mat-form-field>
+                </div>
+                <div [hidden]="!isEditing" *ngIf="showDropDown">
+                  <mat-form-field appearance="outline">
+                    <mat-label> Emi Amount </mat-label>
+                    <input
+                      id="productCodeAutoCompleteBox"
+                      type="text"
+                      placeholder="Select an option"
+                      matInput
+                      required
+                      [formControl]="emiAmountFormControl"
+                      [matAutocomplete]="auto"
+                      [(ngModel)]="loanApplication.emiAmount"
+                    />
+                    <button
+                      mat-button
+                      *ngIf="emiAmountFormControl.value"
+                      matSuffix
+                      mat-icon-button
+                      aria-label="Clear"
+                      (click)="clearEmiInput()"
+                    >
+                      <mat-icon>close</mat-icon>
+                    </button>
+                    <mat-autocomplete #auto="matAutocomplete">
+                      <mat-option
+                        *ngFor="let option of emiAmounts"
+                        [value]="option"
+                      >
+                        {{ option }}
+                      </mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
+                </div>
+                <div [hidden]="isEditing">
+                  <label
+                    class="form-control-label"
+                    jhiTranslate="kCredit.loan.emiAmount"
+                    for="field_emi_amount"
+                    >Emi Amount</label
+                  >
+                  <jhi-null-replace
+                    [value]="loanApplication?.emiAmount"
+                  ></jhi-null-replace>
+                </div>
+              </div>
+              <div class="form-group col-md-3">
+                <div [hidden]="!isEditing">
+                  <mat-form-field appearance="outline">
+                    <mat-label>First repayment date</mat-label>
+                    <input
+                      [disabled]="true"
+                      matInput
+                      type="date"
+                      name="emi_start_date"
+                      id="field_emi_start_date"
+                      [(ngModel)]="loanApplication.emiStartDate"
+                    />
+                  </mat-form-field>
+                </div>
+                <div [hidden]="isEditing">
+                  <label
+                    class="form-control-label"
+                    jhiTranslate="kCredit.loan.emiStartDate"
+                    for="field_emi_start_date"
+                    >First repayment date</label
+                  >
+                  <jhi-null-replace
+                    [value]="loanApplication.emiStartDate"
+                  ></jhi-null-replace>
+                </div>
+              </div>
+              <div class="form-group col-md-3">
+                <div [hidden]="!isEditing">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Partner 1<sup>st</sup>EMI Date</mat-label>
+                    <input
+                      [disabled]="true"
+                      matInput
+                      type="date"
+                      name="emi_start_date"
+                      id="field_emi_start_date"
+                      [(ngModel)]="loanApplication.partnerEmiStartDate"
+                    />
+                  </mat-form-field>
+                </div>
+                <div [hidden]="isEditing">
+                  <label
+                    class="form-control-label"
+                    jhiTranslate="kCredit.loan.emiStartDate"
+                    for="field_emi_start_date"
+                    >Partner 1<sup>st</sup> EMI Date</label
+                  >
+                  <jhi-null-replace
+                    [value]="loanApplication.partnerEmiStartDate"
+                  ></jhi-null-replace>
+                </div>
+              </div>
+            </div>
+            <div class="row row-spacing">
+              <div class="form-group col-md-3">
+                <div [hidden]="isEditing">
+                  <label
+                    class="form-control-label"
+                    jhiTranslate="kCredit.loan.emiStartDate"
+                    for="field_emi_start_date"
+                    >Product Code</label
+                  >
+                  <jhi-null-replace
+                    [value]="loanApplication.productCode"
+                  ></jhi-null-replace>
+                </div>
+                <div [hidden]="!isEditing">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Product Code</mat-label>
+                    <input
+                      id="productCodeAutoCompleteBox"
+                      type="text"
+                      placeholder="Select an option"
+                      matInput
+                      required
+                      [formControl]="productCodeFormControl"
+                      [matAutocomplete]="auto"
+                    />
+                    <button
+                      mat-button
+                      *ngIf="productCodeFormControl.value"
+                      matSuffix
+                      mat-icon-button
+                      aria-label="Clear"
+                      (click)="clearInput()"
+                    >
+                      <mat-icon>close</mat-icon>
+                    </button>
+                    <mat-autocomplete #auto="matAutocomplete">
+                      <mat-option
+                        *ngFor="let option of filteredOptions | async"
+                        [value]="option"
+                      >
+                        {{ option }}
+                      </mat-option>
+                    </mat-autocomplete>
+                    <mat-error [hidden]="!validateProductCode()"
+                      >Please enter valid Product Code</mat-error
+                    >
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="form-group col-md-3" *ngIf="isKcplLender">
+                <div [hidden]="isEditing">
+                  <label
+                    class="form-control-label"
+                    jhiTranslate="kCredit.loan.emiStartDate"
+                    for="field_emi_start_date"
+                    >Loan Type</label
+                  >
+                  <jhi-null-replace
+                    [value]="loanApplication.loanType"
+                  ></jhi-null-replace>
+                </div>
+                <div [hidden]="!isEditing">
+                  <mat-form-field appearance="outline">
+                    <mat-label>Loan Type</mat-label>
+                    <input
+                      disabled
+                      matInput
+                      name="loanType"
+                      [(ngModel)]="loanApplication.loanType"
+                    />
+                  </mat-form-field>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>

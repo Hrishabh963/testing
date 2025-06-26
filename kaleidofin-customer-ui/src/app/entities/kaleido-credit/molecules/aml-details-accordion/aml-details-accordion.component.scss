@@ -1,0 +1,54 @@
+.details-container {
+  padding-top: 2em;
+  align-content: space-around;
+}
+
+.aml-button {
+  background: var(--kcredit-failure-red);
+  color: #FFFFFF;
+}
+
+
+.label-details {
+  color: #000002;
+  font-family: Arial, Verdana, Tahoma, sans-serif;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  letter-spacing: 0.173px;
+}
+
+.no-match {
+  color: #028003;
+  font-family: Arial, Verdana, Tahoma, sans-serif;
+  font-size: 1em;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 0.173px;
+  text-transform: capitalize;
+}
+
+.match {
+  color: #ffac30;
+  font-family: Arial, Verdana, Tahoma, sans-serif;
+  font-size: 1em;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  letter-spacing: 0.173px;
+  text-transform: capitalize;
+}
+
+.header-container {
+  width: 98%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+
+.error-message {
+  color: var(--kcredit-failure-red);
+}

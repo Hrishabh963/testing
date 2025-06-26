@@ -1,0 +1,27 @@
+<mat-accordion>
+  <mat-expansion-panel
+    (opened)="updateAccordionOpenState()"
+    (closed)="updateAccordionCloseState()"
+    [expanded]="panelOpenState"
+  >
+    <mat-expansion-panel-header class="accordion-header">
+      <mat-panel-title class="document-type-title">
+        Document Category - {{ title }}
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+    <div *ngIf="panelOpenState">
+      <div *ngFor="let subtype of subtypeList">
+        <app-loan-document-accordion-item
+          [loanId]="loanId"
+          [partnerId]="partnerId"
+          [subtype]="subtype"
+          [submitAction]="submitAction"
+          [fileData]="getFileData(subtype)"
+          [documentCategory]="title"
+          [sectionAuthority]="sectionAuthority"
+        ></app-loan-document-accordion-item>
+        <hr />
+      </div>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>

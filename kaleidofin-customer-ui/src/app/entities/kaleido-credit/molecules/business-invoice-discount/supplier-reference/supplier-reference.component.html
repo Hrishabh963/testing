@@ -1,0 +1,35 @@
+<mat-accordion>
+  <mat-expansion-panel [expanded]="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <div class="section-title-text" id="supplierReference">
+          Supplier Reference
+        </div></mat-panel-title
+      >
+      <mat-panel-description>
+        <app-section-level-reject
+          [sectionKey]="'SupplierReference'"
+          rejectStatusKey="businessReferenceEntityDtoList[0].reviewStatus"
+          rejectReasonKey="businessReferenceEntityDtoList[0].reviewRemark"
+        ></app-section-level-reject>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <div
+      class="sub-section-container"
+      *ngFor="let supplier of suppliers; let i = index"
+    >
+      <div class="business-review-subtitle-text">
+        Supplier reference - {{ i + 1 }}
+      </div>
+      <!-- Dynamic Fields -->
+      <div class="details-grid">
+        <div *ngFor="let field of fields" class="field-item">
+          <span class="business-review-label">{{ field.label }}</span>
+          <strong class="business-review-value">{{
+            getValue(field?.valueProperty, supplier)
+          }}</strong>
+        </div>
+      </div>
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>

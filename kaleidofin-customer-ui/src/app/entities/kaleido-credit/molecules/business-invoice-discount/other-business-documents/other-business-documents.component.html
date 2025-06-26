@@ -1,0 +1,17 @@
+<mat-accordion>
+  <mat-expansion-panel [expanded]="true">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+        <div class="section-title-text" id="otherBusinessDocuments">
+          Other business related documents
+        </div></mat-panel-title
+      >
+      <mat-panel-description> </mat-panel-description>
+    </mat-expansion-panel-header>
+    <app-business-document
+      *ngFor="let doc of documents"
+      [category]="doc?.category"
+      [data]="doc"
+    ></app-business-document>
+  </mat-expansion-panel>
+</mat-accordion>

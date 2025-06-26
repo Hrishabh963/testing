@@ -1,0 +1,4 @@
+<div class="ekyc-image-container">
+    <img *ngIf="srcUrl" [src]="srcUrl" [alt]="bcDataName || 'KYC'" class="kyc-image" />
+    <span class="image-name">{{ bcDataName }}.{{fileType}}</span>
+</div>

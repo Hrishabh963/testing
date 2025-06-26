@@ -1,0 +1,46 @@
+<div>
+  <label class="assignment-label" htmlFor="label-1">Assigned To</label>
+  <div>
+    <button
+      class="selection-menu"
+      [disabled]="fromEntry"
+      mat-button
+      [matMenuTriggerFor]="menu"
+      (click)="resetMenu()"
+    >
+      <span *ngIf="!selectedAssignee">
+        <i>Unassigned</i>
+      </span>
+      <span *ngIf="selectedAssignee">
+        {{ selectedAssignee }}
+      </span>
+      <mat-icon>expand_more</mat-icon>
+    </button>
+    <mat-menu class="custom-style" #menu="matMenu">
+      <mat-form-field class="search-input" appearance="none">
+        <input
+          #searchInput
+          type="text"
+          (blur)="searchInput.focus()"
+          matInput
+          (click)="$event.stopPropagation()"
+          [formControl]="searchFieldFormControl"
+          placeholder="Search by user"
+          autocomplete="off"
+        />
+      </mat-form-field>
+      <div class="rule-break"></div>
+      <button
+        (click)="menuHandler(assignee)"
+        mat-menu-item
+        *ngFor="let assignee of sortedAssignees; let i = index"
+      >
+        <div>
+          <div class="date-display">
+            {{ assignee?.label }}
+          </div>
+        </div>
+      </button>
+    </mat-menu>
+  </div>
+</div>

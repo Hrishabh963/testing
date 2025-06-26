@@ -1,0 +1,148 @@
+<div class="card-title">
+  <form name="aboutTheLoan" novalidate #editForm="ngForm">
+    <div class="card-body">
+      <div class="card-title">
+        <div class="row row-spacing">
+          <div class="form-group col-md-3">
+            <label
+              class="form-control-label"
+              jhiTranslate="kCredit.loanFee.totalProcessingFee"
+              for="field_total_processing_fee"
+              >Total Processing Fee Amount</label
+            >
+            <jhi-null-replace
+              [value]="loanFee.totalProcessingFee"
+            ></jhi-null-replace>
+          </div>
+          <div class="form-group col-md-3">
+            <label
+              class="form-control-label"
+              jhiTranslate="kCredit.loanFee.kcplProcessingFeePer"
+              for="field_kcpl_processing_fee_per"
+              >KCPL Processing Fee Per</label
+            >
+            <jhi-null-replace
+              [value]="loanFee.kcplProcessingFeePer"
+            ></jhi-null-replace>
+          </div>
+          <div class="form-group col-md-3">
+            <label
+              class="form-control-label"
+              jhiTranslate="kCredit.loanFee.kcplProcessingFeeAmount"
+              for="field_kcpl_processing_fee_amount"
+              >KCPL processing Fee Amount</label
+            >
+            <jhi-null-replace
+              [value]="loanFee.kcplProcessingFeeAmount"
+            ></jhi-null-replace>
+          </div>
+        </div>
+        <div class="row row-spacing">
+          <div class="form-group col-md-3">
+            <label
+              class="form-control-label"
+              jhiTranslate="kCredit.loanFee.partnerProcessingFeePer"
+              for="field_partner_processing_fee_per"
+              >Partner processing fee %</label
+            >
+            <jhi-null-replace
+              [value]="loanFee.partnerProcessingFeePer"
+            ></jhi-null-replace>
+          </div>
+          <div class="form-group col-md-3">
+            <label
+              class="form-control-label"
+              jhiTranslate="kCredit.loanFee.partnerProcessingFeeAmount"
+              for="field_partner_processing_fee_amount"
+              >Partner Processing Fee Amount</label
+            >
+            <jhi-null-replace
+              [value]="loanFee.partnerProcessingFeeAmount"
+            ></jhi-null-replace>
+          </div>
+          <div class="form-group col-md-3">
+            <label
+              class="form-control-label"
+              jhiTranslate="kCredit.loanFee.insurancePremiumAmount"
+              for="field_insurance_premium_amount"
+              >Insurance Premium Amount</label
+            >
+            <jhi-null-replace
+              [value]="loanFee.insurancePremiumAmount"
+            ></jhi-null-replace>
+          </div>
+          <div class="form-group col-md-3">
+            <label
+              class="form-control-label"
+              jhiTranslate="kCredit.loanFee.stampDutyAmount"
+              for="field_stamp_duty_amount"
+              >Stamp Duty Amount</label
+            >
+            <jhi-null-replace
+              [value]="loanFee.stampDutyAmount"
+            ></jhi-null-replace>
+          </div>
+        </div>
+        <div class="row row-spacing">
+          <div class="form-group col-md-3">
+            <label
+              class="form-control-label"
+              jhiTranslate="kCredit.loanFee.otherFeeAmount"
+              for="field_other_fee_amount"
+              >Other Fee Amount</label
+            >
+            <jhi-null-replace
+              [value]="loanFee.otherFeeAmount"
+            ></jhi-null-replace>
+          </div>
+          <div class="form-group col-md-3">
+            <label
+              class="form-control-label"
+              jhiTranslate="kCredit.loanFee.kcplOtherFeePer"
+              for="field_kcpl_other_fee_per"
+              >KCPL Other Fee Per</label
+            >
+            <jhi-null-replace
+              [value]="loanFee.kcplOtherFeePer"
+            ></jhi-null-replace>
+          </div>
+          <div class="form-group col-md-3">
+            <label
+              class="form-control-label"
+              jhiTranslate="kCredit.loanFee.kcplOtherFeeAmount"
+              for="field_kcpl_other_fee_amount"
+              >KCPL Other Fee Amount</label
+            >
+            <jhi-null-replace
+              [value]="loanFee.kcplOtherFeeAmount"
+            ></jhi-null-replace>
+          </div>
+          <div class="form-group col-md-3">
+            <label
+              class="form-control-label"
+              jhiTranslate="kCredit.loanFee.partnerOtherFeePer"
+              for="field_partner_other_fee_per"
+              >Partner Other Fee Per</label
+            >
+            <jhi-null-replace
+              [value]="loanFee.partnerOtherFeePer"
+            ></jhi-null-replace>
+          </div>
+        </div>
+        <div class="row row-spacing">
+          <div class="form-group col-md-3">
+            <label
+              class="form-control-label"
+              jhiTranslate="kCredit.loanFee.partnerOtherFeeAmount"
+              for="field_partner_other_fee_amount"
+              >Partner Other Fee Amount</label
+            >
+            <jhi-null-replace
+              [value]="loanFee.partnerOtherFeeAmount"
+            ></jhi-null-replace>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

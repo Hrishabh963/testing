@@ -1,0 +1,70 @@
+<mat-accordion>
+  <mat-expansion-panel [expanded]="true">
+    <mat-expansion-panel-header>
+      <div class="section-title">Credit Bureau Data</div>
+    </mat-expansion-panel-header>
+    <div class="repor-container" *ngFor="let cbReport of cbResponse">
+      <div class="cb-title-container">
+        <div class="section-sub-heading">
+          {{ cbReport?.sectionTitle || "Applicant" }}
+        </div>
+        <div>
+          <button
+            mat-raised-button
+            class="btn btn-primary"
+            (click)="openReport(cbReport)"
+            [disabled]="!cbReport?.cbHtmlFileId"
+          >
+            <img src="assets/images/common/bi_file-earmark-pdf.svg" alt="" />
+            {{ "View Report" }}
+          </button>
+        </div>
+      </div>
+      <br />
+      <div>
+        <div class="row row-spacing">
+          <div class="col-3">
+            <label class="form-control-label"
+            htmlFor="label-1"
+              >CB Score {{ cbReport["ersScoreText"] }}</label
+            >
+            <div>
+              <jhi-null-replace
+                [value]="cbReport.cbScoreErs"
+              ></jhi-null-replace>
+            </div>
+          </div>
+          <div class="col-3">
+            <label class="form-control-label"
+            htmlFor="label-2"
+              >CB Score {{ cbReport["mrsScoreText"] }}</label
+            >
+            <jhi-null-replace [value]="cbReport.cbScoreMrs"></jhi-null-replace>
+          </div>
+          <div class="col-3">
+            <label class="form-control-label" htmlFor="label-3">Name</label>
+            <jhi-null-replace
+              [value]="cbReport.customerName"
+            ></jhi-null-replace>
+          </div>
+          <div class="col-3">
+            <label class="form-control-label" htmlFor="label-4">Credit Bureau Name</label>
+            <jhi-null-replace [value]="cbReport?.bureauName"></jhi-null-replace>
+          </div>
+        </div>
+        <br />
+        <div class="row row-spacing">
+          <div class="col-3">
+            <label class="form-control-label" htmlFor="label-5">CB Report status</label>
+            <div>
+              <jhi-null-replace
+                [value]="cbReport?.reportStatus"
+              ></jhi-null-replace>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br />
+    </div>
+  </mat-expansion-panel>
+</mat-accordion>

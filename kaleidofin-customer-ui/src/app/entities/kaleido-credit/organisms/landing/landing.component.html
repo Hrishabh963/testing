@@ -1,0 +1,48 @@
+<div class="landing-container">
+  <div class="sub-landing-container-1">
+    <img
+      src="assets\images\login\landing_welcome_image.svg"
+      alt="Welcome"
+      width="450vw"
+    />
+    <span
+      >Welcome to <br />
+      credit admin tool</span
+    >
+  </div>
+  <div class="sub-landing-container-2">
+    <img
+      [ngClass]="['header', metaData?.logoClass || '']"
+      [src]="
+        metaData?.logo || 'assets/images/login/landing_kaleidofin_image.svg'
+      "
+      alt="Kaleidofin"
+      width="200vw"
+    />
+    <ng-container [ngSwitch]="currentPage">
+      <app-login-form
+        *ngSwitchDefault
+        (dataEmitter)="updatePage($event)"
+        [disableForgotPassword]="disableForgotPassword"
+      ></app-login-form>
+      <app-set-new-password
+        *ngSwitchCase="'Set New Password'"
+        (dataEmitter)="updatePage($event)"
+      ></app-set-new-password>
+      <app-forget-password
+        *ngSwitchCase="'Forgot Password'"
+        (dataEmitter)="updatePage($event)"
+      ></app-forget-password>
+      <app-set-new-password-notify
+        *ngSwitchCase="'Set New Password Notification'"
+      ></app-set-new-password-notify>
+      <app-password-changed-notify
+        *ngSwitchCase="'Password Changed Notification'"
+      ></app-password-changed-notify>
+      <app-account-temporarily-blocked-notify
+        [metaData]="metaData"
+        *ngSwitchCase="'Account Temporarily Locked Notification'"
+      ></app-account-temporarily-blocked-notify>
+    </ng-container>
+  </div>
+</div>

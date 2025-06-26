@@ -1,0 +1,147 @@
+<div id="bre-report">
+  <div class="report-logo">
+    <img [src]="logo" alt="Kaleidofin" />    
+    <img
+      class="report-image"
+      src="assets/images/common/report-heading-image.svg"
+      alt="Reports"
+    />
+  </div>
+  <div class="headers-container">
+    <div class="section-title-container">
+      <div class="section-title">BRE Report</div>
+      <button
+        mat-flat-button
+        class="download-button"
+        id="pdf-download-button"
+        (click)="downloadPdf()"
+      >
+        Download
+      </button>
+    </div>
+    <br />
+    <div class="bre-report-contianer">
+      <ng-container *ngFor="let field of uiFieldsMap">
+        <ng-container [ngSwitch]="field?.key">
+          <div *ngSwitchDefault class="column-header-container">
+            <div class="column-header">{{ field?.label }}</div>
+            <div class="column-value">
+              {{
+                breData[field?.propertyKey] ? breData[field?.propertyKey] : "--"
+              }}
+            </div>
+          </div>
+          <div class="column-header-container" *ngSwitchCase="'breDecision'">
+            <span class="column-header"> {{ field?.label }} </span>
+            <div class="bre-decision">
+              <img
+                id="actionIcon"
+                *ngIf="breData.overallDecision"
+                [src]="fetchDecisionIcon(breData.overallDecision)"
+                [alt]="breData.overallDecision"
+              />
+              <span class="overall-decision-text">{{
+                field?.viewMapper[breData?.overallDecision]
+              }}</span>
+            </div>
+          </div>
+        </ng-container>
+      </ng-container>
+    </div>
+  </div>
+  <div>
+    <div class="section-title subtitle">BRE Summary</div>
+    <br />
+    <div>
+      <table>
+        <caption></caption>
+        <thead>
+          <tr>
+            <th class="rule-description">Rule Description</th>
+            <th class="condition">Cutoff Rule Condition</th>
+            <th class="feature-description">Feature Description</th>
+            <th class="feature-value">Actual Value</th>
+            <th class="decision">Decision</th>
+            <th class="remarks">Deviation/Rejection Remarks</th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let row of tableData">
+            <ng-container *ngFor="let desc of row.featureNameAndValues; let i = index">
+              <tr>
+                <td class="rule-description" *ngIf="i === 0" [attr.rowspan]="row.featureNameAndValues.length">
+                  {{ row.description }}
+                </td>
+                <td
+                  class="condition"
+                  *ngIf="i === 0"
+                  [attr.rowspan]="row.featureNameAndValues.length"
+                >
+                  <div class="code-snippet">
+                    {{ row.condition }}
+                  </div>
+                </td>
+                <td class="feature-description">
+                <ng-container *ngIf="!desc?.calculatedVariablesList?.length">
+                  <div class="feature-description-container">
+                    <div>{{ desc?.name || "---" }} &nbsp;</div>
+                    <img id="infoIcon" *ngIf="desc?.description" src="assets/images/common/info-tooltip.svg" [alt]="desc.name"
+                      [matTooltip]="desc?.description || ''" matTooltipPosition="above" />
+                  </div>
+                </ng-container>
+                <app-tree-view-component *ngIf="desc?.calculatedVariablesList?.length" [list]="getCalculatedNameList(desc?.calculatedVariablesList)"
+                  [title]="desc?.name" [optionalToolTip]="desc?.description"
+                >
+                </app-tree-view-component>
+                </td>
+                <td class="feature-value">
+                  <ng-container *ngIf="!desc?.calculatedVariablesList?.length">
+                    {{
+                      checkCurrency(desc)
+                        ? (desc.value | currency : "INR" : symbol : "1.0-0") ||
+                          "--"
+                        : desc?.value
+                    }}
+                  </ng-container>
+                  <app-tree-view-component *ngIf="desc?.calculatedVariablesList?.length"
+                    [title]="desc?.value" [list]="getCalculatedValueList(desc?.calculatedVariablesList, true)"
+                    [showErrorTooltip]="true" [optionalToolTip]="nullValueError"
+                  >
+                  </app-tree-view-component>
+                </td>
+                <td
+                  class="decision"
+                  *ngIf="i === 0"
+                  [attr.rowspan]="row.featureNameAndValues.length"
+                >
+                  <div class="feature-description-container">
+                    <img
+                      id="actionIcon"
+                      *ngIf="i === 0 && row.decision"
+                      [src]="fetchDecisionIcon(row.decision)"
+                      [alt]="desc.name"
+                    />
+                    <span class="decision-text">{{
+                      i === 0 ? " " + row.decision : ""
+                    }}</span>
+                    <img
+                      id="infoIcon"
+                      *ngIf="row?.isPassiveRule === true"
+                      src="assets/images/common/info-tooltip.svg"
+                      [alt]="row.isPassiveRule"
+                      [matTooltip]="passiveRuleDescription || ''"
+                      matTooltipPosition="above"
+                    />
+                  </div>
+                </td>
+                <td class="remarks" id="remarks" *ngIf="i === 0" [attr.rowspan]="row.featureNameAndValues.length">
+                  {{ i === 0 ? row.remarks : "" }}
+                </td>
+              </tr>
+            </ng-container>
+          </ng-container>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

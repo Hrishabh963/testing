@@ -1,0 +1,9 @@
+<div class="user-details-container">
+    <div *ngFor="let field of detailsMap" class="field-container">
+        <img [src]="field?.iconUrl" [alt]="field?.propertyKey" />
+        <div class="detail-field">
+            <span class="field-label">{{ field?.label }}</span>
+            <span class="detail"> {{ userDetails?.[field?.propertyKey] || '--' }} </span>
+        </div>
+    </div>
+</div>

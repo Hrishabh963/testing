@@ -1,0 +1,247 @@
+#bre-report {
+  width: auto;
+  padding: 35px;
+}
+
+
+.report-logo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+
+.subtitle {
+  margin-top: 10px;
+  font-size: large;
+}
+
+
+.bre-report-contianer {
+  box-sizing: border-box;
+  background: #0F547E;
+  border: 2px solid #ecf0f7;
+  border-radius: 16px;
+  padding: 10px;
+  display: flex;
+  justify-content: space-between;
+  flex-flow: wrap;
+}
+
+
+.report-row {
+  margin: 7px 0;
+}
+
+
+.report-row strong {
+  font-weight: bold;
+}
+
+
+.split-cell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  height: auto;
+  /* Set the desired height of the cell */
+}
+
+
+.rule-description {
+  max-width: 70px;
+  /* Adjust the value as per your requirement */
+  line-height: 1.5;
+  word-wrap: break-word;
+}
+
+
+.condition {
+  max-width: 100px;
+  /* Adjust the value as per your requirement */
+  line-height: 1.5;
+  word-wrap: break-word;
+}
+
+
+.feature-description {
+  max-width: 7em;
+  /* Adjust the value as per your requirement */
+  line-height: 1.5;
+  word-wrap: break-word;
+}
+
+
+.feature-value {
+  max-width: 7em;
+  /* Adjust the value as per your requirement */
+  line-height: 1.5;
+  word-wrap: break-word;
+}
+
+
+.decision {
+  max-width: 55px;
+  /* Adjust the value as per your requirement */
+  line-height: 1.5;
+  word-wrap: break-word;
+}
+
+
+.remarks {
+  max-width: 55px;
+  /* Adjust the value as per your requirement */
+  line-height: 1.5;
+  word-wrap: break-word;
+}
+
+
+//
+th {
+  background-color: #0f547e !important;
+  font-family: Arial, Verdana, Tahoma, sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: initial;
+  line-height: 9px;
+  color: #ffffff !important;
+  height: 10vh;
+  text-align: left;
+  padding: 10px;
+  border: 1px solid #ebebeb;
+}
+
+
+thead {
+  border-radius: 8px;
+}
+
+td {
+  text-align: left;
+  padding: 10px;
+  border: 1px solid #ebebeb;
+}
+
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead th:first-child {
+  /* Styles for the first child of the <thead> */
+  border-top-left-radius: 16px;
+  border-bottom-left-radius: 16px;
+}
+
+thead th:last-child {
+  /* Styles for the last child of the <thead> */
+  border-top-right-radius: 16px;
+  border-bottom-right-radius: 16px;
+}
+
+
+table td {
+  font-size: small;
+}
+
+
+table th {
+  font-size: small;
+}
+
+
+.feature-description-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#infoIcon {
+  min-width: 15px;
+  cursor: pointer;
+}
+
+
+
+#actionIcon {
+  min-width: 19px;
+  margin-right: 0.2rem;
+}
+
+pre.code-snippet {
+  white-space: pre-wrap;
+  /* Allow line breaks to be displayed */
+  padding: 10px;
+  /* Add some padding for better visual separation */
+  background-color: inherit;
+  /* Optional: Apply a background color */
+  border-radius: 4px;
+  /* Optional: Add rounded corners */
+  font-weight: 500;
+  text-align: left;
+  font-family: "Lexend Deca", sans-serif;
+  font-size: small;
+
+}
+
+.decision-text {
+  padding: 0 0.5rem 0 0.2rem;
+}
+
+.column-header-container {
+  flex-basis: 50%;
+  display: flex;
+  padding: 1rem 1rem 1rem 2.45rem;
+  justify-content: space-between;
+}
+
+.column-header {
+  font-size: 14px;
+  font-weight: 400;
+  color: #FFFFFF;
+}
+
+.column-value {
+  font-size: 16px;
+  font-weight: 500;
+  color: #FFFFFF;
+  flex-basis: 75%;
+}
+
+.report-image {
+  z-index: -1;
+  height: 205px;
+  position: absolute;
+  right: 0;
+  top: 0.25rem;
+}
+
+.headers-container {
+  padding-top: 3rem;
+}
+
+.bre-decision {
+  flex-basis: 75%;
+}
+
+.overall-decision-text {
+  font-size: 16px;
+  font-weight: 500;
+  color: #FFFFFF;
+}
+
+.section-title-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.download-button {
+  z-index: 1;
+  width: 8rem;
+  background: #0f547e !important;
+  color: #FFFFFF;
+  margin-right: 0.5rem;
+}
